@@ -146,10 +146,34 @@
   programs.neomutt = {
     enable = true;
   };
-  # programs.mbsync.enable = true;
   programs.carapace.enable = true;
-  programs.gpg = {
+  programs.gpg.enable = true;
+
+  # systemd.user.services = {
+  #   mailsync = {
+  #     enable = true;
+  #     after = [ "network.target" ];
+  #     wantedBy = [ "default.target" ];
+  #     description = "Sync mail";
+  #     serviceConfig = {
+  #       Type = "simple";
+  #       ExecStart = ''/my/cool/user/service'';
+  #     };
+  #   };
+  # };
+  # systemd.user.timers = {
+  #   mailsync = {
+  #     wantedBy = [ "timers.target" ];
+  #     timerConfig = {
+  #       OnBootSec = "5m";
+  #       OnUnitActiveSec = "5m";
+  #       Unit = "mailsync.service";
+  #     };
+  #   };
+  # };
+
+  services.mbsync = {
     enable = true;
-    # homedir = /home/lippiece/.gnupg;
+    frequency = "miutely";
   };
 }
