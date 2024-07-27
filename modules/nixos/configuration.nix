@@ -92,6 +92,7 @@ in {
     cargo
     gcc
     libnotify
+    nerdfonts
   ];
 
   environment.persistence."/persist" = {
