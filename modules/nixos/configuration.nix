@@ -95,6 +95,7 @@ in {
     nerdfonts
     nodejs_22
     ripgrep
+    libwebp
   ];
 
   environment.persistence."/persist" = {
