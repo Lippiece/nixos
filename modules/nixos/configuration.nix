@@ -44,6 +44,7 @@ in {
 
   networking.hostName = "mothership"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.extraHosts = "192.168.1.102 cumulonimbus";
 
   time.timeZone = "Europe/Kaliningrad";
 
