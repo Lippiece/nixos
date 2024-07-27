@@ -93,6 +93,7 @@ in {
     gcc
     libnotify
     nerdfonts
+    nodejs_22
   ];
 
   environment.persistence."/persist" = {
