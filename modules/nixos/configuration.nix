@@ -96,6 +96,7 @@ in {
     nodejs_22
     ripgrep
     libwebp
+    kdePackages.qtimageformats
   ];
 
   environment.persistence."/persist" = {
