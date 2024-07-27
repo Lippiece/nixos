@@ -174,6 +174,6 @@
 
   services.mbsync = {
     enable = true;
-    frequency = "minutely";
+    frequency = "5m";
   };
 }
