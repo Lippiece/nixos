@@ -44,6 +44,7 @@
     alejandra
     telegram-desktop
     pass-git-helper
+    lynx
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
