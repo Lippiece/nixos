@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "lippiece";
@@ -35,6 +37,11 @@
     mutt-wizard
     neovim
     vimPlugins.LazyVim
+    urlscan
+    isync
+    neovide
+    wl-clipboard
+    alejandra
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -128,7 +135,6 @@
   programs.password-store = {
     enable = true;
   };
-  # programs.notmuch.enable = true;
   programs.nix-index.enable = true;
   programs.newsboat = {
     enable = true;
@@ -136,7 +142,7 @@
   programs.neomutt = {
     enable = true;
   };
-  programs.mbsync.enable = true;
+  # programs.mbsync.enable = true;
   programs.carapace.enable = true;
   programs.gpg = {
     enable = true;

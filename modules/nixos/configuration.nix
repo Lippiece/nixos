@@ -1,24 +1,25 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, inputs, lib, pkgs, ... }:
-
-let
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: let
   impermanence = builtins.fetchTarball "https://github.com/nix-community/impermanence/archive/master.tar.gz";
-in
-  {
-  imports =
-    [
-      "${impermanence}/nixos.nix"
-    ];
+in {
+  imports = [
+    "${impermanence}/nixos.nix"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.supportedFilesystems = [ "btrfs" ];
+  boot.supportedFilesystems = ["btrfs"];
   nixpkgs.config.allowUnfree = true;
 
   hardware.enableAllFirmware = true;
@@ -31,7 +32,7 @@ in
       vpl-gpu-rt
     ];
   };
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Optionally, set the environment variable
+  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
 
   boot.initrd.luks.devices = {
     root = {
@@ -42,7 +43,7 @@ in
   };
 
   networking.hostName = "mothership"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   time.timeZone = "Europe/Kaliningrad";
 
@@ -69,7 +70,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lippiece = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "sudo" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "sudo"]; # Enable ‘sudo’ for the user.
     # packages = with pkgs; [
     # ];
     hashedPassword = "$6$NBiKVQ9sSyOEws8p$dW1OJV7/VmFZ9H/wiV2Rxg0A73QqCHznqJtIdvGOUZcN0c5tKsBnd3/yLPLve09aF8inl6tgnPVvPxa8w539O/";
@@ -189,7 +190,7 @@ in
   # even if you've upgraded your system to a new NixOS release.
   system.stateVersion = "24.05"; # Did you read the comment?
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
