@@ -94,6 +94,7 @@ in {
     libnotify
     nerdfonts
     nodejs_22
+    ripgrep
   ];
 
   environment.persistence."/persist" = {
