@@ -223,4 +223,5 @@ in {
   #   dates = "daily";
   # };
   programs.command-not-found.enable = false;
+  programs.steam.enable = true;
 }
