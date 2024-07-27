@@ -1,0 +1,145 @@
+{ config, pkgs, ... }:
+
+{
+  # Home Manager needs a bit of information about you and the paths it should
+  # manage.
+  home.username = "lippiece";
+  home.homeDirectory = "/home/lippiece";
+
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
+  home.stateVersion = "24.05"; # Please read the comment before changing.
+
+  # The home.packages option allows you to install Nix packages into your
+  # environment.
+  home.packages = with pkgs; [
+    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+
+    # # You can also create simple shell scripts directly inside your
+    # # configuration. For example, this adds a command 'my-hello' to your
+    # # environment:
+    # (pkgs.writeShellScriptBin "my-hello" ''
+    #   echo "Hello, ${config.home.username}!"
+    # '')
+    brave
+    neomutt
+    mutt-wizard
+    neovim
+    vimPlugins.LazyVim
+  ];
+
+  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  # plain files is through 'home.file'.
+  home.file = {
+    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # symlink to the Nix store copy.
+    # ".screenrc".source = dotfiles/screenrc;
+
+    # # You can also set the file content immediately.
+    # ".gradle/gradle.properties".text = ''
+    #   org.gradle.console=verbose
+    #   org.gradle.daemon.idletimeout=3600000
+    # '';
+  };
+
+  # Home Manager can also manage your environment variables through
+  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # shell provided by Home Manager. If you don't want to manage your shell
+  # through Home Manager then you have to manually source 'hm-session-vars.sh'
+  # located at either
+  #
+  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  /etc/profiles/per-user/lippiece/etc/profile.d/hm-session-vars.sh
+  #
+  home.sessionVariables = {
+    # EDITOR = "emacs";
+  };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+  programs.bat.enable = true;
+  programs.bun.enable = true;
+  programs.chromium = {
+    enable = true;
+    # defaultSearchProviderSearchURL = "https://lipsearch.ydns.eu/search?q=%";
+    # defaultSearchProviderEnabled = true;
+  };
+  programs.dircolors.enable = true;
+  programs.eza.enable = true;
+  programs.eza.icons = true;
+  programs.fd.enable = true;
+  programs.fd.hidden = true;
+  programs.fish = {
+    enable = true;
+    plugins = [
+      {
+        name = "done";
+        # TODO: expipiplus1/update-nix-fetchgit
+        src = pkgs.fetchFromGitHub {
+          owner = "franciscolourenco";
+          repo = "done";
+          rev = "eb32ade85c0f2c68cbfcff3036756bbf27a4f366";
+          hash = "sha256-DMIRKRAVOn7YEnuAtz4hIxrU93ULxNoQhW6juxCoh4o=";
+        };
+      }
+      {
+        name = "tide";
+        src = pkgs.fetchFromGitHub {
+          owner = "IlanCosman";
+          repo = "tide";
+          rev = "44c521ab292f0eb659a9e2e1b6f83f5f0595fcbd";
+          hash = "sha256-85iU1QzcZmZYGhK30/ZaKwJNLTsx+j3w6St8bFiQWxc=";
+        };
+      }
+    ];
+  };
+  programs.git = {
+    enable = true;
+    # delta.enable = true;
+    diff-so-fancy.enable = true;
+    diff-so-fancy.changeHunkIndicators = true;
+    # signing.signByDefault = true;
+    userEmail = "github@lippiece.anonaddy.me";
+    userName = "lippiece";
+  };
+  programs.zoxide.enable = true;
+  # programs.thunderbird = {
+  #   enable = true;
+  #   package = pkgs.thunderbirdPackages.thunderbird-128;
+  # };
+  programs.tealdeer.enable = true;
+  programs.password-store = {
+    enable = true;
+  };
+  # programs.notmuch.enable = true;
+  programs.nix-index.enable = true;
+  programs.newsboat = {
+    enable = true;
+  };
+  programs.neomutt = {
+    enable = true;
+  };
+  programs.mbsync.enable = true;
+  programs.carapace.enable = true;
+  programs.gpg = {
+    enable = true;
+    # homedir = /home/lippiece/.gnupg;
+  };
+}

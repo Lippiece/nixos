@@ -1,0 +1,220 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
+{ config, inputs, lib, pkgs, ... }:
+
+let
+  impermanence = builtins.fetchTarball "https://github.com/nix-community/impermanence/archive/master.tar.gz";
+in
+  {
+  imports =
+    [
+      "${impermanence}/nixos.nix"
+    ];
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.supportedFilesystems = [ "btrfs" ];
+  nixpkgs.config.allowUnfree = true;
+
+  hardware.enableAllFirmware = true;
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+      vpl-gpu-rt
+    ];
+  };
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Optionally, set the environment variable
+
+  boot.initrd.luks.devices = {
+    root = {
+      # Use https://nixos.wiki/wiki/Full_Disk_Encryption
+      device = "/dev/disk/by-uuid/f8535674-a608-4421-bba1-9a8a74fee833";
+      preLVM = true;
+    };
+  };
+
+  networking.hostName = "mothership"; # Define your hostname.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+
+  time.timeZone = "Europe/Kaliningrad";
+
+  # console = {
+  #   font = "Lat2-Terminus16";
+  #   keyMap = "us";
+  #   useXkbConfig = true; # use xkb.options in tty.
+  # };
+
+  # Enable sound.
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput.enable = true;
+
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.lippiece = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "sudo" ]; # Enable ‘sudo’ for the user.
+    # packages = with pkgs; [
+    # ];
+    hashedPassword = "$6$NBiKVQ9sSyOEws8p$dW1OJV7/VmFZ9H/wiV2Rxg0A73QqCHznqJtIdvGOUZcN0c5tKsBnd3/yLPLve09aF8inl6tgnPVvPxa8w539O/";
+  };
+  users.defaultUserShell = pkgs.fish;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    wget
+    bat
+    unar
+    git
+    fish
+    silver-searcher
+    wmctrl
+    xdotool
+    ydotool
+    cargo
+    gcc
+    libnotify
+  ];
+
+  environment.persistence."/persist" = {
+    # hideMounts = true;
+    directories = [
+      "/var/lib/bluetooth"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
+      "/etc/NetworkManager/system-connections"
+      "/etc/nixos"
+      "/usr"
+    ];
+    files = [
+      # { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+    ];
+  };
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+  programs.fish.enable = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    withNodeJs = true;
+  };
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+    glib
+    glibc
+    nss
+    nspr
+    atk
+    cups
+    dbus
+    libdrm
+    gtk3
+    pango
+    cairo
+    xorg.libX11
+    xorg.libXcomposite
+    xorg.libXdamage
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXrandr
+    libxkbcommon
+    mesa
+    expat
+    xorg.libxcb
+    alsaLib
+    libGL
+    libsecret
+  ];
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+  programs.kde-pim.enable = true;
+  programs.kdeconnect.enable = true;
+  programs.lazygit.enable = true;
+  programs.nh.enable = true;
+  programs.nh.clean.enable = true;
+  programs.nh.clean.dates = "daily";
+  programs.nh.flake = /home/lippiece/.config/nixos;
+  programs.nix-index.enable = true;
+  programs.nix-index.enableFishIntegration = true;
+  programs.npm.enable = true;
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  networking.firewall.enable = false;
+
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  system.copySystemConfiguration = true;
+
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  system.stateVersion = "24.05"; # Did you read the comment?
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  home-manager = {
+    extraSpecialArgs = {inherit inputs;};
+
+    users = {
+      "lippiece" = import ../home-manager/home.nix;
+    };
+  };
+
+  i18n = {
+    supportedLocales = [
+      "ru_RU.UTF-8/UTF-8"
+      "en_GB.UTF-8/UTF-8"
+    ];
+
+    defaultLocale = "en_GB.UTF-8/UTF-8";
+    extraLocaleSettings = {
+      LANGUAGE = "en_GB.UTF-8/UTF-8";
+    };
+  };
+
+  # nix.gc = {
+  #   automatic = true;
+  #   persistent = true;
+  #   dates = "daily";
+  # };
+  programs.command-not-found.enable = false;
+}
