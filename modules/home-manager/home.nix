@@ -171,8 +171,5 @@
   #     };
   #   };
   # };
-
-  services.mbsync = {
-    enable = true;
-  };
+  services.easyeffects.enable = true;
 }

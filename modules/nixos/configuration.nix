@@ -118,7 +118,7 @@ in {
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # Some programs need SUID wrappers, can be configured further or are
+  # Some Programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
   programs.gnupg.agent = {
@@ -176,6 +176,7 @@ in {
   programs.nix-index.enable = true;
   programs.nix-index.enableFishIntegration = true;
   programs.npm.enable = true;
+  programs.dconf.enable = true;
 
   # List services that you want to enable:
 
