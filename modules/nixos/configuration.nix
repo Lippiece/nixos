@@ -99,6 +99,7 @@ in {
     ripgrep
     libwebp
     kdePackages.qtimageformats
+    icu
   ];
 
   environment.persistence."/persist" = {
@@ -177,7 +178,7 @@ in {
   programs.nix-index.enableFishIntegration = true;
   programs.npm.enable = true;
   programs.dconf.enable = true;
-
+  programs.java.enable = true;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
