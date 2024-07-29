@@ -179,6 +179,8 @@ in {
   programs.npm.enable = true;
   programs.dconf.enable = true;
   programs.java.enable = true;
+  programs.thunderbird.enable = true;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
