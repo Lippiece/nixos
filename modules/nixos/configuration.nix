@@ -101,6 +101,7 @@ in {
     kdePackages.qtimageformats
     icu
     vlc
+    htop-vim
   ];
 
   environment.persistence."/persist" = {
