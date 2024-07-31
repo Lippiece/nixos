@@ -100,6 +100,7 @@ in {
     libwebp
     kdePackages.qtimageformats
     icu
+    vlc
   ];
 
   environment.persistence."/persist" = {
