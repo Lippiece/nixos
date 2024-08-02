@@ -87,7 +87,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   programs.bat.enable = true;
-  programs.bun.enable = true;
   programs.chromium = {
     enable = true;
     # defaultSearchProviderSearchURL = "https://lipsearch.ydns.eu/search?q=%";
