@@ -101,6 +101,8 @@ in {
     vlc
     htop-vim
     unzip
+    python3
+    python312Packages.pip
   ];
 
   environment.persistence."/persist" = {
