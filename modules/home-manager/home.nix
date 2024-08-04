@@ -142,6 +142,11 @@
   programs.nix-index.enable = true;
   programs.newsboat = {
     enable = true;
+    urls = [
+      {
+        url = "https://dotfyle.com/this-week-in-neovim/rss.xml";
+      }
+    ];
   };
   programs.neomutt = {
     enable = true;

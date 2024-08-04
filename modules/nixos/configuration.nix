@@ -103,6 +103,7 @@ in {
     unzip
     python3
     python312Packages.pip
+    tree
   ];
 
   environment.persistence."/persist" = {
