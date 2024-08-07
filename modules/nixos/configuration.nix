@@ -184,7 +184,7 @@ in {
   programs.dconf.enable = true;
   programs.java.enable = true;
   programs.thunderbird.enable = true;
-
+  programs.chromium.enablePlasmaBrowserIntegration = true;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
