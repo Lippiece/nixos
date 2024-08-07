@@ -30,6 +30,7 @@ in {
       vpl-gpu-rt
     ];
   };
+
   environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
 
   boot.initrd.luks.devices = {
