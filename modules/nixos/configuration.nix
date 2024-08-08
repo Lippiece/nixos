@@ -105,6 +105,7 @@ in {
     python3
     python312Packages.pip
     tree
+    kdePackages.qtbase
   ];
 
   environment.persistence."/persist" = {
