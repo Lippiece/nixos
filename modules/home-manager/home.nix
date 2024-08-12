@@ -83,9 +83,9 @@
   #
   #  /etc/profiles/per-user/lippiece/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
+  # home.sessionVariables = {
+  # EDITOR = "emacs";
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -94,6 +94,7 @@
     enable = true;
     # defaultSearchProviderSearchURL = "https://lipsearch.ydns.eu/search?q=%";
     # defaultSearchProviderEnabled = true;
+    package = pkgs.ungoogled-chromium;
   };
   programs.dircolors.enable = true;
   programs.eza.enable = true;
