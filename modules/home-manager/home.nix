@@ -32,7 +32,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    # brave
+    brave
     neomutt
     mutt-wizard
     neovim
