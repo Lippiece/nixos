@@ -8,11 +8,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    brave-nightly = {
+      url = "/tmp/brave/"; # Replace with the actual path
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
+    brave-nightly,
     ...
   } @ inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
@@ -21,6 +27,13 @@
         /home/lippiece/.config/nixos/modules/nixos/configuration.nix
         /home/lippiece/.config/nixos/modules/nixos/hardware-configuration.nix
         inputs.home-manager.nixosModules.default
+
+        ({pkgs, ...}: {
+          # Make Brave Browser Nightly available system-wide
+          environment.systemPackages = [
+            brave-nightly.packages.${pkgs.system}.default
+          ];
+        })
       ];
     };
   };
