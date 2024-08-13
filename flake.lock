@@ -8,13 +8,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1723545825,
-        "narHash": "sha256-lHBsXDY7RBgVNzsb721u/Lw5HhhNUxDFvAVxxRgMjMQ=",
-        "path": "/tmp/brave",
+        "lastModified": 1,
+        "narHash": "sha256-tYHdD2NalH0ZDg3f710hzrWVA7rBavtJ4SIN+jcx4wQ=",
+        "path": "/nix/store/p3w5rs2qvfdrn25lcml4rbvr0k24bfpj-source/flakes/brave",
         "type": "path"
       },
       "original": {
-        "path": "/tmp/brave",
+        "path": "/nix/store/p3w5rs2qvfdrn25lcml4rbvr0k24bfpj-source/flakes/brave",
         "type": "path"
       }
     },

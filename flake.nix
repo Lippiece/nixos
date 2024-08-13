@@ -10,7 +10,7 @@
     };
 
     brave-nightly = {
-      url = "/tmp/brave/"; # Replace with the actual path
+      url = "./flakes/brave/"; # Replace with the actual path
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
