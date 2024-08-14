@@ -13,7 +13,7 @@
   }:
     flake-utils.lib.eachDefaultSystem (
       system: let
-        archiveSha256 = "sha256-E7geCfjfeKm0Ee4YJntY3UjIRnbjryEeYVIrvTBJw/I=";
+        archiveSha256 = "sha256-RpHQQ3Wf3NoYvXk1b3q2NJo2q3QTMp/CMli8h5++XLk=";
 
         pkgs = nixpkgs.legacyPackages.${system};
 
@@ -22,7 +22,7 @@
 
         latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
           url = "https://api.github.com/repos/${owner}/${repo}/releases";
-          sha256 = "sha256-KNFDGOz8Yzb0JdjjPWuTC9QOvnwWGfZ0iFUfMeTjnQE=";
+          sha256 = "sha256-TAWRs3bfDPQ4nGXcSPUVUYnPnCfCk0FFEmiZn9l1NfA=";
         }));
 
         latestNightly = builtins.head (builtins.filter
