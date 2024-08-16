@@ -30,9 +30,7 @@
 
         ({pkgs, ...}: {
           # Make Brave Browser Nightly available system-wide
-          environment.systemPackages = [
-            brave-nightly.packages.${pkgs.system}.default
-          ];
+          environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
         })
       ];
     };

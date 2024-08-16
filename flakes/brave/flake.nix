@@ -11,70 +11,63 @@
     nixpkgs,
     flake-utils,
   }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
-        archiveSha256 = "sha256-RpHQQ3Wf3NoYvXk1b3q2NJo2q3QTMp/CMli8h5++XLk=";
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      releaseSha = "sha256-khX5/xuUaNBccmL8Gxv0bix7M3gYaaVPVGd07AwU7GM=";
+      archiveSha = "sha256-41azFfPhV4zpjvvhhSvHF21N4TWRrufY++VGWHBW+Ak=";
 
-        pkgs = nixpkgs.legacyPackages.${system};
+      latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
+        url = "https://api.github.com/repos/brave/brave-browser/releases";
+        sha256 = releaseSha;
+      }));
 
-        owner = "brave";
-        repo = "brave-browser";
-
-        latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
-          url = "https://api.github.com/repos/${owner}/${repo}/releases";
-          sha256 = "sha256-TAWRs3bfDPQ4nGXcSPUVUYnPnCfCk0FFEmiZn9l1NfA=";
-        }));
-
-        latestNightly = builtins.head (builtins.filter
-          (
-            release:
-              pkgs.lib.hasPrefix "Nightly" release.name
-          )
+      latestNightly =
+        builtins.head
+        (builtins.filter (release: pkgs.lib.hasPrefix "Nightly" release.name)
           latestRelease);
 
-        version = builtins.elemAt (builtins.match "Nightly v([0-9.]+) .*" latestNightly.name) 0;
+      version =
+        builtins.elemAt
+        (builtins.match "Nightly v([0-9.]+) .*" latestNightly.name)
+        0;
 
-        asset = builtins.head (builtins.filter
-          (
-            asset:
-              pkgs.lib.hasSuffix "linux-amd64.zip" asset.name
-          )
-          latestNightly.assets);
-      in {
-        packages.brave-browser-nightly = pkgs.stdenv.mkDerivation {
-          pname = "brave-browser-nightly";
-          inherit version;
+      asset = builtins.head (builtins.filter
+        (asset: pkgs.lib.hasSuffix "linux-amd64.zip" asset.name)
+        latestNightly.assets);
+    in {
+      packages.brave-browser-nightly = pkgs.stdenv.mkDerivation {
+        pname = "brave-browser-nightly";
+        inherit version;
 
-          src = pkgs.fetchzip {
-            stripRoot = false;
-            url = asset.browser_download_url;
-            sha256 = archiveSha256;
-          };
-
-          installPhase = ''
-            mkdir -p $out/bin
-            cp -r * $out/
-            ln -s $out/brave $out/bin/brave
-
-            mkdir -p $out/share/applications
-            cat <<EOF >$out/share/applications/brave-browser-nightly.desktop
-            [Desktop Entry]
-            Name=brave-browser-nightly
-            Exec=$out/bin/brave %f
-            Type=Application
-            EOF
-          '';
-
-          meta = with pkgs.lib; {
-            description = "Brave Browser Nightly Build";
-            homepage = "https://brave.com";
-            license = licenses.mpl20;
-            platforms = ["x86_64-linux"];
-            maintainers = with maintainers; [];
-          };
+        src = pkgs.fetchzip {
+          stripRoot = false;
+          url = asset.browser_download_url;
+          sha256 = archiveSha;
         };
 
-        packages.default = self.packages.${system}.brave-browser-nightly;
-      }
-    );
+        installPhase = ''
+          mkdir -p $out/bin
+          cp -r * $out/
+          ln -s $out/brave $out/bin/brave
+
+          mkdir -p $out/share/applications
+          cat <<EOF >$out/share/applications/brave-browser-nightly.desktop
+          [Desktop Entry]
+          Name=Brave Browser Nightly
+          Exec=$out/bin/brave %f
+          Type=Application
+          EOF
+        '';
+
+        meta = with pkgs.lib; {
+          description = "Brave Browser Nightly Build";
+          homepage = "https://brave.com";
+          license = licenses.mpl20;
+          platforms = ["x86_64-linux"];
+          maintainers = with maintainers; [];
+        };
+      };
+
+      packages.default = self.packages.${system}.brave-browser-nightly;
+    });
 }
