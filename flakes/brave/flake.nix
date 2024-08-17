@@ -13,7 +13,7 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      releaseSha = "sha256-khX5/xuUaNBccmL8Gxv0bix7M3gYaaVPVGd07AwU7GM=";
+      releaseSha = "sha256-mJNe5ZnGFSzxHERp5qWwP8b1kHPtNLQBXsRIxPCE3Qo=";
       archiveSha = "sha256-41azFfPhV4zpjvvhhSvHF21N4TWRrufY++VGWHBW+Ak=";
 
       latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
@@ -64,7 +64,7 @@
           homepage = "https://brave.com";
           license = licenses.mpl20;
           platforms = ["x86_64-linux"];
-          maintainers = with maintainers; [];
+          maintainers = ["lippiece"];
         };
       };
 
