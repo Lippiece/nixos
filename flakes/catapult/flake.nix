@@ -58,7 +58,7 @@
         ];
 
         installPhase = ''
-            mkdir -p $out/bin
+            mkdir -p $out/bin $out/cache
             cp $src $out/catapult
             chmod +x $out/catapult
             ln -s $out/catapult $out/bin/catapult
