@@ -49,6 +49,7 @@
     super-productivity
     kdePackages.kclock
     nixfmt
+    cataclysm-dda
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -141,57 +142,20 @@
   #   package = pkgs.thunderbirdPackages.thunderbird-128;
   # };
   programs.tealdeer.enable = true;
-  programs.password-store = {
-    enable = true;
-  };
+  programs.password-store = {enable = true;};
   programs.nix-index.enable = true;
   programs.newsboat = {
     enable = true;
-    extraConfig = "
-      reload-threads 5
-      auto-reload yes
-      reload-time 120
-      reload-threads 4
-      download-retries 4
-      download-timeout 10
-      prepopulate-query-feeds yes
-
-      # -- display -------------------------------------------------------------------
-      color info default default reverse
-      color listnormal_unread yellow default
-      color listfocus blue default reverse bold
-      color listfocus_unread blue default reverse bold
-
-      text-width 80
-
-      # -- navigation ----------------------------------------------------------------
-
-      goto-next-feed no
-
-      bind-key j down feedlist
-      bind-key k up feedlist
-      bind-key j next articlelist
-      bind-key k prev articlelist
-      bind-key J next-feed articlelist
-      bind-key K prev-feed articlelist
-      bind-key j down article
-      bind-key k up article
-      ";
+    extraConfig = "\n      reload-threads 5\n      auto-reload yes\n      reload-time 120\n      reload-threads 4\n      download-retries 4\n      download-timeout 10\n      prepopulate-query-feeds yes\n\n      # -- display -------------------------------------------------------------------\n      color info default default reverse\n      color listnormal_unread yellow default\n      color listfocus blue default reverse bold\n      color listfocus_unread blue default reverse bold\n\n      text-width 80\n\n      # -- navigation ----------------------------------------------------------------\n\n      goto-next-feed no\n\n      bind-key j down feedlist\n      bind-key k up feedlist\n      bind-key j next articlelist\n      bind-key k prev articlelist\n      bind-key J next-feed articlelist\n      bind-key K prev-feed articlelist\n      bind-key j down article\n      bind-key k up article\n      ";
     urls = [
-      {
-        url = "https://dotfyle.com/this-week-in-neovim/rss.xml";
-      }
-      {
-        url = "https://factorio.com/blog/rss";
-      }
+      {url = "https://dotfyle.com/this-week-in-neovim/rss.xml";}
+      {url = "https://factorio.com/blog/rss";}
       {
         url = "https://habr.com/ru/rss/feed/d6e1aa020767fe5324b423fc403b5751?fl=en%2Cru&rating=25&types%5B%5D=article&types%5B%5D=post";
       }
     ];
   };
-  programs.neomutt = {
-    enable = true;
-  };
+  programs.neomutt = {enable = true;};
   programs.carapace.enable = true;
   programs.gpg.enable = true;
 
