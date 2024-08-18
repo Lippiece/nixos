@@ -14,17 +14,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catapult = {
-      url = "./flakes/catapult/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # catapult = {
+    #   url = "./flakes/catapult/";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = {
     self,
     nixpkgs,
     brave-nightly,
-    catapult,
+    # catapult,
     ...
   } @ inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
@@ -38,9 +38,9 @@
           # Make Brave Browser Nightly available system-wide
           environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
 
-          home-manager.users.lippiece = {pkgs, ...}: {
-            home.packages = [catapult.packages.${pkgs.system}.default];
-          };
+          # home-manager.users.lippiece = {pkgs, ...}: {
+          #   home.packages = [catapult.packages.${pkgs.system}.default];
+          # };
         })
       ];
     };

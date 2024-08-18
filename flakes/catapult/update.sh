@@ -1,1 +1,1 @@
-/home/lippiece/.config/nixos/flakes/update.sh
+/home/lippiece/.config/nixos/update.sh
