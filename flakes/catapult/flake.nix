@@ -52,17 +52,47 @@
           libGLX
           mesa
           udev
+
+          SDL2.out
+          SDL2_image.out
+          SDL2_mixer_2_0.out
+          SDL2_ttf.out
+          lua5
         ];
 
+        # Export LD_LIBRARY_PATH globally for any child processes
+        # export LD_LIBRARY_PATH="${
+        #   pkgs.lib.makeLibraryPath [
+        #     pkgs.xorg.libXcursor
+        #     pkgs.xorg.libXi
+        #     pkgs.xorg.libXinerama
+        #     pkgs.xorg.libXrender
+        #     pkgs.xorg.libXrandr
+        #     pkgs.xorg.libX11
+        #     pkgs.xorg.libXext
+        #     pkgs.xorg.libxcb
+        #     pkgs.xorg.libXau
+        #     pkgs.xorg.libXdmcp
+        #     pkgs.libGL
+        #     pkgs.libGLX
+        #     pkgs.mesa
+        #     pkgs.udev
+        #
+        #     pkgs.SDL2.out
+        #     pkgs.SDL2_image.out
+        #     pkgs.SDL2_mixer_2_0.out
+        #     pkgs.SDL2_ttf.out
+        #   ]
+        # }:$LD_LIBRARY_PATH"
         installPhase = ''
-            mkdir -p $out/bin $out/share
-            cp $src $out/share/catapult
-            chmod +x $out/share/catapult
-            chmod 777 $out/share
+                mkdir -p $out/bin $out/share
+                cp $src $out/catapult
+                chmod +x $out/catapult
+                chmod 755 $out/
 
-            # make libraries avaiable
-          wrapProgram $out/share/catapult \
-            --set LD_LIBRARY_PATH "${
+                # make libraries avaiable
+                wrapProgram $out/catapult \
+                --set LD_LIBRARY_PATH "${
             pkgs.lib.makeLibraryPath [
               pkgs.xorg.libXcursor
               pkgs.xorg.libXi
@@ -78,16 +108,22 @@
               pkgs.libGLX
               pkgs.mesa
               pkgs.udev
+
+              pkgs.SDL2.out
+              pkgs.SDL2_image.out
+              pkgs.SDL2_mixer_2_0.out
+              pkgs.SDL2_ttf.out
+              pkgs.lua5_3
             ]
           }:$LD_LIBRARY_PATH"
 
-            mkdir -p $out/share/applications
-            cat <<EOF >$out/share/applications/catapult.desktop
-            [Desktop Entry]
-            Name=Catapult CDDA launcher
-            Exec=/opt/catapult/catapult %f
-            Type=Application
-            EOF
+          mkdir -p $out/share/applications
+          cat <<EOF >$out/share/applications/catapult.desktop
+          [Desktop Entry]
+          Name=Catapult CDDA launcher
+          Exec=/opt/catapult/catapult %f
+          Type=Application
+          EOF
         '';
 
         meta = with pkgs.lib; {

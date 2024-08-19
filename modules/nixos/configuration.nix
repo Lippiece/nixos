@@ -6,11 +6,11 @@
   pkgs,
   ...
 }: let
-  impermanence = builtins.fetchTarball "https://github.com/nix-community/impermanence/archive/master.tar.gz";
+  impermanence =
+    builtins.fetchTarball
+    "https://github.com/nix-community/impermanence/archive/master.tar.gz";
 in {
-  imports = [
-    "${impermanence}/nixos.nix"
-  ];
+  imports = ["${impermanence}/nixos.nix"];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -22,7 +22,8 @@ in {
 
   hardware.enableAllFirmware = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot =
+    true; # powers up the default Bluetooth controller on boot
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -31,7 +32,9 @@ in {
     ];
   };
 
-  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  }; # Optionally, set the environment variable
 
   boot.initrd.luks.devices = {
     root = {
@@ -42,7 +45,8 @@ in {
   };
 
   networking.hostName = "mothership"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
   networking.extraHosts = "192.168.1.102 cumulonimbus";
   # networking.networkmanager.dns = "systemd-resolved";
 
@@ -124,7 +128,11 @@ in {
     ];
   };
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    PAGER = "nvim -R";
+    MANPAGER = "nvim -c 'set ft=man' -";
+  };
 
   # Some Programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -213,21 +221,14 @@ in {
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
 
-    users = {
-      "lippiece" = import ../home-manager/home.nix;
-    };
+    users = {"lippiece" = import ../home-manager/home.nix;};
   };
 
   i18n = {
-    supportedLocales = [
-      "ru_RU.UTF-8/UTF-8"
-      "en_GB.UTF-8/UTF-8"
-    ];
+    supportedLocales = ["ru_RU.UTF-8/UTF-8" "en_GB.UTF-8/UTF-8"];
 
     defaultLocale = "en_GB.UTF-8/UTF-8";
-    extraLocaleSettings = {
-      LANGUAGE = "en_GB.UTF-8/UTF-8";
-    };
+    extraLocaleSettings = {LANGUAGE = "en_GB.UTF-8/UTF-8";};
   };
 
   # nix.gc = {

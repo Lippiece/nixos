@@ -50,6 +50,7 @@
     kdePackages.kclock
     nixfmt
     cataclysm-dda
+    cht-sh
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
