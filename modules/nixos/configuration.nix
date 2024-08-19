@@ -32,10 +32,6 @@ in {
     ];
   };
 
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
-  }; # Optionally, set the environment variable
-
   boot.initrd.luks.devices = {
     root = {
       # Use https://nixos.wiki/wiki/Full_Disk_Encryption
@@ -129,6 +125,7 @@ in {
   };
 
   environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
     NIXOS_OZONE_WL = "1";
     PAGER = "nvim -R";
     MANPAGER = "nvim -c 'set ft=man' -";
