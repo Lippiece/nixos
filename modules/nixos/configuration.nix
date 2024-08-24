@@ -128,7 +128,7 @@ in {
     LIBVA_DRIVER_NAME = "iHD";
     NIXOS_OZONE_WL = "1";
     PAGER = "nvim -R";
-    MANPAGER = "nvim -c 'set ft=man' -";
+    MANPAGER = "nvim +Man!";
   };
 
   # Some Programs need SUID wrappers, can be configured further or are

@@ -1,28 +1,28 @@
 warning: Git tree '/home/lippiece/.config/nixos' is dirty
 warning: updating lock file '/home/lippiece/.config/nixos/flake.lock':
 • Updated input 'brave-nightly':
-    'path:/nix/store/0gk52lxpw37865rr3yxyis7n2x4rqlmf-source/flakes/brave?lastModified=1&narHash=sha256-be1pYwjVjzollktrOvMB0uFs5GQC4W2ce5nnJ87sm88%3D' (1970-01-01)
-  → 'path:/nix/store/k7bi9qhyv48kmkpbmf40fra4x1i8fx66-source/flakes/brave?lastModified=1&narHash=sha256-be1pYwjVjzollktrOvMB0uFs5GQC4W2ce5nnJ87sm88%3D' (1970-01-01)
+    'path:/nix/store/1vvb0db7lhrqvxgrq66l27xp4jscnwsi-source/flakes/brave?lastModified=1&narHash=sha256-8kQXOVcthLs3cXQlOwS2CwV2PUjJRK4pIt6MhAZNM5M%3D' (1970-01-01)
+  → 'path:/nix/store/8p34z1l0dcs89mi2ynvgjh529vywd8vd-source/flakes/brave?lastModified=1&narHash=sha256-8kQXOVcthLs3cXQlOwS2CwV2PUjJRK4pIt6MhAZNM5M%3D' (1970-01-01)
 warning: Git tree '/home/lippiece/.config/nixos' is dirty
 building the system configuration...
 warning: Git tree '/home/lippiece/.config/nixos' is dirty
 warning: updating lock file '/home/lippiece/.config/nixos/flake.lock':
 • Updated input 'brave-nightly':
-    'path:/nix/store/k7bi9qhyv48kmkpbmf40fra4x1i8fx66-source/flakes/brave?lastModified=1&narHash=sha256-be1pYwjVjzollktrOvMB0uFs5GQC4W2ce5nnJ87sm88%3D' (1970-01-01)
-  → 'path:/nix/store/hpfamgb7snwl4swzic3p0fr9dl25j4sg-source/flakes/brave?lastModified=1&narHash=sha256-be1pYwjVjzollktrOvMB0uFs5GQC4W2ce5nnJ87sm88%3D' (1970-01-01)
+    'path:/nix/store/8p34z1l0dcs89mi2ynvgjh529vywd8vd-source/flakes/brave?lastModified=1&narHash=sha256-8kQXOVcthLs3cXQlOwS2CwV2PUjJRK4pIt6MhAZNM5M%3D' (1970-01-01)
+  → 'path:/nix/store/as2szsrikr1ic0pzgnr4jk3vyg79l4x0-source/flakes/brave?lastModified=1&narHash=sha256-8kQXOVcthLs3cXQlOwS2CwV2PUjJRK4pIt6MhAZNM5M%3D' (1970-01-01)
 warning: Git tree '/home/lippiece/.config/nixos' is dirty
 trace: evaluation warning: nixfmt was renamed to nixfmt-classic. The nixfmt attribute may be used for the new RFC 166-style formatter in the future, which is currently available as nixfmt-rfc-style
 these 5 derivations will be built:
-  /nix/store/06gh3lyvkmkbhplgi4bv2n1kijp5ap58-set-environment.drv
-  /nix/store/f0ckjx5vnwxmjzni7rg41r9s38ha7l5l-etc-fish-nixos-env-preinit.fish.drv
-  /nix/store/xn8z09kz62ms6mxi345rvana8jflsrxf-etc-profile.drv
-  /nix/store/44s252wj36mf9nnkc691nh3n2z1fga2s-etc.drv
-  /nix/store/f5c502870x556jjmagg4mb5ic74v0kl3-nixos-system-mothership-24.11.20240731.9f918d6.drv
-building '/nix/store/06gh3lyvkmkbhplgi4bv2n1kijp5ap58-set-environment.drv'...
-building '/nix/store/f0ckjx5vnwxmjzni7rg41r9s38ha7l5l-etc-fish-nixos-env-preinit.fish.drv'...
-building '/nix/store/xn8z09kz62ms6mxi345rvana8jflsrxf-etc-profile.drv'...
-building '/nix/store/44s252wj36mf9nnkc691nh3n2z1fga2s-etc.drv'...
-building '/nix/store/f5c502870x556jjmagg4mb5ic74v0kl3-nixos-system-mothership-24.11.20240731.9f918d6.drv'...
+  /nix/store/1pdyprq8s3dm25ywnhchri4bqhr19r3d-set-environment.drv
+  /nix/store/cwzm3xkjjdrbpcnkrif53vz3zhqnkkxn-etc-profile.drv
+  /nix/store/lryg4wy8y809nadpsj94rv58x1ix62jk-etc-fish-nixos-env-preinit.fish.drv
+  /nix/store/lrz3ym0mmij782zlzbysnzpjqh9gbpnv-etc.drv
+  /nix/store/2hhg7d2awqbxjd1ca37s4gqdpm59wws6-nixos-system-mothership-24.11.20240731.9f918d6.drv
+building '/nix/store/1pdyprq8s3dm25ywnhchri4bqhr19r3d-set-environment.drv'...
+building '/nix/store/lryg4wy8y809nadpsj94rv58x1ix62jk-etc-fish-nixos-env-preinit.fish.drv'...
+building '/nix/store/cwzm3xkjjdrbpcnkrif53vz3zhqnkkxn-etc-profile.drv'...
+building '/nix/store/lrz3ym0mmij782zlzbysnzpjqh9gbpnv-etc.drv'...
+building '/nix/store/2hhg7d2awqbxjd1ca37s4gqdpm59wws6-nixos-system-mothership-24.11.20240731.9f918d6.drv'...
 perl: warning: Setting locale failed.
 perl: warning: Please check that your locale settings:
 	LANGUAGE = "en_GB.UTF-8/UTF-8",

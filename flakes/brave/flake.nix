@@ -13,8 +13,8 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      releaseSha = "sha256-WZnqvcpYe9sfFSUfs8KLpfjlCglwTsDqIfV5EzJMank=";
-      archiveSha = "sha256-bS0uF4uBQgMJgvdDk+xx3zna8+T2BuCCduvhsBz+6/E=";
+      releaseSha = "sha256-gVmuRB/mWinlIgcx4A6NKCMasj5ZPfHqobyKhUKt22w=";
+      archiveSha = "sha256-M6nGh8aLIvn/+dZ4eYOOxQcA1X336KjVWq5pCrWR+lM=";
 
       latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
         url = "https://api.github.com/repos/brave/brave-browser/releases";
@@ -22,14 +22,14 @@
       }));
 
       latestNightly =
-        builtins.head
-        (builtins.filter (release: pkgs.lib.hasPrefix "Nightly" release.name)
-          latestRelease);
-
-      version =
         builtins.elemAt
-        (builtins.match "Nightly v([0-9.]+) .*" latestNightly.name)
-        0;
+        (builtins.filter (release: pkgs.lib.hasPrefix "Nightly" release.name)
+          latestRelease)
+        1;
+
+      # version = builtins.elemAt
+      #   (builtins.match "Nightly v([0-9.]+) .*" latestNightly.name) 1;
+      version = "123123";
 
       asset = builtins.head (builtins.filter
         (asset: pkgs.lib.hasSuffix "linux-amd64.zip" asset.name)
