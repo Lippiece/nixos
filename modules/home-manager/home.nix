@@ -51,6 +51,8 @@
     nixfmt
     cataclysm-dda
     cht-sh
+    proxychains-ng
+    spotube
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

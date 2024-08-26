@@ -1,1 +1,0 @@
-/home/lippiece/.config/nixos/flakes/update.sh
