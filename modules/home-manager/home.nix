@@ -53,6 +53,8 @@
     cht-sh
     proxychains-ng
     spotube
+    webtorrent_desktop
+    qbittorrent-enhanced
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
