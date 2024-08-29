@@ -55,6 +55,7 @@
     spotube
     webtorrent_desktop
     qbittorrent-enhanced
+    onlyoffice-bin
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
