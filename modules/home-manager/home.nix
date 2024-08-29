@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "lippiece";
@@ -56,6 +52,7 @@
     webtorrent_desktop
     qbittorrent-enhanced
     onlyoffice-bin
+    nushell
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
