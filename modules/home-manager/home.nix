@@ -53,6 +53,13 @@
     qbittorrent-enhanced
     onlyoffice-bin
     nushell
+
+    # Scala
+    coursier
+    scala
+    scala-cli
+    scalafmt
+    metals
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
