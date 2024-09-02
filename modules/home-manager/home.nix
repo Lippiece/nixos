@@ -53,7 +53,6 @@
     qbittorrent-enhanced
     onlyoffice-bin
     nushell
-    brave
 
     # Scala
     coursier
