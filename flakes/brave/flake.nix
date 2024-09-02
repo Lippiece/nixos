@@ -56,7 +56,7 @@
           cat <<EOF >$out/share/applications/brave-browser-nightly.desktop
           [Desktop Entry]
           Name=Brave Browser Nightly
-          Exec=$out/bin/brave %f
+          Exec=$out/bin/brave --enable-features=UseOzonePlatform --ozone-platform=wayland %f
           Type=Application
           EOF
         '';
