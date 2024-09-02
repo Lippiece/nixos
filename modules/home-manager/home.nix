@@ -53,7 +53,7 @@
     qbittorrent-enhanced
     onlyoffice-bin
     nushell
-    obs-studio
+    brave
 
     # Scala
     coursier
