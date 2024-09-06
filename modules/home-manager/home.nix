@@ -29,39 +29,45 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     # brave
-    neomutt
-    mutt-wizard
     neovim
     vimPlugins.LazyVim
-    urlscan
-    isync
     neovide
-    wl-clipboard
-    alejandra
+
     telegram-desktop
-    pass-git-helper
-    lynx
-    imagemagick
-    super-productivity
-    kdePackages.kclock
-    nixfmt
-    cataclysm-dda
+
+    nushell
     cht-sh
+    imagemagick
+    wl-clipboard
+    pass-git-helper
     proxychains-ng
+
+    kdePackages.kclock
+
+    super-productivity
     spotube
+    onlyoffice-bin
     webtorrent_desktop
     qbittorrent-enhanced
-    onlyoffice-bin
-    nushell
+
+    alejandra
+    nixfmt
+
+    mutt-wizard
+    neomutt
+    isync
+    urlscan
+    msmtp
+    lynx
 
     # Scala
-    coursier
-    scala
-    scala-cli
-    scalafmt
-    metals
-    sbt
-    ammonite
+    # coursier
+    # scala
+    # scala-cli
+    # scalafmt
+    # metals
+    # sbt
+    # ammonite
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
