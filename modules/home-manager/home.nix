@@ -60,6 +60,10 @@
     msmtp
     lynx
 
+    # Rust
+    rustc
+    cargo
+
     # Scala
     # coursier
     # scala
