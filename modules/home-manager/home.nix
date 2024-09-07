@@ -62,7 +62,7 @@
 
     # Rust
     rustc
-    cargo
+    rustup
 
     # Scala
     # coursier
