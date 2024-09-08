@@ -28,13 +28,31 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    # brave
+
+    ## GUI ##
+
+    # Tools
+    kdePackages.kclock
+    telegram-desktop
+
+    # Work
+    super-productivity
+    onlyoffice-bin
+
+    # Entertainment
+    webtorrent_desktop
+    qbittorrent-enhanced
+    spotube
+    bottles
+
+    ## CLI ##
+
+    # vim
     neovim
     vimPlugins.LazyVim
     neovide
 
-    telegram-desktop
-
+    # Shell
     nushell
     cht-sh
     imagemagick
@@ -42,17 +60,11 @@
     pass-git-helper
     proxychains-ng
 
-    kdePackages.kclock
-
-    super-productivity
-    spotube
-    onlyoffice-bin
-    webtorrent_desktop
-    qbittorrent-enhanced
-
+    # Nix
     alejandra
     nixfmt
 
+    # Mutt
     mutt-wizard
     neomutt
     isync
