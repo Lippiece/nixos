@@ -1,41 +1,5 @@
 {
   "nodes": {
-    "brave-nightly": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-FISSOfEpw9viHy6Ns2VytFYLK2esKb8jUL06tuZ+84M=",
-        "path": "/nix/store/yk6ks32ww9hw0pw86fgkwls2f3h23gr2-source/flakes/brave",
-        "type": "path"
-      },
-      "original": {
-        "path": "/nix/store/yk6ks32ww9hw0pw86fgkwls2f3h23gr2-source/flakes/brave",
-        "type": "path"
-      }
-    },
-    "flake-utils": {
-      "inputs": {
-        "systems": "systems"
-      },
-      "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -74,24 +38,8 @@
     },
     "root": {
       "inputs": {
-        "brave-nightly": "brave-nightly",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
-      }
-    },
-    "systems": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
       }
     }
   },

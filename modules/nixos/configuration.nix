@@ -24,14 +24,6 @@ in {
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot =
     true; # powers up the default Bluetooth controller on boot
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
-      vpl-gpu-rt
-    ];
-  };
-
   boot.initrd.luks.devices = {
     root = {
       # Use https://nixos.wiki/wiki/Full_Disk_Encryption

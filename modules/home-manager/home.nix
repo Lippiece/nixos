@@ -62,7 +62,7 @@
 
     # Nix
     alejandra
-    nixfmt
+    nixfmt-classic
 
     # Mutt
     mutt-wizard
