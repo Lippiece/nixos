@@ -14,7 +14,7 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       releaseSha = "sha256-J1TOjH8BNuKlBSKJ8nVv11iSOR7EvXBKVVwsWWlq4I0=";
-      archiveSha = "sha256-rrvw2XGNHgwoVSXcQ+4W3cIcXvLbIff7Z3CSZZfByew=";
+      archiveSha = "sha256-/fOhCBOc51CHHnKU5EVxrop/ig94ojdCqvw6Lvexg9A=";
 
       latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
         url = "https://api.github.com/repos/brave/brave-browser/releases";
@@ -25,7 +25,7 @@
         builtins.elemAt
         (builtins.filter (release: pkgs.lib.hasPrefix "Nightly" release.name)
           latestRelease)
-        0;
+        1;
 
       version =
         builtins.elemAt
