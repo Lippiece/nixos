@@ -198,6 +198,7 @@
         url = "https://habr.com/ru/rss/feed/d6e1aa020767fe5324b423fc403b5751?fl=en%2Cru&rating=25&types%5B%5D=article&types%5B%5D=post";
       }
       {url = "https://bun.sh/rss.xml";}
+      {url = "https://kde.org/index.xml";}
       {url = "http://cumulonimbus:4002/rss/test";}
     ];
   };
