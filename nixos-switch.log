@@ -1,27 +1,37 @@
 warning: Git tree '/home/lippiece/.config/nixos' is dirty
 warning: updating lock file '/home/lippiece/.config/nixos/flake.lock':
 • Updated input 'brave-nightly':
-    'path:/nix/store/3xxp4l81mkgb2q35a1sjb4r5fqkiig48-source/flakes/brave?lastModified=1&narHash=sha256-/hnFQU8Qaex6o/clTmClHAyaoj0t/%2Buc%2BW3bR/z8R8c%3D' (1970-01-01)
-  → 'path:/nix/store/fmgpmcwsnzm5lwzg5q83yrqd8haapyfa-source/flakes/brave?lastModified=1&narHash=sha256-/hnFQU8Qaex6o/clTmClHAyaoj0t/%2Buc%2BW3bR/z8R8c%3D' (1970-01-01)
+    'path:/nix/store/41fvfdzwvd5rfbr0v41114iw1vvqy3y2-source/flakes/brave?lastModified=1&narHash=sha256-/hnFQU8Qaex6o/clTmClHAyaoj0t/%2Buc%2BW3bR/z8R8c%3D' (1970-01-01)
+  → 'path:/nix/store/2px2jw9q1gablmxavnzz0wr6nblvyfv6-source/flakes/brave?lastModified=1&narHash=sha256-/hnFQU8Qaex6o/clTmClHAyaoj0t/%2Buc%2BW3bR/z8R8c%3D' (1970-01-01)
 warning: Git tree '/home/lippiece/.config/nixos' is dirty
 building the system configuration...
 warning: Git tree '/home/lippiece/.config/nixos' is dirty
 warning: updating lock file '/home/lippiece/.config/nixos/flake.lock':
 • Updated input 'brave-nightly':
-    'path:/nix/store/fmgpmcwsnzm5lwzg5q83yrqd8haapyfa-source/flakes/brave?lastModified=1&narHash=sha256-/hnFQU8Qaex6o/clTmClHAyaoj0t/%2Buc%2BW3bR/z8R8c%3D' (1970-01-01)
-  → 'path:/nix/store/41fvfdzwvd5rfbr0v41114iw1vvqy3y2-source/flakes/brave?lastModified=1&narHash=sha256-/hnFQU8Qaex6o/clTmClHAyaoj0t/%2Buc%2BW3bR/z8R8c%3D' (1970-01-01)
+    'path:/nix/store/2px2jw9q1gablmxavnzz0wr6nblvyfv6-source/flakes/brave?lastModified=1&narHash=sha256-/hnFQU8Qaex6o/clTmClHAyaoj0t/%2Buc%2BW3bR/z8R8c%3D' (1970-01-01)
+  → 'path:/nix/store/y6shnirfj53vfzg0sq46inpmmn5v8dv8-source/flakes/brave?lastModified=1&narHash=sha256-/hnFQU8Qaex6o/clTmClHAyaoj0t/%2Buc%2BW3bR/z8R8c%3D' (1970-01-01)
 warning: Git tree '/home/lippiece/.config/nixos' is dirty
-these 5 derivations will be built:
-  /nix/store/k98y77pkl3s8pmmlmxqzfyq1lbsn92g1-set-environment.drv
-  /nix/store/84pcnqs7fwmixf34giwh2ni4wdzfibgv-etc-profile.drv
-  /nix/store/gra12lxhpgpj163b1bw2h4h19dmqskc7-etc-fish-nixos-env-preinit.fish.drv
-  /nix/store/aj1msgbwmnfgsdr15n2n97gks0j06qwj-etc.drv
-  /nix/store/yr508afxcls7jdfswbxji3v2pb5d1895-nixos-system-mothership-24.11.20240731.9f918d6.drv
-building '/nix/store/k98y77pkl3s8pmmlmxqzfyq1lbsn92g1-set-environment.drv'...
-building '/nix/store/gra12lxhpgpj163b1bw2h4h19dmqskc7-etc-fish-nixos-env-preinit.fish.drv'...
-building '/nix/store/84pcnqs7fwmixf34giwh2ni4wdzfibgv-etc-profile.drv'...
-building '/nix/store/aj1msgbwmnfgsdr15n2n97gks0j06qwj-etc.drv'...
-building '/nix/store/yr508afxcls7jdfswbxji3v2pb5d1895-nixos-system-mothership-24.11.20240731.9f918d6.drv'...
+these 10 derivations will be built:
+  /nix/store/8q7vwsdb47k2nxf59y237qg6mbijbrdr-hm_newsboaturls.drv
+  /nix/store/yb6s2xb8ghszkashr7ww048x9fg11li5-home-manager-files.drv
+  /nix/store/ffcv05hlqyjdjpav8yl73zq6lm3nkzdh-home-manager-generation.drv
+  /nix/store/asw6p9skyhhlkwk9bl0mf3daz7myrmdm-unit-home-manager-lippiece.service.drv
+  /nix/store/zngn33l18vj7xws3qfz7492p0xl92x65-set-environment.drv
+  /nix/store/j3487mygxp6hc258w46z33g9gvkcdlkc-etc-profile.drv
+  /nix/store/qh347yv6zpb01q6rq22ynvibxyr5x9x0-system-units.drv
+  /nix/store/rhw2b5sxrp4a59mg1g28p3x5hg2a3zcm-etc-fish-nixos-env-preinit.fish.drv
+  /nix/store/d5wcab2zya4nn4bqcfykrm8q0a6lg7an-etc.drv
+  /nix/store/q2sds7hssmd44pwgpcj1icydsd7v03lw-nixos-system-mothership-24.11.20240731.9f918d6.drv
+building '/nix/store/zngn33l18vj7xws3qfz7492p0xl92x65-set-environment.drv'...
+building '/nix/store/8q7vwsdb47k2nxf59y237qg6mbijbrdr-hm_newsboaturls.drv'...
+building '/nix/store/rhw2b5sxrp4a59mg1g28p3x5hg2a3zcm-etc-fish-nixos-env-preinit.fish.drv'...
+building '/nix/store/j3487mygxp6hc258w46z33g9gvkcdlkc-etc-profile.drv'...
+building '/nix/store/yb6s2xb8ghszkashr7ww048x9fg11li5-home-manager-files.drv'...
+building '/nix/store/ffcv05hlqyjdjpav8yl73zq6lm3nkzdh-home-manager-generation.drv'...
+building '/nix/store/asw6p9skyhhlkwk9bl0mf3daz7myrmdm-unit-home-manager-lippiece.service.drv'...
+building '/nix/store/qh347yv6zpb01q6rq22ynvibxyr5x9x0-system-units.drv'...
+building '/nix/store/d5wcab2zya4nn4bqcfykrm8q0a6lg7an-etc.drv'...
+building '/nix/store/q2sds7hssmd44pwgpcj1icydsd7v03lw-nixos-system-mothership-24.11.20240731.9f918d6.drv'...
 perl: warning: Setting locale failed.
 perl: warning: Please check that your locale settings:
 	LANGUAGE = "en_GB.UTF-8/UTF-8",
@@ -47,4 +57,4 @@ perl: warning: Please check that your locale settings:
 perl: warning: Falling back to the standard locale ("C").
 reloading user units for lippiece...
 restarting sysinit-reactivation.target
-the following new units were started: sysinit-reactivation.target, systemd-tmpfiles-resetup.service
+restarting the following units: home-manager-lippiece.service
