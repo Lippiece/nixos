@@ -241,4 +241,13 @@ in {
       defaultNetwork.settings.dns_enabled = true;
     };
   };
+
+  security.pam.loginLimits = [
+    {
+      domain = "@users";
+      type = "soft";
+      item = "priority";
+      value = "1";
+    }
+  ];
 }
