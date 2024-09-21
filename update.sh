@@ -23,3 +23,4 @@ else
     echo "or the packages was successfully built."
     echo $output
 end
+notify-send "Brave flake concluded."

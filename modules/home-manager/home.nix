@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "lippiece";
@@ -29,11 +33,15 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    ## GUI ##
+    ####################################
+    #              GUI
+    ####################################
 
     # Tools
     kdePackages.kclock
     telegram-desktop
+    # (vivaldi.override {isSnapshot = true;})
+    vivaldi
 
     # Work
     super-productivity
@@ -45,7 +53,9 @@
     spotube
     bottles
 
-    ## CLI ##
+    ####################################
+    #             CLI
+    ####################################
 
     # vim
     neovim
@@ -218,4 +228,10 @@
   #   };
   # };
   services.easyeffects.enable = true;
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      # Add additional package names here
+      "vivaldi"
+    ];
 }
