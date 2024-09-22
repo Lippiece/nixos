@@ -40,8 +40,15 @@
     # Tools
     kdePackages.kclock
     telegram-desktop
+    # vivaldi
     # (vivaldi.override {isSnapshot = true;})
-    vivaldi
+    (vivaldi.overrideAttrs (oldAttrs: {
+      dontWrapQtApps = false;
+      dontPatchELF = true;
+      nativeBuildInputs =
+        oldAttrs.nativeBuildInputs
+        ++ [pkgs.kdePackages.wrapQtAppsHook];
+    }))
 
     # Work
     super-productivity
