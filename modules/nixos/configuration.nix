@@ -6,9 +6,11 @@
   pkgs,
   ...
 }: let
-  impermanence =
-    builtins.fetchTarball
-    "https://github.com/nix-community/impermanence/archive/master.tar.gz";
+  impermanence = builtins.fetchTarball {
+    # "https://github.com/nix-community/impermanence/archive/master.tar.gz";
+    url = "https://github.com/nix-community/impermanence/archive/63f4d0443e32b0dd7189001ee1894066765d18a5.tar.gz";
+    sha256 = "sha256:0xnshgwfg834dm9l14p2w3wmhjysjpqpgfk37im0vrk1qgva19g2";
+  };
 in {
   imports = ["${impermanence}/nixos.nix"];
 
@@ -87,6 +89,7 @@ in {
     gcc
     libnotify
     nerdfonts
+    inter-nerdfont
     nodejs_22
     ripgrep
     libwebp

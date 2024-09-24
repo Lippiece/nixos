@@ -14,6 +14,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence.url = "github:nix-community/impermanence/63f4d0443e32b0dd7189001ee1894066765d18a5";
+
     # catapult = {
     #   url = "./flakes/catapult/";
     #   inputs.nixpkgs.follows = "nixpkgs";

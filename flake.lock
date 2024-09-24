@@ -9,12 +9,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-cqp+YRCffnXD+A2Fvs8v9AhIcPKu9t5f91TsY/TPjkw=",
-        "path": "/nix/store/wzv1cll3h0rnf74fn79nma0shq0avxbq-source/flakes/brave",
+        "narHash": "sha256-eJOb1NIxyTkHqusYm+yFCm/J3fqwvWK89DdmFlfZEH4=",
+        "path": "/nix/store/npnmm9wqlxj56zdikqa7x1vvcyngk5qg-source/flakes/brave",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wzv1cll3h0rnf74fn79nma0shq0avxbq-source/flakes/brave",
+        "path": "/nix/store/npnmm9wqlxj56zdikqa7x1vvcyngk5qg-source/flakes/brave",
         "type": "path"
       }
     },
@@ -56,6 +56,22 @@
         "type": "github"
       }
     },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1725690722,
+        "narHash": "sha256-4qWg9sNh5g1qPGO6d/GV2ktY+eDikkBTbWSg5/iD2nY=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "63f4d0443e32b0dd7189001ee1894066765d18a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "63f4d0443e32b0dd7189001ee1894066765d18a5",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1726871744,
@@ -76,6 +92,7 @@
       "inputs": {
         "brave-nightly": "brave-nightly",
         "home-manager": "home-manager",
+        "impermanence": "impermanence",
         "nixpkgs": "nixpkgs"
       }
     },
