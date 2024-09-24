@@ -89,7 +89,7 @@ in {
     gcc
     libnotify
     nerdfonts
-    inter-nerdfont
+    inter
     nodejs_22
     ripgrep
     libwebp
