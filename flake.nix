@@ -16,25 +16,30 @@
 
     impermanence.url = "github:nix-community/impermanence/63f4d0443e32b0dd7189001ee1894066765d18a5";
 
-    # catapult = {
-    #   url = "./flakes/catapult/";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = {
     self,
     nixpkgs,
     brave-nightly,
-    # catapult,
+    nixos-hardware,
     ...
   } @ inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
+        # My configuration
         /home/lippiece/.config/nixos/modules/nixos/configuration.nix
         /home/lippiece/.config/nixos/modules/nixos/hardware-configuration.nix
+
+        # Home Manager
         inputs.home-manager.nixosModules.default
+
+        # `nixos-hardware.nix`
+        nixos-hardware.nixosModules.common-pc-laptop-ssd
+        nixos-hardware.nixosModules.common-pc-laptop
+        nixos-hardware.nixosModules.common-gpu-nvidia
 
         ({pkgs, ...}: {
           # Make Brave Browser Nightly available system-wide

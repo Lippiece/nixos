@@ -2,6 +2,8 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
+  config,
+  lib,
   inputs,
   pkgs,
   ...
@@ -9,6 +11,7 @@
   impermanence =
     builtins.fetchTarball
     "https://github.com/nix-community/impermanence/archive/master.tar.gz";
+  nvidiaPackage = config.hardware.nvidia.package;
 in {
   imports = ["${impermanence}/nixos.nix"];
 
@@ -251,4 +254,12 @@ in {
       value = "1";
     }
   ];
+
+  hardware.nvidia = {
+    open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
+    prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+  };
 }
