@@ -255,11 +255,38 @@ in {
     }
   ];
 
+  # Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+  };
+
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
   hardware.nvidia = {
     open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
     prime = {
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
+
+      # Needed for finegrained power management to work
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
     };
+    modesetting.enable = true;
+
+    powerManagement.enable = true;
+
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = true;
+
+    # Enable the Nvidia settings menu,
+    # accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
   };
 }

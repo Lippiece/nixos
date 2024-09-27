@@ -36,11 +36,6 @@
         # Home Manager
         inputs.home-manager.nixosModules.default
 
-        # `nixos-hardware.nix`
-        nixos-hardware.nixosModules.common-pc-laptop-ssd
-        nixos-hardware.nixosModules.common-pc-laptop
-        nixos-hardware.nixosModules.common-gpu-nvidia
-
         ({pkgs, ...}: {
           # Make Brave Browser Nightly available system-wide
           environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
