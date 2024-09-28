@@ -276,13 +276,15 @@ in {
         enableOffloadCmd = true;
       };
     };
+
     modesetting.enable = true;
 
-    powerManagement.enable = true;
+    # Causes sleep and suspend to fail.
+    # powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = true;
+    # powerManagement.finegrained = true;
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
