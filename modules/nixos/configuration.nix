@@ -271,10 +271,10 @@ in {
       nvidiaBusId = "PCI:1:0:0";
 
       # Needed for finegrained power management to work
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
+      # offload = {
+      #   enable = true;
+      #   enableOffloadCmd = true;
+      # };
     };
 
     modesetting.enable = true;
