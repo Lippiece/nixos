@@ -271,16 +271,16 @@ in {
   hardware.nvidia = {
     open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
 
-    prime = {
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+    # prime = {
+    # intelBusId = "PCI:0:2:0";
+    # nvidiaBusId = "PCI:1:0:0";
 
-      # Needed for finegrained power management to work
-      # offload = {
-      #   enable = true;
-      #   enableOffloadCmd = true;
-      # };
-    };
+    # Needed for finegrained power management to work
+    # offload = {
+    #   enable = true;
+    #   enableOffloadCmd = true;
+    # };
+    # };
 
     modesetting.enable = true;
 
