@@ -76,6 +76,7 @@
     wl-clipboard
     pass-git-helper
     proxychains-ng
+    commitizen
 
     # Nix
     alejandra
