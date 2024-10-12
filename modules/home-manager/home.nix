@@ -77,9 +77,6 @@
     pass-git-helper
     proxychains-ng
     commitizen
-    tmux
-    tmuxPlugins.resurrect
-    tmuxPlugins.continuum
 
     # Nix
     alejandra
@@ -216,6 +213,11 @@
   programs.neomutt = {enable = true;};
   programs.carapace.enable = true;
   programs.gpg.enable = true;
+  programs.tmux = {
+    enable = true;
+    plugins = with pkgs; [tmuxPlugins.resurrect];
+    newSession = true;
+  };
 
   # systemd.user.services = {
   #   mailsync = {
