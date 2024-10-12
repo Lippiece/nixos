@@ -13,8 +13,8 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      releaseSha = "sha256-VoRJx6Dc2R1SFrbn1BgODaU4Qh6Nm6WUsCqfHSDnkdE=";
-      archiveSha = "sha256-cH5Vyj7KoMrgCdUKb4fZMr09ExqxUlBmU0VyJHr8va4=";
+      releaseSha = "sha256-Jzs0Luum7ABwNN4m9XUcxKAP4ANbxO950h/RE9mSPlo=";
+      archiveSha = "sha256-xqwiMdYuWXI1flfS3e/vbkrtVA3DXxxooqNY5nwujYk=";
 
       latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
         url = "https://api.github.com/repos/brave/brave-browser/releases";

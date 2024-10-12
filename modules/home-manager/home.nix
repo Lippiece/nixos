@@ -77,6 +77,7 @@
     pass-git-helper
     proxychains-ng
     commitizen
+    tmux
 
     # Nix
     alejandra
