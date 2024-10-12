@@ -262,6 +262,11 @@ in {
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      libvdpau-va-gl
+    ];
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -270,18 +275,18 @@ in {
   hardware.nvidia = {
     open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
 
-    prime = {
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+    # prime = {
+    #   intelBusId = "PCI:0:2:0";
+    #   nvidiaBusId = "PCI:1:0:0";
+    #
+    #   # Needed for finegrained power management to work
+    #   offload = {
+    #     enable = true;
+    #     enableOffloadCmd = true;
+    #   };
+    # };
 
-      # Needed for finegrained power management to work
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-    };
-
-    modesetting.enable = true;
+    # modesetting.enable = true;
 
     # Causes sleep and suspend to fail.
     # powerManagement.enable = true;
