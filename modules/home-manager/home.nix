@@ -78,6 +78,7 @@
     proxychains-ng
     commitizen
     tmux
+    tmuxPlugins.resurrect
 
     # Nix
     alejandra
