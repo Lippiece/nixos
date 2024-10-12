@@ -79,6 +79,7 @@
     commitizen
     tmux
     tmuxPlugins.resurrect
+    tmuxPlugins.continuum
 
     # Nix
     alejandra
