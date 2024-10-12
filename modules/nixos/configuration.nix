@@ -224,9 +224,8 @@ in {
 
   i18n = {
     supportedLocales = ["ru_RU.UTF-8/UTF-8" "en_GB.UTF-8/UTF-8"];
-
-    defaultLocale = "en_GB.UTF-8/UTF-8";
-    extraLocaleSettings = {LANGUAGE = "en_GB.UTF-8/UTF-8";};
+    defaultLocale = "en_GB.UTF-8";
+    # extraLocaleSettings = {LANGUAGE = "en_GB.UTF-8";};
   };
 
   # nix.gc = {
