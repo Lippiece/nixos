@@ -89,6 +89,7 @@
     urlscan
     msmtp
     lynx
+    spamassassin
 
     # Rust
     rustc
@@ -217,6 +218,10 @@
     enable = true;
     plugins = with pkgs; [tmuxPlugins.resurrect];
     newSession = true;
+    extraConfig = ''
+      set -g mode-keys vi
+      set -g status-keys vi
+    '';
   };
 
   # systemd.user.services = {
