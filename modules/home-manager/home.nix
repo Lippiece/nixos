@@ -218,10 +218,7 @@
     enable = true;
     plugins = with pkgs; [tmuxPlugins.resurrect];
     newSession = true;
-    extraConfig = ''
-      set -g mode-keys vi
-      set -g status-keys vi
-    '';
+    keyMode = "vi";
   };
 
   # systemd.user.services = {
