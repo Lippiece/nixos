@@ -60,7 +60,6 @@
     qbittorrent-enhanced
     spotube
     bottles
-    cataclysm-dda
 
     #################################
     #              CLI              #

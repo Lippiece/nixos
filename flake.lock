@@ -10,11 +10,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-rCmhOYJ5qUcBtxAI+FOx050XP9laecCqQ19W6RY2JYA=",
-        "path": "/nix/store/k917sgysqjhg32dav6h7fb63zb6y9wzq-source/flakes/brave",
+        "path": "/nix/store/br38n1vjkspv08x6nkjw2ii25qhkr23s-source/flakes/brave",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/k917sgysqjhg32dav6h7fb63zb6y9wzq-source/flakes/brave",
+        "path": "/nix/store/br38n1vjkspv08x6nkjw2ii25qhkr23s-source/flakes/brave",
         "type": "path"
       }
     },
