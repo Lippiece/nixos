@@ -33,9 +33,9 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    ####################################
-    #              GUI
-    ####################################
+    #################################
+    #              GUI              #
+    #################################
 
     # Tools
     kdePackages.kclock
@@ -43,6 +43,7 @@
     # vivaldi
     # (vivaldi.override {isSnapshot = true;})
     (vivaldi.overrideAttrs (oldAttrs: {
+      isSnapshot = true;
       dontWrapQtApps = false;
       dontPatchELF = true;
       nativeBuildInputs =
@@ -59,10 +60,11 @@
     qbittorrent-enhanced
     spotube
     bottles
+    cataclysm-dda
 
-    ####################################
-    #             CLI
-    ####################################
+    #################################
+    #              CLI              #
+    #################################
 
     # vim
     neovim
@@ -80,7 +82,6 @@
 
     # Nix
     alejandra
-    nixfmt-classic
 
     # Mutt
     mutt-wizard
@@ -92,8 +93,8 @@
     spamassassin
 
     # Rust
-    rustc
-    rustup
+    # rustc
+    # rustup
 
     # Scala
     # coursier
