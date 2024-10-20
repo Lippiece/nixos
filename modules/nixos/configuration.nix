@@ -234,7 +234,12 @@ in {
   #   dates = "daily";
   # };
   programs.command-not-found.enable = false;
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [lz4 zstd];
+    };
+  };
 
   # Enable common container config files in /etc/containers
   virtualisation.containers.enable = true;
