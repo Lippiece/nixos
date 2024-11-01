@@ -208,7 +208,8 @@
       }
       {url = "https://bun.sh/rss.xml";}
       {url = "https://kde.org/index.xml";}
-      {url = "http://cumulonimbus:4002/rss/test";}
+      # {url = "http://cumulonimbus:4002/rss/test";}
+      {url = "https://www.joshwcomeau.com/rss.xml/";}
     ];
   };
   programs.neomutt = {enable = true;};
@@ -219,6 +220,11 @@
     plugins = with pkgs; [tmuxPlugins.resurrect];
     newSession = true;
     keyMode = "vi";
+  };
+  programs.direnv = {
+    enable = true;
+    # enableFishIntegration = true;
+    nix-direnv.enable = true;
   };
 
   # systemd.user.services = {
