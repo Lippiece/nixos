@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+
+cd dda/game0/
+nix run github:thiagokokada/nix-alien -- cataclysm-tiles

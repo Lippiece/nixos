@@ -1,0 +1,3 @@
+#!/usr/bin/env fish
+
+nix run github:thiagokokada/nix-alien -- ./catapult-linux-x64-24.07a
