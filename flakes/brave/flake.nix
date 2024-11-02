@@ -13,7 +13,7 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      releaseSha = "sha256-SNVlCSVTglI2az8mp5B4T3p96I60BLqq7hNDu+A+4oY=";
+      releaseSha = "sha256-PmIltIKhMWlU+IshwLZgYzxOcQSqNmsZ+nmlkp20UxY=";
       archiveSha = "sha256-qnLDeG7oVJ1x/GYN6UqQrS895owaRcEWRH1YEFt4M3M=";
 
       latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
