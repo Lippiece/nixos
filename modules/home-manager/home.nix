@@ -78,6 +78,7 @@
     pass-git-helper
     proxychains-ng
     commitizen
+    update-nix-fetchgit
 
     # Nix
     alejandra
@@ -166,7 +167,7 @@
           owner = "franciscolourenco";
           repo = "done";
           rev = "eb32ade85c0f2c68cbfcff3036756bbf27a4f366";
-          hash = "sha256-DMIRKRAVOn7YEnuAtz4hIxrU93ULxNoQhW6juxCoh4o=";
+          sha256 = "12l7m08bp8vfhl8dmi0bfpvx86i344zbg03v2bc7wfhm20li3hhc";
         };
       }
       {
@@ -175,7 +176,7 @@
           owner = "IlanCosman";
           repo = "tide";
           rev = "44c521ab292f0eb659a9e2e1b6f83f5f0595fcbd";
-          hash = "sha256-85iU1QzcZmZYGhK30/ZaKwJNLTsx+j3w6St8bFiQWxc=";
+          sha256 = "05svj1c6qz1bx7q3vyii7cnls0ibbbvd7dqj39c6crnw1kar967k";
         };
       }
     ];

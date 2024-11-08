@@ -5,6 +5,8 @@ echo Building (dirs).
 # Extract the path to the nix file (change this if necessary)
 set nix_file "flake.nix"
 
+# update-nix-fetchgit -v flake.nix
+
 # Run nix build to intentionally get the hash mismatch error
 set output (nix build 2>&1)
 
