@@ -50,6 +50,7 @@
         oldAttrs.nativeBuildInputs
         ++ [pkgs.kdePackages.wrapQtAppsHook];
     }))
+    brave
 
     # Work
     super-productivity
