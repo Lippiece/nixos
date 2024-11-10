@@ -172,7 +172,7 @@ in {
     mesa
     expat
     xorg.libxcb
-    alsaLib
+    alsa-lib
     libGL
     libsecret
   ];
