@@ -61,6 +61,7 @@
     qbittorrent-enhanced
     spotube
     bottles
+    variety
 
     #################################
     #              CLI              #
