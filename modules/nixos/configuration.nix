@@ -78,6 +78,7 @@ in {
     hashedPassword = "$6$NBiKVQ9sSyOEws8p$dW1OJV7/VmFZ9H/wiV2Rxg0A73QqCHznqJtIdvGOUZcN0c5tKsBnd3/yLPLve09aF8inl6tgnPVvPxa8w539O/";
   };
   users.defaultUserShell = pkgs.fish;
+  users.users.lippiece.shell = pkgs.fish;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

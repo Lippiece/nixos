@@ -15,7 +15,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -156,7 +156,7 @@
   };
   programs.dircolors.enable = true;
   programs.eza.enable = true;
-  programs.eza.icons = true;
+  programs.eza.icons = "auto";
   programs.fd.enable = true;
   programs.fd.hidden = true;
   programs.fish = {
@@ -216,7 +216,10 @@
     ];
   };
   programs.neomutt = {enable = true;};
-  programs.carapace.enable = true;
+  programs.carapace = {
+    enable = true;
+    enableFishIntegration = true;
+  };
   programs.gpg.enable = true;
   programs.tmux = {
     enable = true;

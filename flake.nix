@@ -9,10 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    brave-nightly = {
-      url = "./flakes/brave/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # brave-nightly = {
+    #   url = "./flakes/brave/";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     impermanence.url = "github:nix-community/impermanence";
 
@@ -22,7 +22,7 @@
   outputs = {
     self,
     nixpkgs,
-    brave-nightly,
+    # brave-nightly,
     nixos-hardware,
     ...
   } @ inputs: {
@@ -38,7 +38,7 @@
 
         ({pkgs, ...}: {
           # Make Brave Browser Nightly available system-wide
-          environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
+          # environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
 
           # home-manager.users.lippiece = {pkgs, ...}: {
           #   home.packages = [catapult.packages.${pkgs.system}.default];
