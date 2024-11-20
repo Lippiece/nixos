@@ -271,7 +271,7 @@ in {
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       # intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      # libvdpau-va-gl
+      libvdpau-va-gl
     ];
   };
 
@@ -281,8 +281,7 @@ in {
   hardware.nvidia = {
     # open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
     open = true;
-
-    # dynamicBoost.enable = true;
+    nvidiaSettings = false;
 
     # prime = {
     #   intelBusId = "PCI:0:2:0";
@@ -309,6 +308,6 @@ in {
     # nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    # package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 }
