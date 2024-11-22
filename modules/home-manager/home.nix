@@ -51,6 +51,7 @@
         ++ [pkgs.kdePackages.wrapQtAppsHook];
     }))
     brave
+    hiddify-app
 
     # Work
     super-productivity
@@ -261,5 +262,6 @@
     builtins.elem (lib.getName pkg) [
       # Add additional package names here
       "vivaldi"
+      "hiddify-app"
     ];
 }
