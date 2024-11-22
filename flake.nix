@@ -44,7 +44,7 @@
           environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
 
           home-manager.users.lippiece = {pkgs, ...}: {
-            home.packages = [zen-browser.packages.${pkgs.system}.specific];
+            home.packages = [zen-browser.packages.${pkgs.system}.default];
           };
         })
       ];

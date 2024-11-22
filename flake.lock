@@ -9,12 +9,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-6dl1koUVNocgSWJetj1dXZDMK7FNK5Pl4W/onmLb7iE=",
-        "path": "/nix/store/d7nqh4dhn2f61nqgc4k5ls9symwl2q0x-source/flakes/brave",
+        "narHash": "sha256-GqNgNI0oTV9WDbeSpeb9WqiRmdAB2DY/vd1HwHXKYgI=",
+        "path": "/nix/store/2iaxgkaav5zhal1k6icb69r0cid6j37g-source/flakes/brave",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/d7nqh4dhn2f61nqgc4k5ls9symwl2q0x-source/flakes/brave",
+        "path": "/nix/store/2iaxgkaav5zhal1k6icb69r0cid6j37g-source/flakes/brave",
         "type": "path"
       }
     },
@@ -103,13 +103,30 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1727348695,
+        "narHash": "sha256-J+PeFKSDV+pHL7ukkfpVzCOO7mBSrrpJ3svwBFABbhI=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "1925c603f17fc89f4c8f6bf6f631a802ad85d784",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "brave-nightly": "brave-nightly",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "zen-browser": "zen-browser"
       }
     },
     "systems": {
@@ -125,6 +142,21 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-Vew4qAqfD2g2jwiXGmuliCP077xA0UipCnU08Y643LY=",
+        "path": "/nix/store/2iaxgkaav5zhal1k6icb69r0cid6j37g-source/flakes/zen-browser",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/2iaxgkaav5zhal1k6icb69r0cid6j37g-source/flakes/zen-browser",
+        "type": "path"
       }
     }
   },
