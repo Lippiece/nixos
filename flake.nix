@@ -17,6 +17,8 @@
     impermanence.url = "github:nix-community/impermanence";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    zen-browser.url = "./flakes/zen-browser/";
   };
 
   outputs = {
@@ -24,6 +26,7 @@
     nixpkgs,
     brave-nightly,
     nixos-hardware,
+    zen-browser,
     ...
   } @ inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
@@ -40,9 +43,9 @@
           # Make Brave Browser Nightly available system-wide
           environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
 
-          # home-manager.users.lippiece = {pkgs, ...}: {
-          #   home.packages = [catapult.packages.${pkgs.system}.default];
-          # };
+          home-manager.users.lippiece = {pkgs, ...}: {
+            home.packages = [zen-browser.packages.${pkgs.system}.specific];
+          };
         })
       ];
     };
