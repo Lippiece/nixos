@@ -42,16 +42,17 @@
     telegram-desktop
     # vivaldi
     # (vivaldi.override {isSnapshot = true;})
-    (vivaldi.overrideAttrs (oldAttrs: {
-      isSnapshot = true;
-      dontWrapQtApps = false;
-      dontPatchELF = true;
-      nativeBuildInputs =
-        oldAttrs.nativeBuildInputs
-        ++ [pkgs.kdePackages.wrapQtAppsHook];
-    }))
-    brave
+    # (vivaldi.overrideAttrs (oldAttrs: {
+    #   isSnapshot = true;
+    #   dontWrapQtApps = false;
+    #   dontPatchELF = true;
+    #   nativeBuildInputs =
+    #     oldAttrs.nativeBuildInputs
+    #     ++ [pkgs.kdePackages.wrapQtAppsHook];
+    # }))
+    # brave
     hiddify-app
+    obsidian
 
     # Work
     super-productivity
