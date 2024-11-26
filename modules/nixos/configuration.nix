@@ -193,7 +193,7 @@ in {
   programs.npm.enable = true;
   programs.dconf.enable = true;
   programs.java.enable = true;
-  programs.thunderbird.enable = true;
+  # programs.thunderbird.enable = true;
   programs.chromium.enablePlasmaBrowserIntegration = true;
   # List services that you want to enable:
 
@@ -213,7 +213,7 @@ in {
 
   # Most users should NEVER change this value after the initial install, for any reason,
   # even if you've upgraded your system to a new NixOS release.
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -264,6 +264,9 @@ in {
       value = "1";
     }
   ];
+  security.sudo.extraConfig = ''
+    Defaults timestamp_timeout=60
+  '';
 
   # Enable OpenGL
   hardware.graphics = {
@@ -308,6 +311,6 @@ in {
     # nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    # package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 }

@@ -9,22 +9,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    brave-nightly = {
-      url = "./flakes/brave/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # brave-nightly = {
+    #   url = "./flakes/brave/";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     impermanence.url = "github:nix-community/impermanence";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    zen-browser.url = "./flakes/zen-browser/";
+    zen-browser = {
+      url = "./flakes/zen-browser/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
-    brave-nightly,
+    # brave-nightly,
     nixos-hardware,
     zen-browser,
     ...
@@ -41,7 +44,7 @@
 
         ({pkgs, ...}: {
           # Make Brave Browser Nightly available system-wide
-          environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
+          # environment.systemPackages = [brave-nightly.packages.${pkgs.system}.default];
 
           home-manager.users.lippiece = {pkgs, ...}: {
             home.packages = [zen-browser.packages.${pkgs.system}.default];
