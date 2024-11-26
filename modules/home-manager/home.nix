@@ -264,5 +264,6 @@
       # Add additional package names here
       "vivaldi"
       "hiddify-app"
+      "obsidian"
     ];
 }
