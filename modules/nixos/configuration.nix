@@ -60,14 +60,15 @@ in {
     pulse.enable = true;
     alsa.enable = true;
   };
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
-
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.spamassassin = {
+    enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lippiece = {
@@ -83,6 +84,13 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Fonts
+    inter-nerdfont
+    fira-code-nerdfont
+    # nerdfonts
+    # inter
+
+    # Essential
     wget
     bat
     unar
@@ -92,12 +100,10 @@ in {
     wmctrl
     xdotool
     ydotool
-    cargo
-    gcc
+    # cargo
+    # gcc
     libnotify
-    nerdfonts
-    inter
-    nodejs_22
+    # nodejs_22
     ripgrep
     libwebp
     kdePackages.qtimageformats
@@ -105,10 +111,10 @@ in {
     vlc
     htop-vim
     unzip
-    python3
-    python312Packages.pip
+    # python3
+    # python312Packages.pip
     tree
-    kdePackages.qtbase
+    # kdePackages.qtbase
   ];
 
   environment.persistence."/persist" = {
