@@ -85,8 +85,9 @@ in {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Fonts
+    nerd-fonts.fira-code
     inter-nerdfont
-    fira-code-nerdfont
+    nerd-fonts._0xproto
     # nerdfonts
     # inter
 
