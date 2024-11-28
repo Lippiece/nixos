@@ -238,6 +238,7 @@ in {
       inter-nerdfont
       nerd-fonts._0xproto
       liberation_ttf
+      nerd-fonts.symbols-only
     ];
     fontDir.enable = true;
     fontconfig = {
