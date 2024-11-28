@@ -239,6 +239,7 @@ in {
       nerd-fonts._0xproto
       liberation_ttf
     ];
+    fontDir.enable = true;
     fontconfig = {
       enable = true;
       defaultFonts = {
