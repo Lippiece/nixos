@@ -85,9 +85,6 @@ in {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Fonts
-    nerd-fonts.fira-code
-    inter-nerdfont
-    nerd-fonts._0xproto
     # nerdfonts
     # inter
 
@@ -222,7 +219,6 @@ in {
   # even if you've upgraded your system to a new NixOS release.
   system.stateVersion = "25.05"; # Did you read the comment?
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
@@ -236,6 +232,24 @@ in {
     # extraLocaleSettings = {LANGUAGE = "en_GB.UTF-8";};
   };
 
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.fira-code
+      inter-nerdfont
+      nerd-fonts._0xproto
+      liberation_ttf
+    ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = ["Inter" "Liberation Serif"];
+        sansSerif = ["Inter" "Liberation Sans"];
+        monospace = ["0xproto" "Liberation Mono"];
+      };
+    };
+  };
+
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   # nix.gc = {
   #   automatic = true;
   #   persistent = true;
