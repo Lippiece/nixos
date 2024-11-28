@@ -243,9 +243,9 @@ in {
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = ["Inter" "Liberation Serif"];
-        sansSerif = ["Inter" "Liberation Sans"];
-        monospace = ["0xproto" "Liberation Mono"];
+        serif = ["Inter Variable" "Liberation Serif"];
+        sansSerif = ["Inter Variable" "Liberation Sans"];
+        monospace = ["0xProto Nerd Font Mono" "Liberation Mono"];
       };
     };
   };

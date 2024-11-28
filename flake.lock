@@ -85,11 +85,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-ISWGYoYUXNyEZi9r9oy71RM8ZYVAF0edIzn1PN/YvvA=",
-        "path": "/nix/store/ksd9ph9sg4p9b90p1bhh1kka0v4d9jxh-source/flakes/zen-browser",
+        "path": "/nix/store/l6cfq2lakdxblmz86i39d84i2r561adl-source/flakes/zen-browser",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/ksd9ph9sg4p9b90p1bhh1kka0v4d9jxh-source/flakes/zen-browser",
+        "path": "/nix/store/l6cfq2lakdxblmz86i39d84i2r561adl-source/flakes/zen-browser",
         "type": "path"
       }
     }
