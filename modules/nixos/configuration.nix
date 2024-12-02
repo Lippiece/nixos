@@ -98,7 +98,7 @@ in {
     wmctrl
     xdotool
     ydotool
-    gcc
+    gcc #
     libnotify
     ripgrep
     libwebp
