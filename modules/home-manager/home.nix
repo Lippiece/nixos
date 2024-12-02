@@ -228,6 +228,11 @@
     plugins = with pkgs; [tmuxPlugins.resurrect];
     newSession = true;
     keyMode = "vi";
+    extraConfig = ''
+      bind c new-window -c "#{pane_current_path}"
+      bind '"' split-window -c "#{pane_current_path}"
+      bind % split-window -h -c "#{pane_current_path}"
+    '';
   };
   programs.direnv = {
     enable = true;
