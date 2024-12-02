@@ -98,10 +98,8 @@ in {
     wmctrl
     xdotool
     ydotool
-    # cargo
-    # gcc
+    gcc
     libnotify
-    # nodejs_22
     ripgrep
     libwebp
     kdePackages.qtimageformats
@@ -109,9 +107,11 @@ in {
     vlc
     htop-vim
     unzip
+    tree
     # python3
     # python312Packages.pip
-    tree
+    # cargo
+    # nodejs_22
     # kdePackages.qtbase
   ];
 
