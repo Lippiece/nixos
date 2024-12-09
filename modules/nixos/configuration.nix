@@ -108,6 +108,7 @@ in {
     htop-vim
     unzip
     tree
+    gamescope
     # python3
     # python312Packages.pip
     # cargo
@@ -261,7 +262,22 @@ in {
   programs.steam = {
     enable = true;
     package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [lz4 zstd];
+      extraPkgs = pkgs:
+        with pkgs; [
+          lz4
+          zstd
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          libkrb5
+          keyutils
+          gamescope
+        ];
     };
   };
 

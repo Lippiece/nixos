@@ -215,6 +215,7 @@
       {url = "https://kde.org/index.xml";}
       # {url = "http://cumulonimbus:4002/rss/test";}
       {url = "https://www.joshwcomeau.com/rss.xml/";}
+      {url = "https://astro.build/rss.xml";}
     ];
   };
   programs.neomutt = {enable = true;};
