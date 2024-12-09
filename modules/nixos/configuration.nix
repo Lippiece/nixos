@@ -109,6 +109,7 @@ in {
     unzip
     tree
     gamescope
+    gamemode
     # python3
     # python312Packages.pip
     # cargo
