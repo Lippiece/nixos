@@ -137,7 +137,7 @@ in {
     NIXOS_OZONE_WL = "1";
     PAGER = "nvim -R";
     MANPAGER = "nvim +Man!";
-    HTTP_PROXY = "socks5://127.0.0.1:2334";
+    # HTTP_PROXY = "127.0.0.1:2334";
   };
 
   # Some Programs need SUID wrappers, can be configured further or are
