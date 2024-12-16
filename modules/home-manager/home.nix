@@ -73,6 +73,7 @@
     neovim
     vimPlugins.LazyVim
     neovide
+    fzf
 
     # Shell
     nushell
