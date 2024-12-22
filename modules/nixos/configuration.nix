@@ -63,8 +63,13 @@ in {
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      autoNumlock = true;
+      wayland.enable = true;
+    };
+  };
   services.desktopManager.plasma6.enable = true;
   services.spamassassin = {
     enable = true;

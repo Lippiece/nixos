@@ -98,8 +98,8 @@
     spamassassin
 
     # Rust
-    # rustc
-    # rustup
+    rustc
+    rustup
 
     # Scala
     # coursier
