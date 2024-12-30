@@ -71,9 +71,9 @@ in {
     };
   };
   services.desktopManager.plasma6.enable = true;
-  services.spamassassin = {
-    enable = true;
-  };
+  # services.spamassassin = {
+  #   enable = true;
+  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lippiece = {
@@ -115,6 +115,8 @@ in {
     tree
     gamescope
     gamemode
+    kdePackages.kaccounts-providers
+    kdePackages.kaccounts-integration
     # python3
     # python312Packages.pip
     # cargo

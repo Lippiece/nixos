@@ -95,7 +95,6 @@
     urlscan
     msmtp
     lynx
-    spamassassin
 
     # Rust
     rustc

@@ -2,7 +2,7 @@
   inherit (pkgs) buildFHSUserEnv;
 in
   buildFHSUserEnv {
-    name = "catapult-linux-x64-24.07a-fhs";
+    name = "catapult";
     targetPkgs = pkgs:
       with pkgs; [
         xorg.libXcursor.out
@@ -19,7 +19,10 @@ in
         SDL2_mixer_2_0.out
         SDL2_ttf.out
         libgcc.lib
-        zlib.out
+        udev
+
+        freetype.out
+        libz.out
       ];
-    runScript = "/home/lippiece/.config/nixos/packages/catapult/catapult-linux-x64-24.07a";
+    runScript = "/home/lippiece/.config/nixos/packages/catapult/catapult-linux-x64-24.11a";
   }

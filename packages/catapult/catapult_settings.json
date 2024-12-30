@@ -1,7 +1,7 @@
 {
     "game": "dda",
     "channel": "experimental",
-    "active_install_dda": "2024-08-06-2043",
+    "active_install_dda": "2024-12-25-1535",
     "active_install_bn": "",
     "active_install_eod": "",
     "active_install_tish": "",
@@ -11,7 +11,7 @@
     "window_state": {
         "size_x": 600,
         "size_y": 700,
-        "position_x": 1010,
+        "position_x": 510,
         "position_y": 10,
         "decor_offset_x": 0,
         "decor_offset_y": 0
@@ -34,8 +34,8 @@
     "keep_open_after_starting_game": true,
     "keep_cache": false,
     "ignore_cache": false,
-    "proxy_option": "off",
+    "proxy_option": "on",
     "proxy_host": "",
-    "proxy_port": 0,
+    "proxy_port": 2334,
     "debug_mode": false
 }
