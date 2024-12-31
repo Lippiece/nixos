@@ -269,6 +269,10 @@
   #   };
   # };
   services.easyeffects.enable = true;
+  services.nextcloud-client = {
+    enable = true;
+    startInBackground = true;
+  };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
