@@ -53,6 +53,7 @@
     # brave
     hiddify-app
     obsidian
+    (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
 
     # Work
     super-productivity
