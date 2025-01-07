@@ -13,6 +13,9 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    nix-alien.url = "github:thiagokokada/nix-alien";
+
+    # My
     zen-browser = {
       url = "./flakes/zen-browser/";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +43,9 @@
           home-manager.users.lippiece = {pkgs, ...}: {
             home.packages = [
               zen-browser.packages.${pkgs.system}.default
+              inputs.nix-alien.packages.${pkgs.system}.default
+              # inputs.nix-alien.packages.${pkgs.system}.nix-alien-ld
+              # inputs.nix-alien.packages.${pkgs.system}.nix-alien-find-libs
             ];
           };
         })
