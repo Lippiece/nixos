@@ -117,6 +117,7 @@ in {
     gamemode
     kdePackages.kaccounts-providers
     kdePackages.kaccounts-integration
+    kdePackages.korganizer
     # python3
     # python312Packages.pip
     # cargo
