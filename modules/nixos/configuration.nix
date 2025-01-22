@@ -210,6 +210,8 @@ in {
   programs.java.enable = true;
   # programs.thunderbird.enable = true;
   programs.chromium.enablePlasmaBrowserIntegration = true;
+  programs.firefox.nativeMessagingHosts.packages = with pkgs; [plasma-browser-integration];
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
