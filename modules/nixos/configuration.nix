@@ -268,6 +268,8 @@ in {
   #   persistent = true;
   #   dates = "daily";
   # };
+  nix.package = pkgs.lix;
+
   programs.command-not-found.enable = false;
   programs.steam = {
     enable = true;
