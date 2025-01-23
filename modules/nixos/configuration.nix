@@ -197,7 +197,6 @@ in {
     binfmt = true;
   };
   programs.kde-pim.enable = true;
-  programs.kdeconnect.enable = true;
   programs.lazygit.enable = true;
   programs.nh.enable = true;
   programs.nh.clean.enable = true;
@@ -210,7 +209,7 @@ in {
   programs.java.enable = true;
   # programs.thunderbird.enable = true;
   programs.chromium.enablePlasmaBrowserIntegration = true;
-  programs.firefox.nativeMessagingHosts.packages = with pkgs; [plasma-browser-integration];
+  programs.firefox.nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
 
   # List services that you want to enable:
 
