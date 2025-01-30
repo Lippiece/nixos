@@ -121,7 +121,7 @@ in {
     # python3
     # python312Packages.pip
     # cargo
-    # nodejs_22
+    nodejs
     # kdePackages.qtbase
   ];
 

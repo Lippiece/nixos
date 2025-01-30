@@ -40,11 +40,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1737762889,
-        "narHash": "sha256-5HGG09bh/Yx0JA8wtBMAzt0HMCL1bYZ93x4IqzVExio=",
+        "lastModified": 1738228963,
+        "narHash": "sha256-Ee5hVHM7AWxaq7XJN6xiZztTZX8csdXernjqaTW5r9I=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "daf04c5950b676f47a794300657f1d3d14c1a120",
+        "rev": "d963ed335b890a70ed53eecf14cdb21528eda9b8",
         "type": "github"
       },
       "original": {
@@ -55,11 +55,11 @@
     },
     "impermanence": {
       "locked": {
-        "lastModified": 1736688610,
-        "narHash": "sha256-1Zl9xahw399UiZSJ9Vxs1W4WRFjO1SsNdVZQD4nghz0=",
+        "lastModified": 1737831083,
+        "narHash": "sha256-LJggUHbpyeDvNagTUrdhe/pRVp4pnS6wVKALS782gRI=",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "c64bed13b562fc3bb454b48773d4155023ac31b7",
+        "rev": "4b3e914cdf97a5b536a889e939fb2fd2b043a170",
         "type": "github"
       },
       "original": {
@@ -160,11 +160,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1737717945,
-        "narHash": "sha256-ET91TMkab3PmOZnqiJQYOtSGvSTvGeHoegAv4zcTefM=",
+        "lastModified": 1738136902,
+        "narHash": "sha256-pUvLijVGARw4u793APze3j6mU1Zwdtz7hGkGGkD87qw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ecd26a469ac56357fd333946a99086e992452b6a",
+        "rev": "9a5db3142ce450045840cc8d832b13b8a2018e0c",
         "type": "github"
       },
       "original": {
@@ -207,12 +207,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-To5LNZ36abDnDAmeK39p0BNiyrLe12u++XAuETjGW/Q=",
-        "path": "/nix/store/pwkhjc4gjaixm597p7y0xxqqbxxwsajh-source/flakes/zen-browser",
+        "narHash": "sha256-oBfKK2EpdiTu1w1vtFgYKScPf1IjRYy3H4vm6qmIKJI=",
+        "path": "/nix/store/xp845qnz0r7f30cbl87m1m3x3prv7j1d-source/flakes/zen-browser",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/pwkhjc4gjaixm597p7y0xxqqbxxwsajh-source/flakes/zen-browser",
+        "path": "/nix/store/xp845qnz0r7f30cbl87m1m3x3prv7j1d-source/flakes/zen-browser",
         "type": "path"
       }
     }
