@@ -18,7 +18,7 @@
 
       latestRelease = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
         url = "https://api.github.com/repos/brave/brave-browser/releases";
-        sha256 = "00cid62sxrkxg5dfkqf0rhrvd74wzsd89bgw2skw3qrkfdhwf6sr";
+        sha256 = "038llhz06crdxayirs470yzryz02sklv846kkpv67hdny2c1z5h5";
       }));
 
       latestNightly =

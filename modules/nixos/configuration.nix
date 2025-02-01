@@ -118,6 +118,7 @@ in {
     kdePackages.kaccounts-providers
     kdePackages.kaccounts-integration
     kdePackages.korganizer
+    kdePackages.kdepim-addons
     # python3
     # python312Packages.pip
     # cargo
@@ -196,7 +197,6 @@ in {
     enable = true;
     binfmt = true;
   };
-  programs.kde-pim.enable = true;
   programs.lazygit.enable = true;
   programs.nh.enable = true;
   programs.nh.clean.enable = true;
@@ -210,6 +210,10 @@ in {
   # programs.thunderbird.enable = true;
   programs.chromium.enablePlasmaBrowserIntegration = true;
   programs.firefox.nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
+  programs.kde-pim = {
+    enable = true;
+    merkuro = true;
+  };
 
   # List services that you want to enable:
 
