@@ -214,6 +214,7 @@ in {
   programs.kde-pim = {
     enable = true;
     merkuro = true;
+    kontact = true;
   };
 
   # List services that you want to enable:
