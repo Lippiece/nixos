@@ -119,6 +119,7 @@ in {
     kdePackages.kaccounts-integration
     kdePackages.korganizer
     kdePackages.kdepim-addons
+    kdePackages.signond
     # python3
     # python312Packages.pip
     # cargo
