@@ -87,7 +87,7 @@
 
         src = builtins.fetchTarball {
           url = "https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz";
-          sha256 = "11s08p2qsv4yj4wkjgdslykgwb370jvqlypl4ark64xsvv5sclgx";
+          sha256 = "0n4bk776syswhjzx12jj1k1dj67gbmnzrv2nqrxbbrhqlba0vcin";
         };
 
         desktopSrc = ./.;
