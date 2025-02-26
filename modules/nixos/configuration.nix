@@ -61,7 +61,15 @@ in {
     alsa.enable = true;
   };
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      clickMethod = "buttonareas";
+      scrollMethod = "edge";
+      tapping = false;
+    };
+  };
+
   services.xserver.enable = true;
   services.displayManager = {
     sddm = {
@@ -122,7 +130,7 @@ in {
     kdePackages.signond
     # python3
     # python312Packages.pip
-    # cargo
+    cargo
     nodejs
     # kdePackages.qtbase
   ];
