@@ -133,6 +133,7 @@ in {
     cargo
     nodejs
     # kdePackages.qtbase
+    libinput
   ];
 
   environment.persistence."/persist" = {
