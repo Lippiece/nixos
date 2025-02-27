@@ -248,6 +248,9 @@
     # enableFishIntegration = true;
     nix-direnv.enable = true;
   };
+  programs.alacritty = {
+    enable = true;
+  };
 
   # systemd.user.services = {
   #   mailsync = {
