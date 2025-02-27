@@ -380,4 +380,25 @@ in {
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     # package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
+
+  systemd = {
+    services = {
+      reload-touchpad = {
+        script = "/home/lippiece/bin/reload-touchpad.fish";
+        serviceConfig = {
+          Type = "simple";
+        };
+      };
+    };
+
+    timers = {
+      reload-touchpad = {
+        wantedBy = ["timers.target"];
+        timerConfig = {
+          OnUnitInactiveSec = "30m";
+          Unit = "reload-touchpad.service";
+        };
+      };
+    };
+  };
 }
