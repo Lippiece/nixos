@@ -108,9 +108,7 @@ in {
     git
     fish
     silver-searcher
-    wmctrl
-    xdotool
-    ydotool
+    kdotool
     gcc #
     libnotify
     ripgrep
