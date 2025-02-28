@@ -395,7 +395,7 @@ in {
       reload-touchpad = {
         wantedBy = ["timers.target"];
         timerConfig = {
-          OnUnitInactiveSec = "30m";
+          OnUnitInactiveSec = "5m";
           Unit = "reload-touchpad.service";
         };
       };
