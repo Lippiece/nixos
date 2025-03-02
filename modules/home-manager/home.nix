@@ -155,8 +155,6 @@
   programs.bat.enable = true;
   programs.chromium = {
     enable = true;
-    # defaultSearchProviderSearchURL = "https://lipsearch.ydns.eu/search?q=%";
-    # defaultSearchProviderEnabled = true;
     package = pkgs.ungoogled-chromium;
   };
   programs.dircolors.enable = true;
@@ -245,7 +243,6 @@
   };
   programs.direnv = {
     enable = true;
-    # enableFishIntegration = true;
     nix-direnv.enable = true;
   };
   programs.alacritty = {

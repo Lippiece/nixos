@@ -11,7 +11,6 @@
   impermanence =
     builtins.fetchTarball
     "https://github.com/nix-community/impermanence/archive/master.tar.gz";
-  nvidiaPackage = config.hardware.nvidia.package;
 in {
   imports = ["${impermanence}/nixos.nix"];
 
@@ -39,20 +38,15 @@ in {
   networking.networkmanager.enable =
     true; # Easiest to use and most distros use this by default.
   networking.extraHosts = ''
+    192.168.1.102      cumulonimbus
     192.168.1.102:3001 lipsearch.ydns.eu
     192.168.1.102:3002 warden.ydns.eu
     192.168.1.102:3003 lipgit.ydns.eu
-    192.168.1.102 cumulonimbus
+    192.168.1.102:3009 lipguard.ydns.eu
   '';
   # networking.networkmanager.dns = "systemd-resolved";
 
   time.timeZone = "Europe/Kaliningrad";
-
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
 
   # Enable sound.
   services.pipewire = {
@@ -224,6 +218,11 @@ in {
     kontact = true;
   };
 
+  qt = {
+    enable = true;
+    platformTheme = "kde";
+  };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -348,7 +347,7 @@ in {
 
   hardware.nvidia = {
     # open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
-    # open = true;
+    open = true;
     # nvidiaSettings = false;
 
     # prime = {
