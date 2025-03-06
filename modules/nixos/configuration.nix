@@ -2,8 +2,8 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  config,
-  lib,
+  # config,
+  # lib,
   inputs,
   pkgs,
   ...
@@ -84,17 +84,12 @@ in {
     # packages = with pkgs; [
     # ];
     hashedPassword = "$6$NBiKVQ9sSyOEws8p$dW1OJV7/VmFZ9H/wiV2Rxg0A73QqCHznqJtIdvGOUZcN0c5tKsBnd3/yLPLve09aF8inl6tgnPVvPxa8w539O/";
+    shell = pkgs.fish;
   };
   users.defaultUserShell = pkgs.fish;
-  users.users.lippiece.shell = pkgs.fish;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    # Fonts
-    # nerdfonts
-    # inter
-
     # Essential
     wget
     bat
@@ -103,7 +98,7 @@ in {
     fish
     silver-searcher
     kdotool
-    gcc #
+    gcc
     libnotify
     ripgrep
     libwebp
@@ -200,21 +195,23 @@ in {
     binfmt = true;
   };
   programs.lazygit.enable = true;
-  programs.nh.enable = true;
-  programs.nh.clean.enable = true;
-  programs.nh.clean.dates = "daily";
-  programs.nh.flake = /home/lippiece/.config/nixos;
-  programs.nix-index.enable = true;
-  programs.nix-index.enableFishIntegration = true;
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.dates = "daily";
+    flake = /home/lippiece/.config/nixos;
+  };
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
   programs.npm.enable = true;
   programs.dconf.enable = true;
-  programs.java.enable = true;
-  # programs.thunderbird.enable = true;
+  # programs.java.enable = true;
   programs.chromium.enablePlasmaBrowserIntegration = true;
   programs.firefox.nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
   programs.kde-pim = {
     enable = true;
-    merkuro = true;
     kontact = true;
   };
 
@@ -276,11 +273,6 @@ in {
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  # nix.gc = {
-  #   automatic = true;
-  #   persistent = true;
-  #   dates = "daily";
-  # };
   nix.package = pkgs.lix;
 
   programs.command-not-found.enable = false;
@@ -307,8 +299,9 @@ in {
   };
 
   # Enable common container config files in /etc/containers
-  virtualisation.containers.enable = true;
   virtualisation = {
+    containers.enable = true;
+
     podman = {
       enable = true;
 
@@ -379,23 +372,24 @@ in {
   };
 
   systemd = {
-    services = {
-      reload-touchpad = {
-        script = "/home/lippiece/bin/reload-touchpad.fish";
-        serviceConfig = {
-          Type = "simple";
-        };
-      };
-    };
-
-    timers = {
-      reload-touchpad = {
-        wantedBy = ["timers.target"];
-        timerConfig = {
-          OnUnitInactiveSec = "5m";
-          Unit = "reload-touchpad.service";
-        };
-      };
-    };
+    # Workaround for bugged touchpad
+    # services = {
+    #   reload-touchpad = {
+    #     script = "/home/lippiece/bin/reload-touchpad.fish";
+    #     serviceConfig = {
+    #       Type = "simple";
+    #     };
+    #   };
+    # };
+    #
+    # timers = {
+    #   reload-touchpad = {
+    #     wantedBy = ["timers.target"];
+    #     timerConfig = {
+    #       OnUnitInactiveSec = "5m";
+    #       Unit = "reload-touchpad.service";
+    #     };
+    #   };
+    # };
   };
 }

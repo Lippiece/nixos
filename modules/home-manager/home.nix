@@ -62,7 +62,7 @@
     # Entertainment
     webtorrent_desktop
     qbittorrent-enhanced
-    spotube
+    # spotube
     bottles
     variety
 
@@ -77,17 +77,16 @@
     fzf
 
     # Shell
-    nushell
     cht-sh
     imagemagick
     wl-clipboard
     pass-git-helper
     proxychains-ng
     commitizen
-    update-nix-fetchgit
 
     # Nix
     alejandra
+    update-nix-fetchgit
 
     # Mutt
     mutt-wizard
@@ -97,11 +96,11 @@
     msmtp
     lynx
 
-    # Rust
-    rustc
-    rustup
+    # # Rust
+    # rustc
+    # rustup
 
-    # Scala
+    # # Scala
     # coursier
     # scala
     # scala-cli
@@ -129,26 +128,10 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/lippiece/etc/profile.d/hm-session-vars.sh
-  #
-  # home.sessionVariables = {
-  # EDITOR = "emacs";
-  # };
+  home.shell = {
+    enableFishIntegration = true;
+    enableNushellIntegration = true;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -158,8 +141,12 @@
     package = pkgs.ungoogled-chromium;
   };
   programs.dircolors.enable = true;
-  programs.eza.enable = true;
-  programs.eza.icons = "auto";
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+    enableFishIntegration = true;
+    enableNushellIntegration = true;
+  };
   programs.fd.enable = true;
   programs.fd.hidden = true;
   programs.fish = {
@@ -167,7 +154,6 @@
     plugins = [
       {
         name = "done";
-        # TODO: expipiplus1/update-nix-fetchgit
         src = pkgs.fetchFromGitHub {
           owner = "franciscolourenco";
           repo = "done";
@@ -186,22 +172,41 @@
       }
     ];
   };
+  programs.nushell = {
+    enable = true;
+  };
+  programs.pay-respects = {
+    enable = true;
+    enableFishIntegration = true;
+    enableNushellIntegration = true;
+  };
+  programs.starship = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+    enableNushellIntegration = true;
+  };
+
   programs.git = {
     enable = true;
     # delta.enable = true;
     diff-so-fancy.enable = true;
     diff-so-fancy.changeHunkIndicators = true;
-    # signing.signByDefault = true;
+    signing.signByDefault = true;
     userEmail = "github@lippiece.anonaddy.me";
     userName = "lippiece";
   };
-  programs.zoxide.enable = true;
   # programs.thunderbird = {
   #   enable = true;
   #   package = pkgs.thunderbirdPackages.thunderbird-128;
   # };
   programs.tealdeer.enable = true;
-  programs.password-store = {enable = true;};
+  programs.password-store = {
+    enable = true;
+  };
   programs.nix-index.enable = true;
   programs.newsboat = {
     enable = true;
@@ -209,9 +214,7 @@
     urls = [
       {url = "https://dotfyle.com/this-week-in-neovim/rss.xml";}
       {url = "https://factorio.com/blog/rss";}
-      {
-        url = "https://habr.com/ru/rss/feed/d6e1aa020767fe5324b423fc403b5751?fl=en%2Cru&rating=25&types%5B%5D=article&types%5B%5D=post";
-      }
+      {url = "https://habr.com/ru/rss/feed/d6e1aa020767fe5324b423fc403b5751?fl=en%2Cru&rating=25&types%5B%5D=article&types%5B%5D=post";}
       {url = "https://bun.sh/rss.xml";}
       {url = "https://kde.org/index.xml";}
       # {url = "http://cumulonimbus:4002/rss/test";}
@@ -224,6 +227,7 @@
   programs.carapace = {
     enable = true;
     enableFishIntegration = true;
+    enableNushellIntegration = true;
   };
   programs.gpg.enable = true;
   programs.tmux = {
@@ -244,6 +248,8 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+    # enableFishIntegration = true;
+    enableNushellIntegration = true;
   };
   programs.alacritty = {
     enable = true;
@@ -271,12 +277,19 @@
   #     };
   #   };
   # };
-  services.easyeffects.enable = true;
-  services.nextcloud-client = {
-    enable = true;
-    startInBackground = true;
+  services = {
+    easyeffects.enable = true;
+    nextcloud-client = {
+      enable = true;
+      startInBackground = true;
+    };
+    kdeconnect.enable = true;
+    # gpg-agent = {
+    #   enable = true;
+    #   enableFishIntegration = true;
+    #   enableNushellIntegration = true;
+    # };
   };
-  services.kdeconnect.enable = true;
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
