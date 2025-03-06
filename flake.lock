@@ -22,11 +22,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740845322,
-        "narHash": "sha256-AXEgFj3C0YJhu9k1OhbRhiA6FnDr81dQZ65U3DhaWpw=",
+        "lastModified": 1741217763,
+        "narHash": "sha256-g/TrltIjFHIjtzKY5CJpoPANfHQWDD43G5U1a/v5oVg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "fcac3d6d88302a5e64f6cb8014ac785e08874c8d",
+        "rev": "486b066025dccd8af7fbe5dd2cc79e46b88c80da",
         "type": "github"
       },
       "original": {
@@ -125,18 +125,14 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1740791350,
-        "narHash": "sha256-igS2Z4tVw5W/x3lCZeeadt0vcU9fxtetZ/RyrqsCRQ0=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "199169a2135e6b864a888e89a2ace345703c025d",
-        "type": "github"
+        "lastModified": 1741095683,
+        "narHash": "sha256-G7aG5kZmOYCe72/uTBQqrlBXBq4Luc5JQgb/6VvR00Q=",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/5cf285a943c04c03cd74ee633230c16c29fdb133.zip"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/5cf285a943c04c03cd74ee633230c16c29fdb133.zip"
       }
     },
     "root": {
@@ -157,12 +153,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-f6PahMBbNrEcbV6xGUfmLNT5otXGqlhTLpuprKDapU8=",
-        "path": "/nix/store/87y3szyr5mvjp0zq3kq68ymmjccbsd0v-source/flakes/zen-browser",
+        "narHash": "sha256-yIGmciYZJELj9TULWbnd5RgB8R7fRzYfCAbSzch/FME=",
+        "path": "/nix/store/0dz4jhn9nyjp2z9f5hibnxnad5zpj1mc-source/flakes/zen-browser",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/87y3szyr5mvjp0zq3kq68ymmjccbsd0v-source/flakes/zen-browser",
+        "path": "/nix/store/0dz4jhn9nyjp2z9f5hibnxnad5zpj1mc-source/flakes/zen-browser",
         "type": "path"
       }
     }
