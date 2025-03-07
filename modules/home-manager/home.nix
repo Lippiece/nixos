@@ -183,6 +183,7 @@
   programs.starship = {
     enable = true;
     enableNushellIntegration = true;
+    enableFishIntegration = false;
   };
   programs.zoxide = {
     enable = true;
