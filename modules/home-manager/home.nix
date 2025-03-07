@@ -178,7 +178,7 @@
   programs.pay-respects = {
     enable = true;
     enableFishIntegration = true;
-    enableNushellIntegration = true;
+    enableNushellIntegration = false;
   };
   programs.starship = {
     enable = true;
