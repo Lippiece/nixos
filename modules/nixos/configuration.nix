@@ -121,7 +121,6 @@ in {
     nodejs
     # kdePackages.qtbase
     libinput
-    gnumake
   ];
 
   environment.persistence."/persist" = {

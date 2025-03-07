@@ -75,6 +75,11 @@
     vimPlugins.LazyVim
     neovide
     fzf
+    lua54Packages.luarocks
+    gnumake
+    python312Packages.pip
+    python3Full
+    python312Packages.venvShellHook
 
     # Shell
     cht-sh
@@ -83,6 +88,7 @@
     pass-git-helper
     proxychains-ng
     commitizen
+    gh
 
     # Nix
     alejandra
