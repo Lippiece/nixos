@@ -177,7 +177,7 @@
   };
   programs.pay-respects = {
     enable = true;
-    enableFishIntegration = true;
+    enableFishIntegration = false;
     enableNushellIntegration = false;
   };
   programs.starship = {
