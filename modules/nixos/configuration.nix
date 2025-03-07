@@ -198,7 +198,7 @@ in {
   programs.nh = {
     enable = true;
     clean.enable = true;
-    clean.dates = "daily";
+    clean.dates = "weekly";
     flake = /home/lippiece/.config/nixos;
   };
   programs.nix-index = {
