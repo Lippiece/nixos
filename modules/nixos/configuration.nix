@@ -57,11 +57,11 @@ in {
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput = {
     enable = true;
-    touchpad = {
-      clickMethod = "buttonareas";
-      scrollMethod = "edge";
-      tapping = false;
-    };
+    # touchpad = {
+    #   clickMethod = "buttonareas";
+    #   scrollMethod = "edge";
+    #   tapping = false;
+    # };
   };
 
   services.xserver.enable = true;
