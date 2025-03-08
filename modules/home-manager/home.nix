@@ -260,6 +260,20 @@
   };
   programs.alacritty = {
     enable = true;
+    settings = {
+      general = {
+        import = ["~/.config/alacritty/themes/themes/gruvbox_dark.toml"];
+      };
+      font = {
+        normal = {
+          family = "0xProto Nerd Font";
+          style = "Regular";
+        };
+      };
+      mouse = {
+        hide_when_typing = true;
+      };
+    };
   };
 
   # systemd.user.services = {
