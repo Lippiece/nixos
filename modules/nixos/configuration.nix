@@ -7,19 +7,18 @@
   inputs,
   pkgs,
   ...
-}: let
-  impermanence =
-    builtins.fetchTarball
-    "https://github.com/nix-community/impermanence/archive/master.tar.gz";
-in {
-  imports = ["${impermanence}/nixos.nix"];
+}: {
+  imports = ["${inputs.impermanence}/nixos.nix"];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    # Use the systemd-boot EFI boot loader.
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelPackages = pkgs.linuxPackages_latest;
+    supportedFilesystems = ["btrfs"];
+    kernelParams = ["psmouse.synaptics_intertouch=0" "i8042.noloop" "i8042.nomux" "i8042.nopnp" "i8042.reset"];
+  };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.supportedFilesystems = ["btrfs"];
   nixpkgs.config.allowUnfree = true;
 
   hardware.enableAllFirmware = true;
@@ -57,11 +56,11 @@ in {
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput = {
     enable = true;
-    # touchpad = {
-    #   clickMethod = "buttonareas";
-    #   scrollMethod = "edge";
-    #   tapping = false;
-    # };
+    touchpad = {
+      clickMethod = "buttonareas";
+      scrollMethod = "edge";
+      tapping = false;
+    };
   };
 
   services.xserver.enable = true;
@@ -234,7 +233,7 @@ in {
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete `configuration.nix`.
-  system.copySystemConfiguration = true;
+  # system.copySystemConfiguration = true;
 
   # Most users should NEVER change this value after the initial install, for any reason,
   # even if you've upgraded your system to a new NixOS release.
@@ -274,6 +273,7 @@ in {
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.package = pkgs.lix;
+  nix.nixPath = ["/home/lippiece/.config/nixos/"];
 
   programs.command-not-found.enable = false;
   programs.steam = {

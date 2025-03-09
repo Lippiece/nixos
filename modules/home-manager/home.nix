@@ -37,7 +37,7 @@
     #              GUI              #
     #################################
 
-    # Tools
+    # # Tools
     kdePackages.kclock
     telegram-desktop
     # vivaldi
@@ -55,11 +55,11 @@
     obsidian
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
 
-    # Work
+    # # Work
     super-productivity
     onlyoffice-bin
 
-    # Entertainment
+    # # Entertainment
     webtorrent_desktop
     qbittorrent-enhanced
     # spotube
@@ -70,7 +70,7 @@
     #              CLI              #
     #################################
 
-    # vim
+    # # vim
     neovim
     vimPlugins.LazyVim
     neovide
@@ -81,7 +81,7 @@
     python3Full
     python312Packages.venvShellHook
 
-    # Shell
+    # # Shell
     cht-sh
     imagemagick
     wl-clipboard
@@ -90,11 +90,11 @@
     commitizen
     gh
 
-    # Nix
+    # # Nix
     alejandra
     update-nix-fetchgit
 
-    # Mutt
+    # # Mutt
     mutt-wizard
     neomutt
     isync
