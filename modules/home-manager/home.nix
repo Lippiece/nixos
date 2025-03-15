@@ -2,10 +2,17 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  mail = "lippiece@vivaldi.net";
+  name = "lippiece";
+  smtphost = "smtp.vivaldi.net";
+  imaphost = "imap.vivaldi.net";
+  smtpport = 456;
+  imapport = 993;
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "lippiece";
+  home.username = "${name}";
   home.homeDirectory = "/home/lippiece";
 
   # This value determines the Home Manager release that your configuration is
@@ -96,10 +103,9 @@
 
     # # Mutt
     mutt-wizard
-    neomutt
-    isync
+    # isync
+    # msmtp
     urlscan
-    msmtp
     lynx
 
     # # Rust
@@ -133,6 +139,28 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    ".mailcap".text = ''
+      audio/*; xdg-open %s
+
+      image/*; xdg-open %s
+
+      application/msword; xdg-open %s
+      application/postscript ; xdg-open %s
+
+      application/x-gunzip; xdg-open %s
+      application/x-tar-gz; xdg-open %s
+
+      text/plain; $EDITOR %s ;
+      text/html; ${pkgs.mutt-wizard}/lib/mutt-wizard/openfile %s ; nametemplate=%s.html
+      text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump -width=1024 %s; nametemplate=%s.html; copiousoutput;
+      image/*; ${pkgs.mutt-wizard}/lib/mutt-wizard/openfile %s ;
+      video/*; setsid mpv --quiet %s &; copiousoutput
+      audio/*; vlc %s ;
+      application/pdf; ${pkgs.mutt-wizard}/lib/mutt-wizard/openfile %s ;
+      application/pgp-encrypted; gpg -d '%s'; copiousoutput;
+      application/pgp-keys; gpg --import '%s'; copiousoutput;
+    '';
   };
   home.shell = {
     enableFishIntegration = true;
@@ -140,97 +168,185 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  programs.bat.enable = true;
-  programs.chromium = {
-    enable = true;
-    package = pkgs.ungoogled-chromium;
-  };
-  programs.dircolors.enable = true;
-  programs.eza = {
-    enable = true;
-    icons = "auto";
-    enableFishIntegration = true;
-    enableNushellIntegration = true;
-  };
-  programs.fd.enable = true;
-  programs.fd.hidden = true;
-  programs.fish = {
-    enable = true;
-    plugins = [
-      {
-        name = "done";
-        src = pkgs.fetchFromGitHub {
-          owner = "franciscolourenco";
-          repo = "done";
-          rev = "eb32ade85c0f2c68cbfcff3036756bbf27a4f366";
-          sha256 = "12l7m08bp8vfhl8dmi0bfpvx86i344zbg03v2bc7wfhm20li3hhc";
+  programs = {
+    home-manager.enable = true;
+
+    bat.enable = true;
+
+    chromium = {
+      enable = true;
+      package = pkgs.ungoogled-chromium;
+    };
+
+    dircolors.enable = true;
+
+    eza = {
+      enable = true;
+      icons = "auto";
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+    };
+
+    fd = {
+      enable = true;
+      hidden = true;
+    };
+
+    fish = {
+      enable = true;
+      plugins = [
+        {
+          name = "done";
+          src = pkgs.fetchFromGitHub {
+            owner = "franciscolourenco";
+            repo = "done";
+            rev = "eb32ade85c0f2c68cbfcff3036756bbf27a4f366";
+            sha256 = "12l7m08bp8vfhl8dmi0bfpvx86i344zbg03v2bc7wfhm20li3hhc";
+          };
+        }
+        {
+          name = "tide";
+          src = pkgs.fetchFromGitHub {
+            owner = "IlanCosman";
+            repo = "tide";
+            rev = "44c521ab292f0eb659a9e2e1b6f83f5f0595fcbd";
+            sha256 = "05svj1c6qz1bx7q3vyii7cnls0ibbbvd7dqj39c6crnw1kar967k";
+          };
+        }
+      ];
+    };
+
+    nushell = {
+      enable = true;
+    };
+
+    pay-respects = {
+      enable = true;
+      enableFishIntegration = false;
+      enableNushellIntegration = false;
+    };
+
+    starship = {
+      enable = true;
+      enableNushellIntegration = true;
+      enableFishIntegration = false;
+    };
+
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+    };
+
+    git = {
+      enable = true;
+      # delta.enable = true;
+      diff-so-fancy.enable = true;
+      diff-so-fancy.changeHunkIndicators = true;
+      signing.signByDefault = true;
+      userEmail = "github@lippiece.anonaddy.me";
+      userName = "${name}";
+    };
+
+    tealdeer.enable = true;
+
+    password-store = {
+      enable = true;
+    };
+
+    nix-index.enable = true;
+
+    newsboat = {
+      enable = true;
+      extraConfig = "\n      reload-threads 5\n      auto-reload yes\n      reload-time 120\n      reload-threads 4\n      download-retries 4\n      download-timeout 10\n      prepopulate-query-feeds yes\n\n      # -- display -------------------------------------------------------------------\n      color info default default reverse\n      color listnormal_unread yellow default\n      color listfocus blue default reverse bold\n      color listfocus_unread blue default reverse bold\n\n      text-width 80\n\n      # -- navigation ----------------------------------------------------------------\n\n      goto-next-feed no\n\n      bind-key j down feedlist\n      bind-key k up feedlist\n      bind-key j next articlelist\n      bind-key k prev articlelist\n      bind-key J next-feed articlelist\n      bind-key K prev-feed articlelist\n      bind-key j down article\n      bind-key k up article\n      ";
+      urls = [
+        {url = "https://dotfyle.com/this-week-in-neovim/rss.xml";}
+        {url = "https://factorio.com/blog/rss";}
+        {url = "https://habr.com/ru/rss/feed/d6e1aa020767fe5324b423fc403b5751?fl=en%2Cru&rating=25&types%5B%5D=article&types%5B%5D=post";}
+        {url = "https://bun.sh/rss.xml";}
+        {url = "https://kde.org/index.xml";}
+        # {url = "http://cumulonimbus:4002/rss/test";}
+        {url = "https://www.joshwcomeau.com/rss.xml/";}
+        {url = "https://astro.build/rss.xml";}
+        {url = "https://marvinh.dev/feed.xml";}
+      ];
+    };
+
+    neomutt = {
+      enable = true;
+      vimKeys = true;
+      extraConfig = ''
+        unauto_view "*"
+
+        # Quote
+        color body brightcyan default "^[>].*"
+
+        # Link
+        color body brightyellow default "(https?|ftp)://[^ ]+"
+
+        # Code block start and end
+        color body cyan default "^\`\`\`.*$"
+
+        # mail address
+        color body yellow default "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+
+        # Patch mail highlight, copied from https://github.com/neomutt/dyk/issues/13
+        # Diff changes
+        color body brightgreen default "^[+].*"
+        color body brightred   default "^[-].*"
+
+        # Diff file
+        color body green       default "^[-][-][-] .*"
+        color body green       default "^[+][+][+] .*"
+
+        # Diff header
+        color body green       default "^diff .*"
+        color body green       default "^index .*"
+
+        # Diff chunk
+        color body cyan        default "^@@ .*"
+
+        # Linked issue
+        color body brightgreen default "^(close[ds]*|fix(e[ds])*|resolve[sd]*):* *#[0-9]+$"
+
+        # Credit
+        color body brightwhite default "(signed-off|co-authored)-by: .*"
+        # mutt-wizard pre-fixes
+        # bind index,pager gT noop
+        # bind index dT noop
+
+        # mutt-wizard
+        source ${pkgs.mutt-wizard}/share/mutt-wizard/mutt-wizard.muttrc
+
+        # mutt-wizard fixes
+        macro index,pager gi "<change-folder>=Inbox<enter>" "go to inbox"
+        macro index,pager Mi ";<save-message>=Inbox<enter>" "move mail to inbox"
+        macro index,pager Ci ";<copy-message>=Inbox<enter>" "copy mail to inbox"
+
+        bind index <return> dispay-message
+
+        # My additions
+        macro index,pager Ml ";<save-message>=Later<enter>" "move mail to later"
+        macro index,pager gl "<change-folder>=Later<enter>" "go to Later folder"
+
+        macro index,pager,attach,compose \cb "\
+        <enter-command> set my_pipe_decode=\$pipe_decode pipe_decode<Enter>\
+        <pipe-message> urlscan<Enter>\
+        <enter-command> set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<Enter>" \
+        "call urlscan to extract URLs out of a message"
+
+      '';
+    };
+    mbsync = {
+      enable = true;
+      groups = {
+        inboxes = {
+          ${mail} = ["Inbox"];
         };
-      }
-      {
-        name = "tide";
-        src = pkgs.fetchFromGitHub {
-          owner = "IlanCosman";
-          repo = "tide";
-          rev = "44c521ab292f0eb659a9e2e1b6f83f5f0595fcbd";
-          sha256 = "05svj1c6qz1bx7q3vyii7cnls0ibbbvd7dqj39c6crnw1kar967k";
-        };
-      }
-    ];
-  };
-  programs.nushell = {
-    enable = true;
-  };
-  programs.pay-respects = {
-    enable = true;
-    enableFishIntegration = false;
-    enableNushellIntegration = false;
-  };
-  programs.starship = {
-    enable = true;
-    enableNushellIntegration = true;
-    enableFishIntegration = false;
-  };
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
-    enableNushellIntegration = true;
+      };
+    };
   };
 
-  programs.git = {
-    enable = true;
-    # delta.enable = true;
-    diff-so-fancy.enable = true;
-    diff-so-fancy.changeHunkIndicators = true;
-    signing.signByDefault = true;
-    userEmail = "github@lippiece.anonaddy.me";
-    userName = "lippiece";
-  };
-  # programs.thunderbird = {
-  #   enable = true;
-  #   package = pkgs.thunderbirdPackages.thunderbird-128;
-  # };
-  programs.tealdeer.enable = true;
-  programs.password-store = {
-    enable = true;
-  };
-  programs.nix-index.enable = true;
-  programs.newsboat = {
-    enable = true;
-    extraConfig = "\n      reload-threads 5\n      auto-reload yes\n      reload-time 120\n      reload-threads 4\n      download-retries 4\n      download-timeout 10\n      prepopulate-query-feeds yes\n\n      # -- display -------------------------------------------------------------------\n      color info default default reverse\n      color listnormal_unread yellow default\n      color listfocus blue default reverse bold\n      color listfocus_unread blue default reverse bold\n\n      text-width 80\n\n      # -- navigation ----------------------------------------------------------------\n\n      goto-next-feed no\n\n      bind-key j down feedlist\n      bind-key k up feedlist\n      bind-key j next articlelist\n      bind-key k prev articlelist\n      bind-key J next-feed articlelist\n      bind-key K prev-feed articlelist\n      bind-key j down article\n      bind-key k up article\n      ";
-    urls = [
-      {url = "https://dotfyle.com/this-week-in-neovim/rss.xml";}
-      {url = "https://factorio.com/blog/rss";}
-      {url = "https://habr.com/ru/rss/feed/d6e1aa020767fe5324b423fc403b5751?fl=en%2Cru&rating=25&types%5B%5D=article&types%5B%5D=post";}
-      {url = "https://bun.sh/rss.xml";}
-      {url = "https://kde.org/index.xml";}
-      # {url = "http://cumulonimbus:4002/rss/test";}
-      {url = "https://www.joshwcomeau.com/rss.xml/";}
-      {url = "https://astro.build/rss.xml";}
-      {url = "https://marvinh.dev/feed.xml";}
-    ];
-  };
-  programs.neomutt = {enable = true;};
   programs.carapace = {
     enable = true;
     enableFishIntegration = true;
@@ -275,6 +391,7 @@
       };
     };
   };
+  programs.notmuch.enable = true;
 
   # systemd.user.services = {
   #   mailsync = {
@@ -310,6 +427,44 @@
     #   enableFishIntegration = true;
     #   enableNushellIntegration = true;
     # };
+  };
+
+  accounts.email = {
+    accounts.${mail} = {
+      passwordCommand = "pass ${mail}";
+      primary = true;
+      realName = "${name}";
+      address = "${mail}";
+      userName = "${name}";
+      maildir.path = "${mail}";
+
+      neomutt = {
+        enable = true;
+        mailboxName = "${mail}";
+      };
+
+      notmuch = {
+        enable = true;
+      };
+
+      smtp = {
+        host = smtphost;
+        port = smtpport;
+      };
+
+      imap = {
+        host = imaphost;
+        port = imapport;
+      };
+
+      msmtp.enable = true;
+
+      mbsync = {
+        enable = true;
+        create = "both";
+        expunge = "both";
+      };
+    };
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:

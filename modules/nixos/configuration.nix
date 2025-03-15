@@ -7,7 +7,14 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  mail = "lippiece@vivaldi.net";
+  name = "lippiece";
+  smtphost = "smtp.vivaldi.net";
+  imaphost = "imap.vivaldi.net";
+  smtpport = 456;
+  imapport = 993;
+in {
   imports = ["${inputs.impermanence}/nixos.nix"];
 
   boot = {
@@ -104,7 +111,8 @@
     kdePackages.qtimageformats
     icu
     vlc
-    htop-vim
+    # htop-vim
+    htop
     unzip
     tree
     gamescope
@@ -212,6 +220,21 @@
   programs.kde-pim = {
     enable = true;
     kontact = true;
+  };
+  programs.msmtp = {
+    enable = true;
+
+    accounts = {
+      ${mail} = {
+        auth = true;
+        tls = true;
+        # try setting `tls_starttls` to `false` if sendmail hangs
+        from = mail;
+        host = smtphost;
+        user = "${name}";
+        passwordeval = "pass ${mail}";
+      };
+    };
   };
 
   qt = {
