@@ -12,7 +12,7 @@
 
   mailDW = {
     mail = "a.anisko@ddemo.ru";
-    name = "a.anisko";
+    name = "a.anisko@ddemo.ru";
     smtphost = "smtp.dw.team";
     imaphost = "imap.dw.team";
     smtpport = 465;
@@ -334,6 +334,7 @@ in {
         macro index,pager Mi ";<save-message>=Inbox<enter>" "move mail to inbox"
         macro index,pager Ci ";<copy-message>=Inbox<enter>" "copy mail to inbox"
 
+        unbind index <return>
         bind index <return> dispay-message
 
         # My additions
@@ -345,6 +346,9 @@ in {
         <pipe-message> urlscan<Enter>\
         <enter-command> set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<Enter>" \
         "call urlscan to extract URLs out of a message"
+
+        macro index,pager i1 '<sync-mailbox><enter-command>source /home/lippiece/.config/neomutt/${mail}<enter><change-folder>!<enter>;<check-stats>' "switch to ${mail}"
+        macro index,pager i2 '<sync-mailbox><enter-command>source /home/lippiece/.config/neomutt/${mailDW.mail}<enter><change-folder>!<enter>;<check-stats>' "switch to ${mailDW.mail}"
 
       '';
     };
