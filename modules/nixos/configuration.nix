@@ -111,8 +111,8 @@ in {
     kdePackages.qtimageformats
     icu
     vlc
-    # htop-vim
-    htop
+    htop-vim
+    # htop
     unzip
     tree
     gamescope

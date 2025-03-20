@@ -96,6 +96,8 @@ in {
     proxychains-ng
     commitizen
     gh
+    # Build failure: https://github.com/NixOS/nixpkgs/issues/389624
+    # python313Packages.subliminal
 
     # # Nix
     alejandra
