@@ -9,6 +9,15 @@
   imaphost = "imap.vivaldi.net";
   smtpport = 456;
   imapport = 993;
+
+  mailDW = {
+    mail = "a.anisko@ddemo.ru";
+    name = "a.anisko";
+    smtphost = "smtp.dw.team";
+    imaphost = "imap.dw.team";
+    smtpport = 465;
+    imapport = 993;
+  };
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -344,6 +353,7 @@ in {
       groups = {
         inboxes = {
           ${mail} = ["Inbox"];
+          ${mailDW.mail} = ["Inbox"];
         };
       };
     };
@@ -457,6 +467,41 @@ in {
       imap = {
         host = imaphost;
         port = imapport;
+      };
+
+      msmtp.enable = true;
+
+      mbsync = {
+        enable = true;
+        create = "both";
+        expunge = "both";
+      };
+    };
+
+    accounts.${mailDW.mail} = {
+      passwordCommand = "pass ${mailDW.mail}";
+      realName = "${mailDW.name}";
+      address = "${mailDW.mail}";
+      userName = "${mailDW.name}";
+      maildir.path = "${mailDW.mail}";
+
+      neomutt = {
+        enable = true;
+        mailboxName = "${mailDW.mail}";
+      };
+
+      notmuch = {
+        enable = true;
+      };
+
+      smtp = {
+        host = mailDW.smtphost;
+        port = mailDW.smtpport;
+      };
+
+      imap = {
+        host = mailDW.imaphost;
+        port = mailDW.imapport;
       };
 
       msmtp.enable = true;

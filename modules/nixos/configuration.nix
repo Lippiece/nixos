@@ -11,9 +11,12 @@
   mail = "lippiece@vivaldi.net";
   name = "lippiece";
   smtphost = "smtp.vivaldi.net";
-  imaphost = "imap.vivaldi.net";
-  smtpport = 456;
-  imapport = 993;
+
+  mailDW = {
+    mail = "a.anisko@ddemo.ru";
+    name = "a.anisko";
+    smtphost = "smtp.dw.team";
+  };
 in {
   imports = ["${inputs.impermanence}/nixos.nix"];
 
@@ -233,6 +236,15 @@ in {
         host = smtphost;
         user = "${name}";
         passwordeval = "pass ${mail}";
+      };
+
+      ${mailDW.mail} = {
+        auth = true;
+        tls = true;
+        from = mail;
+        host = mailDW.smtphost;
+        user = "${mailDW.name}";
+        passwordeval = "pass ${mailDW.mail}";
       };
     };
   };
