@@ -304,6 +304,7 @@ in {
         monospace = ["0xProto Nerd Font Mono" "Liberation Mono"];
       };
     };
+    enableDefaultPackages = true;
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
