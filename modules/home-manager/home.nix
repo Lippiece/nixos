@@ -3,14 +3,16 @@
   lib,
   ...
 }: let
-  mail = "lippiece@vivaldi.net";
-  name = "lippiece";
-  smtphost = "smtp.vivaldi.net";
-  imaphost = "imap.vivaldi.net";
-  smtpport = 456;
-  imapport = 993;
+  main = {
+    mail = "lippiece@vivaldi.net";
+    name = "lippiece";
+    smtphost = "smtp.vivaldi.net";
+    imaphost = "imap.vivaldi.net";
+    smtpport = 456;
+    imapport = 993;
+  };
 
-  mailDW = {
+  DW = {
     mail = "a.anisko@ddemo.ru";
     name = "a.anisko@ddemo.ru";
     smtphost = "smtp.dw.team";
@@ -21,7 +23,7 @@
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "${name}";
+  home.username = "${main.name}";
   home.homeDirectory = "/home/lippiece";
 
   # This value determines the Home Manager release that your configuration is
@@ -98,14 +100,17 @@ in {
     python312Packages.venvShellHook
 
     # # Shell
-    cht-sh
+    # NOTE: often gives 404
+    # cht-sh
+    # Stackoverflow search
+    so
     imagemagick
     wl-clipboard
     pass-git-helper
     proxychains-ng
     commitizen
     gh
-    # Build failure: https://github.com/NixOS/nixpkgs/issues/389624
+    # TODO: Build failure: https://github.com/NixOS/nixpkgs/issues/389624
     # python313Packages.subliminal
 
     # # Nix
@@ -114,8 +119,6 @@ in {
 
     # # Mutt
     mutt-wizard
-    # isync
-    # msmtp
     urlscan
     lynx
 
@@ -256,7 +259,7 @@ in {
       diff-so-fancy.changeHunkIndicators = true;
       signing.signByDefault = true;
       userEmail = "github@lippiece.anonaddy.me";
-      userName = "${name}";
+      userName = "${main.name}";
     };
 
     tealdeer.enable = true;
@@ -347,8 +350,8 @@ in {
         <enter-command> set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<Enter>" \
         "call urlscan to extract URLs out of a message"
 
-        macro index,pager i1 '<sync-mailbox><enter-command>source /home/lippiece/.config/neomutt/${mail}<enter><change-folder>!<enter>;<check-stats>' "switch to ${mail}"
-        macro index,pager i2 '<sync-mailbox><enter-command>source /home/lippiece/.config/neomutt/${mailDW.mail}<enter><change-folder>!<enter>;<check-stats>' "switch to ${mailDW.mail}"
+        macro index,pager i1 '<sync-mailbox><enter-command>source /home/lippiece/.config/neomutt/${main.mail}<enter><change-folder>!<enter>;<check-stats>' "switch to ${main.mail}"
+        macro index,pager i2 '<sync-mailbox><enter-command>source /home/lippiece/.config/neomutt/${DW.mail}<enter><change-folder>!<enter>;<check-stats>' "switch to ${DW.mail}"
 
       '';
     };
@@ -356,8 +359,8 @@ in {
       enable = true;
       groups = {
         inboxes = {
-          ${mail} = ["Inbox"];
-          ${mailDW.mail} = ["Inbox"];
+          ${main.mail} = ["Inbox"];
+          ${DW.mail} = ["Inbox"];
         };
       };
     };
@@ -446,17 +449,17 @@ in {
   };
 
   accounts.email = {
-    accounts.${mail} = {
-      passwordCommand = "pass ${mail}";
+    accounts.${main.mail} = {
+      passwordCommand = "pass ${main.mail}";
       primary = true;
-      realName = "${name}";
-      address = "${mail}";
-      userName = "${name}";
-      maildir.path = "${mail}";
+      realName = "${main.name}";
+      address = "${main.mail}";
+      userName = "${main.name}";
+      maildir.path = "${main.mail}";
 
       neomutt = {
         enable = true;
-        mailboxName = "${mail}";
+        mailboxName = "${main.mail}";
       };
 
       notmuch = {
@@ -464,13 +467,13 @@ in {
       };
 
       smtp = {
-        host = smtphost;
-        port = smtpport;
+        host = main.smtphost;
+        port = main.smtpport;
       };
 
       imap = {
-        host = imaphost;
-        port = imapport;
+        host = main.imaphost;
+        port = main.imapport;
       };
 
       msmtp.enable = true;
@@ -482,16 +485,16 @@ in {
       };
     };
 
-    accounts.${mailDW.mail} = {
-      passwordCommand = "pass ${mailDW.mail}";
-      realName = "${mailDW.name}";
-      address = "${mailDW.mail}";
-      userName = "${mailDW.name}";
-      maildir.path = "${mailDW.mail}";
+    accounts.${DW.mail} = {
+      passwordCommand = "pass ${DW.mail}";
+      realName = "${DW.name}";
+      address = "${DW.mail}";
+      userName = "${DW.name}";
+      maildir.path = "${DW.mail}";
 
       neomutt = {
         enable = true;
-        mailboxName = "${mailDW.mail}";
+        mailboxName = "${DW.mail}";
       };
 
       notmuch = {
@@ -499,13 +502,13 @@ in {
       };
 
       smtp = {
-        host = mailDW.smtphost;
-        port = mailDW.smtpport;
+        host = DW.smtphost;
+        port = DW.smtpport;
       };
 
       imap = {
-        host = mailDW.imaphost;
-        port = mailDW.imapport;
+        host = DW.imaphost;
+        port = DW.imapport;
       };
 
       msmtp.enable = true;
