@@ -529,4 +529,8 @@ in {
       "steamcmd"
       "rimsort"
     ];
+
+  fonts = {
+    fontconfig.enable = true;
+  };
 }
