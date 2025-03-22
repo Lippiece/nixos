@@ -289,19 +289,22 @@ in {
 
   fonts = {
     packages = with pkgs; [
-      nerd-fonts.fira-code
       inter-nerdfont
       nerd-fonts._0xproto
-      liberation_ttf
       nerd-fonts.symbols-only
+      noto-fonts
+      noto-fonts-cjk-serif
+      noto-fonts-cjk-sans
+      # nerd-fonts.fira-code
+      # liberation_ttf
     ];
     fontDir.enable = true;
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = ["Inter Variable" "Liberation Serif"];
-        sansSerif = ["Inter Variable" "Liberation Sans"];
-        monospace = ["0xProto Nerd Font Mono" "Liberation Mono"];
+        serif = ["Inter Variable" "Noto Serif"];
+        sansSerif = ["Inter Variable" "Noto Sans"];
+        monospace = ["0xProto Nerd Font Mono"];
       };
     };
     enableDefaultPackages = true;
