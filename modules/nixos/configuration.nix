@@ -118,8 +118,6 @@ in {
     # htop
     unzip
     tree
-    gamescope
-    gamemode
     kdePackages.kaccounts-providers
     kdePackages.kaccounts-integration
     kdePackages.korganizer
@@ -361,7 +359,7 @@ in {
     }
   ];
   security.sudo.extraConfig = ''
-    Defaults timestamp_timeout=600
+    Defaults timestamp_timeout=1800
   '';
 
   # Enable OpenGL
@@ -408,27 +406,5 @@ in {
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     # package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
-
-  systemd = {
-    # Workaround for bugged touchpad
-    # services = {
-    #   reload-touchpad = {
-    #     script = "/home/lippiece/bin/reload-touchpad.fish";
-    #     serviceConfig = {
-    #       Type = "simple";
-    #     };
-    #   };
-    # };
-    #
-    # timers = {
-    #   reload-touchpad = {
-    #     wantedBy = ["timers.target"];
-    #     timerConfig = {
-    #       OnUnitInactiveSec = "5m";
-    #       Unit = "reload-touchpad.service";
-    #     };
-    #   };
-    # };
   };
 }

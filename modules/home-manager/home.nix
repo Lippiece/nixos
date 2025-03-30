@@ -102,6 +102,7 @@ in {
     # # Shell
     # NOTE: often gives 404
     # cht-sh
+
     # Stackoverflow search
     so
     imagemagick
@@ -110,8 +111,7 @@ in {
     proxychains-ng
     commitizen
     gh
-    # TODO: Build failure: https://github.com/NixOS/nixpkgs/issues/389624
-    # python313Packages.subliminal
+    python313Packages.subliminal
 
     # # Nix
     alejandra
@@ -412,28 +412,6 @@ in {
   };
   programs.notmuch.enable = true;
 
-  # systemd.user.services = {
-  #   mailsync = {
-  #     enable = true;
-  #     after = [ "network.target" ];
-  #     wantedBy = [ "default.target" ];
-  #     description = "Sync mail";
-  #     serviceConfig = {
-  #       Type = "simple";
-  #       ExecStart = ''/my/cool/user/service'';
-  #     };
-  #   };
-  # };
-  # systemd.user.timers = {
-  #   mailsync = {
-  #     wantedBy = [ "timers.target" ];
-  #     timerConfig = {
-  #       OnBootSec = "5m";
-  #       OnUnitActiveSec = "5m";
-  #       Unit = "mailsync.service";
-  #     };
-  #   };
-  # };
   services = {
     easyeffects.enable = true;
     nextcloud-client = {
@@ -517,6 +495,40 @@ in {
         enable = true;
         create = "both";
         expunge = "both";
+      };
+    };
+  };
+
+  systemd = {
+    user.services = {
+      mailsync = {
+        Unit = {
+          Description = "Sync mail";
+          wantedBy = ["network.target"];
+        };
+
+        Service = {
+          Type = "oneshot";
+          ExecStart = "/home/lippiece/.nix-profile/bin/mbsync -a";
+        };
+      };
+    };
+    user.timers = {
+      mailsync = {
+        Unit = {
+          Description = "My timer";
+          Requires = "mailsync.service";
+        };
+
+        Timer = {
+          OnBootSec = "5m";
+          OnUnitActiveSec = "5m";
+          Persist = true;
+        };
+
+        Install = {
+          WantedBy = ["timers.target"];
+        };
       };
     };
   };
