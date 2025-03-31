@@ -11,20 +11,12 @@
   }: let
     system = "x86_64-linux";
 
-    # releases = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
-    #   url = "https://api.github.com/repos/brave/zen-browser/releases";
-    #   sha256 = "1p204yis9cg0p5ndic437swz6f8p0i00wzd1x4gwymg5w8ga47dl";
-    # }));
-    #
-    # latestNightly =
-    #   builtins.head releases;
-    #
-    # version =
-    #   builtins.head
-    #   # Twilight build - 1.0.1-t.20
-    #   (builtins.match "Twilight build - (\d+\.\d+\.\d+-[a-z]\.\d+) .*" latestNightly.name);
+    release = builtins.head (builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
+      url = "https://api.github.com/repos/zen-browser/desktop/releases";
+      sha256 = "W6ei0NjUV+6lqN6gFWWoEGwUtJPyBG/szS0u5xBS8ho=";
+    })));
 
-    version = "twilight";
+    version = release.tag_name;
 
     pkgs = import nixpkgs {
       inherit system;
@@ -86,8 +78,8 @@
         pname = "zen-browser";
 
         src = builtins.fetchTarball {
-          url = "https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz";
-          sha256 = "06bsfzv5cj975fav8irv5452x1d93zsq2qc2dmhch4d54dfkvwkl";
+          url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
+          sha256 = "1vrxm5m4pylzhs6bilqswis0klkq7xcriwdkfl7dyv8lq4cafz1p";
         };
 
         desktopSrc = ./.;
