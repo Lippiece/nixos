@@ -3,7 +3,7 @@
   stdenv,
   fetchFromGitHub,
   pkg-config,
-  qmake,
+  cmake,
   qttools,
   qtbase,
   qt6Packages,
@@ -11,21 +11,22 @@
   wrapQtAppsHook,
   gitUpdater,
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "mpc-qt";
-  version = "unstable-2025-03-30";
+  version = "unstable-2025-04-07";
 
   src = fetchFromGitHub {
     owner = "mpc-qt";
     repo = "mpc-qt";
-    rev = "40d9d2973ea8df8a59464a51ceb772764adcbabf";
-    sha256 = "1nzf9l41irnv75bkvwf2qa0vjvkdg2ag65nafr848k9jbz382f1f";
+    rev = "4d01e5a429e38cef625fb3031b7260b3208ac5b1";
+    sha256 = "1cwysmwdh26x74959c4lbnm941vd9sb0dhrm0829yapc05rd1j8c";
   };
 
   nativeBuildInputs = [
     pkg-config
-    qmake
+    cmake
     qttools
+    qtbase
     wrapQtAppsHook
     qt6Packages.qtsvg
   ];
@@ -34,17 +35,11 @@ stdenv.mkDerivation rec {
     mpv
   ];
 
-  postPatch = ''
-    substituteInPlace lconvert.pri --replace "qtPrepareTool(LCONVERT, lconvert)" "qtPrepareTool(LCONVERT, lconvert, , , ${qttools}/bin)"
+  buildPhase = ''
+    cmake .
+    make -j`nproc`
+    make install
   '';
-
-  postConfigure = ''
-    substituteInPlace Makefile --replace ${qtbase}/bin/lrelease ${qttools.dev}/bin/lrelease
-  '';
-
-  qmakeFlags = [
-    "MPCQT_VERSION=${version}"
-  ];
 
   passthru.updateScript = gitUpdater {rev-prefix = "v";};
 
@@ -53,8 +48,6 @@ stdenv.mkDerivation rec {
     homepage = "https://mpc-qt.github.io";
     license = licenses.gpl2;
     platforms = platforms.unix;
-    broken = stdenv.hostPlatform.isDarwin;
-    maintainers = with maintainers; [romildo];
     mainProgram = "mpc-qt";
   };
 }

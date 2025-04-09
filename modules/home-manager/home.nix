@@ -509,7 +509,7 @@ in {
 
         Service = {
           Type = "oneshot";
-          ExecStart = "/home/lippiece/.nix-profile/bin/mbsync -a";
+          ExecStart = "/home/lippiece/bin/check-mail.fish";
         };
       };
     };

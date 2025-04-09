@@ -1,7 +1,7 @@
 {
     "game": "dda",
     "channel": "experimental",
-    "active_install_dda": "2024-12-30-0827",
+    "active_install_dda": "2025-04-06-1519",
     "active_install_bn": "",
     "active_install_eod": "",
     "active_install_tish": "",
@@ -11,10 +11,10 @@
     "window_state": {
         "size_x": 600,
         "size_y": 700,
-        "position_x": 32,
+        "position_x": 510,
         "position_y": 10,
-        "decor_offset_x": 0,
-        "decor_offset_y": 0
+        "decor_offset_x": 32,
+        "decor_offset_y": 10
     },
     "print_tips_of_the_day": true,
     "update_to_same_build_allowed": true,

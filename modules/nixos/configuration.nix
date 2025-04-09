@@ -129,6 +129,7 @@ in {
     nodejs
     # kdePackages.qtbase
     libinput
+    inotify-tools
   ];
 
   environment.persistence."/persist" = {
