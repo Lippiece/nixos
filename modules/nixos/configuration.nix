@@ -171,34 +171,34 @@ in {
     withNodeJs = true;
   };
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-    glib
-    glibc
-    nss
-    nspr
-    atk
-    cups
-    dbus
-    libdrm
-    gtk3
-    pango
-    cairo
-    xorg.libX11
-    xorg.libXcomposite
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXrandr
-    libxkbcommon
-    mesa
-    expat
-    xorg.libxcb
-    alsa-lib
-    libGL
-    libsecret
-  ];
+  # programs.nix-ld.libraries = with pkgs; [
+  # Add any missing dynamic libraries for unpackaged programs
+  # here, NOT in environment.systemPackages
+  # glib
+  # glibc
+  # nss
+  # nspr
+  # atk
+  # cups
+  # dbus
+  # libdrm
+  # gtk3
+  # pango
+  # cairo
+  # xorg.libX11
+  # xorg.libXcomposite
+  # xorg.libXdamage
+  # xorg.libXext
+  # xorg.libXfixes
+  # xorg.libXrandr
+  # libxkbcommon
+  # mesa
+  # expat
+  # xorg.libxcb
+  # alsa-lib
+  # libGL
+  # libsecret
+  # ];
   programs.appimage = {
     enable = true;
     binfmt = true;
@@ -301,9 +301,9 @@ in {
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = ["Inter Variable" "Noto Serif"];
-        sansSerif = ["Inter Variable" "Noto Sans"];
-        monospace = ["0xProto Nerd Font Mono"];
+        serif = ["Inter Variable" "Noto Serif" "Noto Color Emoji"];
+        sansSerif = ["Inter Variable" "Noto Sans" "Noto Color Emoji"];
+        monospace = ["0xProto Nerd Font Mono" "Noto Color Emoji"];
       };
     };
     enableDefaultPackages = true;
