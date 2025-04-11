@@ -2,6 +2,8 @@
 echo
 echo Building (dirs).
 
+nix flake update
+
 # Extract the path to the nix file (change this if necessary)
 set nix_file "flake.nix"
 
