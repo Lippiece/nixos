@@ -24,6 +24,11 @@
       url = "./flakes/zen-browser/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kwin-effects-forceblur = {
+      url = "github:taj-ny/kwin-effects-forceblur";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -49,6 +54,7 @@
             home.packages = [
               zen-browser.packages.${pkgs.system}.default
               nix-alien.packages.${pkgs.system}.default
+              inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
               # inputs.nix-alien.packages.${pkgs.system}.nix-alien-ld
               # inputs.nix-alien.packages.${pkgs.system}.nix-alien-find-libs
             ];

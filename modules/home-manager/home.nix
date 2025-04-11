@@ -72,6 +72,9 @@ in {
     hiddify-app
     obsidian
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
+    kdePackages.qtstyleplugin-kvantum
+    themechanger
+    geoclue2
 
     # # Work
     super-productivity
