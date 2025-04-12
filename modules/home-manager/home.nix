@@ -77,7 +77,7 @@ in {
     kdePackages.qtstyleplugin-kvantum
     themechanger
     geoclue2
-    lightly-qt
+    lightly-boehs
 
     # # Work
     super-productivity
