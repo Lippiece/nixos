@@ -291,20 +291,23 @@ in {
       inter-nerdfont
       nerd-fonts._0xproto
       nerd-fonts.symbols-only
+      nerd-fonts.liberation
+
       noto-fonts
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
+
+      twemoji-color-font
       # nerd-fonts.fira-code
-      # liberation_ttf
     ];
     fontDir.enable = true;
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = ["Inter Variable" "Noto Serif" "Noto Color Emoji"];
-        sansSerif = ["Inter Variable" "Noto Sans" "Noto Color Emoji"];
-        monospace = ["0xProto Nerd Font Mono" "Noto Color Emoji"];
+        serif = ["Inter Variable" "Noto Serif"];
+        sansSerif = ["Inter Variable" "Noto Sans"];
+        monospace = ["0xProto Nerd Font Mono"];
       };
     };
     enableDefaultPackages = true;
