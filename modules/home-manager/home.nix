@@ -114,7 +114,7 @@ in {
     proxychains-ng
     # TODO: build failure
     # commitizen
-    cz-cli
+    commitizen-go
     gh
     python313Packages.subliminal
 
