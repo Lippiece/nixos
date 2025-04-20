@@ -17,7 +17,8 @@
     # Helpers
     impermanence.url = "github:nix-community/impermanence";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nix-alien.url = "github:thiagokokada/nix-alien";
+    # TODO: build failure
+    # nix-alien.url = "github:thiagokokada/nix-alien";
 
     # My
     zen-browser = {
@@ -36,7 +37,7 @@
     nixpkgs,
     nixos-hardware,
     zen-browser,
-    nix-alien,
+    # nix-alien,
     ...
   } @ inputs: {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
@@ -53,7 +54,7 @@
           home-manager.users.lippiece = {pkgs, ...}: {
             home.packages = [
               zen-browser.packages.${pkgs.system}.default
-              nix-alien.packages.${pkgs.system}.default
+              # nix-alien.packages.${pkgs.system}.default
               inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
               # inputs.nix-alien.packages.${pkgs.system}.nix-alien-ld
               # inputs.nix-alien.packages.${pkgs.system}.nix-alien-find-libs

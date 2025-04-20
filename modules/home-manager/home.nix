@@ -112,7 +112,9 @@ in {
     wl-clipboard
     pass-git-helper
     proxychains-ng
-    commitizen
+    # TODO: build failure
+    # commitizen
+    cz-cli
     gh
     python313Packages.subliminal
 
