@@ -293,7 +293,6 @@ in {
 
     neomutt = {
       enable = true;
-      vimKeys = true;
       extraConfig = ''
         unauto_view "*"
 
@@ -330,20 +329,16 @@ in {
 
         # Credit
         color body brightwhite default "(signed-off|co-authored)-by: .*"
-        # mutt-wizard pre-fixes
-        # bind index,pager gT noop
-        # bind index dT noop
 
         # mutt-wizard
         source ${pkgs.mutt-wizard}/share/mutt-wizard/mutt-wizard.muttrc
 
-        # mutt-wizard fixes
         macro index,pager gi "<change-folder>=Inbox<enter>" "go to inbox"
         macro index,pager Mi ";<save-message>=Inbox<enter>" "move mail to inbox"
         macro index,pager Ci ";<copy-message>=Inbox<enter>" "copy mail to inbox"
 
-        unbind index <return>
-        bind index <return> dispay-message
+        # unbind index <return>
+        bind index <return> display-message
 
         # My additions
         macro index,pager Ml ";<save-message>=Later<enter>" "move mail to later"
