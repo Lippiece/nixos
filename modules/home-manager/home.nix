@@ -113,8 +113,8 @@ in {
     pass-git-helper
     proxychains-ng
     # TODO: build failure
-    # commitizen
-    commitizen-go
+    commitizen
+    # commitizen-go
     gh
     python313Packages.subliminal
 
