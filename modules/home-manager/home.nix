@@ -103,18 +103,13 @@ in {
     python312Packages.venvShellHook
 
     # # Shell
-    # NOTE: often gives 404
-    # cht-sh
-
-    # Stackoverflow search
+    bun
     so
     imagemagick
     wl-clipboard
     pass-git-helper
     proxychains-ng
-    # TODO: build failure
     commitizen
-    # commitizen-go
     gh
     python313Packages.subliminal
 
@@ -288,6 +283,7 @@ in {
         {url = "https://www.joshwcomeau.com/rss.xml/";}
         {url = "https://astro.build/rss.xml";}
         {url = "https://marvinh.dev/feed.xml";}
+        {url = "https://www.brycewray.com/index-excerpts.xml";}
       ];
     };
 
@@ -366,6 +362,7 @@ in {
     };
   };
 
+  programs.command-not-found.enable = false;
   programs.carapace = {
     enable = true;
     enableFishIntegration = true;
