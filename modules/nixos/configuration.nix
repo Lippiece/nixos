@@ -203,7 +203,28 @@ in {
     enable = true;
     binfmt = true;
   };
-  programs.lazygit.enable = true;
+  programs.lazygit = {
+    enable = true;
+    package = pkgs.buildGoModule rec {
+      pname = "lazygit";
+      version = "unstable-2025-04-29";
+      src = pkgs.fetchFromGitHub {
+        owner = "jesseduffield";
+        repo = "lazygit";
+        rev = "66caa25dcd4c247589e6adc71a6bc088678f3212";
+        sha256 = "1zyhw6b3lhd2wbw3j58s9a61fw2sx9ayqachn6h1zqbdlrbwl4rg";
+      };
+      vendorHash = null;
+      doCheck = false;
+      ldflags = ["-X main.version=${version}" "-X main.buildSource=nix"];
+      meta = with pkgs.lib; {
+        description = "Simple terminal UI for git commands";
+        homepage = "https://github.com/jesseduffield/lazygit";
+        license = licenses.mit;
+        mainProgram = "lazygit";
+      };
+    };
+  };
   programs.nh = {
     enable = true;
     clean.enable = true;
