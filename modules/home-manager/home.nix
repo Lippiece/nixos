@@ -208,15 +208,6 @@ in {
           };
         }
         {
-          name = "async-prompt";
-          src = pkgs.fetchFromGitHub {
-            owner = "acomagu";
-            repo = "fish-async-prompt";
-            rev = "316aa03c875b58e7c7f7d3bc9a78175aa47dbaa8";
-            sha256 = "17gxf043z4h3bzs9prlhgmbgxfclnb2y27ilrkw43f5h783bgg17";
-          };
-        }
-        {
           name = "puffer-fish";
           src = pkgs.fetchFromGitHub {
             owner = "nickeb96";
