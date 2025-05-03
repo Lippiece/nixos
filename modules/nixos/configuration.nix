@@ -115,7 +115,6 @@ in {
     icu
     vlc
     htop-vim
-    # htop
     unzip
     tree
     kdePackages.kaccounts-providers
@@ -320,9 +319,6 @@ in {
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
-
-      twemoji-color-font
-      # nerd-fonts.fira-code
     ];
     fontDir.enable = true;
     fontconfig = {
@@ -343,24 +339,24 @@ in {
   programs.command-not-found.enable = false;
   programs.steam = {
     enable = true;
-    package = pkgs.steam.override {
-      extraPkgs = pkgs:
-        with pkgs; [
-          lz4
-          zstd
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXScrnSaver
-          libpng
-          libpulseaudio
-          libvorbis
-          stdenv.cc.cc.lib
-          libkrb5
-          keyutils
-          gamescope
-        ];
-    };
+    # package = pkgs.steam.override {
+    #   extraPkgs = pkgs:
+    #     with pkgs; [
+    #       lz4
+    #       zstd
+    #       xorg.libXcursor
+    #       xorg.libXi
+    #       xorg.libXinerama
+    #       xorg.libXScrnSaver
+    #       libpng
+    #       libpulseaudio
+    #       libvorbis
+    #       stdenv.cc.cc.lib
+    #       libkrb5
+    #       keyutils
+    #       gamescope
+    #     ];
+    # };
   };
 
   # Enable common container config files in /etc/containers

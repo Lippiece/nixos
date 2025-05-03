@@ -83,7 +83,6 @@ in {
     # # Entertainment
     webtorrent_desktop
     qbittorrent-enhanced
-    # spotube
     bottles
     variety
 
@@ -93,7 +92,6 @@ in {
 
     # # vim
     neovim
-    vimPlugins.LazyVim
     neovide
     fzf
     lua54Packages.luarocks
@@ -125,15 +123,6 @@ in {
     # # Rust
     # rustc
     # rustup
-
-    # # Scala
-    # coursier
-    # scala
-    # scala-cli
-    # scalafmt
-    # metals
-    # sbt
-    # ammonite
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -216,6 +205,24 @@ in {
             repo = "done";
             rev = "eb32ade85c0f2c68cbfcff3036756bbf27a4f366";
             sha256 = "12l7m08bp8vfhl8dmi0bfpvx86i344zbg03v2bc7wfhm20li3hhc";
+          };
+        }
+        {
+          name = "async-prompt";
+          src = pkgs.fetchFromGitHub {
+            owner = "acomagu";
+            repo = "fish-async-prompt";
+            rev = "316aa03c875b58e7c7f7d3bc9a78175aa47dbaa8";
+            sha256 = "17gxf043z4h3bzs9prlhgmbgxfclnb2y27ilrkw43f5h783bgg17";
+          };
+        }
+        {
+          name = "puffer-fish";
+          src = pkgs.fetchFromGitHub {
+            owner = "nickeb96";
+            repo = "puffer-fish";
+            rev = "12d062eae0ad24f4ec20593be845ac30cd4b5923";
+            sha256 = "06g8pv68b0vyhhqzj469i9rcics67cq1kbhb8946azjb8f7rhy6s";
           };
         }
         {
