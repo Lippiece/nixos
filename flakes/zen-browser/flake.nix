@@ -12,12 +12,13 @@
   }: let
     system = "x86_64-linux";
 
-    release = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
-      url = "https://api.github.com/repos/zen-browser/desktop/releases/latest";
-      sha256 = "wRMR9YoDkFuhGcekDDG55cSISqu5zEwlXFSRsCgbB40=";
-    }));
+    # release = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
+    #   url = "https://api.github.com/repos/zen-browser/desktop/releases/latest";
+    #   sha256 = "13873clb14albhjlrk5rmd58ii75p4qhr96736hmp403ibsi24y1";
+    # }));
 
-    version = release.tag_name;
+    # version = release.tag_name;
+    version = "1.12.2b";
 
     pkgs = import nixpkgs {
       inherit system;
