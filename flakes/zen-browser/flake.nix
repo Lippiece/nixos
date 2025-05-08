@@ -14,7 +14,7 @@
 
     release = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
       url = "https://api.github.com/repos/zen-browser/desktop/releases/latest";
-      sha256 = "00sv4s0yda55byy049yy05kxgd5n88iwyfn5iv1vqid7wjl06djl";
+      sha256 = "13873clb14albhjlrk5rmd58ii75p4qhr96736hmp403ibsi24y1";
     }));
 
     version = release.tag_name;
