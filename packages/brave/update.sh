@@ -30,6 +30,3 @@ callPackage ./make-brave.nix (removeAttrs args [ "callPackage" ]) (
   }
 )
 EOF
-
-git add -A && git commit -a -m "Update to ${latestVersion}"
-git push
