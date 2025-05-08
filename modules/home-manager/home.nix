@@ -38,13 +38,13 @@ in {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # NOTE: It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
+    # # NOTE: You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
     # (pkgs.writeShellScriptBin "my-hello" ''
@@ -58,17 +58,8 @@ in {
     # # Tools
     kdePackages.kclock
     telegram-desktop
-    # vivaldi
-    # (vivaldi.override {isSnapshot = true;})
-    # (vivaldi.overrideAttrs (oldAttrs: {
-    #   isSnapshot = true;
-    #   dontWrapQtApps = false;
-    #   dontPatchELF = true;
-    #   nativeBuildInputs =
-    #     oldAttrs.nativeBuildInputs
-    #     ++ [pkgs.kdePackages.wrapQtAppsHook];
-    # }))
     # brave
+    (callPackage ../../packages/brave/package.nix {})
     hiddify-app
     obsidian
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
@@ -282,6 +273,7 @@ in {
         {url = "https://astro.build/rss.xml";}
         {url = "https://marvinh.dev/feed.xml";}
         {url = "https://www.brycewray.com/index-excerpts.xml";}
+        {url = "https://eslint.org/feed.xml";}
       ];
     };
 

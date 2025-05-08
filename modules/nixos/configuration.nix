@@ -114,7 +114,7 @@ in {
     kdePackages.qtimageformats
     icu
     vlc
-    htop-vim
+    btop
     unzip
     tree
     kdePackages.kaccounts-providers
@@ -206,12 +206,12 @@ in {
     enable = true;
     package = pkgs.buildGoModule rec {
       pname = "lazygit";
-      version = "unstable-2025-04-29";
+      version = "unstable-2025-05-07";
       src = pkgs.fetchFromGitHub {
         owner = "jesseduffield";
         repo = "lazygit";
-        rev = "66caa25dcd4c247589e6adc71a6bc088678f3212";
-        sha256 = "1zyhw6b3lhd2wbw3j58s9a61fw2sx9ayqachn6h1zqbdlrbwl4rg";
+        rev = "e6bd9d0ae6dd30d04dfe77d2cac15ac54fa18ff6";
+        sha256 = "0llb5izpk65nr8qphy556c43w6n162f9pnislxswfmcfdqvcyq60";
       };
       vendorHash = null;
       doCheck = false;
