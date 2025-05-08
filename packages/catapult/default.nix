@@ -1,4 +1,4 @@
-{pkgs ? import <nixos> {}}: let
+{pkgs ? import <nixpkgs> {}}: let
   inherit (pkgs) buildFHSUserEnv;
 in
   buildFHSUserEnv {
