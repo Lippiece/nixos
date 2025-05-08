@@ -139,12 +139,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-W3qX1bLWFh43z8zh3g5wcL/Hptdox2waqas7vnNQ+f4=",
-        "path": "/nix/store/bf9hcm7gfz0imb6lgy4hvv8dbvjmwq7j-source/flakes/zen-browser",
+        "narHash": "sha256-VVWg8yoKnDjg+A9xWm026x/U/0nXUUziaO5uMMYiYCo=",
+        "path": "/nix/store/zyjyjis0mzkirx208zdiygiv2l681pnm-source/flakes/zen-browser",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/bf9hcm7gfz0imb6lgy4hvv8dbvjmwq7j-source/flakes/zen-browser",
+        "path": "/nix/store/zyjyjis0mzkirx208zdiygiv2l681pnm-source/flakes/zen-browser",
         "type": "path"
       }
     }
