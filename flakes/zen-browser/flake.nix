@@ -14,7 +14,7 @@
 
     release = builtins.fromJSON (builtins.readFile (pkgs.fetchurl {
       url = "https://api.github.com/repos/zen-browser/desktop/releases/latest";
-      sha256 = "14qfwwdy5vgxcm18lrwiv5yxl4m7pn2av3ap2ljcwncqx5iglkw7";
+      sha256 = "00sv4s0yda55byy049yy05kxgd5n88iwyfn5iv1vqid7wjl06djl";
     }));
 
     version = release.tag_name;
@@ -80,7 +80,7 @@
 
         src = builtins.fetchTarball {
           url = "https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-x86_64.tar.xz";
-          sha256 = "13873clb14albhjlrk5rmd58ii75p4qhr96736hmp403ibsi24y1";
+          sha256 = "1f5fmvkssckdirncmg7xbf9k68dw7nnrr5sa16abshfxp4n6m6ss";
         };
 
         desktopSrc = ./.;
