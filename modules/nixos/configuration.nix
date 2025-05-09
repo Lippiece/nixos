@@ -237,7 +237,7 @@ in {
   programs.npm.enable = true;
   programs.dconf.enable = true;
   # programs.java.enable = true;
-  programs.chromium.enablePlasmaBrowserIntegration = true;
+  # programs.chromium.enablePlasmaBrowserIntegration = true;
   programs.firefox.nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
   programs.kde-pim = {
     enable = true;
