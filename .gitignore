@@ -1,4 +1,4 @@
-result/
+**/result
 nixos-switch.log
 packages/catapult/dda
 packages/catapult/catapult-linux-x64-24.07a
