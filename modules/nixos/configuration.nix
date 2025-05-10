@@ -383,7 +383,7 @@ in {
     }
   ];
   security.sudo.extraConfig = ''
-    Defaults timestamp_timeout=1800
+    Defaults timestamp_timeout=7200
   '';
 
   # Enable OpenGL
@@ -393,6 +393,7 @@ in {
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       libvdpau-va-gl
+      nvidia-vaapi-driver
     ];
   };
 
