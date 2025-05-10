@@ -403,7 +403,6 @@ in {
   hardware.nvidia = {
     # open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
     open = true;
-    # nvidiaSettings = false;
 
     prime = {
       intelBusId = "PCI:0:2:0";
@@ -423,11 +422,11 @@ in {
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = true;
+    # powerManagement.finegrained = true;
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
-    # nvidiaSettings = true;
+    nvidiaSettings = false;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     # package = config.boot.kernelPackages.nvidiaPackages.latest;
