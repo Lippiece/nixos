@@ -83,6 +83,7 @@ in {
     python312Packages.pip
     python3Full
     python312Packages.venvShellHook
+    uv
 
     # # Shell
     bun

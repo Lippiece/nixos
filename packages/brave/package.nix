@@ -3,11 +3,11 @@
 
 let
   pname = "brave";
-  version = "1.78.97";
+  version = "1.78.102";
 
   archive = {
-      url = "https://github.com/brave/brave-browser/releases/download/v1.78.97/brave-browser_1.78.97_amd64.deb";
-      hash = "sha256-SjaYmLCV/od2J6HFNyhh43/swQupl+rXfU8B1VvNXf8=";
+      url = "https://github.com/brave/brave-browser/releases/download/v1.78.102/brave-browser_1.78.102_amd64.deb";
+      hash = "sha256-S5eN33LlpQJFoPkurLKooGkPvqLCV70TjqHVj2e54rk=";
     };
 
 in
