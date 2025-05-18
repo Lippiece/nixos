@@ -129,6 +129,9 @@ in {
     # kdePackages.qtbase
     libinput
     inotify-tools
+
+    # Because of the Phoenix module
+    firefox
   ];
 
   environment.persistence."/persist" = {

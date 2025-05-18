@@ -56,7 +56,6 @@ in {
     obsidian
     # (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
     mpc-qt
-    firefox
 
     # # Plasma
     geoclue2
