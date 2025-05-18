@@ -88,6 +88,26 @@
         "type": "github"
       }
     },
+    "phoenix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747381666,
+        "narHash": "sha256-222AwCgBFCj6iruh0EA44o8Yrw+1Q4Nu/c+l00O7THI=",
+        "ref": "refs/heads/pages",
+        "rev": "1a8c6059a67e7441399755b28479c606c1b9df3f",
+        "revCount": 1651,
+        "type": "git",
+        "url": "https://gitlab.com/celenityy/Phoenix"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gitlab.com/celenityy/Phoenix"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -95,6 +115,7 @@
         "kwin-effects-forceblur": "kwin-effects-forceblur",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "phoenix": "phoenix",
         "zen-browser": "zen-browser"
       }
     },
@@ -139,12 +160,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-VkWuiGPl4wmKaFaIVVtwc/SqhUObyGbnTf6tx8jbnvw=",
-        "path": "/nix/store/6305xbklcakqc2q095n40vg6cncc6mis-source/flakes/zen-browser",
+        "narHash": "sha256-iGEVUFHmdEfZ0BczwX5GfZ7IYwrYFijkV4+mn0jd/y4=",
+        "path": "/nix/store/6mzmmq8bs5zp07z95s912jbzs7q31pcx-source/flakes/zen-browser",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/6305xbklcakqc2q095n40vg6cncc6mis-source/flakes/zen-browser",
+        "path": "/nix/store/6mzmmq8bs5zp07z95s912jbzs7q31pcx-source/flakes/zen-browser",
         "type": "path"
       }
     }
