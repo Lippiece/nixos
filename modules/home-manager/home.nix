@@ -69,6 +69,7 @@ in {
     qbittorrent-enhanced
     bottles
     variety
+    prismlauncher
 
     #################################
     #              CLI              #
