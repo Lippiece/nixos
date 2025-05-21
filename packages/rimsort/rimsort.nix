@@ -11,13 +11,13 @@
 }:
 python3Packages.buildPythonApplication rec {
   pname = "rimsort";
-  version = "unstable-2025-05-16";
+  version = "unstable-2025-05-21";
 
   src = fetchFromGitHub {
     owner = "RimSort";
     repo = "RimSort";
-    rev = "5102e7c859254783337701524821b063ebcbbf33";
-    sha256 = "08rhsyq9hlmmp1xvlqz0c8cmfmg7983ik1cbaqq3y8isgvjkd6cs";
+    rev = "68e75c6616e68a68e89be451c95bb8bce5a112ed";
+    sha256 = "18slf84spw21vf1s6p5v7dghr04iykbvm4i3sd04wib7bqmnzng4";
   };
 
   patches = [
