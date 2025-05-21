@@ -54,7 +54,8 @@ in {
     # (callPackage ../../packages/brave/package.nix {})
     hiddify-app
     obsidian
-    mpc-qt
+    (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
+    # mpc-qt
 
     # # Plasma
     geoclue2

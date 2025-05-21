@@ -13,13 +13,13 @@
 }:
 stdenv.mkDerivation {
   pname = "mpc-qt";
-  version = "unstable-2025-05-16";
+  version = "unstable-2025-05-19";
 
   src = fetchFromGitHub {
     owner = "mpc-qt";
     repo = "mpc-qt";
-    rev = "350e48adcec563be5dd9888bec03f2e31a07d0c1";
-    sha256 = "0kll2gjiazmwb5f2y22srzdcg3ln2zvrzdswx65bkjczz1wl3bnl";
+    rev = "a399f3cd56206018ac02cea680b8f800e51b2d26";
+    sha256 = "0d0fk2683bnmh8b6j72rgvc52yxpkzkhgww76y23nldkh9b7mn8g";
   };
 
   nativeBuildInputs = [
