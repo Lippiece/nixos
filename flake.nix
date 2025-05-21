@@ -21,10 +21,10 @@
     # nix-alien.url = "github:thiagokokada/nix-alien";
 
     # My
-    zen-browser = {
-      url = "./flakes/zen-browser/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # zen-browser = {
+    #   url = "./flakes/zen-browser/";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     kwin-effects-forceblur = {
       url = "github:taj-ny/kwin-effects-forceblur";
@@ -36,7 +36,6 @@
     self,
     nixpkgs,
     nixos-hardware,
-    zen-browser,
     # nix-alien,
     ...
   } @ inputs: {
@@ -53,7 +52,7 @@
         ({pkgs, ...}: {
           home-manager.users.lippiece = {pkgs, ...}: {
             home.packages = [
-              zen-browser.packages.${pkgs.system}.default
+              # inputs.zen-browser.packages.${pkgs.system}.default
               # nix-alien.packages.${pkgs.system}.default
               # inputs.nix-alien.packages.${pkgs.system}.nix-alien-ld
               # inputs.nix-alien.packages.${pkgs.system}.nix-alien-find-libs
