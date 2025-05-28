@@ -342,24 +342,32 @@ in {
   programs.command-not-found.enable = false;
   programs.steam = {
     enable = true;
-    # package = pkgs.steam.override {
-    #   extraPkgs = pkgs:
-    #     with pkgs; [
-    #       lz4
-    #       zstd
-    #       xorg.libXcursor
-    #       xorg.libXi
-    #       xorg.libXinerama
-    #       xorg.libXScrnSaver
-    #       libpng
-    #       libpulseaudio
-    #       libvorbis
-    #       stdenv.cc.cc.lib
-    #       libkrb5
-    #       keyutils
-    #       gamescope
-    #     ];
-    # };
+    package = pkgs.steam.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          alsa-lib.out
+          at-spi2-atk.out
+          cairo.out
+          cups.lib
+          dbus.lib
+          expat.out
+          glib.out
+          gtk3.out
+          libdrm.out
+          libgbm.out
+          libxkbcommon.out
+          nspr.out
+          nss.out
+          pango.out
+          xorg.libX11.out
+          xorg.libXcomposite.out
+          xorg.libXdamage.out
+          xorg.libXext.out
+          xorg.libXfixes.out
+          xorg.libXrandr.out
+          xorg.libxcb.out
+        ];
+    };
   };
 
   # Enable common container config files in /etc/containers
