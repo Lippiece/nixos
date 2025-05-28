@@ -346,6 +346,7 @@ in {
       extraPkgs = pkgs:
         with pkgs; [
           alsa-lib.out
+          libsForQt5.libqtpas.out
           at-spi2-atk.out
           cairo.out
           cups.lib
