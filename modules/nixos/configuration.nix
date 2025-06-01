@@ -209,12 +209,12 @@ in {
     enable = true;
     package = pkgs.buildGoModule rec {
       pname = "lazygit";
-      version = "unstable-2025-05-29";
+      version = "unstable-2025-06-01";
       src = pkgs.fetchFromGitHub {
         owner = "jesseduffield";
         repo = "lazygit";
-        rev = "8280fdedb72e90ff5169dfe11ef2a92ebfe33551";
-        sha256 = "1dgj6z0y03s21i0dhn50xxdhknqgavawd9yzyr3gmxm15gs0m4l5";
+        rev = "1e5d10452417f1d258aef97f141742ebb882bd1b";
+        sha256 = "1pqk0dqa75k985qxs8l8afrkc6l82fq5gqv9vxmz7sylwi2bk471";
       };
       vendorHash = null;
       doCheck = false;
@@ -231,7 +231,7 @@ in {
     enable = true;
     clean.enable = true;
     clean.dates = "weekly";
-    flake = /home/lippiece/.config/nixos;
+    # flake = /home/lippiece/.config/nixos;
   };
   programs.nix-index = {
     enable = true;
@@ -304,11 +304,8 @@ in {
   };
 
   i18n = {
-    supportedLocales = ["ru_RU.UTF-8/UTF-8" "en_GB.UTF-8/UTF-8"];
-    defaultLocale = "en_GB.utf8";
-    extraLocaleSettings = {
-      LC_TIME = "en_GB.utf8";
-    };
+    extraLocales = ["ru_RU.UTF-8/UTF-8"];
+    defaultLocale = "en_GB.UTF-8";
   };
 
   fonts = {
