@@ -129,9 +129,6 @@ in {
     # kdePackages.qtbase
     libinput
     inotify-tools
-
-    # Because of the Phoenix module
-    firefox
   ];
 
   environment.persistence."/persist" = {
@@ -209,12 +206,12 @@ in {
     enable = true;
     package = pkgs.buildGoModule rec {
       pname = "lazygit";
-      version = "unstable-2025-06-01";
+      version = "unstable-2025-06-05";
       src = pkgs.fetchFromGitHub {
         owner = "jesseduffield";
         repo = "lazygit";
-        rev = "1e5d10452417f1d258aef97f141742ebb882bd1b";
-        sha256 = "1pqk0dqa75k985qxs8l8afrkc6l82fq5gqv9vxmz7sylwi2bk471";
+        rev = "aa331e52b8a0e5da03c59ee6b9bd1d2a9073618c";
+        sha256 = "0nijsnx9nq8kdmjcx9g2fxbj6rmx2wqy1xr5aysgzlc1ysi53cdm";
       };
       vendorHash = null;
       doCheck = false;
@@ -241,7 +238,11 @@ in {
   programs.dconf.enable = true;
   # programs.java.enable = true;
   # programs.chromium.enablePlasmaBrowserIntegration = true;
-  programs.firefox.nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-beta;
+    nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
+  };
   programs.kde-pim = {
     enable = true;
     kontact = true;
@@ -327,13 +328,14 @@ in {
         serif = ["Inter Variable" "Noto Serif"];
         sansSerif = ["Inter Variable" "Noto Sans"];
         monospace = ["0xProto Nerd Font Mono"];
+        emoji = ["Noto Color Emoji"];
       };
     };
     enableDefaultPackages = true;
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  nix.package = pkgs.lix;
+  nix.package = pkgs.lixPackageSets.latest.lix;
   nix.nixPath = ["/home/lippiece/.config/nixos/"];
 
   programs.command-not-found.enable = false;

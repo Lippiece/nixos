@@ -10,16 +10,17 @@
   mpv,
   wrapQtAppsHook,
   gitUpdater,
+  boost,
 }:
 stdenv.mkDerivation {
   pname = "mpc-qt";
-  version = "unstable-2025-05-30";
+  version = "unstable-2025-06-02";
 
   src = fetchFromGitHub {
     owner = "mpc-qt";
     repo = "mpc-qt";
-    rev = "5b1f6a9768432ff9ec15eaef7d9b65565ed62db0";
-    sha256 = "1s4ixf7qxmpcb0i5y5i36s00bgdmqswly79da85v56x6amp2k511";
+    rev = "a750ae6cba1ab96e8b8727f99205d697239059f9";
+    sha256 = "1v50fbr3mxw4sm0yxjwn3pmsrccqvq594rq3923rkxzhdksw8mif";
   };
 
   nativeBuildInputs = [
@@ -29,6 +30,7 @@ stdenv.mkDerivation {
     qtbase
     wrapQtAppsHook
     qt6Packages.qtsvg
+    boost
   ];
 
   buildInputs = [
