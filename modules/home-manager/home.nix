@@ -365,6 +365,9 @@ in {
 
       bind "\%" split-window -h -c "#{pane_current_path}"
       bind '\"' split-window -c "#{pane_current_path}"
+
+      # In vi copy mode, press 'y' to copy but remain in copy-mode
+      bind -T copy-mode-vi y send -X copy-selection
     '';
   };
   programs.direnv = {
