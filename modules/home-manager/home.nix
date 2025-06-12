@@ -57,9 +57,10 @@ in {
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
     # mpc-qt
 
-    # Emulators
-    spice-gtk
-    quickemu
+    # # Emulators
+    # Laggy and can't redirect USB
+    # spice-gtk
+    # quickemu
 
     # # Plasma
     geoclue2

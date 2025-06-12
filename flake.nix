@@ -17,7 +17,6 @@
     # Helpers
     impermanence.url = "github:nix-community/impermanence";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    # TODO: build failure
     nix-alien.url = "github:thiagokokada/nix-alien";
 
     # My
