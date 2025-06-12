@@ -57,6 +57,10 @@ in {
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
     # mpc-qt
 
+    # Emulators
+    spice-gtk
+    quickemu
+
     # # Plasma
     geoclue2
 
@@ -67,7 +71,9 @@ in {
     # # Entertainment
     webtorrent_desktop
     qbittorrent-enhanced
-    bottles
+    (bottles.override {
+      removeWarningPopup = true;
+    })
     variety
     prismlauncher
 
