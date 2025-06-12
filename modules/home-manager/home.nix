@@ -61,6 +61,7 @@ in {
     # Laggy and can't redirect USB
     spice-gtk
     quickemu
+    spice-vdagent
 
     # # Plasma
     geoclue2
