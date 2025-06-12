@@ -59,8 +59,8 @@ in {
 
     # # Emulators
     # Laggy and can't redirect USB
-    # spice-gtk
-    # quickemu
+    spice-gtk
+    quickemu
 
     # # Plasma
     geoclue2
