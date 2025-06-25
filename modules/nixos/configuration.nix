@@ -122,13 +122,14 @@ in {
     kdePackages.korganizer
     kdePackages.kdepim-addons
     kdePackages.signond
-    # python3
-    # python312Packages.pip
     cargo
     nodejs
-    # kdePackages.qtbase
     libinput
     inotify-tools
+    sqlite
+
+    # For `pactl`
+    pulseaudio
   ];
 
   environment.persistence."/persist" = {
@@ -147,8 +148,8 @@ in {
   };
 
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
-    NIXOS_OZONE_WL = "1";
+    # LIBVA_DRIVER_NAME = "iHD";
+    # NIXOS_OZONE_WL = "1";
     PAGER = "nvim -R";
     MANPAGER = "nvim +Man!";
     # HTTP_PROXY = "127.0.0.1:2334";
@@ -170,34 +171,6 @@ in {
     withNodeJs = true;
   };
   programs.nix-ld.enable = true;
-  # programs.nix-ld.libraries = with pkgs; [
-  # Add any missing dynamic libraries for unpackaged programs
-  # here, NOT in environment.systemPackages
-  # glib
-  # glibc
-  # nss
-  # nspr
-  # atk
-  # cups
-  # dbus
-  # libdrm
-  # gtk3
-  # pango
-  # cairo
-  # xorg.libX11
-  # xorg.libXcomposite
-  # xorg.libXdamage
-  # xorg.libXext
-  # xorg.libXfixes
-  # xorg.libXrandr
-  # libxkbcommon
-  # mesa
-  # expat
-  # xorg.libxcb
-  # alsa-lib
-  # libGL
-  # libsecret
-  # ];
   programs.appimage = {
     enable = true;
     binfmt = true;
@@ -206,12 +179,12 @@ in {
     enable = true;
     package = pkgs.buildGoModule rec {
       pname = "lazygit";
-      version = "unstable-2025-06-05";
+      version = "unstable-2025-06-20";
       src = pkgs.fetchFromGitHub {
         owner = "jesseduffield";
         repo = "lazygit";
-        rev = "aa331e52b8a0e5da03c59ee6b9bd1d2a9073618c";
-        sha256 = "0nijsnx9nq8kdmjcx9g2fxbj6rmx2wqy1xr5aysgzlc1ysi53cdm";
+        rev = "ef6f96bda32455f04a4d0de347e300000285d790";
+        sha256 = "03cb6m3jn265sljalaazmj19zfqdhracgykqz7zg7m4fhm929nfs";
       };
       vendorHash = null;
       doCheck = false;
@@ -228,7 +201,6 @@ in {
     enable = true;
     clean.enable = true;
     clean.dates = "weekly";
-    # flake = /home/lippiece/.config/nixos;
   };
   programs.nix-index = {
     enable = true;
@@ -236,8 +208,6 @@ in {
   };
   programs.npm.enable = true;
   programs.dconf.enable = true;
-  # programs.java.enable = true;
-  # programs.chromium.enablePlasmaBrowserIntegration = true;
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-beta;
@@ -253,8 +223,8 @@ in {
     accounts = {
       ${mail} = {
         auth = true;
-        tls = true;
         # try setting `tls_starttls` to `false` if sendmail hangs
+        tls = true;
         from = mail;
         host = smtphost;
         user = "${name}";
@@ -382,9 +352,13 @@ in {
 
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+      };
     };
 
-    spiceUSBRedirection.enable = true;
+    # spiceUSBRedirection.enable = true;
   };
 
   security.pam.loginLimits = [

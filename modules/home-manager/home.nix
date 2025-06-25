@@ -50,18 +50,18 @@ in {
     # # Tools
     kdePackages.kclock
     telegram-desktop
-    # brave
-    # (callPackage ../../packages/brave/package.nix {})
-    hiddify-app
+    v2rayn
+    xray
     obsidian
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
     # mpc-qt
+    kdePackages.filelight
 
     # # Emulators
     # Laggy and can't redirect USB
-    spice-gtk
-    quickemu
-    spice-vdagent
+    # spice-gtk
+    # quickemu
+    # spice-vdagent
 
     # # Plasma
     geoclue2
@@ -371,9 +371,6 @@ in {
       bind '"' split-window -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
 
-      bind "\%" split-window -h -c "#{pane_current_path}"
-      bind '\"' split-window -c "#{pane_current_path}"
-
       # In vi copy mode, press 'y' to copy but remain in copy-mode
       bind -T copy-mode-vi y send -X copy-selection
     '';
@@ -429,6 +426,7 @@ in {
       neomutt = {
         enable = true;
         mailboxName = "${main.mail}";
+        sendMailCommand = "msmtpq -a ${main.mail}";
       };
 
       notmuch = {
@@ -464,6 +462,7 @@ in {
       neomutt = {
         enable = true;
         mailboxName = "${DW.mail}";
+        sendMailCommand = "msmtpq -a ${DW.mail}";
       };
 
       notmuch = {
@@ -527,13 +526,9 @@ in {
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       # Add additional package names here
-      "vivaldi"
-      "hiddify-app"
-      "hiddify-core"
       "obsidian"
       "steam"
       "steamcmd"
-      "rimsort"
     ];
 
   fonts = {
