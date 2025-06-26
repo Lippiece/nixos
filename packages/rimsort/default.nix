@@ -1,5 +1,5 @@
 let
   pkgs = import <nixpkgs> {};
 in {
-  rimsort = pkgs.callPackage ./rimsort.nix {};
+  rimsort = pkgs.callPackage ./package.nix {};
 }

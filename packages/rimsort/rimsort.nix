@@ -7,7 +7,7 @@
   imagemagick,
   stdenv,
   todds,
-  steamPackages,
+  steamcmd,
 }:
 python3Packages.buildPythonApplication rec {
   pname = "rimsort";
@@ -46,9 +46,9 @@ python3Packages.buildPythonApplication rec {
     pyside6
     pytz
     requests
-    steam
-    steamfiles
-    steamworks
+    # steam
+    # steamfiles
+    # steamworks
     toposort
     watchdog
     xmltodict
@@ -87,7 +87,7 @@ python3Packages.buildPythonApplication rec {
     ln -s $src/libs/SteamworksPy_${stdenv.hostPlatform.uname.processor}.so $out/lib/SteamworksPy.so
     ln -s $src/libs/libsteam_api.so $out/lib/libsteam_api.so
     ln -s ${todds}/bin/todds $out/bin/
-    ln -s ${steamPackages.steamcmd}/bin/steamcmd $out/bin/
+    ln -s ${steamcmd}/bin/steamcmd $out/bin/
   '';
 
   desktopItems = [

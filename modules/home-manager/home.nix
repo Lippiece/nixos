@@ -104,6 +104,7 @@ in {
     commitizen
     gh
     python313Packages.subliminal
+    steamcmd
 
     # # Nix
     alejandra
@@ -532,6 +533,7 @@ in {
       "obsidian"
       "steam"
       "steamcmd"
+      "steam-unwrapped"
     ];
 
   fonts = {
