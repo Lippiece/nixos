@@ -22,11 +22,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1750973805,
-        "narHash": "sha256-BZXgag7I0rnL/HMHAsBz3tQrfKAibpY2vovexl2lS+Y=",
+        "lastModified": 1751411489,
+        "narHash": "sha256-x+AJyQ5+4EPDU3NnQ1OPP/KuoG0C6UrbgptEW6PSLQ8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "080e8b48b0318b38143d5865de9334f46d51fce3",
+        "rev": "e96a8a325cf23538a7f58b9335b4c4c0b393bacf",
         "type": "github"
       },
       "original": {
@@ -114,11 +114,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1750837715,
-        "narHash": "sha256-2m1ceZjbmgrJCZ2PuQZaK4in3gcg3o6rZ7WK6dr5vAA=",
+        "lastModified": 1751393906,
+        "narHash": "sha256-I1x6K61ZcdFlqc07weRBy3erCAB0lVkX10i0c9eXjDI=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "98236410ea0fe204d0447149537a924fb71a6d4f",
+        "rev": "f49bb3b4107a0917ee144337bb02d311033ee1ba",
         "type": "github"
       },
       "original": {
@@ -146,11 +146,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1750776420,
-        "narHash": "sha256-/CG+w0o0oJ5itVklOoLbdn2dGB0wbZVOoDm4np6w09A=",
+        "lastModified": 1751271578,
+        "narHash": "sha256-P/SQmKDu06x8yv7i0s8bvnnuJYkxVGBWLWHaU+tt4YY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "30a61f056ac492e3b7cdcb69c1e6abdcf00e39cf",
+        "rev": "3016b4b15d13f3089db8a41ef937b13a9e33a8df",
         "type": "github"
       },
       "original": {
@@ -167,17 +167,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1750787839,
-        "narHash": "sha256-L2CVX6bo+4N4VWPyw+euX9/KhFu7n9L8HEErhHnSyMo=",
+        "lastModified": 1751251121,
+        "narHash": "sha256-5Cdxkm3LpKcwvzMQBbu0hEKMIe0JkaZgOMxPf/UqSpA=",
         "ref": "refs/heads/pages",
-        "rev": "216382d8d2a1139361307204ca1159437adf0c12",
-        "revCount": 1943,
+        "rev": "7b5d9e3febee7f19fda83a91e3c662a54bbce026",
+        "revCount": 1944,
         "type": "git",
-        "url": "https://gitlab.com/celenityy/Phoenix"
+        "url": "https://codeberg.org/celenity/Phoenix"
       },
       "original": {
         "type": "git",
-        "url": "https://gitlab.com/celenityy/Phoenix"
+        "url": "https://codeberg.org/celenity/Phoenix"
       }
     },
     "root": {

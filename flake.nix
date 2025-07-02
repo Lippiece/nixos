@@ -10,7 +10,7 @@
     };
 
     phoenix = {
-      url = "git+https://gitlab.com/celenityy/Phoenix";
+      url = "git+https://codeberg.org/celenity/Phoenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
