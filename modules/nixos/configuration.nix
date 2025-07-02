@@ -57,50 +57,12 @@ in {
 
   time.timeZone = "Europe/Kaliningrad";
 
-  environment.etc = {
-    # This creates /etc/wireplumber/policy.lua.d/10-app-specific-ducking.lua
-    "wireplumber/policy.lua.d/10-app-specific-ducking.lua".text = ''
-      -- Define two roles: Trigger (higher) ducks Target (lower)
-      default_policy.policy.roles = {
-        ["Target"] = {
-          priority = 10,
-          action.default = "mix",
-        },
-        ["Trigger"] = {
-          priority = 20,
-          action.Target = "duck",
-          action.default = "mix",
-        },
-      }
-
-      -- Match endpoints by application.name
-      default_policy.endpoints = {
-        ["endpoint.trigger"] = {
-          media.class = "Stream/Output/Audio",
-          role        = "Trigger",
-          match       = {
-            ["application.name"] = "FMOD Ex App",   -- change to your trigger app
-          },
-        },
-        ["endpoint.target"] = {
-          media.class = "Stream/Output/Audio",
-          role        = "Target",
-          match       = {
-            ["application.name"] = "Spotify",   -- or Firefox, your music player, etc.
-          },
-        },
-      }
-    '';
-  };
-
   # Enable sound.
   services.pipewire = {
     enable = true;
     pulse.enable = true;
     alsa.enable = true;
-    wireplumber.enable = true;
   };
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput = {
     enable = true;
