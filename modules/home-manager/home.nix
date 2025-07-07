@@ -534,6 +534,7 @@ in {
       "steam"
       "steamcmd"
       "steam-unwrapped"
+      "rimsort"
     ];
 
   fonts = {

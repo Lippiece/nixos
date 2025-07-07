@@ -16,28 +16,35 @@
 
     # Helpers
     impermanence.url = "github:nix-community/impermanence";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-alien.url = "github:thiagokokada/nix-alien";
 
-    # My
-    # zen-browser = {
-    #   url = "./flakes/zen-browser/";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    kwin-effects-forceblur = {
-      url = "github:taj-ny/kwin-effects-forceblur";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    weirdrock-pkgs.url = "github:weirdrock/nixpkgs/init-rimsort";
   };
 
   outputs = {
     self,
     nixpkgs,
-    nixos-hardware,
-    # nix-alien,
     ...
-  } @ inputs: {
+  } @ inputs: let
+    # import your normal nixpkgs with allowUnfree turned on
+    pkgsUnfree = import nixpkgs {
+      system = "x86_64-linux";
+      config = {
+        allowUnfree = true;
+      };
+    };
+
+    # now pull in the weirdrock flake against that
+    rimsortUnfree =
+      import inputs.weirdrock-pkgs
+      {
+        inherit pkgsUnfree; # so that it sees the unfree‐enabled pkgs
+        system = pkgsUnfree.system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+  in {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
@@ -51,10 +58,7 @@
         ({pkgs, ...}: {
           home-manager.users.lippiece = {pkgs, ...}: {
             home.packages = [
-              # inputs.zen-browser.packages.${pkgs.system}.default
-              # nix-alien.packages.${pkgs.system}.default
-              # inputs.nix-alien.packages.${pkgs.system}.nix-alien-ld
-              # inputs.nix-alien.packages.${pkgs.system}.nix-alien-find-libs
+              rimsortUnfree.rimsort
             ];
           };
         })
