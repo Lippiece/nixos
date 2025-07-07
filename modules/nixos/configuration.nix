@@ -6,6 +6,7 @@
   # lib,
   inputs,
   pkgs,
+  rimsortUnfree,
   ...
 }: let
   mail = "lippiece@vivaldi.net";
@@ -269,7 +270,9 @@ in {
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs rimsortUnfree;
+    };
 
     users = {"lippiece" = import ../home-manager/home.nix;};
   };

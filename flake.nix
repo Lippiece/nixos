@@ -46,7 +46,7 @@
       };
   in {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs rimsortUnfree;};
       modules = [
         # My configuration
         ./modules/nixos/configuration.nix

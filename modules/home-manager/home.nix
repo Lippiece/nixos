@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  rimsortUnfree,
   ...
 }: let
   main = {
@@ -78,6 +79,7 @@ in {
     })
     variety
     prismlauncher
+    rimsortUnfree.rimsort
 
     #################################
     #              CLI              #
@@ -546,6 +548,15 @@ in {
         monospace = ["0xProto Nerd Font Mono"];
         emoji = ["Noto Color Emoji"];
       };
+    };
+  };
+
+  xdg.desktopEntries = {
+    rimsort = {
+      name = "Rimsort";
+      genericName = "Rimsort";
+      exec = "${rimsortUnfree.rimsort}/bin/rimsort";
+      icon = "${rimsortUnfree.rimsort}/share/icons/hicolor/512x512/apps/io.github.rimsort.rimsort.png";
     };
   };
 }
