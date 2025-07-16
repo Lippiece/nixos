@@ -394,16 +394,16 @@ in {
     # open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
     open = true;
 
-    # prime = {
-    #   intelBusId = "PCI:0:2:0";
-    #   nvidiaBusId = "PCI:1:0:0";
-    #
-    #   # Needed for finegrained power management to work
-    #   offload = {
-    #     enable = true;
-    #     enableOffloadCmd = true;
-    #   };
-    # };
+    prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+
+      # Needed for finegrained power management to work
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+    };
 
     # modesetting.enable = true;
 
@@ -412,7 +412,7 @@ in {
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    # powerManagement.finegrained = true;
+    powerManagement.finegrained = true;
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
