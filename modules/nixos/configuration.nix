@@ -275,7 +275,7 @@ in {
       # DNS over TLS upstream
       # upstream = [ "tls://dns.adguard.com" ];
       # DNS over HTTPS upstream
-      upstream = ["https://lipguard.ydns.eu/dns-query"];
+      upstream = ["quic://lipguard.ydns.eu"];
     };
     # Additional launch flags
     # flags = [ "--verbose" ];
