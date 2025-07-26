@@ -6,7 +6,6 @@
   # lib,
   inputs,
   pkgs,
-  rimsortUnfree,
   ...
 }: let
   mail = "lippiece@vivaldi.net";
@@ -43,18 +42,6 @@ in {
       preLVM = true;
     };
   };
-
-  networking.hostName = "mothership"; # Define your hostname.
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
-  networking.extraHosts = ''
-    192.168.1.102      cumulonimbus
-    192.168.1.102:3001 lipsearch.ydns.eu
-    192.168.1.102:3002 warden.ydns.eu
-    192.168.1.102:3003 lipgit.ydns.eu
-    192.168.1.102:3009 lipguard.ydns.eu
-  '';
-  # networking.networkmanager.dns = "systemd-resolved";
 
   time.timeZone = "Europe/Kaliningrad";
 
@@ -257,7 +244,42 @@ in {
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+
+  # Enable the DNS proxy.
+  networking = {
+    hostName = "mothership"; # Define your hostname.
+    extraHosts = ''
+      192.168.1.102      cumulonimbus
+      192.168.1.102:3001 lipsearch.ydns.eu
+      192.168.1.102:3002 warden.ydns.eu
+      192.168.1.102:3003 lipgit.ydns.eu
+      192.168.1.102:3009 lipguard.ydns.eu
+    '';
+
+    firewall.enable = false;
+
+    networkmanager.enable =
+      true; # Easiest to use and most distros use this by default.
+    # If using NetworkManager:
+    networkmanager.dns = "none";
+    nameservers = ["127.0.0.1"];
+  };
+  # networking.networkmanager.dns = "systemd-resolved";
+  services.dnsproxy = {
+    enable = true;
+    settings = {
+      bootstrap = ["9.9.9.9:53"];
+
+      # Plain DNS upstream
+      # upstream = [ "1.1.1.1:53" ];
+      # DNS over TLS upstream
+      # upstream = [ "tls://dns.adguard.com" ];
+      # DNS over HTTPS upstream
+      upstream = ["https://lipguard.ydns.eu/dns-query"];
+    };
+    # Additional launch flags
+    # flags = [ "--verbose" ];
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -271,7 +293,7 @@ in {
 
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs rimsortUnfree;
+      inherit inputs;
     };
 
     users = {"lippiece" = import ../home-manager/home.nix;};
@@ -309,7 +331,7 @@ in {
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.package = pkgs.lixPackageSets.latest.lix;
-  nix.nixPath = ["/home/lippiece/.config/nixos/"];
+  nix.nixPath = ["/home/lippiece/.config/nixos/modules/nixos/configuration.nix"];
 
   programs.command-not-found.enable = false;
   programs.steam = {

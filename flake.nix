@@ -55,13 +55,19 @@
         # Home Manager
         inputs.home-manager.nixosModules.default
 
-        ({pkgs, ...}: {
-          home-manager.users.lippiece = {pkgs, ...}: {
-            home.packages = [
-              rimsortUnfree.rimsort
-            ];
-          };
-        })
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              unstable = inputs.weirdrock-pkgs.legacyPackages.${prev.system};
+              # use this variant if unfree packages are needed:
+              # unstable = import nixpkgs-unstable {
+              #   inherit prev;
+              #   system = prev.system;
+              #   config.allowUnfree = true;
+              # };
+            })
+          ];
+        }
 
         inputs.phoenix.nixosModules.default
       ];
