@@ -78,6 +78,7 @@ in {
     })
     variety
     prismlauncher
+    rimsort
 
     #################################
     #              CLI              #

@@ -22,11 +22,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753387274,
-        "narHash": "sha256-Y1hAI9h+9DLBbgKvZBsHaeptFIcRw4iC6ySPmzyqmlM=",
+        "lastModified": 1753803071,
+        "narHash": "sha256-O8l1+c8L6NE+kW4MJvJMLKKz6cElV/FOcomr+qTZjZs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a35f6b60430ff0c7803bd2a727df84c87569c167",
+        "rev": "cfe397c8c091a06a5a0a4e683e6fca2e57a8312f",
         "type": "github"
       },
       "original": {
@@ -109,11 +109,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1753418588,
-        "narHash": "sha256-pdpkbarGU0sP38sWt56FQRRGnpOy6pGfVkoRNP3fhRw=",
+        "lastModified": 1753773966,
+        "narHash": "sha256-7FrVYeHkVG62XocPzy0fqIsSoGX148JNa+pn2fBVt+Q=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a0a889d240ff8fda7209aec00d1877d440b23735",
+        "rev": "974b7c9047733353fd661f467d511f0bdac1c670",
         "type": "github"
       },
       "original": {
@@ -149,24 +149,7 @@
         "impermanence": "impermanence",
         "nix-alien": "nix-alien",
         "nixpkgs": "nixpkgs_2",
-        "phoenix": "phoenix",
-        "weirdrock-pkgs": "weirdrock-pkgs"
-      }
-    },
-    "weirdrock-pkgs": {
-      "locked": {
-        "lastModified": 1753337125,
-        "narHash": "sha256-1Z6mjN19lTcjGnjLmZfy1/PnvSqFOd8zqr8CkglUaV8=",
-        "owner": "weirdrock",
-        "repo": "nixpkgs",
-        "rev": "ff90ff193ef03199e3e3ac47a90ec06ccf29f4fb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "weirdrock",
-        "ref": "init-rimsort",
-        "repo": "nixpkgs",
-        "type": "github"
+        "phoenix": "phoenix"
       }
     }
   },

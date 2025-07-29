@@ -17,36 +17,15 @@
     # Helpers
     impermanence.url = "github:nix-community/impermanence";
     nix-alien.url = "github:thiagokokada/nix-alien";
-
-    weirdrock-pkgs.url = "github:weirdrock/nixpkgs/init-rimsort";
   };
 
   outputs = {
     self,
     nixpkgs,
     ...
-  } @ inputs: let
-    # import your normal nixpkgs with allowUnfree turned on
-    pkgsUnfree = import nixpkgs {
-      system = "x86_64-linux";
-      config = {
-        allowUnfree = true;
-      };
-    };
-
-    # now pull in the weirdrock flake against that
-    rimsortUnfree =
-      import inputs.weirdrock-pkgs
-      {
-        inherit pkgsUnfree; # so that it sees the unfree‐enabled pkgs
-        system = pkgsUnfree.system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-  in {
+  } @ inputs: {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs rimsortUnfree;};
+      specialArgs = {inherit inputs;};
       modules = [
         # My configuration
         ./modules/nixos/configuration.nix
@@ -54,20 +33,6 @@
 
         # Home Manager
         inputs.home-manager.nixosModules.default
-
-        {
-          nixpkgs.overlays = [
-            (final: prev: {
-              unstable = inputs.weirdrock-pkgs.legacyPackages.${prev.system};
-              # use this variant if unfree packages are needed:
-              # unstable = import nixpkgs-unstable {
-              #   inherit prev;
-              #   system = prev.system;
-              #   config.allowUnfree = true;
-              # };
-            })
-          ];
-        }
 
         inputs.phoenix.nixosModules.default
       ];
