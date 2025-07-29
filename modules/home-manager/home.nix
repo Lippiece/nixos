@@ -536,6 +536,7 @@ in {
       "steamcmd"
       "steam-unwrapped"
       "rimsort"
+      "python313Packages.steamworkspy"
     ];
 
   fonts = {
