@@ -103,6 +103,7 @@ in {
     icu
     vlc
     btop
+    glances
     unzip
     tree
     kdePackages.kaccounts-providers
