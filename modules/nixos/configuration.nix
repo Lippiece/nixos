@@ -168,12 +168,12 @@ in {
     enable = true;
     package = pkgs.buildGoModule rec {
       pname = "lazygit";
-      version = "unstable-2025-07-29";
+      version = "unstable-2025-08-02";
       src = pkgs.fetchFromGitHub {
         owner = "jesseduffield";
         repo = "lazygit";
-        rev = "d7626d4ccf6cd5bea7e446e544003a2cf959f1aa";
-        sha256 = "1mzbps2ls3kd5vwpjhkk7iynqw3svnzz0x87paa4ivsm3cfs7x2a";
+        rev = "5175798cb1e0bbafed8a2d48ad71f41e7400cd56";
+        sha256 = "0xjll12lswvg7q6d91c9r4aaiz7nsavshzl9hsdj9ppp1zvl1r0n";
       };
       vendorHash = null;
       doCheck = false;
