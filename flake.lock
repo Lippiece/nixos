@@ -22,11 +22,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754263839,
-        "narHash": "sha256-ck7lILfCNuunsLvExPI4Pw9OOCJksxXwozum24W8b+8=",
+        "lastModified": 1754457347,
+        "narHash": "sha256-QN9yZ1L5EmR16NNM+hNNzMjARk+FPjUeSE/ds4Kms0E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1d7abbd5454db97e0af51416f4960b3fb64a4773",
+        "rev": "ad5d2b4aa770fdc74c80fd682fee0b00a8ad7991",
         "type": "github"
       },
       "original": {
@@ -109,16 +109,16 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1754284898,
-        "narHash": "sha256-wzM6HN0xxyooekXfl7p5P4Bn0LieOKOfsLg4DqY7XLk=",
+        "lastModified": 1754214453,
+        "narHash": "sha256-Q/I2xJn/j1wpkGhWkQnm20nShYnG7TI99foDBpXm1SY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "114484ca7213ac06fa7907e58dd8ef9d801d39f0",
+        "rev": "5b09dc45f24cf32316283e62aec81ffee3c3e376",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable-small",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -130,11 +130,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754201405,
-        "narHash": "sha256-/BulkxPfLuNd8tpXFKaXyluO0istuT4/Xdjhvq4KTcw=",
+        "lastModified": 1754363173,
+        "narHash": "sha256-/hooVwCQRF4nJpbd/Vb1CGrVOJZAEWu0bXgl1WtIXDw=",
         "ref": "refs/heads/pages",
-        "rev": "0995b98ccac9312cedecbcd96f09606942ce27ff",
-        "revCount": 2063,
+        "rev": "ea8d436ead42c38bdd45dd9b654d3093b4f81a82",
+        "revCount": 2064,
         "type": "git",
         "url": "https://codeberg.org/celenity/Phoenix"
       },

@@ -166,25 +166,25 @@ in {
   };
   programs.lazygit = {
     enable = true;
-    package = pkgs.buildGoModule rec {
-      pname = "lazygit";
-      version = "unstable-2025-08-02";
-      src = pkgs.fetchFromGitHub {
-        owner = "jesseduffield";
-        repo = "lazygit";
-        rev = "5175798cb1e0bbafed8a2d48ad71f41e7400cd56";
-        sha256 = "0xjll12lswvg7q6d91c9r4aaiz7nsavshzl9hsdj9ppp1zvl1r0n";
-      };
-      vendorHash = null;
-      doCheck = false;
-      ldflags = ["-X main.version=${version}" "-X main.buildSource=nix"];
-      meta = with pkgs.lib; {
-        description = "Simple terminal UI for git commands";
-        homepage = "https://github.com/jesseduffield/lazygit";
-        license = licenses.mit;
-        mainProgram = "lazygit";
-      };
-    };
+    # package = pkgs.buildGoModule rec {
+    #   pname = "lazygit";
+    #   version = "unstable-2025-08-06";
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "jesseduffield";
+    #     repo = "lazygit";
+    #     rev = "c08903e3adabcf00d910e0107c1f675af958a70e";
+    #     sha256 = "1f1r7gkpyqwg8b6vg9h46zncdrm9i5xxlqkslziqxd3jm5w9afri";
+    #   };
+    #   vendorHash = null;
+    #   doCheck = false;
+    #   ldflags = ["-X main.version=${version}" "-X main.buildSource=nix"];
+    #   meta = with pkgs.lib; {
+    #     description = "Simple terminal UI for git commands";
+    #     homepage = "https://github.com/jesseduffield/lazygit";
+    #     license = licenses.mit;
+    #     mainProgram = "lazygit";
+    #   };
+    # };
   };
   programs.nh = {
     enable = true;
@@ -330,7 +330,12 @@ in {
     enableDefaultPackages = true;
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    cores = 8;
+    max-jobs = 4;
+    auto-optimise-store = true;
+  };
   nix.package = pkgs.lixPackageSets.latest.lix;
   nix.nixPath = ["/home/lippiece/.config/nixos/modules/nixos/configuration.nix"];
 
@@ -403,12 +408,14 @@ in {
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      # intel-media-driver # LIBVA_DRIVER_NAME=iHD
       intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      libvdpau-va-gl
+      # libvdpau-va-gl
       nvidia-vaapi-driver
     ];
   };
+
+  environment.sessionVariables = {LIBVA_DRIVER_NAME = "i965";}; # Optionally, set the environment variable
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
@@ -434,10 +441,9 @@ in {
     # powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
     powerManagement.finegrained = true;
 
-    # Enable the Nvidia settings menu,
+    # Enable the useless Nvidia settings menu,
     # accessible via `nvidia-settings`.
     nvidiaSettings = false;
 
