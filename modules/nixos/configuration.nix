@@ -408,14 +408,12 @@ in {
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      # intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      # libvdpau-va-gl
-      nvidia-vaapi-driver
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      # intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
     ];
   };
 
-  environment.sessionVariables = {LIBVA_DRIVER_NAME = "i965";}; # Optionally, set the environment variable
+  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
