@@ -80,6 +80,10 @@ in {
     prismlauncher
     rimsort
 
+    # # System
+    colloid-icon-theme
+    colloid-gtk-theme
+
     #################################
     #              CLI              #
     #################################
