@@ -550,4 +550,83 @@ in {
       };
     };
   };
+  # gtk.cursorTheme.name	The name of the cursor theme within the package.	string
+  # gtk.cursorTheme.package	Package providing the cursor theme. This package will be installed to your profile. If `null` then the cursor theme is assumed to already be available in your profile. 	null or package
+  # gtk.cursorTheme.size	The size of the cursor.	null or signed integer
+  # gtk.cursorTheme	Default cursor theme for all GTK versions.	null or (submodule)
+  # gtk.enable	Whether to enable GTK theming and configuration.	boolean
+  # gtk.font.name	The family name of the font within the package. 	string
+  # gtk.font.package	Package providing the font. This package will be installed to your profile. If `null` then the font is assumed to already be available in your profile. 	null or package
+  # gtk.font.size	The size of the font. 	null or signed integer or floating point number
+  # gtk.font	Default font for all GTK versions.	null or (submodule)
+  # gtk.gtk2.configLocation	The location of the GTK 2 configuration file.	absolute path
+  # gtk.gtk2.cursorTheme.name	The name of the cursor theme within the package.	string
+  # gtk.gtk2.cursorTheme.package	Package providing the cursor theme. This package will be installed to your profile. If `null` then the cursor theme is assumed to already be available in your profile. 	null or package
+  # gtk.gtk2.cursorTheme.size	The size of the cursor.	null or signed integer
+  # gtk.gtk2.cursorTheme	Cursor theme for GTK 2 applications.	null or (submodule)
+  # gtk.gtk2.enable	Whether to enable GTK 2 configuration.	boolean
+  # gtk.gtk2.extraConfig	Extra lines to add to {file}`~/.gtkrc-2.0`.	strings concatenated with "\n"
+  # gtk.gtk2.font.name	The family name of the font within the package. 	string
+  # gtk.gtk2.font.package	Package providing the font. This package will be installed to your profile. If `null` then the font is assumed to already be available in your profile. 	null or package
+  # gtk.gtk2.font.size	The size of the font. 	null or signed integer or floating point number
+  # gtk.gtk2.font	Font for GTK 2 applications.	null or (submodule)
+  # gtk.gtk2.force	Whether to enable GTK 2 config force overwrite without creating a backup.	boolean
+  # gtk.gtk2.iconTheme.name	The name of the icon theme within the package.	string
+  # gtk.gtk2.iconTheme.package	Package providing the icon theme. This package will be installed to your profile. If `null` then the icon theme is assumed to already be available in your profile. 	null or package
+  # gtk.gtk2.iconTheme	Icon theme for GTK 2 applications.	null or (submodule)
+  # gtk.gtk2.theme.name	The name of the theme within the package.	string
+  # gtk.gtk2.theme.package	Package providing the theme. This package will be installed to your profile. If `null` then the theme is assumed to already be available in your profile. For the theme to apply to GTK 4, this option is mandatory. 	null or package
+  # gtk.gtk2.theme	Theme for GTK 2 applications.	null or (submodule)
+  # gtk.gtk3.bookmarks	File browser bookmarks.	list of string
+  # gtk.gtk3.cursorTheme.name	The name of the cursor theme within the package.	string
+  # gtk.gtk3.cursorTheme.package	Package providing the cursor theme. This package will be installed to your profile. If `null` then the cursor theme is assumed to already be available in your profile. 	null or package
+  # gtk.gtk3.cursorTheme.size	The size of the cursor.	null or signed integer
+  # gtk.gtk3.cursorTheme	Cursor theme for GTK 3 applications.	null or (submodule)
+  # gtk.gtk3.enable	Whether to enable GTK 3 configuration.	boolean
+  # gtk.gtk3.extraConfig	Extra settings for {file}`$XDG_CONFIG_HOME/gtk-3.0/settings.ini`.	attribute set of (boolean or signed integer or string)
+  # gtk.gtk3.extraCss	Extra CSS for {file}`$XDG_CONFIG_HOME/gtk-3.0/gtk.css`.	strings concatenated with "\n"
+  # gtk.gtk3.font.name	The family name of the font within the package. 	string
+  # gtk.gtk3.font.package	Package providing the font. This package will be installed to your profile. If `null` then the font is assumed to already be available in your profile. 	null or package
+  # gtk.gtk3.font.size	The size of the font. 	null or signed integer or floating point number
+  # gtk.gtk3.font	Font for GTK 3 applications.	null or (submodule)
+  # gtk.gtk3.iconTheme.name	The name of the icon theme within the package.	string
+  # gtk.gtk3.iconTheme.package	Package providing the icon theme. This package will be installed to your profile. If `null` then the icon theme is assumed to already be available in your profile. 	null or package
+  # gtk.gtk3.iconTheme	Icon theme for GTK 3 applications.	null or (submodule)
+  # gtk.gtk3.theme.name	The name of the theme within the package.	string
+  # gtk.gtk3.theme.package	Package providing the theme. This package will be installed to your profile. If `null` then the theme is assumed to already be available in your profile. For the theme to apply to GTK 4, this option is mandatory. 	null or package
+  # gtk.gtk3.theme	Theme for GTK 3 applications.	null or (submodule)
+  # gtk.gtk4.cursorTheme.name	The name of the cursor theme within the package.	string
+  # gtk.gtk4.cursorTheme.package	Package providing the cursor theme. This package will be installed to your profile. If `null` then the cursor theme is assumed to already be available in your profile. 	null or package
+  # gtk.gtk4.cursorTheme.size	The size of the cursor.	null or signed integer
+  # gtk.gtk4.cursorTheme	Cursor theme for GTK 4 applications.	null or (submodule)
+  # gtk.gtk4.enable	Whether to enable GTK 4 configuration.	boolean
+  # gtk.gtk4.extraConfig	Extra settings for {file}`$XDG_CONFIG_HOME/gtk-4.0/settings.ini`.	attribute set of (boolean or signed integer or string)
+  # gtk.gtk4.extraCss	Extra CSS for {file}`$XDG_CONFIG_HOME/gtk-4.0/gtk.css`.	strings concatenated with "\n"
+  # gtk.gtk4.font.name	The family name of the font within the package. 	string
+  # gtk.gtk4.font.package	Package providing the font. This package will be installed to your profile. If `null` then the font is assumed to already be available in your profile. 	null or package
+  # gtk.gtk4.font.size	The size of the font. 	null or signed integer or floating point number
+  # gtk.gtk4.font	Font for GTK 4 applications.	null or (submodule)
+  # gtk.gtk4.iconTheme.name	The name of the icon theme within the package.	string
+  # gtk.gtk4.iconTheme.package	Package providing the icon theme. This package will be installed to your profile. If `null` then the icon theme is assumed to already be available in your profile. 	null or package
+  # gtk.gtk4.iconTheme	Icon theme for GTK 4 applications.	null or (submodule)
+  # gtk.gtk4.theme.name	The name of the theme within the package.	string
+  # gtk.gtk4.theme.package	Package providing the theme. This package will be installed to your profile. If `null` then the theme is assumed to already be available in your profile. For the theme to apply to GTK 4, this option is mandatory. 	null or package
+  # gtk.gtk4.theme	Theme for GTK 4 applications.	null or (submodule)
+  # gtk.iconTheme.name	The name of the icon theme within the package.	string
+  # gtk.iconTheme.package	Package providing the icon theme. This package will be installed to your profile. If `null` then the icon theme is assumed to already be available in your profile. 	null or package
+  # gtk.iconTheme	Default icon theme for all GTK versions.	null or (submodule)
+  # gtk.theme.name	The name of the theme within the package.	string
+  # gtk.theme.package	Package providing the theme. This package will be installed to your profile. If `null` then the theme is assumed to already be available in your profile. For the theme to apply to GTK 4, this option is mandatory. 	null or package
+  # gtk.theme	Default theme for all GTK versions.	null or (submodule)
+
+  gtk = {
+    iconTheme = {
+      name = "colloid-icon-theme";
+      package = pkgs.colloid-icon-theme;
+    };
+    theme = {
+      name = "colloid-gtk-theme";
+      package = pkgs.colloid-gtk-theme;
+    };
+  };
 }
