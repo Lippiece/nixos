@@ -26,7 +26,7 @@ in {
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = ["btrfs"];
-    kernelParams = ["psmouse.synaptics_intertouch=0" "i8042.noloop" "i8042.nomux" "i8042.nopnp" "i8042.reset"];
+    # kernelParams = ["psmouse.synaptics_intertouch=0" "i8042.noloop" "i8042.nomux" "i8042.nopnp" "i8042.reset"];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -55,6 +55,9 @@ in {
   services.libinput = {
     enable = true;
     touchpad = {
+      horizontalScrolling = true;
+      naturalScrolling = true;
+      middleEmulation = true;
       clickMethod = "buttonareas";
       scrollMethod = "edge";
       tapping = false;
@@ -255,6 +258,8 @@ in {
       192.168.1.102:3002 warden.ydns.eu
       192.168.1.102:3003 lipgit.ydns.eu
       192.168.1.102:3009 lipguard.ydns.eu
+
+      192.168.1.201 yuos
     '';
 
     firewall.enable = false;
@@ -335,6 +340,7 @@ in {
     cores = 8;
     max-jobs = 4;
     auto-optimise-store = true;
+    keep-going = true;
   };
   nix.package = pkgs.lixPackageSets.latest.lix;
   nix.nixPath = ["/home/lippiece/.config/nixos/modules/nixos/configuration.nix"];
