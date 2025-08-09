@@ -265,7 +265,10 @@ in {
       };
     };
 
-    wireshark.enable = true;
+    wireshark = {
+      enable = true;
+      dumpcap.enable = true;
+    };
   };
 
   qt = {
