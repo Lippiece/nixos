@@ -149,89 +149,123 @@ in {
 
   # Some Programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-  programs.fish.enable = true;
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    withNodeJs = true;
-  };
-  programs.nix-ld.enable = true;
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
-  programs.lazygit = {
-    enable = true;
-    # package = pkgs.buildGoModule rec {
-    #   pname = "lazygit";
-    #   version = "unstable-2025-08-06";
-    #   src = pkgs.fetchFromGitHub {
-    #     owner = "jesseduffield";
-    #     repo = "lazygit";
-    #     rev = "c08903e3adabcf00d910e0107c1f675af958a70e";
-    #     sha256 = "1f1r7gkpyqwg8b6vg9h46zncdrm9i5xxlqkslziqxd3jm5w9afri";
-    #   };
-    #   vendorHash = null;
-    #   doCheck = false;
-    #   ldflags = ["-X main.version=${version}" "-X main.buildSource=nix"];
-    #   meta = with pkgs.lib; {
-    #     description = "Simple terminal UI for git commands";
-    #     homepage = "https://github.com/jesseduffield/lazygit";
-    #     license = licenses.mit;
-    #     mainProgram = "lazygit";
-    #   };
-    # };
-  };
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.dates = "weekly";
-  };
-  programs.nix-index = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-  programs.npm.enable = true;
-  programs.dconf.enable = true;
-  programs.firefox = {
-    enable = true;
-    package = pkgs.firefox-beta;
-    nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
-  };
-  programs.kde-pim = {
-    enable = true;
-    kontact = true;
-  };
-  programs.msmtp = {
-    enable = true;
+  programs = {
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    fish.enable = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      withNodeJs = true;
+    };
+    nix-ld.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    lazygit = {
+      enable = true;
+      # package = pkgs.buildGoModule rec {
+      #   pname = "lazygit";
+      #   version = "unstable-2025-08-06";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "jesseduffield";
+      #     repo = "lazygit";
+      #     rev = "c08903e3adabcf00d910e0107c1f675af958a70e";
+      #     sha256 = "1f1r7gkpyqwg8b6vg9h46zncdrm9i5xxlqkslziqxd3jm5w9afri";
+      #   };
+      #   vendorHash = null;
+      #   doCheck = false;
+      #   ldflags = ["-X main.version=${version}" "-X main.buildSource=nix"];
+      #   meta = with pkgs.lib; {
+      #     description = "Simple terminal UI for git commands";
+      #     homepage = "https://github.com/jesseduffield/lazygit";
+      #     license = licenses.mit;
+      #     mainProgram = "lazygit";
+      #   };
+      # };
+    };
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.dates = "weekly";
+    };
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    npm.enable = true;
+    dconf.enable = true;
+    firefox = {
+      enable = true;
+      package = pkgs.firefox-beta;
+      nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
+    };
+    kde-pim = {
+      enable = true;
+      kontact = true;
+    };
+    msmtp = {
+      enable = true;
+      accounts = {
+        ${mail} = {
+          auth = true;
+          # try setting `tls_starttls` to `false` if sendmail hangs
+          tls = true;
+          from = mail;
+          host = smtphost;
+          user = "${name}";
+          passwordeval = "pass ${mail}";
+        };
 
-    accounts = {
-      ${mail} = {
-        auth = true;
-        # try setting `tls_starttls` to `false` if sendmail hangs
-        tls = true;
-        from = mail;
-        host = smtphost;
-        user = "${name}";
-        passwordeval = "pass ${mail}";
-      };
-
-      ${mailDW.mail} = {
-        auth = true;
-        tls = true;
-        from = mail;
-        host = mailDW.smtphost;
-        user = "${mailDW.name}";
-        passwordeval = "pass ${mailDW.mail}";
+        ${mailDW.mail} = {
+          auth = true;
+          tls = true;
+          from = mail;
+          host = mailDW.smtphost;
+          user = "${mailDW.name}";
+          passwordeval = "pass ${mailDW.mail}";
+        };
       };
     };
+    command-not-found.enable = false;
+    steam = {
+      enable = true;
+      package = pkgs.steam.override {
+        extraPkgs = pkgs:
+          with pkgs; [
+            alsa-lib.out
+            libsForQt5.libqtpas.out
+            at-spi2-atk.out
+            cairo.out
+            cups.lib
+            dbus.lib
+            expat.out
+            glib.out
+            gtk3.out
+            libdrm.out
+            libgbm.out
+            libxkbcommon.out
+            nspr.out
+            nss.out
+            pango.out
+            xorg.libX11.out
+            xorg.libXcomposite.out
+            xorg.libXdamage.out
+            xorg.libXext.out
+            xorg.libXfixes.out
+            xorg.libXrandr.out
+            xorg.libxcb.out
+          ];
+      };
+    };
+
+    wireshark.enable = true;
   };
 
   qt = {
@@ -344,38 +378,6 @@ in {
   };
   nix.package = pkgs.lixPackageSets.latest.lix;
   nix.nixPath = ["/home/lippiece/.config/nixos/modules/nixos/configuration.nix"];
-
-  programs.command-not-found.enable = false;
-  programs.steam = {
-    enable = true;
-    package = pkgs.steam.override {
-      extraPkgs = pkgs:
-        with pkgs; [
-          alsa-lib.out
-          libsForQt5.libqtpas.out
-          at-spi2-atk.out
-          cairo.out
-          cups.lib
-          dbus.lib
-          expat.out
-          glib.out
-          gtk3.out
-          libdrm.out
-          libgbm.out
-          libxkbcommon.out
-          nspr.out
-          nss.out
-          pango.out
-          xorg.libX11.out
-          xorg.libXcomposite.out
-          xorg.libXdamage.out
-          xorg.libXext.out
-          xorg.libXfixes.out
-          xorg.libXrandr.out
-          xorg.libxcb.out
-        ];
-    };
-  };
 
   # Enable common container config files in /etc/containers
   virtualisation = {

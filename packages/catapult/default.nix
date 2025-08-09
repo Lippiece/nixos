@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs> {}}: let
-  inherit (pkgs) buildFHSUserEnv;
+  inherit (pkgs) buildFHSEnv;
 in
-  buildFHSUserEnv {
+  buildFHSEnv {
     name = "catapult";
     targetPkgs = pkgs:
       with pkgs; [
@@ -15,8 +15,8 @@ in
         xorg.libXrandr.out
 
         SDL2.out
-        SDL2_image_2_0.out
-        SDL2_mixer_2_0.out
+        SDL2_image.out
+        SDL2_mixer.out
         SDL2_ttf.out
         libgcc.lib
         udev
