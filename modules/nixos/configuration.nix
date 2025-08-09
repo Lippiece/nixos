@@ -264,8 +264,6 @@ in {
           ];
       };
     };
-
-    wireshark.enable = true;
   };
 
   qt = {
