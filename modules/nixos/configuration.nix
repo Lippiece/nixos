@@ -98,27 +98,25 @@ in {
     fish
     silver-searcher
     kdotool
-    gcc
-    libnotify
-    ripgrep
-    libwebp
-    kdePackages.qtimageformats
-    icu
     vlc
     btop
     glances
     unzip
     tree
+
+    # Libs & tools
+    icu
     kdePackages.kaccounts-providers
     kdePackages.kaccounts-integration
     kdePackages.korganizer
     kdePackages.kdepim-addons
     kdePackages.signond
-    cargo
-    nodejs
-    libinput
-    inotify-tools
     sqlite
+    libinput
+    libnotify
+    inotify-tools
+    kdePackages.qtimageformats
+    libwebp
 
     # For `pactl`
     pulseaudio

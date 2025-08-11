@@ -98,6 +98,10 @@ in {
     python3Full
     python312Packages.venvShellHook
     uv
+    cargo
+    nodejs
+    gcc
+    ripgrep
 
     # # Shell
     bun
