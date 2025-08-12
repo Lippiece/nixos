@@ -98,6 +98,7 @@ in {
     fish
     silver-searcher
     kdotool
+    gcc
     vlc
     btop
     glances

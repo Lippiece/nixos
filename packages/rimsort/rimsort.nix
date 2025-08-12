@@ -16,8 +16,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "RimSort";
     repo = "RimSort";
-    rev = "5ef3826e02c2a3d1f16d83a9173d474db6dce06a";
-    sha256 = "049bx4dhc01ibyk2d9n3x3nnn452kz51bk9wvx08zgxkb9jkamay";
+    rev = "3bc213389cc385a6bb2feb3cdb60d12c0367e527";
+    sha256 = "1598f4a6f6mfd6751fjycmiivn46qra76cfpdyn4l5mfnn81279j";
   };
 
   patches = [

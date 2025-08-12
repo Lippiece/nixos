@@ -100,7 +100,6 @@ in {
     uv
     cargo
     nodejs
-    gcc
     ripgrep
 
     # # Shell
