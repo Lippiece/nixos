@@ -18,6 +18,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Helpers
     impermanence.url = "github:nix-community/impermanence";
     nix-alien.url = "github:thiagokokada/nix-alien";

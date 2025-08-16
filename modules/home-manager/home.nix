@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   ...
@@ -21,6 +22,7 @@
     imapport = 993;
   };
 in {
+  imports = [inputs.nixvim.homeManagerModules.nixvim];
   home.username = "${main.name}";
   home.homeDirectory = "/home/lippiece";
 
@@ -359,6 +361,13 @@ in {
           ${DW.mail} = ["Inbox"];
         };
       };
+    };
+
+    nixvim = {
+      enable = true;
+
+      colorschemes.catppuccin.enable = true;
+      plugins.lualine.enable = true;
     };
   };
 
