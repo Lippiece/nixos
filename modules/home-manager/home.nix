@@ -22,7 +22,7 @@
     imapport = 993;
   };
 in {
-  imports = [inputs.nixvim.homeManagerModules.nixvim];
+  imports = [inputs.nixvim.homeModules.nixvim];
   home.username = "${main.name}";
   home.homeDirectory = "/home/lippiece";
 
@@ -91,18 +91,18 @@ in {
     #################################
 
     # # vim
-    neovim
-    neovide
-    fzf
-    lua54Packages.luarocks
-    gnumake
-    python312Packages.pip
-    python3Full
-    python312Packages.venvShellHook
-    uv
-    cargo
-    nodejs
-    ripgrep
+    # neovim
+    # neovide
+    # fzf
+    # lua54Packages.luarocks
+    # gnumake
+    # python312Packages.pip
+    # python3Full
+    # python312Packages.venvShellHook
+    # uv
+    # cargo
+    # nodejs
+    # ripgrep
 
     # # Shell
     bun
@@ -365,9 +365,15 @@ in {
 
     nixvim = {
       enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      withNodeJs = true;
 
       colorschemes.catppuccin.enable = true;
-      plugins.lualine.enable = true;
+      plugins = {
+        lualine.enable = true;
+      };
     };
   };
 

@@ -156,13 +156,13 @@ in {
       enableSSHSupport = true;
     };
     fish.enable = true;
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      withNodeJs = true;
-    };
+    # neovim = {
+    #   enable = true;
+    #   defaultEditor = true;
+    #   viAlias = true;
+    #   vimAlias = true;
+    #   withNodeJs = true;
+    # };
     nix-ld.enable = true;
     appimage = {
       enable = true;
