@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    firefox = {
+      url = "github:nix-community/flake-firefox-nightly";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     phoenix = {
       url = "git+https://codeberg.org/celenity/Phoenix";
       inputs.nixpkgs.follows = "nixpkgs";
