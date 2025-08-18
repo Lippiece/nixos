@@ -103,6 +103,7 @@ in {
     # cargo
     # nodejs
     # ripgrep
+    python313Packages.demjson3
 
     # # Shell
     bun
@@ -420,13 +421,12 @@ in {
         # Don't break cli programs' watch mode
         backupcopy = "yes";
         mouse = "";
+        conceallevel = 2;
       };
 
       colorschemes.onedark.enable = true;
 
       plugins = {
-        lualine.enable = true;
-
         lspconfig = {
           enable = true;
         };
@@ -475,24 +475,6 @@ in {
             };
             sources = {
               default = ["lsp" "snippets" "path" "codeium"];
-              lsp.transform_items.__raw =
-                # Lua
-                ''
-                  function(_, items)
-                    -- demote snippets
-                    for _, item in ipairs(items) do
-                      if item.kind == require('blink.cmp.types').CompletionItemKind.Snippet then
-                        item.score_offset = item.score_offset - 3
-                      end
-                    end
-
-                    -- filter out text items, since we have the buffer source
-                    return vim.tbl_filter(
-                      function(item) return item.kind ~= require('blink.cmp.types').CompletionItemKind.Text end,
-                      items
-                    )
-                  end
-                '';
               providers = {
                 codeium = {
                   name = "Codeium";
@@ -512,35 +494,6 @@ in {
         conform-nvim = {
           enable = true;
           settings = {
-            formatters_by_ft = {
-              nix = ["alejandra"];
-              lua = ["stylua"];
-              # javascript = {
-              #   __unkeyed-1 = "prettierd";
-              #   __unkeyed-2 = "prettier";
-              #   timeout_ms = 2000;
-              #   stop_after_first = true;
-              # };
-              # "_" = [
-              #   "squeeze_blanks"
-              #     "trim_whitespace"
-              #     "trim_newlines"
-              # ];
-            };
-            format_on_save =
-              # Lua
-              ''
-                function(bufnr)
-                  if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-                    return
-                  end
-
-                  return {}
-                end
-              '';
-            log_level = "warn";
-            notify_on_error = true;
-            notify_no_formatters = true;
             formatters = {
               alejandra = {
                 command = lib.getExe pkgs.alejandra;
@@ -548,13 +501,126 @@ in {
               stylua = {
                 command = lib.getExe pkgs.stylua;
               };
+              prettier.command = lib.getExe pkgs.prettier;
+              yamlfmt.command = lib.getExe pkgs.yamlfmt;
             };
+            formatters = {
+              oxlint = {
+                command = "oxlint";
+                args = [
+                  "--import-plugin"
+                  "--type-aware"
+                  "--fix"
+                  "--fix-suggestions"
+                  "--fix-dangerously"
+                  "$FILENAME"
+                ];
+                exit_codes = [0 2]; # code 2 is given when the file includes some non-autofixable errors
+                stdin = false;
+                tmpfile_format = "ConformOxlint$FILENAME";
+              };
+              stylelint = {
+                meta = {
+                  url = "https://github.com/stylelint/stylelint";
+                  description = "A mighty CSS linter that helps you avoid errors and enforce conventions.";
+                };
+                command = "stylelint";
+                args = ["$FILENAME" "--fix"];
+                exit_codes = [0 2]; # code 2 is given when the file includes some non-autofixable errors
+                stdin = false;
+                tmpfile_format = "ConformStylelint$FILENAME";
+              };
+              biome_check = {
+                command = "biome";
+                args = [
+                  "check"
+                  "--write"
+                  "--unsafe"
+                  "--stdin-file-path"
+                  "$FILENAME"
+                ];
+                stdin = true;
+                #   cwd =
+                #     lib.mkLuaInline
+                #     #lua
+                #     ''
+                #       function()
+                #         local util = require "conform.util"
+                #
+                #         util.root_file {
+                #           "biome.json",
+                #           "biome.jsonc",
+                #         }
+                #       end,
+                #     '';
+              };
+              prettier_custom = {
+                command = "prettier";
+                args = [
+                  "--write"
+                  "--stdin-filepath"
+                  "$FILENAME"
+                ];
+                stdin = true;
+              };
+            };
+            formatters_by_ft = {
+              # -- ["*"] = { "injected" };
+              javascript = ["biome_check" "oxlint" "eslint_d"];
+              typescript = ["biome_check" "oxlint" "eslint_d"];
+              javascriptreact = ["biome_check" "oxlint" "eslint_d"];
+              typescriptreact = ["biome_check" "oxlint" "eslint_d"];
+              astro = ["prettier_custom" "biome_check" "oxlint"];
+              vue = ["prettier" "biome_check" "oxlint" "eslint_d"];
+              svelte = ["prettier" "biome_check" "oxlint" "eslint_d"];
+              css = ["prettier"];
+              html = ["prettier"];
+              json = ["biome_check" "eslint_d"];
+              jsonc = ["biome_check" "eslint_d"];
+              nix = ["alejandra"];
+              lua = ["stylua"];
+              # python = ["isort" "black"];
+              yaml = ["yamlfmt"];
+              # fish = ["fish_indent"];
+              # rust = ["rustfmt"];
+              injected = {options = {ignore_errors = true;};};
+            };
+            format_after_save =
+              # Lua
+              ''
+                function()
+                  if vim.g.disable_autoformat or vim.b.disable_autoformat then
+                    return
+                  end
+
+                  return {
+                    async = true,
+                    ignore_errors = true,
+                    lsp_format = "fallback",
+                  }
+                end
+              '';
+            log_level = "warn";
+            notify_on_error = true;
+            notify_no_formatters = true;
           };
         };
 
         treesitter = {
           enable = true;
-          settings.highlight.enable = true;
+          settings = {
+            highlight.enable = true;
+            indent.enable = true;
+            incremental_selection = {
+              enable = true;
+              keymaps = {
+                init_selection = "gnn";
+                scope_incremental = false;
+                node_incremental = "v";
+                node_decremental = "V";
+              };
+            };
+          };
         };
 
         refactoring = {
@@ -562,10 +628,6 @@ in {
           settings = {
             show_success_message = true;
           };
-        };
-
-        snacks = {
-          enable = true;
         };
 
         auto-session = {
@@ -595,6 +657,39 @@ in {
           settings.enable_cmp_source = false;
         };
 
+        lint = {
+          enable = true;
+          lintersByFt = {
+            fish = ["fish"];
+            json = ["jsonlint" "eslint_d"];
+            jsonc = ["jsonlint" "eslint_d"];
+            javascript = ["oxlint" "eslint_d"];
+            typescript = ["oxlint" "eslint_d"];
+            typescriptreact = ["oxlint" "eslint_d"];
+            javascriptreact = ["oxlint" "eslint_d"];
+            astro = ["oxlint"];
+            svelte = ["oxlint" "eslint_d"];
+            vue = ["oxlint" "eslint_d"];
+            css = ["stylelint"];
+            # html = ["markuplint"];
+            # -- Use the "*" filetype to run linters on all filetypes.
+            # -- '*' = [ 'global linter' ];
+            # # -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
+            # -- '_' = [ 'fallback linter' ];
+            # -- "*" = [ "typos" ];
+          };
+        };
+
+        noice = {
+          enable = true;
+          settings = {
+            cmdline.enabled = false;
+            messages.enabled = false;
+            # popupmenu.enabled = false;
+          };
+        };
+
+        lualine.enable = true;
         lazydev.enable = true;
         lazygit.enable = true;
         schemastore.enable = true;
@@ -612,12 +707,18 @@ in {
         project-nvim.enable = true;
         sandwich.enable = true;
         git-conflict.enable = true;
+        ccc.enable = true;
+        snacks.enable = true;
+        origami.enable = true;
+        guess-indent.enable = true;
+        bufferline.enable = true;
       };
 
-      extraPlugins = [
-        pkgs.vimPlugins.nvim-unception
+      extraPlugins = with pkgs; [
+        vimPlugins.nvim-unception
+        vimPlugins.vim-fetch
         # pkgs.vimPlugins.vim-automkdir
-        (pkgs.vimUtils.buildVimPlugin {
+        (vimUtils.buildVimPlugin {
           name = "automkdir";
           src = pkgs.fetchFromGitHub {
             owner = "mateuszwieloch";
@@ -626,6 +727,33 @@ in {
             sha256 = "1qpwip0wd7shry094355ljq7143vlsmkq60pgi0bvdh9dywf21f4";
           };
         })
+        (vimUtils.buildVimPlugin {
+          name = "ts-error-translator";
+          src = pkgs.fetchFromGitHub {
+            owner = "dmmulroy";
+            repo = "ts-error-translator.nvim";
+            rev = "47e5ba89f71b9e6c72eaaaaa519dd59bd6897df4";
+            sha256 = "08whn7l75qv5n74cifmnxc0s7n7ja1g7589pjnbbsk2djn6bqbky";
+          };
+        })
+        (vimUtils.buildVimPlugin {
+          name = "nvim_context_vt";
+          src = pkgs.fetchFromGitHub {
+            owner = "andersevenrud";
+            repo = "nvim_context_vt";
+            rev = "b69f642f7848fec8c056a7e2c9452e3dec84c2b5";
+            sha256 = "1dyzp6ng67a6zp021nxbimj7rf7bp7rkc4lkl9wrx9fwvxz1x0xi";
+          };
+        })
+        # (vimUtils.buildVimPlugin {
+        #   name = "vim-fetch";
+        #   src = pkgs.fetchFromGitHub {
+        #     owner = "wsdjeg";
+        #     repo = "vim-fetch";
+        #     rev = "db3fd95eb0cf7e7e9effa1338b286db33e4a36c1";
+        #     sha256 = "1br13ih1ybx5dnj8aax6lf0s970vy43s9swwrxqn411ihcrclqz6";
+        #   };
+        # })
       ];
       extraConfigLua =
         #lua
@@ -647,6 +775,9 @@ in {
           -- NOTE: custom plugins
           require"unception"
           require"automkdir".setup()
+          require"ts-error-translator".setup()
+          require"nvim_context_vt".setup()
+          vim.opt.rtp:prepend(${"\"" + pkgs.vimPlugins.vim-fetch + "\""})
 
           vim.lsp.config("jsonls", {
             -- Schemastore won't work otherwise
@@ -662,6 +793,7 @@ in {
             },
           })
 
+          -- NOTE: LSP
           vim.lsp.config("vtsls", {
             filetypes = vim.tbl_deep_extend("force",
               vim.lsp.config.vtsls.filetypes, { "vue" }),
@@ -785,6 +917,10 @@ in {
             enable = true;
             activate = true;
           };
+          astro = {
+            enable = true;
+            activate = true;
+          };
         };
       };
 
@@ -844,6 +980,15 @@ in {
           options = {
             remap = true;
             desc = "Go to Lower Window";
+          };
+        }
+        {
+          key = "<C-k>";
+          mode = ["n"];
+          action = "<C-w>k";
+          options = {
+            remap = true;
+            desc = "Go to Upper Window";
           };
         }
         {
@@ -1544,6 +1689,80 @@ in {
           options = {
             desc = "general clear highlights";
           };
+        }
+
+        {
+          key = "<leader>uf";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              if vim.b.disable_autoformat then
+                vim.b.disable_autoformat = false
+                vim.print "Enabled autoformat-on-save"
+              else
+                vim.b.disable_autoformat = true
+                vim.print "Disabled autoformat-on-save"
+              end
+            end
+          '';
+          options.desc = "Toggle autoformat-on-save in buffer";
+        }
+        {
+          key = "<leader>uF";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              if vim.g.disable_autoformat then
+                vim.g.disable_autoformat = false
+                vim.print "Enabled autoformat-on-save"
+              else
+                vim.g.disable_autoformat = true
+                vim.print "Disabled autoformat-on-save"
+              end
+            end
+          '';
+          options.desc = "Toggle autoformat-on-save globally";
+        }
+
+        {
+          key = "<leader>xx";
+          mode = ["n"];
+          action = "<cmd>Trouble diagnostics toggle filter.buf=0<cr>";
+          options.desc = "Buffer Diagnostics (Trouble)";
+        }
+        {
+          key = "<leader>xX";
+          mode = ["n"];
+          action = "<cmd>Trouble diagnostics toggle<cr>";
+          options.desc = "Diagnostics (Trouble)";
+        }
+
+        {
+          key = "<leader>n";
+          mode = ["n"];
+          action = "<cmd>NoiceSnacks<cr>";
+          options.desc = "Show notifications (snacks + noice)";
+        }
+
+        {
+          key = "<leader>n";
+          mode = ["n"];
+          action = "<cmd>NoiceSnacks<cr>";
+          options.desc = "Show notifications (snacks + noice)";
+        }
+
+        # Refactoring
+        {
+          key = "<leader>rp";
+          mode = ["x" "n"];
+          action.__raw = ''
+            function()
+              require('refactoring').select_refactor({
+                prefer_ex_cmd = true,
+              })
+            end
+          '';
+          options.desc = "Select a refactor to apply";
         }
       ];
 
