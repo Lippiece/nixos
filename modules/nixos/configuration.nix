@@ -378,7 +378,7 @@ in {
     keep-going = true;
   };
   nix.package = pkgs.lixPackageSets.latest.lix;
-  nix.nixPath = ["/home/lippiece/.config/nixos/modules/nixos/configuration.nix"];
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # Enable common container config files in /etc/containers
   virtualisation = {

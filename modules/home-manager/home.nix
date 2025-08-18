@@ -91,8 +91,8 @@ in {
     #################################
 
     # # vim
+    neovide
     # neovim
-    # neovide
     # fzf
     # lua54Packages.luarocks
     # gnumake
@@ -369,10 +369,1193 @@ in {
       viAlias = true;
       vimAlias = true;
       withNodeJs = true;
+      vimdiffAlias = true;
 
-      colorschemes.catppuccin.enable = true;
+      globals = {
+        mapleader = ",";
+        maplocalleader = "\\";
+      };
+
+      opts = {
+        confirm = true;
+        cursorline = true;
+        expandtab = true;
+        ignorecase = true;
+        smartcase = true;
+        inccommand = "nosplit";
+        fillchars = {
+          foldopen = "";
+          foldclose = "";
+          diff = "╱";
+        };
+        jumpoptions = "view";
+        laststatus = 3;
+        linebreak = true;
+        breakindent = true;
+        smartindent = true;
+        wrap = true;
+        textwidth = 80;
+        wrapmargin = 0;
+        list = true;
+        number = true;
+        relativenumber = true;
+        pumblend = 10;
+        pumheight = 10;
+        shiftround = true;
+        shiftwidth = 2;
+        shortmess = "atToOCF";
+        showmode = false;
+        signcolumn = "yes";
+        splitkeep = "screen";
+        tabstop = 2;
+        termguicolors = true;
+        timeoutlen = 300;
+        undofile = true;
+        guifont = "0xProto Nerd Font Mono:h10";
+        scrolloff = 8;
+        langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz";
+        foldnestmax = 8;
+        foldlevel = 2;
+        foldlevelstart = 2;
+        # Don't break cli programs' watch mode
+        backupcopy = "yes";
+        mouse = "";
+      };
+
+      colorschemes.onedark.enable = true;
+
       plugins = {
         lualine.enable = true;
+
+        lspconfig = {
+          enable = true;
+        };
+
+        blink-cmp = {
+          enable = true;
+          settings = {
+            keymap = {
+              "<C-space>" = [
+                "show"
+                "show_documentation"
+                "hide_documentation"
+              ];
+              "<Tab>" = [
+                "select_next"
+                "fallback"
+              ];
+              "<S-Tab>" = [
+                "select_prev"
+                "fallback"
+              ];
+              "<C-b>" = [
+                "scroll_documentation_up"
+                "fallback"
+              ];
+              "<CR>" = ["accept" "fallback"];
+              "<C-f>" = [
+                "scroll_documentation_down"
+                "fallback"
+              ];
+            };
+            signature = {
+              enabled = true;
+            };
+            completion = {
+              list = {
+                selection = {
+                  auto_insert = false;
+                };
+                cycle = {
+                  from_bottom = true;
+                  from_top = true;
+                };
+              };
+              accept = {auto_brackets = {enabled = true;};};
+            };
+            sources = {
+              default = ["lsp" "snippets" "path" "codeium"];
+              lsp.transform_items.__raw =
+                # Lua
+                ''
+                  function(_, items)
+                    -- demote snippets
+                    for _, item in ipairs(items) do
+                      if item.kind == require('blink.cmp.types').CompletionItemKind.Snippet then
+                        item.score_offset = item.score_offset - 3
+                      end
+                    end
+
+                    -- filter out text items, since we have the buffer source
+                    return vim.tbl_filter(
+                      function(item) return item.kind ~= require('blink.cmp.types').CompletionItemKind.Text end,
+                      items
+                    )
+                  end
+                '';
+              providers = {
+                codeium = {
+                  name = "Codeium";
+                  module = "codeium.blink";
+                  async = true;
+                  score_offset = -1;
+                };
+              };
+            };
+          };
+        };
+
+        neo-tree = {
+          enable = true;
+        };
+
+        conform-nvim = {
+          enable = true;
+          settings = {
+            formatters_by_ft = {
+              nix = ["alejandra"];
+              lua = ["stylua"];
+              # javascript = {
+              #   __unkeyed-1 = "prettierd";
+              #   __unkeyed-2 = "prettier";
+              #   timeout_ms = 2000;
+              #   stop_after_first = true;
+              # };
+              # "_" = [
+              #   "squeeze_blanks"
+              #     "trim_whitespace"
+              #     "trim_newlines"
+              # ];
+            };
+            format_on_save =
+              # Lua
+              ''
+                function(bufnr)
+                  if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+                    return
+                  end
+
+                  return {}
+                end
+              '';
+            log_level = "warn";
+            notify_on_error = true;
+            notify_no_formatters = true;
+            formatters = {
+              alejandra = {
+                command = lib.getExe pkgs.alejandra;
+              };
+              stylua = {
+                command = lib.getExe pkgs.stylua;
+              };
+            };
+          };
+        };
+
+        treesitter = {
+          enable = true;
+          settings.highlight.enable = true;
+        };
+
+        refactoring = {
+          enable = true;
+          settings = {
+            show_success_message = true;
+          };
+        };
+
+        snacks = {
+          enable = true;
+        };
+
+        auto-session = {
+          enable = true;
+          settings = {
+            suppressed_dirs = ["~/" "~/Projects" "~/Downloads" "/"];
+            # NOTE: Follow normal session save/load logic if launched with a single
+            # directory as the only argument
+            args_allow_single_directory = false;
+            # NOTE: (30 days) Sessions older than purge_after_minutes will be
+            # deleted asynchronously on startup, e.g. set to 14400 to delete
+            # sessions that haven't been accessed for more than 10 days,
+            # defaults to off (no purging), requires >= nvim 0.10
+            purge_after_minutes = 43200;
+          };
+        };
+
+        fastaction = {
+          enable = true;
+          settings = {
+            title = false;
+          };
+        };
+
+        windsurf-nvim = {
+          enable = true;
+          settings.enable_cmp_source = false;
+        };
+
+        lazydev.enable = true;
+        lazygit.enable = true;
+        schemastore.enable = true;
+        sleuth.enable = true;
+        todo-comments.enable = true;
+        treesitter-refactor.enable = true;
+        treesitter-textobjects.enable = true;
+        treesj.enable = true;
+        trouble.enable = true;
+        ts-comments.enable = true;
+        web-devicons.enable = true;
+        which-key.enable = true;
+        actions-preview.enable = true;
+        dap.enable = true;
+        project-nvim.enable = true;
+        sandwich.enable = true;
+        git-conflict.enable = true;
+      };
+
+      extraPlugins = [
+        pkgs.vimPlugins.nvim-unception
+        # pkgs.vimPlugins.vim-automkdir
+        (pkgs.vimUtils.buildVimPlugin {
+          name = "automkdir";
+          src = pkgs.fetchFromGitHub {
+            owner = "mateuszwieloch";
+            repo = "automkdir.nvim";
+            rev = "e36da288764cc41864dc5b4e1234f1425033ce59";
+            sha256 = "1qpwip0wd7shry094355ljq7143vlsmkq60pgi0bvdh9dywf21f4";
+          };
+        })
+      ];
+      extraConfigLua =
+        #lua
+        ''
+          vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+          vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
+
+          -- Highlight on yank
+          local highlight_group =
+            vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+          vim.api.nvim_create_autocmd("TextYankPost", {
+            callback = function()
+              vim.highlight.on_yank()
+            end,
+            group = highlight_group,
+            pattern = "*",
+          })
+
+          -- NOTE: custom plugins
+          require"unception"
+          require"automkdir".setup()
+
+          vim.lsp.config("jsonls", {
+            -- Schemastore won't work otherwise
+            -- https://github.com/Saghen/blink.cmp/issues/2096
+            before_init = function(_, config)
+              config.settings.json.schemas = config.settings.json.schemas or {}
+              vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
+            end,
+            settings = {
+              json = {
+                validate = { enable = true },
+              },
+            },
+          })
+
+          vim.lsp.config("vtsls", {
+            filetypes = vim.tbl_deep_extend("force",
+              vim.lsp.config.vtsls.filetypes, { "vue" }),
+            settings = {
+              vtsls = {
+                tsserver = {
+                  globalPlugins = {
+                    {
+                      name = "@vue/typescript-plugin",
+                      languages = { "vue" },
+                      configNamespace = "typescript",
+                      location =
+                      "/home/lippiece/node_modules/@vue/language-server",
+                    },
+                  },
+                },
+              },
+            },
+          })
+          vim.lsp.config("vue_ls", {
+            on_init = function(client)
+              client.handlers["tsserver/request"] = function(_, result, context)
+                local clients =
+                  vim.lsp.get_clients { bufnr = context.bufnr, name = "vtsls" }
+                if #clients == 0 then
+                  vim.notify(
+                    "Could not found `vtsls` lsp client, vue_lsp would not work without it.",
+                    vim.log.levels.ERROR
+                  )
+                  return
+                end
+                local ts_client = clients[1]
+                local param = unpack(result)
+                local id, command, payload = unpack(param)
+                ts_client:exec_cmd({
+                  title = "vue_request_forward",
+                  command = "typescript.tsserverRequest",
+                  arguments = {
+                    command,
+                    payload,
+                  },
+                }, { bufnr = context.bufnr }, function(_, r)
+                  local response_data = { { id, r.body } }
+                  ---@diagnostic disable-next-line: param-type-mismatch
+                  client:notify("tsserver/response", response_data)
+                end)
+              end
+            end,
+          })
+          vim.lsp.enable("vue_ls")
+        '';
+
+      lsp = {
+        inlayHints.enable = true;
+        keymaps = [
+          {
+            key = "gd";
+            lspBufAction = "definition";
+            options.desc = "Go to Definition";
+          }
+          {
+            key = "gr";
+            lspBufAction = "references";
+            options.desc = "Show References";
+          }
+          {
+            key = "gt";
+            lspBufAction = "type_definition";
+            options.desc = "Go to Type Definition";
+          }
+          {
+            key = "gI";
+            lspBufAction = "implementation";
+            options.desc = "Go to Implementation";
+          }
+          {
+            key = "gD";
+            lspBufAction = "declaration";
+            options.desc = "Go to Declaration";
+          }
+          {
+            key = "cr";
+            lspBufAction = "rename";
+            options.desc = "Rename";
+          }
+          # {
+          #   action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
+          #   key = "gd";
+          # }
+        ];
+        servers = {
+          nixd = {
+            enable = true;
+            activate = true;
+            settings = let
+              flake = ''(builtins.getFlake (builtins.toString ./.))'';
+              system = ''''${builtins.currentSystem}'';
+            in {
+              nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
+
+              options = {
+                nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
+                nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
+                home-manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
+              };
+            };
+          };
+          lua_ls = {
+            enable = true;
+            activate = true;
+          };
+          yamlls = {
+            enable = true;
+            activate = true;
+          };
+          jsonls = {
+            enable = true;
+            activate = true;
+          };
+          vtsls = {
+            enable = true;
+            activate = true;
+          };
+        };
+      };
+
+      keymaps = [
+        {
+          action.__raw =
+            # lua
+            ''
+              function ()
+                require("neo-tree.command").execute { toggle = true }
+              end
+            '';
+          key = "<Leader>e";
+          mode = ["n" "v"];
+          options = {
+            desc = "Open neo-tree";
+            silent = true;
+            noremap = true;
+          };
+        }
+
+        # Better up/down
+        {
+          key = "j";
+          mode = ["n" "x"];
+          action = "v:count == 0 ? 'gj' : 'j'";
+          options = {
+            silent = true;
+            expr = true;
+            desc = "Down";
+          };
+        }
+        {
+          key = "k";
+          mode = ["n" "x"];
+          action = "v:count == 0 ? 'gk' : 'k'";
+          options = {
+            silent = true;
+            expr = true;
+            desc = "Up";
+          };
+        }
+
+        {
+          key = "<C-h>";
+          mode = ["n"];
+          action = "<C-w>h";
+          options = {
+            remap = true;
+            desc = "Go to Left Window";
+          };
+        }
+        {
+          key = "<C-j>";
+          mode = ["n"];
+          action = "<C-w>j";
+          options = {
+            remap = true;
+            desc = "Go to Lower Window";
+          };
+        }
+        {
+          key = "<C-l>";
+          mode = ["n"];
+          action = "<C-w>l";
+          options = {
+            remap = true;
+            desc = "Go to Right Window";
+          };
+        }
+
+        {
+          key = "<C-Up>";
+          mode = ["n"];
+          action = "<cmd>resize +2<cr>";
+          options = {
+            desc = "Increase Window Height";
+          };
+        }
+        {
+          key = "<C-Down>";
+          mode = ["n"];
+          action = "<cmd>resize -2<cr>";
+          options = {
+            desc = "Decrease Window Height";
+          };
+        }
+        {
+          key = "<C-Left>";
+          mode = ["n"];
+          action = "<cmd>vertical resize -2<cr>";
+          options = {
+            desc = "Decrease Window Width";
+          };
+        }
+        {
+          key = "<C-Right>";
+          mode = ["n"];
+          action = "<cmd>vertical resize +2<cr>";
+          options = {
+            desc = "Increase Window Width";
+          };
+        }
+
+        {
+          key = "<S-h>";
+          mode = ["n"];
+          action = "<cmd>bprevious<cr>";
+          options = {
+            desc = "Prev Buffer";
+          };
+        }
+        {
+          key = "<S-l>";
+          mode = ["n"];
+          action = "<cmd>bnext<cr>";
+          options = {
+            desc = "Next Buffer";
+          };
+        }
+        {
+          key = "<leader>bb";
+          mode = ["n"];
+          action = "<cmd>e #<cr>";
+          options = {
+            desc = "Switch to Other Buffer";
+          };
+        }
+        {
+          key = "<leader>`";
+          mode = ["n"];
+          action = "<cmd>e #<cr>";
+          options = {
+            desc = "Switch to Other Buffer";
+          };
+        }
+
+        {
+          key = "<leader>bd";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            Snacks.bufdelete()
+                      end
+          '';
+          options = {
+            desc = "Delete Buffer";
+          };
+        }
+        {
+          key = "<leader>bo";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            Snacks.bufdelete.other()
+                      end
+          '';
+          options = {
+            desc = "Delete Other Buffers";
+          };
+        }
+        {
+          key = "<leader>bD";
+          mode = ["n"];
+          action = "<cmd>:bd<cr>";
+          options = {
+            desc = "Delete Buffer and Window";
+          };
+        }
+
+        {
+          key = "<leader>ur";
+          mode = ["n"];
+          action = "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>";
+          options = {
+            desc = "Redraw / Clear hlsearch / Diff Update";
+          };
+        }
+
+        {
+          key = "n";
+          mode = ["n"];
+          action = "'Nn'[v:searchforward].'zv'";
+          options = {
+            expr = true;
+            desc = "Next Search Result";
+          };
+        }
+        {
+          key = "n";
+          mode = ["x"];
+          action = "'Nn'[v:searchforward]";
+          options = {
+            expr = true;
+            desc = "Next Search Result";
+          };
+        }
+        {
+          key = "n";
+          mode = ["o"];
+          action = "'Nn'[v:searchforward]";
+          options = {
+            expr = true;
+            desc = "Next Search Result";
+          };
+        }
+        {
+          key = "N";
+          mode = ["n"];
+          action = "'nN'[v:searchforward].'zv'";
+          options = {
+            expr = true;
+            desc = "Prev Search Result";
+          };
+        }
+        {
+          key = "N";
+          mode = ["x"];
+          action = "'nN'[v:searchforward]";
+          options = {
+            expr = true;
+            desc = "Prev Search Result";
+          };
+        }
+        {
+          key = "N";
+          mode = ["o"];
+          action = "'nN'[v:searchforward]";
+          options = {
+            expr = true;
+            desc = "Prev Search Result";
+          };
+        }
+
+        # Add undo break-points
+        {
+          key = ",";
+          mode = ["i"];
+          action = ",<c-g>u";
+        }
+        {
+          key = ".";
+          mode = ["i"];
+          action = ".<c-g>u";
+        }
+        {
+          key = ";";
+          mode = ["i"];
+          action = ";<c-g>u";
+        }
+
+        {
+          key = "<leader>K";
+          mode = ["n"];
+          action = "<cmd>norm! K<cr>";
+          options = {
+            desc = "Keywordprg";
+          };
+        }
+
+        # Better indenting
+        {
+          key = "<";
+          mode = ["v"];
+          action = "<gv";
+        }
+        {
+          key = ">";
+          mode = ["v"];
+          action = ">gv";
+        }
+
+        # Insert comment below/above
+        {
+          key = "gco";
+          mode = ["n"];
+          action = "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";
+          options = {
+            desc = "Add Comment Below";
+          };
+        }
+        {
+          key = "gcO";
+          mode = ["n"];
+          action = "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";
+          options = {
+            desc = "Add Comment Above";
+          };
+        }
+
+        {
+          key = "<leader>fn";
+          mode = ["n"];
+          action = "<cmd>enew<cr>";
+          options = {
+            desc = "New File";
+          };
+        }
+
+        {
+          key = "[q";
+          mode = ["n"];
+          action = "vim.cmd.cprev";
+          options = {
+            desc = "Previous Quickfix";
+          };
+        }
+        {
+          key = "]q";
+          mode = ["n"];
+          action = "vim.cmd.cnext";
+          options = {
+            desc = "Next Quickfix";
+          };
+        }
+
+        {
+          key = "<leader>cd";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            vim.diagnostic.open_float()
+                      end
+          '';
+          options = {
+            desc = "Line Diagnostics";
+          };
+        }
+        {
+          key = "]d";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              vim.diagnostic.jump({
+                  count = 1,
+                  float = true,
+                })
+            end
+          '';
+          options = {
+            desc = "Next Diagnostic";
+          };
+        }
+        {
+          key = "[d";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              vim.diagnostic.jump({
+                  count = -1,
+                  float = true,
+                })
+            end
+          '';
+          options = {
+            desc = "Prev Diagnostic";
+          };
+        }
+        {
+          key = "]e";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              vim.diagnostic.jump({
+                severity = "ERROR",
+                count = 1,
+                float = true,
+              })
+            end
+          '';
+          options = {
+            desc = "Next Error";
+          };
+        }
+        {
+          key = "[e";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              vim.diagnostic.jump({
+                severity = "ERROR",
+                count = -1,
+                float = true,
+              })
+            end
+          '';
+          options = {
+            desc = "Prev Error";
+          };
+        }
+        {
+          key = "]w";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              vim.diagnostic.jump({
+                severity = "WARN",
+                count = 1,
+                float = true,
+              })
+            end
+          '';
+          options = {
+            desc = "Next Warning";
+          };
+        }
+        {
+          key = "[w";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              vim.diagnostic.jump({
+                severity = "WARN",
+                count = -1,
+                float = true,
+              })
+            end
+          '';
+          options = {
+            desc = "Prev Warning";
+          };
+        }
+
+        {
+          key = "<leader>gg";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            Snacks.lazygit()
+                      end
+          '';
+          options = {
+            desc = "Lazygit (cwd)";
+          };
+        }
+
+        {
+          key = "<leader>gb";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            Snacks.picker.git_log_line()
+                      end
+          '';
+          options = {
+            desc = "Git Blame Line";
+          };
+        }
+        {
+          key = "<leader>gB";
+          mode = ["n" "x"];
+          action.__raw = ''
+                        function()
+            Snacks.gitbrowse()
+                      end
+          '';
+          options = {
+            desc = "Git Browse (open)";
+          };
+        }
+        {
+          key = "<leader>gY";
+          mode = ["n" "x"];
+          action.__raw = ''
+                        function()
+            Snacks.gitbrowse {
+              open = function(url)
+                vim.fn.setreg("+", url)
+              end,
+              notify = false,
+            }
+                      end
+          '';
+          options = {
+            desc = "Git Browse (copy)";
+          };
+        }
+
+        {
+          key = "<C-/>";
+          mode = ["t"];
+          action = "<cmd>close<cr>";
+          options = {
+            desc = "Hide Terminal";
+          };
+        }
+
+        {
+          key = "<c-_>";
+          mode = ["t"];
+          action = "<cmd>close<cr>";
+          options = {
+            desc = "which_key_ignore";
+          };
+        }
+
+        {
+          key = "<leader>-";
+          mode = ["n"];
+          action = "<C-W>s";
+          options = {
+            remap = true;
+            desc = "Split Window Below";
+          };
+        }
+        {
+          key = "<leader>|";
+          mode = ["n"];
+          action = "<C-W>v";
+          options = {
+            remap = true;
+            desc = "Split Window Right";
+          };
+        }
+        {
+          key = "<leader>wd";
+          mode = ["n"];
+          action = "<C-W>c";
+          options = {
+            remap = true;
+            desc = "Delete Window";
+          };
+        }
+
+        {
+          key = "<leader><tab>l";
+          mode = ["n"];
+          action = "<cmd>tablast<cr>";
+          options = {
+            desc = "Last Tab";
+          };
+        }
+        {
+          key = "<leader><tab>o";
+          mode = ["n"];
+          action = "<cmd>tabonly<cr>";
+          options = {
+            desc = "Close Other Tabs";
+          };
+        }
+        {
+          key = "<leader><tab>f";
+          mode = ["n"];
+          action = "<cmd>tabfirst<cr>";
+          options = {
+            desc = "First Tab";
+          };
+        }
+        {
+          key = "<leader><tab><tab>";
+          mode = ["n"];
+          action = "<cmd>tabnew<cr>";
+          options = {
+            desc = "New Tab";
+          };
+        }
+        {
+          key = "<leader><tab>]";
+          mode = ["n"];
+          action = "<cmd>tabnext<cr>";
+          options = {
+            desc = "Next Tab";
+          };
+        }
+        {
+          key = "<leader><tab>d";
+          mode = ["n"];
+          action = "<cmd>tabclose<cr>";
+          options = {
+            desc = "Close Tab";
+          };
+        }
+        {
+          key = "<leader><tab>[";
+          mode = ["n"];
+          action = "<cmd>tabprevious<cr>";
+          options = {
+            desc = "Previous Tab";
+          };
+        }
+
+        {
+          key = "<leader>cl";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            Snacks.picker.lsp_config()
+                      end
+          '';
+          options = {
+            desc = "Lsp Info";
+          };
+        }
+
+        {
+          key = "<leader>/";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              Snacks.picker.grep()
+            end
+          '';
+          options = {
+            desc = "Find text";
+          };
+        }
+        {
+          key = "<leader><space>";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              Snacks.picker.files()
+            end
+          '';
+          options = {
+            desc = "Find files";
+          };
+        }
+
+        {
+          key = "<leader>cc";
+          mode = ["n" "v"];
+          action.__raw = ''
+                        function()
+            vim.lsp.codelens.run()
+                      end
+          '';
+          options = {
+            desc = "Run Codelens";
+          };
+        }
+
+        {
+          key = "<leader>cC";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            vim.lsp.codelens.refresh()
+                      end
+          '';
+          options = {
+            desc = "Refresh & Display Codelens";
+          };
+        }
+
+        {
+          key = "<leader>cR";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            Snacks.rename.rename_file()
+                      end
+          '';
+          options = {
+            desc = "Rename File";
+          };
+        }
+
+        # LSP code action variants
+        {
+          key = "<Leader>cM";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            vim.lsp.buf.code_action {
+              apply = true,
+              context = { only = { "source.addMissingImports.ts" }, diagnostics = {} },
+            }
+                      end
+          '';
+          options = {
+            desc = "Add missing imports";
+          };
+        }
+        {
+          key = "<Leader>cu";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            vim.lsp.buf.code_action {
+              apply = true,
+              context = { only = { "source.removeUnused.ts" }, diagnostics = {} },
+            }
+                      end
+          '';
+          options = {
+            desc = "Remove unused code";
+          };
+        }
+        {
+          key = "<Leader>cA";
+          mode = ["n"];
+          action.__raw = ''
+            function ()
+              vim.lsp.buf.code_action {
+                apply = true,
+                context = { only = { "source" }, diagnostics = {} },
+              }
+            end
+          '';
+          options.desc = "Code Action (file)";
+        }
+        {
+          key = "<Leader>ca";
+          mode = ["n" "v"];
+          action.__raw = ''
+            function ()
+              require"fastaction".code_action {}
+            end
+          '';
+          options.desc = "Code Action (fastaction)";
+        }
+
+        {
+          key = "<Leader>cf";
+          mode = ["n"];
+          action.__raw = ''
+                        function()
+            require("conform").format()
+                      end
+          '';
+          options = {
+            desc = "Format file";
+          };
+        }
+
+        {
+          key = "]]";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              Snacks.words.jump(1)
+            end
+          '';
+          options = {
+            desc = "Next Reference";
+          };
+        }
+
+        {
+          key = "[[";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              Snacks.words.jump(-1)
+            end
+          '';
+          options = {
+            desc = "Prev Reference";
+          };
+        }
+
+        {
+          key = "<Esc>";
+          mode = ["n"];
+          action = "<cmd>noh<CR>";
+          options = {
+            desc = "general clear highlights";
+          };
+        }
+      ];
+
+      diagnostic.settings = {
+        severity_sort = true;
+        virtual_text = true;
+      };
+
+      nixpkgs = {
+        config = {
+          allowUnfree = true;
+        };
       };
     };
   };
@@ -389,18 +1572,20 @@ in {
     plugins = with pkgs; [tmuxPlugins.resurrect];
     newSession = true;
     keyMode = "vi";
-    extraConfig = ''
-      bind c new-window -c "#{pane_current_path}"
+    extraConfig =
+      # tmux
+      ''
+        bind c new-window -c "#{pane_current_path}"
 
-      bind '"' split-window -c "#{pane_current_path}"
-      bind % split-window -h -c "#{pane_current_path}"
+        bind '"' split-window -c "#{pane_current_path}"
+        bind % split-window -h -c "#{pane_current_path}"
 
-      # In vi copy mode, press 'y' to copy but remain in copy-mode
-      bind -T copy-mode-vi y send -X copy-selection
+        # In vi copy mode, press 'y' to copy but remain in copy-mode
+        bind -T copy-mode-vi y send -X copy-selection
 
-      # `open` the selected text
-      bind -T copy-mode-vi o send-keys -X copy-pipe-and-cancel "xargs open"
-    '';
+        # `open` the selected text
+        bind -T copy-mode-vi o send-keys -X copy-pipe-and-cancel "xargs open"
+      '';
   };
   programs.direnv = {
     enable = true;
@@ -559,6 +1744,7 @@ in {
       "steam-unwrapped"
       "rimsort"
       "steamworkspy"
+      "codeium"
     ];
 
   fonts = {
@@ -572,74 +1758,6 @@ in {
       };
     };
   };
-  # gtk.cursorTheme.name	The name of the cursor theme within the package.	string
-  # gtk.cursorTheme.package	Package providing the cursor theme. This package will be installed to your profile. If `null` then the cursor theme is assumed to already be available in your profile. 	null or package
-  # gtk.cursorTheme.size	The size of the cursor.	null or signed integer
-  # gtk.cursorTheme	Default cursor theme for all GTK versions.	null or (submodule)
-  # gtk.enable	Whether to enable GTK theming and configuration.	boolean
-  # gtk.font.name	The family name of the font within the package. 	string
-  # gtk.font.package	Package providing the font. This package will be installed to your profile. If `null` then the font is assumed to already be available in your profile. 	null or package
-  # gtk.font.size	The size of the font. 	null or signed integer or floating point number
-  # gtk.font	Default font for all GTK versions.	null or (submodule)
-  # gtk.gtk2.configLocation	The location of the GTK 2 configuration file.	absolute path
-  # gtk.gtk2.cursorTheme.name	The name of the cursor theme within the package.	string
-  # gtk.gtk2.cursorTheme.package	Package providing the cursor theme. This package will be installed to your profile. If `null` then the cursor theme is assumed to already be available in your profile. 	null or package
-  # gtk.gtk2.cursorTheme.size	The size of the cursor.	null or signed integer
-  # gtk.gtk2.cursorTheme	Cursor theme for GTK 2 applications.	null or (submodule)
-  # gtk.gtk2.enable	Whether to enable GTK 2 configuration.	boolean
-  # gtk.gtk2.extraConfig	Extra lines to add to {file}`~/.gtkrc-2.0`.	strings concatenated with "\n"
-  # gtk.gtk2.font.name	The family name of the font within the package. 	string
-  # gtk.gtk2.font.package	Package providing the font. This package will be installed to your profile. If `null` then the font is assumed to already be available in your profile. 	null or package
-  # gtk.gtk2.font.size	The size of the font. 	null or signed integer or floating point number
-  # gtk.gtk2.font	Font for GTK 2 applications.	null or (submodule)
-  # gtk.gtk2.force	Whether to enable GTK 2 config force overwrite without creating a backup.	boolean
-  # gtk.gtk2.iconTheme.name	The name of the icon theme within the package.	string
-  # gtk.gtk2.iconTheme.package	Package providing the icon theme. This package will be installed to your profile. If `null` then the icon theme is assumed to already be available in your profile. 	null or package
-  # gtk.gtk2.iconTheme	Icon theme for GTK 2 applications.	null or (submodule)
-  # gtk.gtk2.theme.name	The name of the theme within the package.	string
-  # gtk.gtk2.theme.package	Package providing the theme. This package will be installed to your profile. If `null` then the theme is assumed to already be available in your profile. For the theme to apply to GTK 4, this option is mandatory. 	null or package
-  # gtk.gtk2.theme	Theme for GTK 2 applications.	null or (submodule)
-  # gtk.gtk3.bookmarks	File browser bookmarks.	list of string
-  # gtk.gtk3.cursorTheme.name	The name of the cursor theme within the package.	string
-  # gtk.gtk3.cursorTheme.package	Package providing the cursor theme. This package will be installed to your profile. If `null` then the cursor theme is assumed to already be available in your profile. 	null or package
-  # gtk.gtk3.cursorTheme.size	The size of the cursor.	null or signed integer
-  # gtk.gtk3.cursorTheme	Cursor theme for GTK 3 applications.	null or (submodule)
-  # gtk.gtk3.enable	Whether to enable GTK 3 configuration.	boolean
-  # gtk.gtk3.extraConfig	Extra settings for {file}`$XDG_CONFIG_HOME/gtk-3.0/settings.ini`.	attribute set of (boolean or signed integer or string)
-  # gtk.gtk3.extraCss	Extra CSS for {file}`$XDG_CONFIG_HOME/gtk-3.0/gtk.css`.	strings concatenated with "\n"
-  # gtk.gtk3.font.name	The family name of the font within the package. 	string
-  # gtk.gtk3.font.package	Package providing the font. This package will be installed to your profile. If `null` then the font is assumed to already be available in your profile. 	null or package
-  # gtk.gtk3.font.size	The size of the font. 	null or signed integer or floating point number
-  # gtk.gtk3.font	Font for GTK 3 applications.	null or (submodule)
-  # gtk.gtk3.iconTheme.name	The name of the icon theme within the package.	string
-  # gtk.gtk3.iconTheme.package	Package providing the icon theme. This package will be installed to your profile. If `null` then the icon theme is assumed to already be available in your profile. 	null or package
-  # gtk.gtk3.iconTheme	Icon theme for GTK 3 applications.	null or (submodule)
-  # gtk.gtk3.theme.name	The name of the theme within the package.	string
-  # gtk.gtk3.theme.package	Package providing the theme. This package will be installed to your profile. If `null` then the theme is assumed to already be available in your profile. For the theme to apply to GTK 4, this option is mandatory. 	null or package
-  # gtk.gtk3.theme	Theme for GTK 3 applications.	null or (submodule)
-  # gtk.gtk4.cursorTheme.name	The name of the cursor theme within the package.	string
-  # gtk.gtk4.cursorTheme.package	Package providing the cursor theme. This package will be installed to your profile. If `null` then the cursor theme is assumed to already be available in your profile. 	null or package
-  # gtk.gtk4.cursorTheme.size	The size of the cursor.	null or signed integer
-  # gtk.gtk4.cursorTheme	Cursor theme for GTK 4 applications.	null or (submodule)
-  # gtk.gtk4.enable	Whether to enable GTK 4 configuration.	boolean
-  # gtk.gtk4.extraConfig	Extra settings for {file}`$XDG_CONFIG_HOME/gtk-4.0/settings.ini`.	attribute set of (boolean or signed integer or string)
-  # gtk.gtk4.extraCss	Extra CSS for {file}`$XDG_CONFIG_HOME/gtk-4.0/gtk.css`.	strings concatenated with "\n"
-  # gtk.gtk4.font.name	The family name of the font within the package. 	string
-  # gtk.gtk4.font.package	Package providing the font. This package will be installed to your profile. If `null` then the font is assumed to already be available in your profile. 	null or package
-  # gtk.gtk4.font.size	The size of the font. 	null or signed integer or floating point number
-  # gtk.gtk4.font	Font for GTK 4 applications.	null or (submodule)
-  # gtk.gtk4.iconTheme.name	The name of the icon theme within the package.	string
-  # gtk.gtk4.iconTheme.package	Package providing the icon theme. This package will be installed to your profile. If `null` then the icon theme is assumed to already be available in your profile. 	null or package
-  # gtk.gtk4.iconTheme	Icon theme for GTK 4 applications.	null or (submodule)
-  # gtk.gtk4.theme.name	The name of the theme within the package.	string
-  # gtk.gtk4.theme.package	Package providing the theme. This package will be installed to your profile. If `null` then the theme is assumed to already be available in your profile. For the theme to apply to GTK 4, this option is mandatory. 	null or package
-  # gtk.gtk4.theme	Theme for GTK 4 applications.	null or (submodule)
-  # gtk.iconTheme.name	The name of the icon theme within the package.	string
-  # gtk.iconTheme.package	Package providing the icon theme. This package will be installed to your profile. If `null` then the icon theme is assumed to already be available in your profile. 	null or package
-  # gtk.iconTheme	Default icon theme for all GTK versions.	null or (submodule)
-  # gtk.theme.name	The name of the theme within the package.	string
-  # gtk.theme.package	Package providing the theme. This package will be installed to your profile. If `null` then the theme is assumed to already be available in your profile. For the theme to apply to GTK 4, this option is mandatory. 	null or package
-  # gtk.theme	Default theme for all GTK versions.	null or (submodule)
 
   gtk = {
     iconTheme = {
