@@ -204,7 +204,7 @@ in {
     firefox = {
       enable = true;
       package = inputs.firefox.packages.${pkgs.stdenv.hostPlatform.system}.firefox-nightly-bin;
-      nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration];
+      nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration tridactyl-native];
       preferences = {
         "widget.use-xdg-desktop-portal.file-picker" = 1;
       };
