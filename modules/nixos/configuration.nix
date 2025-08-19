@@ -113,6 +113,7 @@ in {
     kdePackages.korganizer
     kdePackages.kdepim-addons
     kdePackages.signond
+    kdePackages.kontact
     sqlite
     libinput
     libnotify

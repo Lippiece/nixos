@@ -80,7 +80,7 @@ in {
     })
     variety
     prismlauncher
-    rimsort
+    (pkgs.callPackage ../../packages/rimsort/package.nix {})
 
     # # System
     colloid-icon-theme

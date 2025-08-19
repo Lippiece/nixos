@@ -14,6 +14,10 @@
   boot.initrd.kernelModules = ["dm-snapshot"];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
+  boot.kernel.sysctl = {
+    "net.core.rmem_max" = 7500000;
+    "net.core.wmem_max" = 7500000;
+  };
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
