@@ -761,6 +761,19 @@ in {
           vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
           vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
 
+          if vim.g.neovide then
+            vim.opt.scrolloff = 15
+            vim.g.neovide_opacity = 0.9
+
+            -- vim.g.neovide_font_hinting = "none"
+            -- vim.g.neovide_font_edging = "subpixelantialias"
+
+            -- vim.keymap.set("n", "<C-v>", '"+P') -- Paste normal mode
+            -- vim.keymap.set("v", "<C-v>", '"+P') -- Paste visual mode
+            vim.keymap.set("c", "<C-v>", "<C-R>+") -- Paste command mode
+            vim.keymap.set("i", "<C-v>", '<ESC>l"+Pli') -- Paste insert mode
+          end
+
           -- Highlight on yank
           local highlight_group =
             vim.api.nvim_create_augroup("YankHighlight", { clear = true })
@@ -1790,6 +1803,7 @@ in {
     enable = true;
     plugins = with pkgs; [tmuxPlugins.resurrect];
     newSession = true;
+    terminal = "tmux-256color";
     keyMode = "vi";
     extraConfig =
       # tmux
