@@ -934,6 +934,14 @@ in {
             enable = true;
             activate = true;
           };
+          tailwindcss = {
+            enable = true;
+            activate = true;
+          };
+          emmet_language_server = {
+            enable = true;
+            activate = true;
+          };
         };
       };
 
