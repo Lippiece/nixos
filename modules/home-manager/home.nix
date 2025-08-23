@@ -225,8 +225,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "IlanCosman";
             repo = "tide";
-            rev = "7318d44a4b367c396d2bbaab90836d5107804792";
-            sha256 = "1c04sf8sy3acipvprmaxm82jsh02cq7d4l3ww9snmaapm1i3bs81";
+            rev = "7818abcbc600372418b1f8a931306b1d694bd009";
+            sha256 = "0zgn0ys34vc6b0hzqack3m6vlz0kad4chmr3zia2lamxjr6y7dxr";
           };
         }
       ];
