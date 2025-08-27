@@ -120,6 +120,7 @@ in {
     inotify-tools
     kdePackages.qtimageformats
     libwebp
+    mangohud
 
     # For `pactl`
     pulseaudio
@@ -270,6 +271,10 @@ in {
     };
 
     gamemode.enable = true;
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
   };
 
   qt = {
