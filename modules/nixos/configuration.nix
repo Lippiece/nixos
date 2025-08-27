@@ -268,6 +268,8 @@ in {
           ];
       };
     };
+
+    gamemode.enable = true;
   };
 
   qt = {
