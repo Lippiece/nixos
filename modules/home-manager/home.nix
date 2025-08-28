@@ -703,7 +703,7 @@ in {
         which-key.enable = true;
         actions-preview.enable = true;
         dap.enable = true;
-        project-nvim.enable = true;
+        # project-nvim.enable = true;
         sandwich.enable = true;
         git-conflict.enable = true;
         ccc.enable = true;
