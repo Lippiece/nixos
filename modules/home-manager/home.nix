@@ -703,7 +703,7 @@ in {
         which-key.enable = true;
         actions-preview.enable = true;
         dap.enable = true;
-        # project-nvim.enable = true;
+        project-nvim.enable = true;
         sandwich.enable = true;
         git-conflict.enable = true;
         ccc.enable = true;
@@ -742,6 +742,15 @@ in {
             repo = "nvim_context_vt";
             rev = "b69f642f7848fec8c056a7e2c9452e3dec84c2b5";
             sha256 = "1dyzp6ng67a6zp021nxbimj7rf7bp7rkc4lkl9wrx9fwvxz1x0xi";
+          };
+        })
+        (vimUtils.buildVimPlugin {
+          name = "project";
+          src = pkgs.fetchFromGitHub {
+            owner = "DrKJeff16";
+            repo = "project.nvim";
+            rev = "1438dc7997ba35f4acfcfc41b907fa5227049d6e";
+            sha256 = "02vdl8v5wkhh2cxwn3j01v8icwxjhlwd1q2g3mk3gggp9cqkfikj";
           };
         })
         # (vimUtils.buildVimPlugin {
@@ -789,6 +798,7 @@ in {
           require"automkdir".setup()
           require"ts-error-translator".setup()
           require"nvim_context_vt".setup()
+          require"project".setup()
           vim.opt.rtp:prepend(${"\"" + pkgs.vimPlugins.vim-fetch + "\""})
 
           vim.lsp.config("jsonls", {
