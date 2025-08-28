@@ -114,7 +114,6 @@ in {
     proxychains-ng
     commitizen
     gh
-    python313Packages.subliminal
     steamcmd
 
     # # Nix
