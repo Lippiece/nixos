@@ -120,7 +120,6 @@ in {
     inotify-tools
     kdePackages.qtimageformats
     libwebp
-    mangohud
 
     # For `pactl`
     pulseaudio
