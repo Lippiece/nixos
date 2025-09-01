@@ -1,15 +1,15 @@
 diff --git a/app/utils/generic.py b/app/utils/generic.py
 --- a/app/utils/generic.py
 +++ b/app/utils/generic.py
-@@ -255,7 +255,7 @@
-                 popen_args.extend(args)
-                 p = subprocess.Popen(popen_args)
-             else:
--                popen_args = [executable_path]
-+                popen_args = ["@steam-run@/bin/steam-run", executable_path]
-                 popen_args.extend(args)
+@@ -307,7 +307,7 @@ def launch_process(
+         p = subprocess.Popen(popen_args)
+         pid = p.pid
+     else:
+-        popen_args = [executable_path]
++        popen_args = ["@steam-run@/bin/steam-run", executable_path]
+         popen_args.extend(args)
  
-                 if sys.platform == "win32":
+         if sys.platform == "win32":
 diff --git a/app/utils/steam/steamcmd/wrapper.py b/app/utils/steam/steamcmd/wrapper.py
 --- a/app/utils/steam/steamcmd/wrapper.py
 +++ b/app/utils/steam/steamcmd/wrapper.py

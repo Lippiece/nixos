@@ -750,8 +750,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "DrKJeff16";
             repo = "project.nvim";
-            rev = "1438dc7997ba35f4acfcfc41b907fa5227049d6e";
-            sha256 = "02vdl8v5wkhh2cxwn3j01v8icwxjhlwd1q2g3mk3gggp9cqkfikj";
+            rev = "8c2cf3c25d3462aad35b1e7ee5adbceedc45992d";
+            sha256 = "1xq2zf33i1fw3baypjwms81cvp06firmhq0pwy5m7d91jlsw74p8";
           };
         })
         # (vimUtils.buildVimPlugin {
@@ -874,27 +874,27 @@ in {
         keymaps = [
           {
             key = "gd";
-            lspBufAction = "definition";
+            action = "<cmd>Trouble lsp_definitions<cr>";
             options.desc = "Go to Definition";
           }
           {
             key = "gr";
-            lspBufAction = "references";
+            action = "<cmd>Trouble lsp_references<cr>";
             options.desc = "Show References";
           }
           {
             key = "gt";
-            lspBufAction = "type_definition";
+            action = "<cmd>Trouble lsp_type_definitions<cr>";
             options.desc = "Go to Type Definition";
           }
           {
             key = "gI";
-            lspBufAction = "implementation";
+            action = "<cmd>Trouble lsp_implementations<cr>";
             options.desc = "Go to Implementation";
           }
           {
             key = "gD";
-            lspBufAction = "declaration";
+            action = "<cmd>Trouble lsp_declarations<cr>";
             options.desc = "Go to Declaration";
           }
           {
@@ -902,10 +902,6 @@ in {
             lspBufAction = "rename";
             options.desc = "Rename";
           }
-          # {
-          #   action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
-          #   key = "gd";
-          # }
         ];
         servers = {
           nixd = {
@@ -920,7 +916,7 @@ in {
               options = {
                 nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
                 nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
-                home-manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
+                home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
               };
             };
           };
@@ -1546,9 +1542,9 @@ in {
           key = "<leader>cl";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            Snacks.picker.lsp_config()
-                      end
+            function()
+              Snacks.picker.lsp_config()
+            end
           '';
           options = {
             desc = "Lsp Info";
@@ -1584,9 +1580,9 @@ in {
           key = "<leader>cc";
           mode = ["n" "v"];
           action.__raw = ''
-                        function()
-            vim.lsp.codelens.run()
-                      end
+            function()
+              vim.lsp.codelens.run()
+            end
           '';
           options = {
             desc = "Run Codelens";
@@ -1597,9 +1593,9 @@ in {
           key = "<leader>cC";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            vim.lsp.codelens.refresh()
-                      end
+            function()
+              vim.lsp.codelens.refresh()
+            end
           '';
           options = {
             desc = "Refresh & Display Codelens";
@@ -1610,9 +1606,9 @@ in {
           key = "<leader>cR";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            Snacks.rename.rename_file()
-                      end
+            function()
+              Snacks.rename.rename_file()
+            end
           '';
           options = {
             desc = "Rename File";
@@ -1624,12 +1620,12 @@ in {
           key = "<Leader>cM";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            vim.lsp.buf.code_action {
-              apply = true,
-              context = { only = { "source.addMissingImports.ts" }, diagnostics = {} },
-            }
-                      end
+            function()
+              vim.lsp.buf.code_action {
+                apply = true,
+                context = { only = { "source.addMissingImports.ts" }, diagnostics = {} },
+              }
+            end
           '';
           options = {
             desc = "Add missing imports";
@@ -1639,12 +1635,12 @@ in {
           key = "<Leader>cu";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            vim.lsp.buf.code_action {
-              apply = true,
-              context = { only = { "source.removeUnused.ts" }, diagnostics = {} },
-            }
-                      end
+            function()
+              vim.lsp.buf.code_action {
+                apply = true,
+                context = { only = { "source.removeUnused.ts" }, diagnostics = {} },
+              }
+            end
           '';
           options = {
             desc = "Remove unused code";
@@ -1678,9 +1674,9 @@ in {
           key = "<Leader>cf";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            require("conform").format()
-                      end
+            function()
+              require("conform").format()
+            end
           '';
           options = {
             desc = "Format file";
