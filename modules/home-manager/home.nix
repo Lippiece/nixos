@@ -86,6 +86,7 @@ in {
     # # System
     colloid-icon-theme
     colloid-gtk-theme
+    kdePackages.karousel
 
     #################################
     #              CLI              #
