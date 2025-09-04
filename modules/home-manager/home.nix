@@ -541,19 +541,6 @@ in {
                   "$FILENAME"
                 ];
                 stdin = true;
-                #   cwd =
-                #     lib.mkLuaInline
-                #     #lua
-                #     ''
-                #       function()
-                #         local util = require "conform.util"
-                #
-                #         util.root_file {
-                #           "biome.json",
-                #           "biome.jsonc",
-                #         }
-                #       end,
-                #     '';
               };
               prettier_custom = {
                 command = "prettier";
@@ -635,10 +622,10 @@ in {
           enable = true;
           settings = {
             suppressed_dirs = ["~/" "~/Projects" "~/Downloads" "/"];
-            # NOTE: Follow normal session save/load logic if launched with a single
+            # Follow normal session save/load logic if launched with a single
             # directory as the only argument
             args_allow_single_directory = false;
-            # NOTE: (30 days) Sessions older than purge_after_minutes will be
+            # (30 days) Sessions older than purge_after_minutes will be
             # deleted asynchronously on startup, e.g. set to 14400 to delete
             # sessions that haven't been accessed for more than 10 days,
             # defaults to off (no purging), requires >= nvim 0.10
@@ -705,6 +692,7 @@ in {
         which-key.enable = true;
         actions-preview.enable = true;
         dap.enable = true;
+        # TODO: https://github.com/nix-community/nixvim/issues/3654
         # project-nvim.enable = true;
         sandwich.enable = true;
         git-conflict.enable = true;
@@ -746,24 +734,35 @@ in {
             sha256 = "1dyzp6ng67a6zp021nxbimj7rf7bp7rkc4lkl9wrx9fwvxz1x0xi";
           };
         })
+        # TODO: https://github.com/nix-community/nixvim/issues/3654
         (vimUtils.buildVimPlugin {
           name = "project";
           src = pkgs.fetchFromGitHub {
             owner = "DrKJeff16";
             repo = "project.nvim";
-            rev = "8c2cf3c25d3462aad35b1e7ee5adbceedc45992d";
-            sha256 = "1xq2zf33i1fw3baypjwms81cvp06firmhq0pwy5m7d91jlsw74p8";
+            rev = "435b0b31738c6e2e4bf8d3531a672184722ea4cd";
+            sha256 = "1wg0s237rv79him5qh56s5glnrwzr10h4wpwgvlkqz8ira88hb7x";
           };
         })
-        # (vimUtils.buildVimPlugin {
-        #   name = "vim-fetch";
-        #   src = pkgs.fetchFromGitHub {
-        #     owner = "wsdjeg";
-        #     repo = "vim-fetch";
-        #     rev = "db3fd95eb0cf7e7e9effa1338b286db33e4a36c1";
-        #     sha256 = "1br13ih1ybx5dnj8aax6lf0s970vy43s9swwrxqn411ihcrclqz6";
-        #   };
-        # })
+        (vimUtils.buildVimPlugin {
+          name = "nvim-quicktype";
+          src = pkgs.fetchFromGitHub {
+            owner = "Lippiece";
+            repo = "nvim-quicktype";
+            rev = "main";
+            sha256 = "0j4a932p17c9fqpvk3svj6jqp26jvms8kp83hfahfvpmr29sspxx";
+          };
+        })
+        (vimUtils.buildVimPlugin {
+          name = "tsc";
+          nvimRequireCheck = "tsc";
+          src = pkgs.fetchFromGitHub {
+            owner = "dmmulroy";
+            repo = "tsc.nvim";
+            rev = "8c1b4ec6a48d038a79ced8674cb15e7db6dd8ef0";
+            sha256 = "00irwjlm3r741i06w6qd6pmgqcs5zh1faz2fnqvlzgm7pyb4qz50";
+          };
+        })
       ];
       extraConfigLua =
         #lua
@@ -800,9 +799,41 @@ in {
           require"automkdir".setup()
           require"ts-error-translator".setup()
           require"nvim_context_vt".setup()
+          -- TODO: https://github.com/nix-community/nixvim/issues/3654
           require"project".setup()
+          require("nvim-quicktype").setup({
+            global = {
+              -- Quicktype global options
+              quicktype_cmd = ${"\"" + pkgs.quicktype + "/bin/quicktype\""}, -- Path to the quicktype executable
+              src_lang = "json", -- The language of the input
+              no_combine_classes = false, -- Do not combine classes with shared properties into a single base class
+              all_properties_optional = false, -- Make all properties optional
+              alphabetize_properties = false, -- Alphabetize properties
+              telemetry = "disable", -- Send telemetry data to Quicktype (can be "enable", or "disable")
+              -- output_file = nil, -- Output file (if not specified, output is printed to stdout)
+              debug_dir = "/tmp/", -- Directory to write debug info to (if not specified, no debug info is written)
+            },
+            filetypes = {
+              -- Quicktype language-specific options
+              typescript = {
+                lang = "typescript", -- The language to generate types for
+                additional_options = {
+                  -- Add any additional options here
+                  -- Example:
+                  ["just-types"] = true,
+                  -- ["prefer-unions"] = true,
+                },
+              },
+              -- Add more filetypes as needed
+            },
+          })
+          require"tsc".setup({
+            use_trouble_qflist = true,
+          })
+
           vim.opt.rtp:prepend(${"\"" + pkgs.vimPlugins.vim-fetch + "\""})
 
+          -- NOTE: LSP
           vim.lsp.config("jsonls", {
             -- Schemastore won't work otherwise
             -- https://github.com/Saghen/blink.cmp/issues/2096
@@ -816,8 +847,6 @@ in {
               },
             },
           })
-
-          -- NOTE: LSP
           vim.lsp.config("vtsls", {
             filetypes = vim.tbl_deep_extend("force",
               vim.lsp.config.vtsls.filetypes, { "vue" }),
@@ -916,6 +945,7 @@ in {
 
               options = {
                 nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
+                # BUG: doesn't work: https://github.com/nix-community/nixd/issues/706
                 nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
                 home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
               };
@@ -958,11 +988,11 @@ in {
             # lua
             ''
               function ()
-                require("neo-tree.command").execute { toggle = true }
+                require("neo-tree.command").execute { toggle = true, reveal = true }
               end
             '';
           key = "<Leader>e";
-          mode = ["n" "v"];
+          mode = ["n"];
           options = {
             desc = "Open neo-tree";
             silent = true;
@@ -1099,9 +1129,9 @@ in {
           key = "<leader>bd";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            Snacks.bufdelete()
-                      end
+            function()
+              Snacks.bufdelete()
+            end
           '';
           options = {
             desc = "Delete Buffer";
@@ -1111,9 +1141,9 @@ in {
           key = "<leader>bo";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            Snacks.bufdelete.other()
-                      end
+            function()
+              Snacks.bufdelete.other()
+            end
           '';
           options = {
             desc = "Delete Other Buffers";
@@ -1278,9 +1308,9 @@ in {
           key = "<leader>cd";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            vim.diagnostic.open_float()
-                      end
+            function()
+              vim.diagnostic.open_float()
+            end
           '';
           options = {
             desc = "Line Diagnostics";
@@ -1292,9 +1322,9 @@ in {
           action.__raw = ''
             function()
               vim.diagnostic.jump({
-                  count = 1,
-                  float = true,
-                })
+                count = 1,
+                float = true,
+              })
             end
           '';
           options = {
@@ -1307,9 +1337,9 @@ in {
           action.__raw = ''
             function()
               vim.diagnostic.jump({
-                  count = -1,
-                  float = true,
-                })
+                count = -1,
+                float = true,
+              })
             end
           '';
           options = {
@@ -1385,9 +1415,9 @@ in {
           key = "<leader>gg";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            Snacks.lazygit()
-                      end
+            function()
+              Snacks.lazygit()
+            end
           '';
           options = {
             desc = "Lazygit (cwd)";
@@ -1398,9 +1428,9 @@ in {
           key = "<leader>gb";
           mode = ["n"];
           action.__raw = ''
-                        function()
-            Snacks.picker.git_log_line()
-                      end
+            function()
+              Snacks.picker.git_log_line()
+            end
           '';
           options = {
             desc = "Git Blame Line";
@@ -1410,9 +1440,9 @@ in {
           key = "<leader>gB";
           mode = ["n" "x"];
           action.__raw = ''
-                        function()
-            Snacks.gitbrowse()
-                      end
+            function()
+              Snacks.gitbrowse()
+            end
           '';
           options = {
             desc = "Git Browse (open)";
@@ -1422,14 +1452,14 @@ in {
           key = "<leader>gY";
           mode = ["n" "x"];
           action.__raw = ''
-                        function()
-            Snacks.gitbrowse {
-              open = function(url)
-                vim.fn.setreg("+", url)
-              end,
-              notify = false,
-            }
-                      end
+            function()
+              Snacks.gitbrowse {
+                open = function(url)
+                  vim.fn.setreg("+", url)
+                end,
+                notify = false,
+              }
+            end
           '';
           options = {
             desc = "Git Browse (copy)";
@@ -1791,6 +1821,39 @@ in {
             end
           '';
           options.desc = "Select a refactor to apply";
+        }
+
+        # dmmulroy/tsc.nvim
+        {
+          key = "<leader>tt";
+          mode = ["x" "n"];
+          action.__raw = ''
+            function()
+              require("tsc").run()
+            end
+          '';
+          options.desc = "Run tsc";
+        }
+        {
+          key = "<leader>tv";
+          mode = ["x" "n"];
+          action.__raw = ''
+            function()
+              require("tsc").setup {
+                use_trouble_qflist = true,
+                bin_path = "node_modules/.bin/vue-tsc",
+              }
+              require("tsc").run()
+            end
+          '';
+          options.desc = "Run vue-tsc";
+        }
+
+        # Redoxahmii/json-to-types.nvim
+        {
+          key = "<leader>ct";
+          action = "<CMD>ConvertJSONtoLangBuffer typescript<CR>";
+          options.desc = "Convert JSON to TS from buffer";
         }
       ];
 
