@@ -1879,7 +1879,11 @@ in {
   programs.gpg.enable = true;
   programs.tmux = {
     enable = true;
-    plugins = with pkgs; [tmuxPlugins.resurrect];
+    plugins = with pkgs.tmuxPlugins; [
+      resurrect
+      harpoon
+      kanagawa
+    ];
     newSession = true;
     terminal = "tmux-256color";
     keyMode = "vi";
