@@ -202,6 +202,7 @@ in {
 
     fish = {
       enable = true;
+      generateCompletions = true;
       plugins = [
         {
           name = "done";

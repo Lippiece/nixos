@@ -156,7 +156,10 @@ in {
       enable = true;
       enableSSHSupport = true;
     };
-    fish.enable = true;
+    fish = {
+      enable = true;
+      generateCompletions = true;
+    };
     # neovim = {
     #   enable = true;
     #   defaultEditor = true;
