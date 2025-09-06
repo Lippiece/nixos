@@ -117,6 +117,7 @@ in {
     commitizen
     gh
     steamcmd
+    rsync
 
     # # Nix
     alejandra
