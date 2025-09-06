@@ -98,31 +98,31 @@
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      # intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-    ];
+    # extraPackages = with pkgs; [
+    # intel-media-driver # LIBVA_DRIVER_NAME=iHD
+    # intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    # ];
   };
 
-  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
+  # environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
     # open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
-    open = true;
+    open = false;
 
-    prime = {
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-
-      # Needed for finegrained power management to work
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-    };
+    # prime = {
+    #   intelBusId = "PCI:0:2:0";
+    #   nvidiaBusId = "PCI:1:0:0";
+    #
+    #   # Needed for finegrained power management to work
+    #   offload = {
+    #     enable = true;
+    #     enableOffloadCmd = true;
+    #   };
+    # };
 
     # modesetting.enable = true;
 
@@ -130,7 +130,7 @@
     # powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
-    powerManagement.finegrained = true;
+    # powerManagement.finegrained = true;
 
     # Enable the useless Nvidia settings menu,
     # accessible via `nvidia-settings`.
