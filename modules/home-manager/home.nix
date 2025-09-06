@@ -742,8 +742,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "DrKJeff16";
             repo = "project.nvim";
-            rev = "435b0b31738c6e2e4bf8d3531a672184722ea4cd";
-            sha256 = "1wg0s237rv79him5qh56s5glnrwzr10h4wpwgvlkqz8ira88hb7x";
+            rev = "d8ac8c43fb68aab4ce921ca7197caccf8d90c897";
+            sha256 = "1h06ww43sbpkqdxl0sg8r2gdbid15cmlzwj0ljiw8kw9h73ybpsc";
           };
         })
         (vimUtils.buildVimPlugin {
@@ -751,7 +751,7 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "Lippiece";
             repo = "nvim-quicktype";
-            rev = "main";
+            rev = "7ef6d2bc43cf945f5d418e2e58d61297c05f39b8";
             sha256 = "0j4a932p17c9fqpvk3svj6jqp26jvms8kp83hfahfvpmr29sspxx";
           };
         })
