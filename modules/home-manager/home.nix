@@ -2023,12 +2023,30 @@ in {
       mailsync = {
         Unit = {
           Description = "Sync mail";
-          wantedBy = ["network.target"];
         };
 
         Service = {
           Type = "oneshot";
           ExecStart = "/home/lippiece/bin/check-mail.fish";
+        };
+
+        Install = {
+          WantedBy = ["network.target"];
+        };
+      };
+
+      krunner-daemon = {
+        Unit = {
+          Description = "Run krunner daemon";
+        };
+
+        Service = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.kdePackages.plasma-workspace}/bin/krunner -d";
+        };
+
+        Install = {
+          WantedBy = ["graphical-session.target"];
         };
       };
     };
