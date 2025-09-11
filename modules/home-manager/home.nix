@@ -233,6 +233,9 @@ in {
           };
         }
       ];
+      interactiveShellInit = ''
+        set -U __done_min_cmd_duration 1000
+      '';
     };
 
     nushell = {
@@ -742,8 +745,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "DrKJeff16";
             repo = "project.nvim";
-            rev = "d8ac8c43fb68aab4ce921ca7197caccf8d90c897";
-            sha256 = "1h06ww43sbpkqdxl0sg8r2gdbid15cmlzwj0ljiw8kw9h73ybpsc";
+            rev = "a15becb01e829d9c6de3fc36eec05c19acea7f4f";
+            sha256 = "19lz17g25z9f7c1fm8774jlcqqf0hxf4h33qx8ydccwm5sjm88rx";
           };
         })
         (vimUtils.buildVimPlugin {

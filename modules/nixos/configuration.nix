@@ -159,6 +159,7 @@ in {
     fish = {
       enable = true;
       generateCompletions = true;
+      useBabelfish = true;
     };
     # neovim = {
     #   enable = true;
