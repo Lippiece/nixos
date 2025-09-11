@@ -2044,7 +2044,7 @@ in {
         };
 
         Service = {
-          Type = "oneshot";
+          Type = "simple";
           ExecStart = "${pkgs.kdePackages.plasma-workspace}/bin/krunner -d";
         };
 
