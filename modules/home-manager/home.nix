@@ -1888,6 +1888,7 @@ in {
       resurrect
       harpoon
       kanagawa
+      tmux-which-key
     ];
     newSession = true;
     terminal = "tmux-256color";
