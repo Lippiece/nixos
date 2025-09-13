@@ -745,8 +745,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "DrKJeff16";
             repo = "project.nvim";
-            rev = "a15becb01e829d9c6de3fc36eec05c19acea7f4f";
-            sha256 = "19lz17g25z9f7c1fm8774jlcqqf0hxf4h33qx8ydccwm5sjm88rx";
+            rev = "5b7ff822490edeb4c4a2a5b9460f7c509d1ee363";
+            sha256 = "0qb1sc34wncir0j76w63kav0a2z05m7mnnw52r9f7hiq9dcn22q2";
           };
         })
         (vimUtils.buildVimPlugin {

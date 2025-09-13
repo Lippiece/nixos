@@ -11,13 +11,13 @@
   steam,
 }: let
   pname = "rimsort";
-  version = "unstable-2025-09-10";
+  version = "unstable-2025-09-11";
 
   src = fetchFromGitHub {
     owner = "RimSort";
     repo = "RimSort";
-    rev = "8c556fd6b8df84fe08eecb9787c9baffbaa01ae4";
-    sha256 = "0z72ql7gvmba0k9z3dh2hxcz49bqfxpmh6vyzkzbz7mi8azhi4ln";
+    rev = "09e075120d99f0525b385e4bb5ddcf144c09d78f";
+    sha256 = "0smz04yqcvi44dq317m9s6765di50ky0qvpzw5ggcjqlddin18a4";
     fetchSubmodules = true;
   };
   steamworksSrc = fetchzip {

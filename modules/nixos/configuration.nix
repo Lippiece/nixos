@@ -199,6 +199,7 @@ in {
       enable = true;
       clean.enable = true;
       clean.dates = "weekly";
+      flake = "~/.config/nixos";
     };
     nix-index = {
       enable = true;
