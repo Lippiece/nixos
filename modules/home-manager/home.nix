@@ -59,6 +59,7 @@ in {
     # mpc-qt
     kdePackages.filelight
     element-desktop
+    rustdesk-flutter
 
     # # Emulators
     # Laggy and can't redirect USB
