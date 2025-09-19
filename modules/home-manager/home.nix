@@ -564,7 +564,7 @@ in {
               typescript = ["biome_check" "oxlint" "eslint_d"];
               javascriptreact = ["biome_check" "oxlint" "eslint_d"];
               typescriptreact = ["biome_check" "oxlint" "eslint_d"];
-              astro = ["prettier_custom" "biome_check" "oxlint"];
+              astro = ["prettier" "biome_check" "oxlint" "eslint_d"];
               vue = ["prettier" "biome_check" "oxlint" "eslint_d"];
               svelte = ["prettier" "biome_check" "oxlint" "eslint_d"];
               css = ["prettier"];
@@ -736,8 +736,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "andersevenrud";
             repo = "nvim_context_vt";
-            rev = "b69f642f7848fec8c056a7e2c9452e3dec84c2b5";
-            sha256 = "1dyzp6ng67a6zp021nxbimj7rf7bp7rkc4lkl9wrx9fwvxz1x0xi";
+            rev = "fadbd9e57af72f6df3dd33df32ee733aa01cdbc0";
+            sha256 = "0rx7lik3c40ka9y4qws0d960lzhvpnkv5hs512140dq4k2n5f6l2";
           };
         })
         # TODO: https://github.com/nix-community/nixvim/issues/3654
@@ -746,8 +746,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "DrKJeff16";
             repo = "project.nvim";
-            rev = "5b7ff822490edeb4c4a2a5b9460f7c509d1ee363";
-            sha256 = "0qb1sc34wncir0j76w63kav0a2z05m7mnnw52r9f7hiq9dcn22q2";
+            rev = "8b10559b2c821708539961ac48b424d90981d026";
+            sha256 = "1ifm1p0y1f5zb3zfg337l3mqnkc1ng5y7qnrwdpzna9wsvvmc03n";
           };
         })
         (vimUtils.buildVimPlugin {

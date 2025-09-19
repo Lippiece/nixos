@@ -388,7 +388,8 @@ in {
     auto-optimise-store = true;
     keep-going = true;
   };
-  nix.package = pkgs.lixPackageSets.latest.lix;
+  # TODO: https://github.com/NixOS/nixpkgs/pull/442624
+  # nix.package = pkgs.lixPackageSets.latest.lix;
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # Enable common container config files in /etc/containers
