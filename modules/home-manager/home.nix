@@ -661,7 +661,7 @@ in {
             typescript = ["oxlint" "eslint_d"];
             typescriptreact = ["oxlint" "eslint_d"];
             javascriptreact = ["oxlint" "eslint_d"];
-            astro = ["oxlint"];
+            astro = ["oxlint" "eslint_d"];
             svelte = ["oxlint" "eslint_d"];
             vue = ["oxlint" "eslint_d"];
             css = ["stylelint"];
