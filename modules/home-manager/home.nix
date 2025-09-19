@@ -988,6 +988,12 @@ in {
           unocss = {
             enable = true;
             activate = true;
+            settings.settings.unocss = {
+              remToPxPreview = true;
+            };
+            settings.options.unocss = {
+              remToPxPreview = true;
+            };
           };
         };
       };
