@@ -985,6 +985,10 @@ in {
             enable = true;
             activate = true;
           };
+          unocss = {
+            enable = true;
+            activate = true;
+          };
         };
       };
 
