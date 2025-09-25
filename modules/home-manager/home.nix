@@ -115,7 +115,7 @@ in {
     wl-clipboard
     pass-git-helper
     proxychains-ng
-    commitizen
+    # commitizen
     gh
     steamcmd
     rsync
@@ -431,7 +431,7 @@ in {
         conceallevel = 2;
       };
 
-      colorschemes.onedark.enable = true;
+      colorschemes.rose-pine.enable = true;
 
       plugins = {
         lspconfig = {
@@ -698,8 +698,7 @@ in {
         which-key.enable = true;
         actions-preview.enable = true;
         dap.enable = true;
-        # TODO: https://github.com/nix-community/nixvim/issues/3654
-        # project-nvim.enable = true;
+        project-nvim.enable = true;
         sandwich.enable = true;
         git-conflict.enable = true;
         ccc.enable = true;
@@ -738,16 +737,6 @@ in {
             repo = "nvim_context_vt";
             rev = "fadbd9e57af72f6df3dd33df32ee733aa01cdbc0";
             sha256 = "0rx7lik3c40ka9y4qws0d960lzhvpnkv5hs512140dq4k2n5f6l2";
-          };
-        })
-        # TODO: https://github.com/nix-community/nixvim/issues/3654
-        (vimUtils.buildVimPlugin {
-          name = "project";
-          src = pkgs.fetchFromGitHub {
-            owner = "DrKJeff16";
-            repo = "project.nvim";
-            rev = "8b10559b2c821708539961ac48b424d90981d026";
-            sha256 = "1ifm1p0y1f5zb3zfg337l3mqnkc1ng5y7qnrwdpzna9wsvvmc03n";
           };
         })
         (vimUtils.buildVimPlugin {
@@ -805,8 +794,6 @@ in {
           require"automkdir".setup()
           require"ts-error-translator".setup()
           require"nvim_context_vt".setup()
-          -- TODO: https://github.com/nix-community/nixvim/issues/3654
-          require"project".setup()
           require("nvim-quicktype").setup({
             global = {
               -- Quicktype global options
