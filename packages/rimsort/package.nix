@@ -16,7 +16,7 @@
   src = fetchFromGitHub {
     owner = "RimSort";
     repo = "RimSort";
-    rev = "09e075120d99f0525b385e4bb5ddcf144c09d78f";
+    rev = "09e075120d99f0525b385e4bb5ddcf144c09d78f"; # pin
     sha256 = "0smz04yqcvi44dq317m9s6765di50ky0qvpzw5ggcjqlddin18a4";
     fetchSubmodules = true;
   };

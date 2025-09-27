@@ -431,7 +431,7 @@ in {
         conceallevel = 2;
       };
 
-      colorschemes.rose-pine.enable = true;
+      colorschemes.modus.enable = true;
 
       plugins = {
         lspconfig = {
@@ -706,6 +706,7 @@ in {
         origami.enable = true;
         guess-indent.enable = true;
         bufferline.enable = true;
+        telescope.enable = true;
       };
 
       extraPlugins = with pkgs; [
@@ -1307,6 +1308,7 @@ in {
           };
         }
 
+        # Diagnostics
         {
           key = "<leader>cd";
           mode = ["n"];
@@ -1414,6 +1416,7 @@ in {
           };
         }
 
+        # Git
         {
           key = "<leader>gg";
           mode = ["n"];
@@ -1426,7 +1429,6 @@ in {
             desc = "Lazygit (cwd)";
           };
         }
-
         {
           key = "<leader>gb";
           mode = ["n"];
@@ -1468,6 +1470,14 @@ in {
             desc = "Git Browse (copy)";
           };
         }
+        {
+          key = "<leader>gY";
+          mode = ["n" "x"];
+          action = "<cmd>Telescope git_bcommits<cr>";
+          options = {
+            desc = "Git file history";
+          };
+        }
 
         {
           key = "<C-/>";
@@ -1487,6 +1497,7 @@ in {
           };
         }
 
+        # Windows
         {
           key = "<leader>-";
           mode = ["n"];
@@ -1515,6 +1526,7 @@ in {
           };
         }
 
+        # Tabs
         {
           key = "<leader><tab>l";
           mode = ["n"];
@@ -1572,6 +1584,7 @@ in {
           };
         }
 
+        # Snacks
         {
           key = "<leader>cl";
           mode = ["n"];
@@ -1584,7 +1597,6 @@ in {
             desc = "Lsp Info";
           };
         }
-
         {
           key = "<leader>/";
           mode = ["n"];
@@ -1622,7 +1634,6 @@ in {
             desc = "Run Codelens";
           };
         }
-
         {
           key = "<leader>cC";
           mode = ["n"];
@@ -1703,20 +1714,6 @@ in {
           '';
           options.desc = "Code Action (fastaction)";
         }
-
-        {
-          key = "<Leader>cf";
-          mode = ["n"];
-          action.__raw = ''
-            function()
-              require("conform").format()
-            end
-          '';
-          options = {
-            desc = "Format file";
-          };
-        }
-
         {
           key = "]]";
           mode = ["n"];
@@ -1729,7 +1726,6 @@ in {
             desc = "Next Reference";
           };
         }
-
         {
           key = "[[";
           mode = ["n"];
@@ -1742,7 +1738,6 @@ in {
             desc = "Prev Reference";
           };
         }
-
         {
           key = "<Esc>";
           mode = ["n"];
@@ -1752,6 +1747,7 @@ in {
           };
         }
 
+        # Format
         {
           key = "<leader>uf";
           mode = ["n"];
@@ -1784,7 +1780,20 @@ in {
           '';
           options.desc = "Toggle autoformat-on-save globally";
         }
+        {
+          key = "<Leader>cf";
+          mode = ["n"];
+          action.__raw = ''
+            function()
+              require("conform").format()
+            end
+          '';
+          options = {
+            desc = "Format file";
+          };
+        }
 
+        # Trouble
         {
           key = "<leader>xx";
           mode = ["n"];
@@ -1796,6 +1805,12 @@ in {
           mode = ["n"];
           action = "<cmd>Trouble diagnostics toggle<cr>";
           options.desc = "Diagnostics (Trouble)";
+        }
+        {
+          key = "<leader>xt";
+          mode = ["n"];
+          action = "<cmd>Trouble todo toggle<cr>";
+          options.desc = "Trouble: Todos";
         }
 
         {

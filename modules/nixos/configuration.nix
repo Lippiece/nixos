@@ -199,7 +199,7 @@ in {
       enable = true;
       clean.enable = true;
       clean.dates = "weekly";
-      flake = "~/.config/nixos";
+      flake = "/home/lippiece/.config/nixos";
     };
     nix-index = {
       enable = true;
@@ -388,8 +388,7 @@ in {
     auto-optimise-store = true;
     keep-going = true;
   };
-  # TODO: https://github.com/NixOS/nixpkgs/pull/442624
-  # nix.package = pkgs.lixPackageSets.latest.lix;
+  nix.package = pkgs.lixPackageSets.latest.lix;
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # Enable common container config files in /etc/containers
