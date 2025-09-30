@@ -434,8 +434,69 @@ in {
       colorschemes.modus.enable = true;
 
       plugins = {
-        lspconfig = {
+        # lspconfig = {
+        #   enable = true;
+        # };
+        lsp = {
           enable = true;
+          servers = {
+            astro = {
+              enable = true;
+              autostart = true;
+            };
+            nixd = {
+              enable = true;
+              autostart = true;
+              settings = let
+                flake = ''(builtins.getFlake (builtins.toString ./.))'';
+                system = ''''${builtins.currentSystem}'';
+              in {
+                nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
+
+                options = {
+                  nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
+                  # BUG: doesn't work: https://github.com/nix-community/nixd/issues/706
+                  nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
+                  home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
+                };
+              };
+            };
+            lua_ls = {
+              enable = true;
+              autostart = true;
+            };
+            yamlls = {
+              enable = true;
+              autostart = true;
+            };
+            jsonls = {
+              enable = true;
+              autostart = true;
+            };
+            vtsls = {
+              enable = true;
+              autostart = true;
+            };
+            tailwindcss = {
+              enable = true;
+              autostart = true;
+            };
+            emmet_language_server = {
+              enable = true;
+              autostart = true;
+            };
+            unocss = {
+              package = null;
+              enable = true;
+              autostart = true;
+              settings.settings.unocss = {
+                remToPxPreview = true;
+              };
+              settings.options.unocss = {
+                remToPxPreview = true;
+              };
+            };
+          };
         };
 
         blink-cmp = {
@@ -927,63 +988,6 @@ in {
             options.desc = "Rename";
           }
         ];
-        servers = {
-          nixd = {
-            enable = true;
-            activate = true;
-            settings = let
-              flake = ''(builtins.getFlake (builtins.toString ./.))'';
-              system = ''''${builtins.currentSystem}'';
-            in {
-              nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
-
-              options = {
-                nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
-                # BUG: doesn't work: https://github.com/nix-community/nixd/issues/706
-                nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
-                home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
-              };
-            };
-          };
-          lua_ls = {
-            enable = true;
-            activate = true;
-          };
-          yamlls = {
-            enable = true;
-            activate = true;
-          };
-          jsonls = {
-            enable = true;
-            activate = true;
-          };
-          vtsls = {
-            enable = true;
-            activate = true;
-          };
-          astro = {
-            enable = true;
-            activate = true;
-          };
-          tailwindcss = {
-            enable = true;
-            activate = true;
-          };
-          emmet_language_server = {
-            enable = true;
-            activate = true;
-          };
-          unocss = {
-            enable = true;
-            activate = true;
-            settings.settings.unocss = {
-              remToPxPreview = true;
-            };
-            settings.options.unocss = {
-              remToPxPreview = true;
-            };
-          };
-        };
       };
 
       keymaps = [
