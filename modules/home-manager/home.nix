@@ -444,23 +444,6 @@ in {
               enable = true;
               autostart = true;
             };
-            nixd = {
-              enable = true;
-              autostart = true;
-              settings = let
-                flake = ''(builtins.getFlake (builtins.toString ./.))'';
-                system = ''''${builtins.currentSystem}'';
-              in {
-                nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
-
-                options = {
-                  nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
-                  # BUG: doesn't work: https://github.com/nix-community/nixd/issues/706
-                  nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
-                  home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
-                };
-              };
-            };
             lua_ls = {
               enable = true;
               autostart = true;
@@ -768,6 +751,7 @@ in {
         guess-indent.enable = true;
         bufferline.enable = true;
         telescope.enable = true;
+        overseer.enable = true;
       };
 
       extraPlugins = with pkgs; [
@@ -988,6 +972,25 @@ in {
             options.desc = "Rename";
           }
         ];
+        servers = {
+          nixd = {
+            enable = true;
+            activate = true;
+            settings = let
+              flake = ''(builtins.getFlake (builtins.toString ./.))'';
+              system = ''''${builtins.currentSystem}'';
+            in {
+              nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
+
+              options = {
+                nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
+                # BUG: doesn't work: https://github.com/nix-community/nixd/issues/706
+                nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
+                home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
+              };
+            };
+          };
+        };
       };
 
       keymaps = [
