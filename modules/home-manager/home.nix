@@ -551,7 +551,7 @@ in {
               stylua = {
                 command = lib.getExe pkgs.stylua;
               };
-              prettier.command = lib.getExe pkgs.prettier;
+              prettier.command = "prettier";
               yamlfmt.command = lib.getExe pkgs.yamlfmt;
             };
             formatters = {
@@ -587,15 +587,6 @@ in {
                   "--write"
                   "--unsafe"
                   "--stdin-file-path"
-                  "$FILENAME"
-                ];
-                stdin = true;
-              };
-              prettier_custom = {
-                command = "prettier";
-                args = [
-                  "--write"
-                  "--stdin-filepath"
                   "$FILENAME"
                 ];
                 stdin = true;
