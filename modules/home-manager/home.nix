@@ -59,7 +59,6 @@ in {
     # mpc-qt
     kdePackages.filelight
     element-desktop
-    rustdesk-flutter
 
     # # Emulators
     # Laggy and can't redirect USB
@@ -1879,6 +1878,23 @@ in {
           key = "<leader>ct";
           action = "<CMD>ConvertJSONtoLangBuffer typescript<CR>";
           options.desc = "Convert JSON to TS from buffer";
+        }
+
+        # Overseer
+        {
+          key = "<leader>uo";
+          action = "<CMD>OverseerToggle<CR>";
+          options.desc = "Toggle Overseer UI";
+        }
+        {
+          key = "<leader>ur";
+          action = "<CMD>OverseerRunCmd<CR>";
+          options.desc = "Run command with Overseer";
+        }
+        {
+          key = "<leader>ul";
+          action = "<CMD>OverseerLoadBundle<CR>";
+          options.desc = "Load Overseer command bundle";
         }
       ];
 
