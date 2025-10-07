@@ -45,38 +45,115 @@ in {
 
   time.timeZone = "Europe/Kaliningrad";
 
-  # Enable sound.
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
+  services = {
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      alsa.enable = true;
+    };
+    libinput = {
+      enable = true;
+      touchpad = {
+        horizontalScrolling = true;
+        naturalScrolling = true;
+        middleEmulation = true;
+        clickMethod = "buttonareas";
+        scrollMethod = "edge";
+        tapping = false;
+      };
+    };
+
+    xserver.enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        autoNumlock = true;
+        wayland.enable = true;
+      };
+    };
+    desktopManager.plasma6.enable = true;
+    openssh.enable = true;
+    dnsproxy = {
+      enable = true;
+      settings = {
+        bootstrap = ["9.9.9.9:53"];
+
+        # Plain DNS upstream
+        # upstream = [ "1.1.1.1:53" ];
+        # DNS over TLS upstream
+        # upstream = [ "tls://dns.adguard.com" ];
+        # DNS over HTTPS upstream
+        upstream = ["quic://lipguard.ydns.eu"];
+      };
+      # Additional launch flags
+      # flags = [ "--verbose" ];
+    };
   };
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput = {
-    enable = true;
-    touchpad = {
-      horizontalScrolling = true;
-      naturalScrolling = true;
-      middleEmulation = true;
-      clickMethod = "buttonareas";
-      scrollMethod = "edge";
-      tapping = false;
-    };
-  };
+  environment = {
+    sessionVariables.MOZ_ENABLE_WAYLAND = "1";
+    etc."xdg/kcminputrc".text = ''
+      [Keyboard]
+      NumLock=0
+    '';
+    systemPackages = with pkgs; [
+      # Essential
+      wget
+      bat
+      unar
+      git
+      fish
+      silver-searcher
+      kdotool
+      gcc
+      vlc
+      btop
+      glances
+      unzip
+      tree
 
-  services.xserver.enable = true;
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      autoNumlock = true;
-      wayland.enable = true;
+      # Libs & tools
+      icu
+      kdePackages.kaccounts-providers
+      kdePackages.kaccounts-integration
+      kdePackages.korganizer
+      kdePackages.kdepim-addons
+      kdePackages.signond
+      kdePackages.kontact
+      sqlite
+      libinput
+      libnotify
+      inotify-tools
+      kdePackages.qtimageformats
+      libwebp
+
+      # For `pactl`
+      pulseaudio
+    ];
+
+    persistence."/persist" = {
+      # hideMounts = true;
+      directories = [
+        "/var/lib/bluetooth"
+        "/var/lib/nixos"
+        "/var/lib/systemd/coredump"
+        "/etc/NetworkManager/system-connections"
+        "/etc/nixos"
+        "/usr"
+      ];
+      files = [
+        # { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+      ];
+    };
+
+    sessionVariables = {
+      # LIBVA_DRIVER_NAME = "iHD";
+      # NIXOS_OZONE_WL = "1";
+      PAGER = "nvim -R";
+      MANPAGER = "nvim +Man!";
+      # HTTP_PROXY = "127.0.0.1:2334";
     };
   };
-  services.desktopManager.plasma6.enable = true;
-  environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
-  # services.spamassassin = {
-  #   enable = true;
-  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lippiece = {
@@ -90,63 +167,6 @@ in {
   users.defaultUserShell = pkgs.fish;
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    # Essential
-    wget
-    bat
-    unar
-    git
-    fish
-    silver-searcher
-    kdotool
-    gcc
-    vlc
-    btop
-    glances
-    unzip
-    tree
-
-    # Libs & tools
-    icu
-    kdePackages.kaccounts-providers
-    kdePackages.kaccounts-integration
-    kdePackages.korganizer
-    kdePackages.kdepim-addons
-    kdePackages.signond
-    kdePackages.kontact
-    sqlite
-    libinput
-    libnotify
-    inotify-tools
-    kdePackages.qtimageformats
-    libwebp
-
-    # For `pactl`
-    pulseaudio
-  ];
-
-  environment.persistence."/persist" = {
-    # hideMounts = true;
-    directories = [
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-      "/etc/nixos"
-      "/usr"
-    ];
-    files = [
-      # { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
-    ];
-  };
-
-  environment.sessionVariables = {
-    # LIBVA_DRIVER_NAME = "iHD";
-    # NIXOS_OZONE_WL = "1";
-    PAGER = "nvim -R";
-    MANPAGER = "nvim +Man!";
-    # HTTP_PROXY = "127.0.0.1:2334";
-  };
 
   # Some Programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -285,11 +305,6 @@ in {
     platformTheme = "kde";
   };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -305,7 +320,7 @@ in {
       192.168.1.102:3003 lipgit.ydns.eu
       192.168.1.102:3009 lipguard.ydns.eu
 
-      192.168.1.201 yuos
+      192.168.1.201      yuos
     '';
 
     firewall.enable = false;
@@ -317,31 +332,31 @@ in {
     nameservers = ["127.0.0.1"];
   };
   # networking.networkmanager.dns = "systemd-resolved";
-  services.dnsproxy = {
-    enable = true;
-    settings = {
-      bootstrap = ["9.9.9.9:53"];
-
-      # Plain DNS upstream
-      # upstream = [ "1.1.1.1:53" ];
-      # DNS over TLS upstream
-      # upstream = [ "tls://dns.adguard.com" ];
-      # DNS over HTTPS upstream
-      upstream = ["quic://lipguard.ydns.eu"];
-    };
-    # Additional launch flags
-    # flags = [ "--verbose" ];
-  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete `configuration.nix`.
   # system.copySystemConfiguration = true;
 
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  system.stateVersion = "25.05"; # Did you read the comment?
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
+  system = {
+    autoUpgrade = {
+      flake = inputs.self.outPath;
+      flags = [
+        "--print-build-logs"
+      ];
+      dates = "02:00";
+      allowReboot = true;
+      rebootWindow = {
+        lower = "01:00";
+        upper = "06:00";
+      };
+      persistent = true;
+      enable = true;
+    };
+
+    # Most users should NEVER change this value after the initial install, for any reason,
+    stateVersion = "25.05";
+  };
 
   home-manager = {
     extraSpecialArgs = {
@@ -381,15 +396,22 @@ in {
     enableDefaultPackages = true;
   };
 
-  nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
-    cores = 8;
-    max-jobs = 4;
-    auto-optimise-store = true;
-    keep-going = true;
+  nix = {
+    optimise = {
+      automatic = true;
+      persistent = true;
+      dates = "03:00";
+    };
+    settings = {
+      experimental-features = ["nix-command" "flakes"];
+      cores = 8;
+      max-jobs = 4;
+      auto-optimise-store = true;
+      keep-going = true;
+    };
+    package = pkgs.lixPackageSets.latest.lix;
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
-  nix.package = pkgs.lixPackageSets.latest.lix;
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # Enable common container config files in /etc/containers
   virtualisation = {
