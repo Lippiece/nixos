@@ -452,4 +452,16 @@ in {
       kdePackages.xdg-desktop-portal-kde
     ];
   };
+
+  systemd = {
+    services = {
+      nixos-upgrade.serviceConfig.ExecStartPost = ["/run/current-system/sw/bin/systemctl suspend"];
+      nix-optimise.serviceConfig.ExecStartPost = ["/run/current-system/sw/bin/systemctl suspend"];
+    };
+
+    timers = {
+      nixos-upgrade.timerConfig.WakeSystem = "yes";
+      nix-optimise.timerConfig.WakeSystem = "yes";
+    };
+  };
 }
