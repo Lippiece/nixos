@@ -343,18 +343,6 @@ in {
       flake = inputs.self.outPath;
       flags = [
         "--print-build-logs"
-        "--update-input"
-        "nixpkgs"
-        "--update-input"
-        "home-manager"
-        "--update-input"
-        "firefox"
-        "--update-input"
-        "phoenix"
-        "--update-input"
-        "nixvim"
-        "--update-input"
-        "impermanence"
         "--commit-lock-file"
       ];
       dates = "02:00";
@@ -468,6 +456,8 @@ in {
 
   systemd = {
     services = {
+      nixos-upgrade.serviceConfig.WorkingDirectory = "/home/lippiece/.config/nixos";
+      nixos-upgrade.serviceConfig.ExecStartPre = ["/run/current-system/sw/bin/nix flake update"];
       nixos-upgrade.serviceConfig.ExecStartPost = ["/run/current-system/sw/bin/systemctl suspend"];
       nix-optimise.serviceConfig.ExecStartPost = ["/run/current-system/sw/bin/systemctl suspend"];
     };
