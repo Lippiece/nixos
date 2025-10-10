@@ -347,6 +347,7 @@ in {
       ];
       dates = "02:00";
       allowReboot = true;
+      operation = "switch";
       rebootWindow = {
         lower = "01:00";
         upper = "06:00";
@@ -460,8 +461,6 @@ in {
       github.com=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'"];
       nixos-upgrade.serviceConfig.WorkingDirectory = "/home/lippiece/.config/nixos";
       nixos-upgrade.serviceConfig.ExecStartPre = ["/run/current-system/sw/bin/nix flake update"];
-      nixos-upgrade.serviceConfig.ExecStartPost = ["/run/current-system/sw/bin/systemctl suspend"];
-      nix-optimise.serviceConfig.ExecStartPost = ["/run/current-system/sw/bin/systemctl suspend"];
     };
 
     timers = {
