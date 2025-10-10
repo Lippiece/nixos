@@ -343,6 +343,19 @@ in {
       flake = inputs.self.outPath;
       flags = [
         "--print-build-logs"
+        "--update-input"
+        "nixpkgs"
+        "--update-input"
+        "home-manager"
+        "--update-input"
+        "firefox"
+        "--update-input"
+        "phoenix"
+        "--update-input"
+        "nixvim"
+        "--update-input"
+        "impermanence"
+        "--commit-lock-file"
       ];
       dates = "02:00";
       allowReboot = true;
