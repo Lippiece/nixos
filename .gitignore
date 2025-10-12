@@ -4,6 +4,3 @@ packages/catapult/dda
 packages/catapult/catapult-linux-x64-24.07a
 nixos-switch.log
 archive/
-.sops.yaml
-secrets/
-
