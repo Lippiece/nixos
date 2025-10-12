@@ -108,7 +108,7 @@ in {
     python313Packages.demjson3
 
     # # Shell
-    bun
+    # bun
     so
     imagemagick
     wl-clipboard
