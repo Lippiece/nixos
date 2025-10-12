@@ -22,16 +22,18 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Helpers
     impermanence.url = "github:nix-community/impermanence";
     nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: {
+  outputs = {nixpkgs, ...} @ inputs: {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
@@ -39,10 +41,11 @@
         ./modules/nixos/configuration.nix
         ./modules/nixos/hardware-configuration.nix
 
-        # Home Manager
         inputs.home-manager.nixosModules.default
 
         inputs.phoenix.nixosModules.default
+
+        inputs.sops-nix.nixosModules.sops
       ];
     };
   };
