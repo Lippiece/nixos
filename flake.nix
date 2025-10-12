@@ -27,11 +27,7 @@
     nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: {
+  outputs = {nixpkgs, ...} @ inputs: {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
@@ -39,7 +35,6 @@
         ./modules/nixos/configuration.nix
         ./modules/nixos/hardware-configuration.nix
 
-        # Home Manager
         inputs.home-manager.nixosModules.default
 
         inputs.phoenix.nixosModules.default
