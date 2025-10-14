@@ -457,8 +457,7 @@ in {
 
   systemd = {
     services = {
-      nixos-upgrade.serviceConfig.Environment = ["NIX_CONFIG='access-tokens =
-      github.com=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'"];
+      nixos-upgrade.serviceConfig.EnvironmentFile = "/home/lippiece/.config/nixos/.env";
       nixos-upgrade.serviceConfig.WorkingDirectory = "/home/lippiece/.config/nixos";
       nixos-upgrade.serviceConfig.ExecStartPre = ["/run/current-system/sw/bin/nix flake update"];
     };
