@@ -457,9 +457,15 @@ in {
 
   systemd = {
     services = {
-      nixos-upgrade.serviceConfig.EnvironmentFile = "/home/lippiece/.config/nixos/.env";
-      nixos-upgrade.serviceConfig.WorkingDirectory = "/home/lippiece/.config/nixos";
-      nixos-upgrade.serviceConfig.ExecStartPre = ["/run/current-system/sw/bin/nix flake update"];
+      nixos-upgrade = {
+        serviceConfig.EnvironmentFile = "/home/lippiece/.config/nixos/.env";
+        serviceConfig.WorkingDirectory = "/home/lippiece/.config/nixos";
+        serviceConfig.ExecStartPre = ["/run/current-system/sw/bin/nix flake update"];
+        unitConfig = {
+          After = ["dnsproxy.service"];
+          Wants = ["dnsproxy.service"];
+        };
+      };
     };
 
     timers = {
