@@ -478,6 +478,10 @@ in {
                 remToPxPreview = true;
               };
             };
+            svelte = {
+              enable = true;
+              autostart = true;
+            };
           };
         };
 
