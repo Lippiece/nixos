@@ -219,8 +219,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "nickeb96";
             repo = "puffer-fish";
-            rev = "12d062eae0ad24f4ec20593be845ac30cd4b5923";
-            sha256 = "06g8pv68b0vyhhqzj469i9rcics67cq1kbhb8946azjb8f7rhy6s";
+            rev = "3cb17caa88270e1bd215d97fbd591155c976f083";
+            sha256 = "1vk19pgykc537rjxahympq2dihmzsqwjsf1c2qi68n6qi8rhac4k";
           };
         }
         {
@@ -438,6 +438,7 @@ in {
         # };
         lsp = {
           enable = true;
+          inlayHints = true;
           servers = {
             astro = {
               enable = true;
@@ -482,6 +483,14 @@ in {
               enable = true;
               autostart = true;
             };
+            vue_ls = {
+              enable = true;
+              autostart = true;
+            };
+            cssls = {
+              enable = true;
+              autostart = true;
+            };
           };
         };
 
@@ -513,7 +522,7 @@ in {
               ];
             };
             signature = {
-              enabled = true;
+              enabled = false;
             };
             completion = {
               list = {
@@ -525,7 +534,14 @@ in {
                   from_top = true;
                 };
               };
-              accept = {auto_brackets = {enabled = true;};};
+              accept = {
+                auto_brackets = {
+                  enabled = true;
+                };
+              };
+              menu = {
+                auto_show_delay_ms = 100;
+              };
             };
             sources = {
               default = ["lsp" "snippets" "path" "codeium"];
@@ -892,44 +908,13 @@ in {
                       languages = { "vue" },
                       configNamespace = "typescript",
                       location =
-                      "/home/lippiece/node_modules/@vue/language-server",
+                        "/home/lippiece/node_modules/@vue/language-server",
                     },
                   },
                 },
               },
             },
           })
-          vim.lsp.config("vue_ls", {
-            on_init = function(client)
-              client.handlers["tsserver/request"] = function(_, result, context)
-                local clients =
-                  vim.lsp.get_clients { bufnr = context.bufnr, name = "vtsls" }
-                if #clients == 0 then
-                  vim.notify(
-                    "Could not found `vtsls` lsp client, vue_lsp would not work without it.",
-                    vim.log.levels.ERROR
-                  )
-                  return
-                end
-                local ts_client = clients[1]
-                local param = unpack(result)
-                local id, command, payload = unpack(param)
-                ts_client:exec_cmd({
-                  title = "vue_request_forward",
-                  command = "typescript.tsserverRequest",
-                  arguments = {
-                    command,
-                    payload,
-                  },
-                }, { bufnr = context.bufnr }, function(_, r)
-                  local response_data = { { id, r.body } }
-                  ---@diagnostic disable-next-line: param-type-mismatch
-                  client:notify("tsserver/response", response_data)
-                end)
-              end
-            end,
-          })
-          vim.lsp.enable("vue_ls")
         '';
 
       lsp = {
@@ -1966,10 +1951,11 @@ in {
 
   services = {
     easyeffects.enable = true;
-    nextcloud-client = {
-      enable = true;
-      startInBackground = true;
-    };
+    # WARN: wait for https://github.com/NixOS/nixpkgs/pull/454716 to merge
+    # nextcloud-client = {
+    #   enable = true;
+    #   startInBackground = true;
+    # };
     kdeconnect.enable = true;
     # gpg-agent = {
     #   enable = true;
