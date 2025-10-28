@@ -111,7 +111,7 @@ in {
     # bun
     so
     imagemagick
-    wl-clipboard
+    wl-clipboard-rs
     pass-git-helper
     proxychains-ng
     # commitizen
