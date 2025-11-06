@@ -71,7 +71,7 @@ in {
 
     # # Work
     super-productivity
-    onlyoffice-bin
+    onlyoffice-desktopeditors
 
     # # Entertainment
     webtorrent_desktop
@@ -103,7 +103,7 @@ in {
     # python312Packages.venvShellHook
     # uv
     # cargo
-    # nodejs
+    nodejs_latest
     # ripgrep
     python313Packages.demjson3
 
@@ -963,7 +963,7 @@ in {
 
               options = {
                 nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
-                # BUG: doesn't work: https://github.com/nix-community/nixd/issues/706
+                # TODO: doesn't work: https://github.com/nix-community/nixd/issues/706
                 nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
                 home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
               };
@@ -1951,7 +1951,7 @@ in {
 
   services = {
     easyeffects.enable = true;
-    # WARN: wait for https://github.com/NixOS/nixpkgs/pull/454716 to merge
+    # TODO: wait for https://github.com/NixOS/nixpkgs/pull/454716 to merge
     # nextcloud-client = {
     #   enable = true;
     #   startInBackground = true;
