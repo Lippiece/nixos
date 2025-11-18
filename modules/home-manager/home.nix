@@ -116,7 +116,7 @@ in {
     proxychains-ng
     # commitizen
     gh
-    steamcmd
+    # steamcmd
     rsync
 
     # # Nix
@@ -219,8 +219,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "nickeb96";
             repo = "puffer-fish";
-            rev = "3cb17caa88270e1bd215d97fbd591155c976f083";
-            sha256 = "1vk19pgykc537rjxahympq2dihmzsqwjsf1c2qi68n6qi8rhac4k";
+            rev = "83174b07de60078be79985ef6123d903329622b8";
+            sha256 = "0a4x985hzv77r5q8cly6580n488pf5iqlwkifrhzj9kifkwpj70f";
           };
         }
         {
@@ -782,8 +782,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "dmmulroy";
             repo = "ts-error-translator.nvim";
-            rev = "47e5ba89f71b9e6c72eaaaaa519dd59bd6897df4";
-            sha256 = "08whn7l75qv5n74cifmnxc0s7n7ja1g7589pjnbbsk2djn6bqbky";
+            rev = "c36753091616acfd9cd49ac06a0de7ad8dc155da";
+            sha256 = "0077q81dlv7sgsp06pnbq01nmsi6g7916hiqps9652mlrziq0rrc";
           };
         })
         (vimUtils.buildVimPlugin {
@@ -810,8 +810,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "dmmulroy";
             repo = "tsc.nvim";
-            rev = "8c1b4ec6a48d038a79ced8674cb15e7db6dd8ef0";
-            sha256 = "00irwjlm3r741i06w6qd6pmgqcs5zh1faz2fnqvlzgm7pyb4qz50";
+            rev = "e4773833726beec2e8a8e11f0b21613b5472b97b";
+            sha256 = "07lswanahg4j533lp8cwb3100hpcg8kdvzfq9apf3259lyn8rj27";
           };
         })
       ];
@@ -898,7 +898,7 @@ in {
           })
           vim.lsp.config("vtsls", {
             filetypes = vim.tbl_deep_extend("force",
-              vim.lsp.config.vtsls.filetypes, { "vue" }),
+              vim.lsp.config.vtsls.filetypes, { "vue", "javascript" }),
             settings = {
               vtsls = {
                 tsserver = {
@@ -2101,6 +2101,7 @@ in {
       "rimsort"
       "steamworkspy"
       "codeium"
+      "jitsi-meet"
     ];
 
   fonts = {

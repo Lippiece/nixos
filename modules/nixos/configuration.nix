@@ -3,7 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   # config,
-  # lib,
+  lib,
   inputs,
   pkgs,
   ...
@@ -43,7 +43,7 @@ in {
     };
   };
 
-  time.timeZone = "Europe/Kaliningrad";
+  time.timeZone = lib.mkDefault "Europe/Kaliningrad";
 
   services = {
     pipewire = {
@@ -88,7 +88,10 @@ in {
       # Additional launch flags
       # flags = [ "--verbose" ];
     };
+
+    automatic-timezoned.enable = true;
   };
+
   # Enable touchpad support (enabled default in most desktopManager).
   environment = {
     sessionVariables.MOZ_ENABLE_WAYLAND = "1";
