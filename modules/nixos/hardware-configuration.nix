@@ -131,7 +131,7 @@
     # powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
-    powerManagement.finegrained = true;
+    # powerManagement.finegrained = true;
 
     # Enable the useless Nvidia settings menu,
     # accessible via `nvidia-settings`.

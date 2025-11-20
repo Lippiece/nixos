@@ -59,6 +59,26 @@ in {
     # mpc-qt
     kdePackages.filelight
     element-desktop
+    (rustdesk-flutter.overrideAttrs {
+      buildInputs = [
+        ffmpeg_7
+        fuse3
+        gst_all_1.gst-plugins-base
+        gst_all_1.gstreamer
+        xorg.libXtst
+        libaom
+        libopus
+        libpulseaudio
+        libva
+        libvdpau
+        libvpx
+        pipewire
+        libxkbcommon
+        libyuv
+        pam
+        xdotool
+      ];
+    })
 
     # # Emulators
     # Laggy and can't redirect USB
