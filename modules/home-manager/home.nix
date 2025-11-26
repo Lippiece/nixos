@@ -59,26 +59,6 @@ in {
     # mpc-qt
     kdePackages.filelight
     element-desktop
-    (rustdesk-flutter.overrideAttrs {
-      buildInputs = [
-        ffmpeg_7
-        fuse3
-        gst_all_1.gst-plugins-base
-        gst_all_1.gstreamer
-        xorg.libXtst
-        libaom
-        libopus
-        libpulseaudio
-        libva
-        libvdpau
-        libvpx
-        pipewire
-        libxkbcommon
-        libyuv
-        pam
-        xdotool
-      ];
-    })
 
     # # Emulators
     # Laggy and can't redirect USB
@@ -248,8 +228,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "IlanCosman";
             repo = "tide";
-            rev = "7818abcbc600372418b1f8a931306b1d694bd009";
-            sha256 = "0zgn0ys34vc6b0hzqack3m6vlz0kad4chmr3zia2lamxjr6y7dxr";
+            rev = "fcda500d2c2996e25456fb46cd1a5532b3157b16";
+            sha256 = "0zg4ydsjs163n89i6a1fcv2j82qph7wx3cwrb8mzsq2v5mh08dkp";
           };
         }
       ];
@@ -802,8 +782,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "dmmulroy";
             repo = "ts-error-translator.nvim";
-            rev = "c36753091616acfd9cd49ac06a0de7ad8dc155da";
-            sha256 = "0077q81dlv7sgsp06pnbq01nmsi6g7916hiqps9652mlrziq0rrc";
+            rev = "c1e6a5529009e855eb102a668549679548757a05";
+            sha256 = "0azvhr0ap0x620iwap1rf2747yjfq14pc4w26bg0k965919dpqpx";
           };
         })
         (vimUtils.buildVimPlugin {
@@ -1964,6 +1944,10 @@ in {
       };
       mouse = {
         hide_when_typing = true;
+      };
+      window = {
+        opacity = 0.9;
+        blur = true;
       };
     };
   };
