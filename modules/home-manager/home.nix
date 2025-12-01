@@ -1955,11 +1955,10 @@ in {
 
   services = {
     easyeffects.enable = true;
-    # TODO: wait for https://github.com/NixOS/nixpkgs/pull/454716 to merge
-    # nextcloud-client = {
-    #   enable = true;
-    #   startInBackground = true;
-    # };
+    nextcloud-client = {
+      enable = true;
+      startInBackground = true;
+    };
     kdeconnect.enable = true;
     # gpg-agent = {
     #   enable = true;
