@@ -210,8 +210,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "franciscolourenco";
             repo = "done";
-            rev = "102cf3986fbcf08e82f4125e208218fd7b597714";
-            sha256 = "1r29lxfvs884j5naz7yk1qd47anx9gi1b0skdx7jxdjqxa2rqwhr";
+            rev = "998ad4f5fc9cee36c09840a7e635b56428e554f9";
+            sha256 = "1ggjz9z95r46bdsfp8mrs07si6hc97hw9vx5qwgbfzc4qsjmk78r";
           };
         }
         {
