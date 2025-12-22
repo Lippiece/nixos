@@ -443,8 +443,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "dmmulroy";
           repo = "tsc.nvim";
-          rev = "e4773833726beec2e8a8e11f0b21613b5472b97b";
-          sha256 = "07lswanahg4j533lp8cwb3100hpcg8kdvzfq9apf3259lyn8rj27";
+          rev = "eecf551d69bf683603c77bd31a031873261d0147";
+          sha256 = "1m8drdmj6dsn6n2g3xc92qgs5ka8mway3ss8licxn9xsjnva74rn";
         };
       })
     ];
