@@ -205,6 +205,7 @@
               command = lib.getExe pkgs.stylua;
             };
             prettier.command = "prettier";
+            oxfmt.command = "oxfmt";
             yamlfmt.command = lib.getExe pkgs.yamlfmt;
           };
           formatters = {
@@ -252,10 +253,10 @@
             javascriptreact = ["biome_check" "oxlint" "eslint_d"];
             typescriptreact = ["biome_check" "oxlint" "eslint_d"];
             astro = ["prettier" "biome_check" "oxlint" "eslint_d"];
-            vue = ["prettier" "biome_check" "oxlint" "eslint_d"];
+            vue = ["oxfmt" "biome_check" "oxlint" "eslint_d"];
             svelte = ["prettier" "biome_check" "oxlint" "eslint_d"];
-            css = ["prettier"];
-            html = ["prettier"];
+            css = ["oxfmt"];
+            html = ["oxfmt"];
             json = ["biome_check" "eslint_d"];
             jsonc = ["biome_check" "eslint_d"];
             nix = ["alejandra"];
