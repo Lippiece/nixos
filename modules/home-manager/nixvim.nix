@@ -1,0 +1,1525 @@
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  programs.nixvim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    withNodeJs = true;
+    vimdiffAlias = true;
+
+    globals = {
+      mapleader = ",";
+      maplocalleader = "\\";
+    };
+
+    opts = {
+      confirm = true;
+      cursorline = true;
+      expandtab = true;
+      ignorecase = true;
+      smartcase = true;
+      inccommand = "nosplit";
+      fillchars = {
+        foldopen = "";
+        foldclose = "";
+        diff = "╱";
+      };
+      jumpoptions = "view";
+      laststatus = 3;
+      linebreak = true;
+      breakindent = true;
+      smartindent = true;
+      wrap = true;
+      textwidth = 80;
+      wrapmargin = 0;
+      list = true;
+      number = true;
+      relativenumber = true;
+      pumblend = 10;
+      pumheight = 10;
+      shiftround = true;
+      shiftwidth = 2;
+      shortmess = "atToOCF";
+      showmode = false;
+      signcolumn = "yes";
+      splitkeep = "screen";
+      tabstop = 2;
+      termguicolors = true;
+      timeoutlen = 300;
+      undofile = true;
+      guifont = "0xProto Nerd Font Mono:h10";
+      scrolloff = 8;
+      langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz";
+      foldnestmax = 8;
+      foldlevel = 2;
+      foldlevelstart = 2;
+      # Don't break cli programs' watch mode
+      backupcopy = "yes";
+      mouse = "";
+      conceallevel = 2;
+    };
+
+    colorschemes.modus.enable = true;
+
+    plugins = {
+      # lspconfig = {
+      #   enable = true;
+      # };
+      lsp = {
+        enable = true;
+        inlayHints = true;
+        servers = {
+          astro = {
+            enable = true;
+            autostart = true;
+          };
+          lua_ls = {
+            enable = true;
+            autostart = true;
+          };
+          yamlls = {
+            enable = true;
+            autostart = true;
+          };
+          jsonls = {
+            enable = true;
+            autostart = true;
+          };
+          vtsls = {
+            enable = true;
+            autostart = true;
+          };
+          tailwindcss = {
+            enable = true;
+            autostart = true;
+          };
+          emmet_language_server = {
+            enable = true;
+            autostart = true;
+          };
+          unocss = {
+            package = null;
+            enable = true;
+            autostart = true;
+            settings.settings.unocss = {
+              remToPxPreview = true;
+            };
+            settings.options.unocss = {
+              remToPxPreview = true;
+            };
+          };
+          svelte = {
+            enable = true;
+            autostart = true;
+          };
+          vue_ls = {
+            enable = true;
+            autostart = true;
+          };
+          cssls = {
+            enable = true;
+            autostart = true;
+          };
+        };
+      };
+
+      blink-cmp = {
+        enable = true;
+        settings = {
+          keymap = {
+            "<C-space>" = [
+              "show"
+              "show_documentation"
+              "hide_documentation"
+            ];
+            "<Tab>" = [
+              "select_next"
+              "fallback"
+            ];
+            "<S-Tab>" = [
+              "select_prev"
+              "fallback"
+            ];
+            "<C-b>" = [
+              "scroll_documentation_up"
+              "fallback"
+            ];
+            "<CR>" = ["accept" "fallback"];
+            "<C-f>" = [
+              "scroll_documentation_down"
+              "fallback"
+            ];
+          };
+          signature = {
+            enabled = false;
+          };
+          completion = {
+            list = {
+              selection = {
+                auto_insert = false;
+              };
+              cycle = {
+                from_bottom = true;
+                from_top = true;
+              };
+            };
+            accept = {
+              auto_brackets = {
+                enabled = true;
+              };
+            };
+            menu = {
+              auto_show_delay_ms = 100;
+            };
+          };
+          sources = {
+            default = ["lsp" "snippets" "path" "codeium"];
+            providers = {
+              codeium = {
+                name = "Codeium";
+                module = "codeium.blink";
+                async = true;
+                score_offset = -1;
+              };
+            };
+          };
+        };
+      };
+
+      neo-tree = {
+        enable = true;
+      };
+
+      conform-nvim = {
+        enable = true;
+        settings = {
+          formatters = {
+            alejandra = {
+              command = lib.getExe pkgs.alejandra;
+            };
+            stylua = {
+              command = lib.getExe pkgs.stylua;
+            };
+            prettier.command = "prettier";
+            yamlfmt.command = lib.getExe pkgs.yamlfmt;
+          };
+          formatters = {
+            oxlint = {
+              command = "oxlint";
+              args = [
+                "--import-plugin"
+                "--type-aware"
+                "--fix"
+                "--fix-suggestions"
+                "--fix-dangerously"
+                "$FILENAME"
+              ];
+              exit_codes = [0 2]; # code 2 is given when the file includes some non-autofixable errors
+              stdin = false;
+              tmpfile_format = "ConformOxlint$FILENAME";
+            };
+            stylelint = {
+              meta = {
+                url = "https://github.com/stylelint/stylelint";
+                description = "A mighty CSS linter that helps you avoid errors and enforce conventions.";
+              };
+              command = "stylelint";
+              args = ["$FILENAME" "--fix"];
+              exit_codes = [0 2]; # code 2 is given when the file includes some non-autofixable errors
+              stdin = false;
+              tmpfile_format = "ConformStylelint$FILENAME";
+            };
+            biome_check = {
+              command = "biome";
+              args = [
+                "check"
+                "--write"
+                "--unsafe"
+                "--stdin-file-path"
+                "$FILENAME"
+              ];
+              stdin = true;
+            };
+          };
+          formatters_by_ft = {
+            # -- ["*"] = { "injected" };
+            javascript = ["biome_check" "oxlint" "eslint_d"];
+            typescript = ["biome_check" "oxlint" "eslint_d"];
+            javascriptreact = ["biome_check" "oxlint" "eslint_d"];
+            typescriptreact = ["biome_check" "oxlint" "eslint_d"];
+            astro = ["prettier" "biome_check" "oxlint" "eslint_d"];
+            vue = ["prettier" "biome_check" "oxlint" "eslint_d"];
+            svelte = ["prettier" "biome_check" "oxlint" "eslint_d"];
+            css = ["prettier"];
+            html = ["prettier"];
+            json = ["biome_check" "eslint_d"];
+            jsonc = ["biome_check" "eslint_d"];
+            nix = ["alejandra"];
+            lua = ["stylua"];
+            # python = ["isort" "black"];
+            yaml = ["yamlfmt"];
+            # fish = ["fish_indent"];
+            # rust = ["rustfmt"];
+            injected = {options = {ignore_errors = true;};};
+          };
+          format_after_save =
+            # Lua
+            ''
+              function()
+                if vim.g.disable_autoformat or vim.b.disable_autoformat then
+                  return
+                end
+
+                return {
+                  async = true,
+                  ignore_errors = true,
+                  lsp_format = "fallback",
+                }
+              end
+            '';
+          log_level = "warn";
+          notify_on_error = true;
+          notify_no_formatters = true;
+        };
+      };
+
+      treesitter = {
+        enable = true;
+        settings = {
+          highlight.enable = true;
+          indent.enable = true;
+          incremental_selection = {
+            enable = true;
+            keymaps = {
+              init_selection = "gnn";
+              scope_incremental = false;
+              node_incremental = "v";
+              node_decremental = "V";
+            };
+          };
+        };
+      };
+
+      refactoring = {
+        enable = true;
+        settings = {
+          show_success_message = true;
+        };
+      };
+
+      auto-session = {
+        enable = true;
+        settings = {
+          suppressed_dirs = ["~/" "~/Projects" "~/Downloads" "/"];
+          # Follow normal session save/load logic if launched with a single
+          # directory as the only argument
+          args_allow_single_directory = false;
+          # (30 days) Sessions older than purge_after_minutes will be
+          # deleted asynchronously on startup, e.g. set to 14400 to delete
+          # sessions that haven't been accessed for more than 10 days,
+          # defaults to off (no purging), requires >= nvim 0.10
+          purge_after_minutes = 43200;
+        };
+      };
+
+      fastaction = {
+        enable = true;
+        settings = {
+          title = false;
+        };
+      };
+
+      windsurf-nvim = {
+        enable = true;
+        settings.enable_cmp_source = false;
+      };
+
+      lint = {
+        enable = true;
+        lintersByFt = {
+          fish = ["fish"];
+          json = ["jsonlint" "eslint_d"];
+          jsonc = ["jsonlint" "eslint_d"];
+          javascript = ["oxlint" "eslint_d"];
+          typescript = ["oxlint" "eslint_d"];
+          typescriptreact = ["oxlint" "eslint_d"];
+          javascriptreact = ["oxlint" "eslint_d"];
+          astro = ["oxlint" "eslint_d"];
+          svelte = ["oxlint" "eslint_d"];
+          vue = ["oxlint" "eslint_d"];
+          css = ["stylelint"];
+          # html = ["markuplint"];
+          # -- Use the "*" filetype to run linters on all filetypes.
+          # -- '*' = [ 'global linter' ];
+          # # -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
+          # -- '_' = [ 'fallback linter' ];
+          # -- "*" = [ "typos" ];
+        };
+      };
+
+      noice = {
+        enable = true;
+        settings = {
+          cmdline.enabled = false;
+          messages.enabled = false;
+          # popupmenu.enabled = false;
+        };
+      };
+
+      lualine.enable = true;
+      lazydev.enable = true;
+      lazygit.enable = true;
+      schemastore.enable = true;
+      sleuth.enable = true;
+      todo-comments.enable = true;
+      treesitter-refactor.enable = true;
+      treesitter-textobjects.enable = true;
+      treesj.enable = true;
+      trouble.enable = true;
+      ts-comments.enable = true;
+      web-devicons.enable = true;
+      which-key.enable = true;
+      actions-preview.enable = true;
+      dap.enable = true;
+      project-nvim.enable = true;
+      sandwich.enable = true;
+      git-conflict.enable = true;
+      ccc.enable = true;
+      snacks.enable = true;
+      origami.enable = true;
+      guess-indent.enable = true;
+      bufferline.enable = true;
+      telescope.enable = true;
+      overseer.enable = true;
+    };
+
+    extraPlugins = with pkgs; [
+      vimPlugins.nvim-unception
+      vimPlugins.vim-fetch
+      # pkgs.vimPlugins.vim-automkdir
+      (vimUtils.buildVimPlugin {
+        name = "automkdir";
+        src = pkgs.fetchFromGitHub {
+          owner = "mateuszwieloch";
+          repo = "automkdir.nvim";
+          rev = "e36da288764cc41864dc5b4e1234f1425033ce59";
+          sha256 = "1qpwip0wd7shry094355ljq7143vlsmkq60pgi0bvdh9dywf21f4";
+        };
+      })
+      (vimUtils.buildVimPlugin {
+        name = "ts-error-translator";
+        src = pkgs.fetchFromGitHub {
+          owner = "dmmulroy";
+          repo = "ts-error-translator.nvim";
+          rev = "c1e6a5529009e855eb102a668549679548757a05";
+          sha256 = "0azvhr0ap0x620iwap1rf2747yjfq14pc4w26bg0k965919dpqpx";
+        };
+      })
+      (vimUtils.buildVimPlugin {
+        name = "nvim_context_vt";
+        src = pkgs.fetchFromGitHub {
+          owner = "andersevenrud";
+          repo = "nvim_context_vt";
+          rev = "fadbd9e57af72f6df3dd33df32ee733aa01cdbc0";
+          sha256 = "0rx7lik3c40ka9y4qws0d960lzhvpnkv5hs512140dq4k2n5f6l2";
+        };
+      })
+      (vimUtils.buildVimPlugin {
+        name = "nvim-quicktype";
+        src = pkgs.fetchFromGitHub {
+          owner = "Lippiece";
+          repo = "nvim-quicktype";
+          rev = "7ef6d2bc43cf945f5d418e2e58d61297c05f39b8";
+          sha256 = "0j4a932p17c9fqpvk3svj6jqp26jvms8kp83hfahfvpmr29sspxx";
+        };
+      })
+      (vimUtils.buildVimPlugin {
+        name = "tsc";
+        nvimRequireCheck = "tsc";
+        src = pkgs.fetchFromGitHub {
+          owner = "dmmulroy";
+          repo = "tsc.nvim";
+          rev = "e4773833726beec2e8a8e11f0b21613b5472b97b";
+          sha256 = "07lswanahg4j533lp8cwb3100hpcg8kdvzfq9apf3259lyn8rj27";
+        };
+      })
+    ];
+    extraConfigLua =
+      #lua
+      ''
+        vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+        vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
+
+        if vim.g.neovide then
+          vim.opt.scrolloff = 15
+          vim.g.neovide_opacity = 0.9
+
+          -- vim.g.neovide_font_hinting = "none"
+          -- vim.g.neovide_font_edging = "subpixelantialias"
+
+          -- vim.keymap.set("n", "<C-v>", '"+P') -- Paste normal mode
+          -- vim.keymap.set("v", "<C-v>", '"+P') -- Paste visual mode
+          vim.keymap.set("c", "<C-v>", "<C-R>+") -- Paste command mode
+          vim.keymap.set("i", "<C-v>", '<ESC>l"+Pli') -- Paste insert mode
+        end
+
+        -- Highlight on yank
+        local highlight_group =
+          vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+        vim.api.nvim_create_autocmd("TextYankPost", {
+          callback = function()
+            vim.highlight.on_yank()
+          end,
+          group = highlight_group,
+          pattern = "*",
+        })
+
+        -- NOTE: custom plugins
+        require"unception"
+        require"automkdir".setup()
+        require"ts-error-translator".setup()
+        require"nvim_context_vt".setup()
+        require("nvim-quicktype").setup({
+          global = {
+            -- Quicktype global options
+            quicktype_cmd = ${"\"" + pkgs.quicktype + "/bin/quicktype\""}, -- Path to the quicktype executable
+            src_lang = "json", -- The language of the input
+            no_combine_classes = false, -- Do not combine classes with shared properties into a single base class
+            all_properties_optional = false, -- Make all properties optional
+            alphabetize_properties = false, -- Alphabetize properties
+            telemetry = "disable", -- Send telemetry data to Quicktype (can be "enable", or "disable")
+            -- output_file = nil, -- Output file (if not specified, output is printed to stdout)
+            debug_dir = "/tmp/", -- Directory to write debug info to (if not specified, no debug info is written)
+          },
+          filetypes = {
+            -- Quicktype language-specific options
+            typescript = {
+              lang = "typescript", -- The language to generate types for
+              additional_options = {
+                -- Add any additional options here
+                -- Example:
+                ["just-types"] = true,
+                -- ["prefer-unions"] = true,
+              },
+            },
+            -- Add more filetypes as needed
+          },
+        })
+        require"tsc".setup({
+          use_trouble_qflist = true,
+        })
+
+        vim.opt.rtp:prepend(${"\"" + pkgs.vimPlugins.vim-fetch + "\""})
+
+        -- NOTE: LSP
+        vim.lsp.config("jsonls", {
+          -- Schemastore won't work otherwise
+          -- https://github.com/Saghen/blink.cmp/issues/2096
+          before_init = function(_, config)
+            config.settings.json.schemas = config.settings.json.schemas or {}
+            vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
+          end,
+          settings = {
+            json = {
+              validate = { enable = true },
+            },
+          },
+        })
+        vim.lsp.config("vtsls", {
+          filetypes = vim.tbl_deep_extend("force",
+            vim.lsp.config.vtsls.filetypes, { "vue", "javascript" }),
+          settings = {
+            vtsls = {
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = "@vue/typescript-plugin",
+                    languages = { "vue" },
+                    configNamespace = "typescript",
+                    location =
+                      "/home/lippiece/node_modules/@vue/language-server",
+                  },
+                },
+              },
+            },
+          },
+        })
+      '';
+
+    lsp = {
+      inlayHints.enable = true;
+      keymaps = [
+        {
+          key = "gd";
+          action = "<cmd>Trouble lsp_definitions<cr>";
+          options.desc = "Go to Definition";
+        }
+        {
+          key = "gr";
+          action = "<cmd>Trouble lsp_references<cr>";
+          options.desc = "Show References";
+        }
+        {
+          key = "gt";
+          action = "<cmd>Trouble lsp_type_definitions<cr>";
+          options.desc = "Go to Type Definition";
+        }
+        {
+          key = "gI";
+          action = "<cmd>Trouble lsp_implementations<cr>";
+          options.desc = "Go to Implementation";
+        }
+        {
+          key = "gD";
+          action = "<cmd>Trouble lsp_declarations<cr>";
+          options.desc = "Go to Declaration";
+        }
+        {
+          key = "cr";
+          lspBufAction = "rename";
+          options.desc = "Rename";
+        }
+      ];
+      servers = {
+        nixd = {
+          enable = true;
+          activate = true;
+          settings = let
+            flake = ''(builtins.getFlake (builtins.toString ./.))'';
+            system = ''''${builtins.currentSystem}'';
+          in {
+            nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
+
+            options = {
+              nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
+              # TODO: doesn't work: https://github.com/nix-community/nixd/issues/706
+              nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
+              home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
+            };
+          };
+        };
+      };
+    };
+
+    keymaps = [
+      {
+        action.__raw =
+          # lua
+          ''
+            function ()
+              require("neo-tree.command").execute { toggle = true, reveal = true }
+            end
+          '';
+        key = "<Leader>e";
+        mode = ["n"];
+        options = {
+          desc = "Open neo-tree";
+          silent = true;
+          noremap = true;
+        };
+      }
+
+      # Better up/down
+      {
+        key = "j";
+        mode = ["n" "x"];
+        action = "v:count == 0 ? 'gj' : 'j'";
+        options = {
+          silent = true;
+          expr = true;
+          desc = "Down";
+        };
+      }
+      {
+        key = "k";
+        mode = ["n" "x"];
+        action = "v:count == 0 ? 'gk' : 'k'";
+        options = {
+          silent = true;
+          expr = true;
+          desc = "Up";
+        };
+      }
+
+      {
+        key = "<C-h>";
+        mode = ["n"];
+        action = "<C-w>h";
+        options = {
+          remap = true;
+          desc = "Go to Left Window";
+        };
+      }
+      {
+        key = "<C-j>";
+        mode = ["n"];
+        action = "<C-w>j";
+        options = {
+          remap = true;
+          desc = "Go to Lower Window";
+        };
+      }
+      {
+        key = "<C-k>";
+        mode = ["n"];
+        action = "<C-w>k";
+        options = {
+          remap = true;
+          desc = "Go to Upper Window";
+        };
+      }
+      {
+        key = "<C-l>";
+        mode = ["n"];
+        action = "<C-w>l";
+        options = {
+          remap = true;
+          desc = "Go to Right Window";
+        };
+      }
+
+      {
+        key = "<C-Up>";
+        mode = ["n"];
+        action = "<cmd>resize +2<cr>";
+        options = {
+          desc = "Increase Window Height";
+        };
+      }
+      {
+        key = "<C-Down>";
+        mode = ["n"];
+        action = "<cmd>resize -2<cr>";
+        options = {
+          desc = "Decrease Window Height";
+        };
+      }
+      {
+        key = "<C-Left>";
+        mode = ["n"];
+        action = "<cmd>vertical resize -2<cr>";
+        options = {
+          desc = "Decrease Window Width";
+        };
+      }
+      {
+        key = "<C-Right>";
+        mode = ["n"];
+        action = "<cmd>vertical resize +2<cr>";
+        options = {
+          desc = "Increase Window Width";
+        };
+      }
+
+      {
+        key = "<S-h>";
+        mode = ["n"];
+        action = "<cmd>bprevious<cr>";
+        options = {
+          desc = "Prev Buffer";
+        };
+      }
+      {
+        key = "<S-l>";
+        mode = ["n"];
+        action = "<cmd>bnext<cr>";
+        options = {
+          desc = "Next Buffer";
+        };
+      }
+      {
+        key = "<leader>bb";
+        mode = ["n"];
+        action = "<cmd>e #<cr>";
+        options = {
+          desc = "Switch to Other Buffer";
+        };
+      }
+      {
+        key = "<leader>`";
+        mode = ["n"];
+        action = "<cmd>e #<cr>";
+        options = {
+          desc = "Switch to Other Buffer";
+        };
+      }
+
+      {
+        key = "<leader>bd";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.bufdelete()
+          end
+        '';
+        options = {
+          desc = "Delete Buffer";
+        };
+      }
+      {
+        key = "<leader>bo";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.bufdelete.other()
+          end
+        '';
+        options = {
+          desc = "Delete Other Buffers";
+        };
+      }
+      {
+        key = "<leader>bD";
+        mode = ["n"];
+        action = "<cmd>:bd<cr>";
+        options = {
+          desc = "Delete Buffer and Window";
+        };
+      }
+
+      {
+        key = "<leader>ur";
+        mode = ["n"];
+        action = "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>";
+        options = {
+          desc = "Redraw / Clear hlsearch / Diff Update";
+        };
+      }
+
+      {
+        key = "n";
+        mode = ["n"];
+        action = "'Nn'[v:searchforward].'zv'";
+        options = {
+          expr = true;
+          desc = "Next Search Result";
+        };
+      }
+      {
+        key = "n";
+        mode = ["x"];
+        action = "'Nn'[v:searchforward]";
+        options = {
+          expr = true;
+          desc = "Next Search Result";
+        };
+      }
+      {
+        key = "n";
+        mode = ["o"];
+        action = "'Nn'[v:searchforward]";
+        options = {
+          expr = true;
+          desc = "Next Search Result";
+        };
+      }
+      {
+        key = "N";
+        mode = ["n"];
+        action = "'nN'[v:searchforward].'zv'";
+        options = {
+          expr = true;
+          desc = "Prev Search Result";
+        };
+      }
+      {
+        key = "N";
+        mode = ["x"];
+        action = "'nN'[v:searchforward]";
+        options = {
+          expr = true;
+          desc = "Prev Search Result";
+        };
+      }
+      {
+        key = "N";
+        mode = ["o"];
+        action = "'nN'[v:searchforward]";
+        options = {
+          expr = true;
+          desc = "Prev Search Result";
+        };
+      }
+
+      # Add undo break-points
+      {
+        key = ",";
+        mode = ["i"];
+        action = ",<c-g>u";
+      }
+      {
+        key = ".";
+        mode = ["i"];
+        action = ".<c-g>u";
+      }
+      {
+        key = ";";
+        mode = ["i"];
+        action = ";<c-g>u";
+      }
+
+      {
+        key = "<leader>K";
+        mode = ["n"];
+        action = "<cmd>norm! K<cr>";
+        options = {
+          desc = "Keywordprg";
+        };
+      }
+
+      # Better indenting
+      {
+        key = "<";
+        mode = ["v"];
+        action = "<gv";
+      }
+      {
+        key = ">";
+        mode = ["v"];
+        action = ">gv";
+      }
+
+      # Insert comment below/above
+      {
+        key = "gco";
+        mode = ["n"];
+        action = "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";
+        options = {
+          desc = "Add Comment Below";
+        };
+      }
+      {
+        key = "gcO";
+        mode = ["n"];
+        action = "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";
+        options = {
+          desc = "Add Comment Above";
+        };
+      }
+
+      {
+        key = "<leader>fn";
+        mode = ["n"];
+        action = "<cmd>enew<cr>";
+        options = {
+          desc = "New File";
+        };
+      }
+
+      {
+        key = "[q";
+        mode = ["n"];
+        action = "vim.cmd.cprev";
+        options = {
+          desc = "Previous Quickfix";
+        };
+      }
+      {
+        key = "]q";
+        mode = ["n"];
+        action = "vim.cmd.cnext";
+        options = {
+          desc = "Next Quickfix";
+        };
+      }
+
+      # Diagnostics
+      {
+        key = "<leader>cd";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.diagnostic.open_float()
+          end
+        '';
+        options = {
+          desc = "Line Diagnostics";
+        };
+      }
+      {
+        key = "]d";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.diagnostic.jump({
+              count = 1,
+              float = true,
+            })
+          end
+        '';
+        options = {
+          desc = "Next Diagnostic";
+        };
+      }
+      {
+        key = "[d";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.diagnostic.jump({
+              count = -1,
+              float = true,
+            })
+          end
+        '';
+        options = {
+          desc = "Prev Diagnostic";
+        };
+      }
+      {
+        key = "]e";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.diagnostic.jump({
+              severity = "ERROR",
+              count = 1,
+              float = true,
+            })
+          end
+        '';
+        options = {
+          desc = "Next Error";
+        };
+      }
+      {
+        key = "[e";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.diagnostic.jump({
+              severity = "ERROR",
+              count = -1,
+              float = true,
+            })
+          end
+        '';
+        options = {
+          desc = "Prev Error";
+        };
+      }
+      {
+        key = "]w";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.diagnostic.jump({
+              severity = "WARN",
+              count = 1,
+              float = true,
+            })
+          end
+        '';
+        options = {
+          desc = "Next Warning";
+        };
+      }
+      {
+        key = "[w";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.diagnostic.jump({
+              severity = "WARN",
+              count = -1,
+              float = true,
+            })
+          end
+        '';
+        options = {
+          desc = "Prev Warning";
+        };
+      }
+
+      # Git
+      {
+        key = "<leader>gg";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.lazygit()
+          end
+        '';
+        options = {
+          desc = "Lazygit (cwd)";
+        };
+      }
+      {
+        key = "<leader>gb";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.picker.git_log_line()
+          end
+        '';
+        options = {
+          desc = "Git Blame Line";
+        };
+      }
+      {
+        key = "<leader>gB";
+        mode = ["n" "x"];
+        action.__raw = ''
+          function()
+            Snacks.gitbrowse()
+          end
+        '';
+        options = {
+          desc = "Git Browse (open)";
+        };
+      }
+      {
+        key = "<leader>gY";
+        mode = ["n" "x"];
+        action.__raw = ''
+          function()
+            Snacks.gitbrowse {
+              open = function(url)
+                vim.fn.setreg("+", url)
+              end,
+              notify = false,
+            }
+          end
+        '';
+        options = {
+          desc = "Git Browse (copy)";
+        };
+      }
+      {
+        key = "<leader>gY";
+        mode = ["n" "x"];
+        action = "<cmd>Telescope git_bcommits<cr>";
+        options = {
+          desc = "Git file history";
+        };
+      }
+
+      {
+        key = "<C-/>";
+        mode = ["t"];
+        action = "<cmd>close<cr>";
+        options = {
+          desc = "Hide Terminal";
+        };
+      }
+
+      {
+        key = "<c-_>";
+        mode = ["t"];
+        action = "<cmd>close<cr>";
+        options = {
+          desc = "which_key_ignore";
+        };
+      }
+
+      # Windows
+      {
+        key = "<leader>-";
+        mode = ["n"];
+        action = "<C-W>s";
+        options = {
+          remap = true;
+          desc = "Split Window Below";
+        };
+      }
+      {
+        key = "<leader>|";
+        mode = ["n"];
+        action = "<C-W>v";
+        options = {
+          remap = true;
+          desc = "Split Window Right";
+        };
+      }
+      {
+        key = "<leader>wd";
+        mode = ["n"];
+        action = "<C-W>c";
+        options = {
+          remap = true;
+          desc = "Delete Window";
+        };
+      }
+
+      # Tabs
+      {
+        key = "<leader><tab>l";
+        mode = ["n"];
+        action = "<cmd>tablast<cr>";
+        options = {
+          desc = "Last Tab";
+        };
+      }
+      {
+        key = "<leader><tab>o";
+        mode = ["n"];
+        action = "<cmd>tabonly<cr>";
+        options = {
+          desc = "Close Other Tabs";
+        };
+      }
+      {
+        key = "<leader><tab>f";
+        mode = ["n"];
+        action = "<cmd>tabfirst<cr>";
+        options = {
+          desc = "First Tab";
+        };
+      }
+      {
+        key = "<leader><tab><tab>";
+        mode = ["n"];
+        action = "<cmd>tabnew<cr>";
+        options = {
+          desc = "New Tab";
+        };
+      }
+      {
+        key = "<leader><tab>]";
+        mode = ["n"];
+        action = "<cmd>tabnext<cr>";
+        options = {
+          desc = "Next Tab";
+        };
+      }
+      {
+        key = "<leader><tab>d";
+        mode = ["n"];
+        action = "<cmd>tabclose<cr>";
+        options = {
+          desc = "Close Tab";
+        };
+      }
+      {
+        key = "<leader><tab>[";
+        mode = ["n"];
+        action = "<cmd>tabprevious<cr>";
+        options = {
+          desc = "Previous Tab";
+        };
+      }
+
+      # Snacks
+      {
+        key = "<leader>cl";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.picker.lsp_config()
+          end
+        '';
+        options = {
+          desc = "Lsp Info";
+        };
+      }
+      {
+        key = "<leader>/";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.picker.grep()
+          end
+        '';
+        options = {
+          desc = "Find text";
+        };
+      }
+      {
+        key = "<leader><space>";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.picker.files()
+          end
+        '';
+        options = {
+          desc = "Find files";
+        };
+      }
+
+      {
+        key = "<leader>cc";
+        mode = ["n" "v"];
+        action.__raw = ''
+          function()
+            vim.lsp.codelens.run()
+          end
+        '';
+        options = {
+          desc = "Run Codelens";
+        };
+      }
+      {
+        key = "<leader>cC";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.lsp.codelens.refresh()
+          end
+        '';
+        options = {
+          desc = "Refresh & Display Codelens";
+        };
+      }
+
+      {
+        key = "<leader>cR";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.rename.rename_file()
+          end
+        '';
+        options = {
+          desc = "Rename File";
+        };
+      }
+
+      # LSP code action variants
+      {
+        key = "<Leader>cM";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.lsp.buf.code_action {
+              apply = true,
+              context = { only = { "source.addMissingImports.ts" }, diagnostics = {} },
+            }
+          end
+        '';
+        options = {
+          desc = "Add missing imports";
+        };
+      }
+      {
+        key = "<Leader>cu";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            vim.lsp.buf.code_action {
+              apply = true,
+              context = { only = { "source.removeUnused.ts" }, diagnostics = {} },
+            }
+          end
+        '';
+        options = {
+          desc = "Remove unused code";
+        };
+      }
+      {
+        key = "<Leader>cA";
+        mode = ["n"];
+        action.__raw = ''
+          function ()
+            vim.lsp.buf.code_action {
+              apply = true,
+              context = { only = { "source" }, diagnostics = {} },
+            }
+          end
+        '';
+        options.desc = "Code Action (file)";
+      }
+      {
+        key = "<Leader>ca";
+        mode = ["n" "v"];
+        action.__raw = ''
+          function ()
+            require"fastaction".code_action {}
+          end
+        '';
+        options.desc = "Code Action (fastaction)";
+      }
+      {
+        key = "]]";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.words.jump(1)
+          end
+        '';
+        options = {
+          desc = "Next Reference";
+        };
+      }
+      {
+        key = "[[";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            Snacks.words.jump(-1)
+          end
+        '';
+        options = {
+          desc = "Prev Reference";
+        };
+      }
+      {
+        key = "<Esc>";
+        mode = ["n"];
+        action = "<cmd>noh<CR>";
+        options = {
+          desc = "general clear highlights";
+        };
+      }
+
+      # Format
+      {
+        key = "<leader>uf";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            if vim.b.disable_autoformat then
+              vim.b.disable_autoformat = false
+              vim.print "Enabled autoformat-on-save"
+            else
+              vim.b.disable_autoformat = true
+              vim.print "Disabled autoformat-on-save"
+            end
+          end
+        '';
+        options.desc = "Toggle autoformat-on-save in buffer";
+      }
+      {
+        key = "<leader>uF";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            if vim.g.disable_autoformat then
+              vim.g.disable_autoformat = false
+              vim.print "Enabled autoformat-on-save"
+            else
+              vim.g.disable_autoformat = true
+              vim.print "Disabled autoformat-on-save"
+            end
+          end
+        '';
+        options.desc = "Toggle autoformat-on-save globally";
+      }
+      {
+        key = "<Leader>cf";
+        mode = ["n"];
+        action.__raw = ''
+          function()
+            require("conform").format()
+          end
+        '';
+        options = {
+          desc = "Format file";
+        };
+      }
+
+      # Trouble
+      {
+        key = "<leader>xx";
+        mode = ["n"];
+        action = "<cmd>Trouble diagnostics toggle filter.buf=0<cr>";
+        options.desc = "Buffer Diagnostics (Trouble)";
+      }
+      {
+        key = "<leader>xX";
+        mode = ["n"];
+        action = "<cmd>Trouble diagnostics toggle<cr>";
+        options.desc = "Diagnostics (Trouble)";
+      }
+      {
+        key = "<leader>xt";
+        mode = ["n"];
+        action = "<cmd>Trouble todo toggle<cr>";
+        options.desc = "Trouble: Todos";
+      }
+
+      {
+        key = "<leader>n";
+        mode = ["n"];
+        action = "<cmd>NoiceSnacks<cr>";
+        options.desc = "Show notifications (snacks + noice)";
+      }
+
+      {
+        key = "<leader>n";
+        mode = ["n"];
+        action = "<cmd>NoiceSnacks<cr>";
+        options.desc = "Show notifications (snacks + noice)";
+      }
+
+      # Refactoring
+      {
+        key = "<leader>rp";
+        mode = ["x" "n"];
+        action.__raw = ''
+          function()
+            require('refactoring').select_refactor({
+              prefer_ex_cmd = true,
+            })
+          end
+        '';
+        options.desc = "Select a refactor to apply";
+      }
+
+      # dmmulroy/tsc.nvim
+      {
+        key = "<leader>tt";
+        mode = ["x" "n"];
+        action.__raw = ''
+          function()
+            require("tsc").run()
+          end
+        '';
+        options.desc = "Run tsc";
+      }
+      {
+        key = "<leader>tv";
+        mode = ["x" "n"];
+        action.__raw = ''
+          function()
+            require("tsc").setup {
+              use_trouble_qflist = true,
+              bin_path = "node_modules/.bin/vue-tsc",
+            }
+            require("tsc").run()
+          end
+        '';
+        options.desc = "Run vue-tsc";
+      }
+
+      # Redoxahmii/json-to-types.nvim
+      {
+        key = "<leader>ct";
+        action = "<CMD>ConvertJSONtoLangBuffer typescript<CR>";
+        options.desc = "Convert JSON to TS from buffer";
+      }
+
+      # Overseer
+      {
+        key = "<leader>uo";
+        action = "<CMD>OverseerToggle<CR>";
+        options.desc = "Toggle Overseer UI";
+      }
+      {
+        key = "<leader>ur";
+        action = "<CMD>OverseerRunCmd<CR>";
+        options.desc = "Run command with Overseer";
+      }
+      {
+        key = "<leader>ul";
+        action = "<CMD>OverseerLoadBundle<CR>";
+        options.desc = "Load Overseer command bundle";
+      }
+    ];
+
+    diagnostic.settings = {
+      severity_sort = true;
+      virtual_text = true;
+    };
+
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+      };
+    };
+  };
+}
