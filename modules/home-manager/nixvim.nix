@@ -448,6 +448,21 @@
           sha256 = "1m8drdmj6dsn6n2g3xc92qgs5ka8mway3ss8licxn9xsjnva74rn";
         };
       })
+      (vimUtils.buildVimPlugin
+        {
+          name = "vscode-diff.nvim";
+          buildInputs = [vimPlugins.nui-nvim];
+          nativeBuildInputs = [pkgs.cmake];
+          buildPhase = ''
+            make
+          '';
+          src = pkgs.fetchFromGitHub {
+            owner = "esmuellert";
+            repo = "vscode-diff.nvim";
+            rev = "main";
+            hash = "sha256-0kPFAyPY7Ki/xY2mlDFBidelDWT2VH/xjmiIfVsPVXo=";
+          };
+        })
     ];
     extraConfigLua =
       #lua
