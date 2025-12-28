@@ -106,6 +106,7 @@ in {
     gh
     # steamcmd
     rsync
+    tomb
 
     # # Nix
     alejandra
@@ -243,65 +244,67 @@ in {
     };
 
     nix-index.enable = true;
-  };
 
-  programs.command-not-found.enable = false;
-  programs.carapace = {
-    enable = true;
-    enableFishIntegration = true;
-    enableNushellIntegration = true;
-  };
-  programs.gpg.enable = true;
-  programs.tmux = {
-    enable = true;
-    plugins = with pkgs.tmuxPlugins; [
-      resurrect
-      harpoon
-      kanagawa
-      tmux-which-key
-    ];
-    newSession = true;
-    terminal = "tmux-256color";
-    keyMode = "vi";
-    extraConfig =
-      # tmux
-      ''
-        bind c new-window -c "#{pane_current_path}"
+    command-not-found.enable = false;
+    carapace = {
+      enable = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+    };
 
-        bind '"' split-window -c "#{pane_current_path}"
-        bind % split-window -h -c "#{pane_current_path}"
+    gpg.enable = true;
 
-        # In vi copy mode, press 'y' to copy but remain in copy-mode
-        bind -T copy-mode-vi y send -X copy-selection
+    tmux = {
+      enable = true;
+      plugins = with pkgs.tmuxPlugins; [
+        resurrect
+        harpoon
+        kanagawa
+        tmux-which-key
+      ];
+      newSession = true;
+      terminal = "tmux-256color";
+      keyMode = "vi";
+      extraConfig =
+        # tmux
+        ''
+          bind c new-window -c "#{pane_current_path}"
 
-        # `open` the selected text
-        bind -T copy-mode-vi o send-keys -X copy-pipe-and-cancel "xargs open"
-      '';
-  };
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    # enableFishIntegration = true;
-    enableNushellIntegration = true;
-  };
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      general = {
-        import = ["~/.config/alacritty/themes/themes/gruvbox_dark.toml"];
-      };
-      font = {
-        normal = {
-          family = "0xProto Nerd Font";
-          style = "Regular";
+          bind '"' split-window -c "#{pane_current_path}"
+          bind % split-window -h -c "#{pane_current_path}"
+
+          # In vi copy mode, press 'y' to copy but remain in copy-mode
+          bind -T copy-mode-vi y send -X copy-selection
+
+          # `open` the selected text
+          bind -T copy-mode-vi o send-keys -X copy-pipe-and-cancel "xargs open"
+        '';
+    };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      # enableFishIntegration = true;
+      enableNushellIntegration = true;
+    };
+    alacritty = {
+      enable = true;
+      settings = {
+        general = {
+          import = ["~/.config/alacritty/themes/themes/gruvbox_dark.toml"];
         };
-      };
-      mouse = {
-        hide_when_typing = true;
-      };
-      window = {
-        opacity = 0.9;
-        blur = true;
+        font = {
+          normal = {
+            family = "0xProto Nerd Font";
+            style = "Regular";
+          };
+        };
+        mouse = {
+          hide_when_typing = true;
+        };
+        window = {
+          opacity = 0.9;
+          blur = true;
+        };
       };
     };
   };
@@ -318,6 +321,7 @@ in {
     #   enableFishIntegration = true;
     #   enableNushellIntegration = true;
     # };
+    ssh-agent.enable = true;
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
