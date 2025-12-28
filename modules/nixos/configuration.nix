@@ -348,13 +348,8 @@ in {
         "--print-build-logs"
         "--commit-lock-file"
       ];
-      dates = "02:00";
-      allowReboot = true;
+      dates = "03:00";
       operation = "switch";
-      rebootWindow = {
-        lower = "01:00";
-        upper = "06:00";
-      };
       persistent = true;
       enable = true;
     };
@@ -405,7 +400,7 @@ in {
     optimise = {
       automatic = true;
       persistent = true;
-      dates = "03:00";
+      dates = "04:00";
     };
     settings = {
       experimental-features = ["nix-command" "flakes"];
