@@ -177,8 +177,8 @@ in {
     mtr.enable = true;
     gnupg.agent = {
       enable = true;
-      enableSSHSupport = true;
     };
+    ssh.startAgent = true;
     fish = {
       enable = true;
       generateCompletions = true;
