@@ -29,6 +29,8 @@ in {
       "net.core.wmem_max" = 7500000;
       "net.ipv4.tcp_congestion_control" = "bbr";
     };
+
+    initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/d97cee83-4277-4653-bf49-9280b6dcd10a";
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -133,32 +135,6 @@ in {
       # For `pactl`
       pulseaudio
     ];
-
-    persistence."/persist" = {
-      hideMounts = true;
-      directories = [
-        "/var/lib/bluetooth"
-        "/var/lib/nixos"
-        "/var/lib/systemd/coredump"
-        "/etc/NetworkManager/system-connections"
-        "/etc/nixos"
-        "/usr"
-        "/var/log"
-        {
-          directory = "/var/lib/colord";
-          user = "colord";
-          group = "colord";
-          mode = "u=rwx,g=rx,o=";
-        }
-      ];
-      files = [
-        "/etc/machine-id"
-        {
-          file = "/var/keys/secret_file";
-          parentDirectory = {mode = "u=rwx,g=,o=";};
-        }
-      ];
-    };
 
     sessionVariables = {
       # LIBVA_DRIVER_NAME = "iHD";
