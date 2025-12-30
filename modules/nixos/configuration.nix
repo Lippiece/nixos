@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  # config,
+  config,
   lib,
   inputs,
   pkgs,
@@ -18,30 +18,20 @@
     smtphost = "smtp.dw.team";
   };
 in {
-  imports = ["${inputs.impermanence}/nixos.nix"];
-
   boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = ["btrfs"];
-    # kernelParams = ["psmouse.synaptics_intertouch=0" "i8042.noloop" "i8042.nomux" "i8042.nopnp" "i8042.reset"];
+
+    kernel.sysctl = {
+      "net.core.rmem_max" = 7500000;
+      "net.core.wmem_max" = 7500000;
+      "net.ipv4.tcp_congestion_control" = "bbr";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  hardware.enableAllFirmware = true;
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot =
-    true; # powers up the default Bluetooth controller on boot
-  boot.initrd.luks.devices = {
-    root = {
-      # Use https://nixos.wiki/wiki/Full_Disk_Encryption
-      device = "/dev/disk/by-uuid/f8535674-a608-4421-bba1-9a8a74fee833";
-      preLVM = true;
-    };
-  };
 
   time.timeZone = lib.mkDefault "Europe/Kaliningrad";
 
@@ -90,11 +80,17 @@ in {
     };
 
     automatic-timezoned.enable = true;
+
+    # Load nvidia driver for Xorg and Wayland
+    xserver.videoDrivers = ["nvidia"];
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
   environment = {
-    sessionVariables.MOZ_ENABLE_WAYLAND = "1";
+    sessionVariables = {
+      LIBVA_DRIVER_NAME = "iHD";
+      MOZ_ENABLE_WAYLAND = "1";
+    };
     etc."xdg/kcminputrc".text = ''
       [Keyboard]
       NumLock=0
@@ -119,11 +115,15 @@ in {
       icu
       kdePackages.kaccounts-providers
       kdePackages.kaccounts-integration
+      kdePackages.accounts-qt
       kdePackages.korganizer
       kdePackages.kdepim-addons
       kdePackages.signond
       kdePackages.kontact
+      kdePackages.akonadi
+      kdePackages.qtwebengine
       sqlite
+      mariadb
       libinput
       libnotify
       inotify-tools
@@ -135,7 +135,7 @@ in {
     ];
 
     persistence."/persist" = {
-      # hideMounts = true;
+      hideMounts = true;
       directories = [
         "/var/lib/bluetooth"
         "/var/lib/nixos"
@@ -143,9 +143,20 @@ in {
         "/etc/NetworkManager/system-connections"
         "/etc/nixos"
         "/usr"
+        "/var/log"
+        {
+          directory = "/var/lib/colord";
+          user = "colord";
+          group = "colord";
+          mode = "u=rwx,g=rx,o=";
+        }
       ];
       files = [
-        # { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+        "/etc/machine-id"
+        {
+          file = "/var/keys/secret_file";
+          parentDirectory = {mode = "u=rwx,g=,o=";};
+        }
       ];
     };
 
@@ -362,6 +373,8 @@ in {
     extraSpecialArgs = {
       inherit inputs;
     };
+    useGlobalPkgs = true;
+    useUserPackages = true;
 
     users = {"lippiece" = import ../home-manager/home.nix;};
   };
@@ -471,4 +484,65 @@ in {
       nix-optimise.timerConfig.WakeSystem = "yes";
     };
   };
+
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  networking.enableIPv6 = false;
+  # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
+
+  # Enable OpenGL
+  hardware = {
+    enableAllFirmware = true;
+    bluetooth.enable = true; # enables support for Bluetooth
+    bluetooth.powerOnBoot =
+      true; # powers up the default Bluetooth controller on boot
+
+    nvidia = {
+      # open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
+      open = true;
+
+      prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+
+        # Needed for finegrained power management to work
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+      };
+
+      # modesetting.enable = true;
+
+      # Causes sleep and suspend to fail.
+      # powerManagement.enable = true;
+
+      # Fine-grained power management. Turns off GPU when not in use.
+      # powerManagement.finegrained = true;
+
+      nvidiaSettings = false;
+
+      # Optionally, you may need to select the appropriate driver version for your specific GPU.
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+    };
+
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        # intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      ];
+    };
+  };
+
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024; # 16 GB
+    }
+  ];
 }

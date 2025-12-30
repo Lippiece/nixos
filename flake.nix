@@ -38,6 +38,8 @@
         inputs.home-manager.nixosModules.default
 
         inputs.phoenix.nixosModules.default
+
+        inputs.impermanence.nixosModules.impermanence
       ];
     };
   };
