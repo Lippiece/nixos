@@ -259,7 +259,32 @@ in {
       plugins = with pkgs.tmuxPlugins; [
         resurrect
         harpoon
-        kanagawa
+        {
+          plugin = dracula;
+          extraConfig = ''
+            set -g @dracula-plugins "ssh-session cwd continuum attached-clients"
+
+            set -g @dracula-show-powerline true
+            set -g @dracula-show-battery false
+            set -g @dracula-show-location false
+            set -g @dracula-show-timezone false
+
+            set -g @dracula-synchronize-panes-label "Sync"
+            set -g @dracula-synchronize-panes-auto-hide true
+
+            set -g @dracula-show-ssh-only-when-connected true
+
+            set -g @dracula-ping-rate -1
+
+            set -g @dracula-cwd-max-dirs "2"
+            set -g @dracula-cwd-max-chars "20"
+
+            set -g @dracula-battery-label false
+            set -g @dracula-show-battery-status false
+
+            set -g @dracula-clients-minimum 1
+          '';
+        }
         tmux-which-key
       ];
       newSession = true;
