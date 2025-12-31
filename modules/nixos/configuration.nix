@@ -337,10 +337,11 @@ in {
     autoUpgrade = {
       flake = inputs.self.outPath;
       flags = [
+        "--upgrade-all"
         "--print-build-logs"
         "--commit-lock-file"
       ];
-      dates = "03:00";
+      dates = "weekly";
       operation = "switch";
       persistent = true;
       enable = true;
@@ -394,17 +395,20 @@ in {
     optimise = {
       automatic = true;
       persistent = true;
-      dates = "04:00";
+      dates = "daily";
     };
     settings = {
       experimental-features = ["nix-command" "flakes"];
       cores = 8;
-      max-jobs = 4;
+      max-jobs = 8;
       auto-optimise-store = true;
       keep-going = true;
     };
     package = pkgs.lixPackageSets.latest.lix;
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+    extraOptions = ''
+      use-xdg-base-directories = true
+    '';
   };
 
   # Enable common container config files in /etc/containers
