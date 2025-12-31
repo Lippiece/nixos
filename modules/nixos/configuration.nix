@@ -92,6 +92,7 @@ in {
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_ENABLE_WAYLAND = "1";
+      BROWSER = "firefox-nigthly";
     };
     etc."xdg/kcminputrc".text = ''
       [Keyboard]
