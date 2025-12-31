@@ -85,6 +85,17 @@ in {
 
     # Load nvidia driver for Xorg and Wayland
     xserver.videoDrivers = ["nvidia"];
+
+    btrfs.autoScrub.enable = true;
+
+    beesd.filesystems = {
+      root = {
+        spec = "/";
+        hashTableSizeMB = 2048;
+        verbosity = "crit";
+        extraOptions = ["--loadavg-target" "5.0"];
+      };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -93,6 +104,8 @@ in {
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_ENABLE_WAYLAND = "1";
       BROWSER = "firefox-nigthly";
+      PAGER = "nvim -R";
+      MANPAGER = "nvim +Man!";
     };
     etc."xdg/kcminputrc".text = ''
       [Keyboard]
@@ -136,14 +149,6 @@ in {
       # For `pactl`
       pulseaudio
     ];
-
-    sessionVariables = {
-      # LIBVA_DRIVER_NAME = "iHD";
-      # NIXOS_OZONE_WL = "1";
-      PAGER = "nvim -R";
-      MANPAGER = "nvim +Man!";
-      # HTTP_PROXY = "127.0.0.1:2334";
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

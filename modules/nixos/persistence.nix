@@ -2,7 +2,10 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/d3d44327-bd14-4e4f-93ca-3b6869f41ed0";
     fsType = "btrfs";
-    options = ["subvol=root"];
+    options = [
+      "subvol=root"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/boot" = {
@@ -15,13 +18,20 @@
     device = "/dev/disk/by-uuid/d3d44327-bd14-4e4f-93ca-3b6869f41ed0";
     neededForBoot = true;
     fsType = "btrfs";
-    options = ["subvol=persist"];
+    options = [
+      "subvol=persist"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/d3d44327-bd14-4e4f-93ca-3b6869f41ed0";
     fsType = "btrfs";
-    options = ["subvol=nix"];
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
