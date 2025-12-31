@@ -243,7 +243,10 @@ in {
       enable = true;
     };
 
-    nix-index.enable = true;
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+    };
 
     command-not-found.enable = false;
     carapace = {

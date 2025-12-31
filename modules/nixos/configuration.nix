@@ -117,7 +117,6 @@ in {
       bat
       unar
       git
-      fish
       silver-searcher
       kdotool
       gcc
@@ -158,7 +157,7 @@ in {
     # packages = with pkgs; [
     # ];
     hashedPassword = "$6$NBiKVQ9sSyOEws8p$dW1OJV7/VmFZ9H/wiV2Rxg0A73QqCHznqJtIdvGOUZcN0c5tKsBnd3/yLPLve09aF8inl6tgnPVvPxa8w539O/";
-    shell = pkgs.fish;
+    # shell = pkgs.fish;
   };
   users.defaultUserShell = pkgs.fish;
 
