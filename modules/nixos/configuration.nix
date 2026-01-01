@@ -355,10 +355,9 @@ in {
     extraSpecialArgs = {
       inherit inputs;
     };
-    useGlobalPkgs = true;
     useUserPackages = true;
 
-    users = {"lippiece" = import ../home-manager/home.nix;};
+    users.lippiece = ../home-manager/home.nix;
   };
 
   i18n = {
