@@ -102,7 +102,7 @@ in {
     wl-clipboard-rs
     pass-git-helper
     proxychains-ng
-    # commitizen
+    commitizen
     gh
     # steamcmd
     rsync

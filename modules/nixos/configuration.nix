@@ -103,7 +103,7 @@ in {
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_ENABLE_WAYLAND = "1";
-      BROWSER = "firefox-nigthly";
+      BROWSER = "firefox-nightly";
       PAGER = "nvim -R";
       MANPAGER = "nvim +Man!";
     };
