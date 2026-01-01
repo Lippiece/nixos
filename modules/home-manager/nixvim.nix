@@ -248,17 +248,17 @@
           };
           formatters_by_ft = {
             # -- ["*"] = { "injected" };
-            javascript = ["biome_check" "oxlint" "eslint_d"];
-            typescript = ["biome_check" "oxlint" "eslint_d"];
-            javascriptreact = ["biome_check" "oxlint" "eslint_d"];
-            typescriptreact = ["biome_check" "oxlint" "eslint_d"];
+            javascript = ["oxfmt" "oxlint" "eslint_d"];
+            typescript = ["oxfmt" "oxlint" "eslint_d"];
+            javascriptreact = ["oxfmt" "oxlint" "eslint_d"];
+            typescriptreact = ["oxfmt" "oxlint" "eslint_d"];
             astro = ["prettier" "biome_check" "oxlint" "eslint_d"];
-            vue = ["oxfmt" "biome_check" "oxlint" "eslint_d"];
+            vue = ["oxfmt" "oxlint" "eslint_d"];
             svelte = ["prettier" "biome_check" "oxlint" "eslint_d"];
             css = ["oxfmt"];
             html = ["oxfmt"];
-            json = ["biome_check" "eslint_d"];
-            jsonc = ["biome_check" "eslint_d"];
+            json = ["oxfmt" "eslint_d"];
+            jsonc = ["oxfmt" "eslint_d"];
             nix = ["alejandra"];
             lua = ["stylua"];
             # python = ["isort" "black"];
