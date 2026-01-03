@@ -156,10 +156,11 @@ in {
     extraGroups = ["wheel" "sudo"]; # Enable ‘sudo’ for the user.
     # packages = with pkgs; [
     # ];
-    hashedPassword = "$6$NBiKVQ9sSyOEws8p$dW1OJV7/VmFZ9H/wiV2Rxg0A73QqCHznqJtIdvGOUZcN0c5tKsBnd3/yLPLve09aF8inl6tgnPVvPxa8w539O/";
+    hashedPasswordFile = "/persist/pass";
     # shell = pkgs.fish;
   };
   users.defaultUserShell = pkgs.fish;
+  users.mutableUsers = false;
 
   # List packages installed in system profile.
 
