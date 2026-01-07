@@ -460,7 +460,7 @@
             owner = "esmuellert";
             repo = "vscode-diff.nvim";
             rev = "main";
-            hash = "sha256-0kPFAyPY7Ki/xY2mlDFBidelDWT2VH/xjmiIfVsPVXo=";
+            hash = "sha256-aI3JowDmk4hjuiOyKEZQPd1OWJbdh2pM7sd9huRt7Zc=";
           };
         })
     ];
@@ -611,10 +611,10 @@
             nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
 
             options = {
-              nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
+              nixos.expr = ''${flake}.nixosConfigurations.cumulonimbus.options'';
               # TODO: doesn't work: https://github.com/nix-community/nixd/issues/706
               nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
-              home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
+              home_manager.expr = ''${flake}.nixosConfigurations.cumulonimbus.options.home-manager.users.type.getSubOptions []'';
             };
           };
         };

@@ -9,7 +9,6 @@ in {
   imports = [
     inputs.nixvim.homeModules.nixvim
     ./nixvim.nix
-    ./mail.nix
   ];
   home.username = "${name}";
   home.homeDirectory = "/home/lippiece";
@@ -38,50 +37,14 @@ in {
     #################################
 
     # # Tools
-    kdePackages.kclock
-    telegram-desktop
-    v2rayn
     xray
-    obsidian
-    (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
-    # mpc-qt
-    kdePackages.filelight
-    element-desktop
-
-    # # Emulators
-    # Laggy and can't redirect USB
-    # spice-gtk
-    # quickemu
-    # spice-vdagent
-
-    # # Plasma
-    geoclue2
-
-    # # Work
-    super-productivity
-    onlyoffice-desktopeditors
-
-    # # Entertainment
-    webtorrent_desktop
-    qbittorrent-enhanced
-    (bottles.override {
-      removeWarningPopup = true;
-    })
-    variety
-    prismlauncher
-    # (pkgs.callPackage ../../packages/rimsort/package.nix {})
-
-    # # System
-    colloid-icon-theme
-    colloid-gtk-theme
-    kdePackages.karousel
 
     #################################
     #              CLI              #
     #################################
 
     # # vim
-    neovide
+    # neovide
     # neovim
     # fzf
     # lua54Packages.luarocks
@@ -91,7 +54,7 @@ in {
     # python312Packages.venvShellHook
     # uv
     # cargo
-    nodejs_latest
+    # nodejs_latest
     # ripgrep
     python313Packages.demjson3
 
@@ -111,15 +74,6 @@ in {
     # # Nix
     alejandra
     update-nix-fetchgit
-
-    # # Mutt
-    mutt-wizard
-    urlscan
-    lynx
-
-    # # Rust
-    # rustc
-    # rustup
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -140,7 +94,6 @@ in {
   };
   home.shell = {
     enableFishIntegration = true;
-    enableNushellIntegration = true;
   };
 
   # Let Home Manager install and manage itself.
@@ -149,18 +102,12 @@ in {
 
     bat.enable = true;
 
-    chromium = {
-      enable = true;
-      package = pkgs.ungoogled-chromium;
-    };
-
     dircolors.enable = true;
 
     eza = {
       enable = true;
       icons = "auto";
       enableFishIntegration = true;
-      enableNushellIntegration = true;
     };
 
     fd = {
@@ -205,26 +152,9 @@ in {
       '';
     };
 
-    nushell = {
-      enable = true;
-    };
-
     pay-respects = {
       enable = true;
       enableFishIntegration = false;
-      enableNushellIntegration = false;
-    };
-
-    starship = {
-      enable = true;
-      enableNushellIntegration = true;
-      enableFishIntegration = false;
-    };
-
-    zoxide = {
-      enable = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
     };
 
     git = {
@@ -252,7 +182,6 @@ in {
     carapace = {
       enable = true;
       enableFishIntegration = true;
-      enableNushellIntegration = true;
     };
 
     gpg.enable = true;
@@ -312,7 +241,6 @@ in {
       enable = true;
       nix-direnv.enable = true;
       # enableFishIntegration = true;
-      enableNushellIntegration = true;
     };
     alacritty = {
       enable = true;
@@ -338,32 +266,8 @@ in {
   };
 
   services = {
-    easyeffects.enable = true;
-    nextcloud-client = {
-      enable = true;
-      startInBackground = true;
-    };
-    kdeconnect.enable = true;
-    # gpg-agent = {
-    #   enable = true;
-    #   enableFishIntegration = true;
-    #   enableNushellIntegration = true;
-    # };
     ssh-agent.enable = true;
   };
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      # Add additional package names here
-      "obsidian"
-      "steam"
-      "steamcmd"
-      "steam-unwrapped"
-      "rimsort"
-      "steamworkspy"
-      "codeium"
-      "jitsi-meet"
-    ];
 
   fonts = {
     fontconfig = {
@@ -374,17 +278,6 @@ in {
         monospace = ["0xProto Nerd Font Mono"];
         emoji = ["Noto Color Emoji"];
       };
-    };
-  };
-
-  gtk = {
-    iconTheme = {
-      name = "colloid-icon-theme";
-      package = pkgs.colloid-icon-theme;
-    };
-    theme = {
-      name = "colloid-gtk-theme";
-      package = pkgs.colloid-gtk-theme;
     };
   };
 }
