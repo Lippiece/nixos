@@ -23,10 +23,13 @@
   };
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot.enable = true;
-    grub.enable = false;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+      grub.enable = false;
+    };
   };
 
   # networking.hostName = "nixos"; # Define your hostname.
@@ -69,7 +72,6 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lippiece = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
@@ -154,26 +156,6 @@
 
     # Most users should NEVER change this value after the initial install, for any reason,
     stateVersion = "25.11"; # Did you read the comment?
-  };
-
-  virtualisation = {
-    containers.enable = true;
-
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-      };
-    };
-
-    # spiceUSBRedirection.enable = true;
   };
 
   security = {
