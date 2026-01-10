@@ -335,7 +335,43 @@ in {
         };
       };
     };
+
+    keepassxc = {
+      autostart = true;
+      enable = true;
+      # For available settings, see https://github.com/keepassxreboot/keepassxc/blob/develop/src/core/Config.cpp
+      settings = {
+        FdoSecrets.Enabled = true; # Enable Secret Service Integration
+        SSHAgent.Enabled = true;
+        SSHAgent.UseOpenSSH = true;
+        Browser.Enabled = true;
+        PasswordGenerator = {
+          Type = 1;
+          WordCount = 6;
+          WordSeparator = "-";
+        };
+        GUI = {
+          ColorPasswords = true;
+          MinimizeOnClose = true;
+          MinimizeToTray = true;
+          ShowTrayIcon = true;
+          TrayIconAppearance = "monochrome-light";
+        };
+        General = {
+          AutoGeneratePasswordForNewEntries = true;
+          ConfigVersion = 2;
+          URLDoubleClickAction = 2;
+        };
+        Security = {
+          ClearClipboard = false;
+          IconDownloadFallback = true;
+          LockDatabaseIdle = false;
+        };
+      };
+    };
   };
+
+  xdg.autostart.enable = true;
 
   services = {
     easyeffects.enable = true;
@@ -344,11 +380,6 @@ in {
       startInBackground = true;
     };
     kdeconnect.enable = true;
-    # gpg-agent = {
-    #   enable = true;
-    #   enableFishIntegration = true;
-    #   enableNushellIntegration = true;
-    # };
     ssh-agent.enable = true;
   };
 

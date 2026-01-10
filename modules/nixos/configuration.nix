@@ -442,14 +442,17 @@ in {
   };
 
   security = {
-    pam.loginLimits = [
-      {
-        domain = "@users";
-        type = "soft";
-        item = "priority";
-        value = "1";
-      }
-    ];
+    pam = {
+      services.login.enableKwallet = lib.mkForce false;
+      loginLimits = [
+        {
+          domain = "@users";
+          type = "soft";
+          item = "priority";
+          value = "1";
+        }
+      ];
+    };
     sudo.extraConfig = ''
       Defaults timestamp_timeout=7200
     '';
@@ -533,10 +536,10 @@ in {
     };
   };
 
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 16 * 1024; # 16 GB
-    }
-  ];
+  # swapDevices = [
+  #   {
+  #     device = "/var/lib/swapfile";
+  #     size = 16 * 1024; # 16 GB
+  #   }
+  # ];
 }
