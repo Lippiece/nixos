@@ -416,8 +416,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "dmmulroy";
           repo = "ts-error-translator.nvim";
-          rev = "c1e6a5529009e855eb102a668549679548757a05";
-          sha256 = "0azvhr0ap0x620iwap1rf2747yjfq14pc4w26bg0k965919dpqpx";
+          rev = "558abff11b9e8f4cefc0de09df780c56841c7a4b";
+          sha256 = "17ilq1f4ig4zwh3nw2lz804ncd7z0bc4jhfhw61b21zlyrz70dlj";
         };
       })
       (vimUtils.buildVimPlugin {
@@ -460,7 +460,7 @@
             owner = "esmuellert";
             repo = "vscode-diff.nvim";
             rev = "main";
-            hash = "sha256-0kPFAyPY7Ki/xY2mlDFBidelDWT2VH/xjmiIfVsPVXo=";
+            hash = "sha256-aI3JowDmk4hjuiOyKEZQPd1OWJbdh2pM7sd9huRt7Zc=";
           };
         })
     ];

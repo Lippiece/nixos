@@ -170,6 +170,10 @@ in {
     mtr.enable = true;
     gnupg.agent = {
       enable = true;
+      settings = {
+        default-cache-ttl = 86400;
+        max-cache-ttl = 86400;
+      };
     };
     ssh.startAgent = true;
     fish = {
@@ -310,6 +314,8 @@ in {
   networking = {
     hostName = "mothership"; # Define your hostname.
     extraHosts = ''
+      192.168.1.1 mwlogin.net
+
       192.168.1.102      cumulonimbus
       192.168.1.102:3001 lipsearch.ydns.eu
       192.168.1.102:3002 warden.ydns.eu
@@ -326,6 +332,9 @@ in {
     # If using NetworkManager:
     networkmanager.dns = "none";
     nameservers = ["127.0.0.1"];
+
+    useDHCP = lib.mkDefault true;
+    enableIPv6 = false;
   };
   # networking.networkmanager.dns = "systemd-resolved";
 
@@ -432,17 +441,19 @@ in {
     # spiceUSBRedirection.enable = true;
   };
 
-  security.pam.loginLimits = [
-    {
-      domain = "@users";
-      type = "soft";
-      item = "priority";
-      value = "1";
-    }
-  ];
-  security.sudo.extraConfig = ''
-    Defaults timestamp_timeout=7200
-  '';
+  security = {
+    pam.loginLimits = [
+      {
+        domain = "@users";
+        type = "soft";
+        item = "priority";
+        value = "1";
+      }
+    ];
+    sudo.extraConfig = ''
+      Defaults timestamp_timeout=7200
+    '';
+  };
 
   xdg.portal = {
     enable = true;
@@ -474,8 +485,6 @@ in {
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  networking.enableIPv6 = false;
   # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 

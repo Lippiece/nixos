@@ -58,7 +58,7 @@ in {
     geoclue2
 
     # # Work
-    super-productivity
+    # super-productivity
     onlyoffice-desktopeditors
 
     # # Entertainment
