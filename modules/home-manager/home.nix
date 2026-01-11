@@ -126,7 +126,19 @@ in {
   # plain files is through 'home.file'.
   home.file = {
     # ".mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/lib/mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+    ".config/chromium/NativeMessagingHosts/org.keepassxc.keepassxc_browser.json".text = ''
+      {
+        "allowed_origins": [
+          "chrome-extension://pdffhmdngciaglkoonimfcmckehcpafo/",
+          "chrome-extension://oboonakemofpalcgghocfoadofidjkkk/"
+          ],
+        "description": "KeePassXC integration with native messaging support",
+        "name": "org.keepassxc.keepassxc_browser",
+        "path": "${pkgs.keepassxc}/bin/keepassxc-proxy",
+        "type": "stdio"
+      }
 
+    '';
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -152,6 +164,9 @@ in {
     chromium = {
       enable = true;
       package = pkgs.ungoogled-chromium;
+      nativeMessagingHosts = [
+        pkgs.kdePackages.plasma-browser-integration
+      ];
     };
 
     dircolors.enable = true;
@@ -369,9 +384,17 @@ in {
         };
       };
     };
+    git-credential-keepassxc.enable = true;
   };
 
-  xdg.autostart.enable = true;
+  xdg = {
+    autostart.enable = true;
+    dataFile."dbus-1/services/org.freedesktop.secrets.service".text = ''
+      [D-BUS Service]
+      Name=org.freedesktop.secrets
+      Exec=${pkgs.keepassxc}/bin/keepassxc
+    '';
+  };
 
   services = {
     easyeffects.enable = true;
