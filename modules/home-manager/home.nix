@@ -270,7 +270,7 @@ in {
       enableNushellIntegration = true;
     };
 
-    gpg.enable = true;
+    gpg.enable = false;
 
     tmux = {
       enable = true;
