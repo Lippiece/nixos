@@ -35,9 +35,6 @@
   };
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
-    lsblk -f
-    echo
-
     mkdir /btrfs_tmp
     mount /dev/disk/by-uuid/d3d44327-bd14-4e4f-93ca-3b6869f41ed0 /btrfs_tmp
     if [[ -e /btrfs_tmp/root ]]; then
