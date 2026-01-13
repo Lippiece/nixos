@@ -280,4 +280,32 @@ in {
       };
     };
   };
+
+  systemd.user = {
+    services = {
+      "ydns-updater" = {
+        Unit = {
+          After = ["network.target"];
+        };
+        Service = {
+          Type = "simple";
+          ExecStart = "/home/lippiece/bin/updater.sh";
+        };
+      };
+    };
+    timers = {
+      "ydns-updater" = {
+        Install = {
+          WantedBy = ["timers.target"];
+        };
+        Unit = {
+          After = ["network.target"];
+        };
+        Timer = {
+          OnBootSec = "5m";
+          OnUnitInactiveSec = "4h";
+        };
+      };
+    };
+  };
 }
