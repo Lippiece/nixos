@@ -2,7 +2,6 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  config,
   inputs,
   lib,
   pkgs,
@@ -29,6 +28,12 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
       grub.enable = false;
+    };
+    kernel.sysctl = {
+      "vm.overcommit_memory" = 1;
+      "net.core.rmem_max" = 7500000;
+      "net.core.wmem_max" = 7500000;
+      "net.ipv4.tcp_congestion_control" = "bbr";
     };
   };
 
