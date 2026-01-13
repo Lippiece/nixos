@@ -57,46 +57,14 @@
     enable = true;
     enableReload = true;
     virtualHosts = {
-      "lipcloud.ydns.eu" = {
-        extraConfig = ''
-          reverse_proxy localhost:11000
-        '';
-      };
-      "lipsearch.ydns.eu" = {
-        extraConfig = ''
-          reverse_proxy localhost:3001
-        '';
-      };
-      "warden.ydns.eu" = {
-        extraConfig = ''
-          reverse_proxy localhost:3002
-        '';
-      };
-      "lipgit.ydns.eu" = {
-        extraConfig = ''
-          reverse_proxy localhost:3003
-        '';
-      };
-      "lipgrammar.ydns.eu" = {
-        extraConfig = ''
-          reverse_proxy localhost:3006
-        '';
-      };
-      "lipguard.ydns.eu" = {
-        extraConfig = ''
-          reverse_proxy localhost:3007
-        '';
-      };
-      "lipoffice.ydns.eu" = {
-        extraConfig = ''
-          reverse_proxy localhost:3010
-        '';
-      };
-      "liprss.ydns.eu" = {
-        extraConfig = ''
-          reverse_proxy localhost:3011
-        '';
-      };
+      "lipcloud.ydns.eu".extraConfig = ''reverse_proxy localhost:11000 '';
+      "lipsearch.ydns.eu".extraConfig = ''reverse_proxy localhost:3001 '';
+      "warden.ydns.eu".extraConfig = ''reverse_proxy localhost:3002 '';
+      "lipgit.ydns.eu".extraConfig = ''reverse_proxy localhost:3003 '';
+      "lipgrammar.ydns.eu".extraConfig = ''reverse_proxy localhost:3006 '';
+      "lipguard.ydns.eu".extraConfig = ''reverse_proxy localhost:3007 '';
+      "lipoffice.ydns.eu".extraConfig = ''reverse_proxy localhost:3010 '';
+      "liprss.ydns.eu".extraConfig = ''reverse_proxy localhost:3011 '';
       "matrix.lippiece.ru" = {
         extraConfig = ''
                    handle_path /.well-known/matrix/* {
@@ -153,16 +121,8 @@
           }
         '';
       };
-      "matrix.lippiece.ru:3478" = {
-        extraConfig = ''
-          reverse_proxy localhost:4200
-        '';
-      };
-      "matrix.lippiece.ru:5349" = {
-        extraConfig = ''
-          reverse_proxy localhost:4200
-        '';
-      };
+      "matrix.lippiece.ru:3478".extraConfig = ''reverse_proxy localhost:4200 '';
+      "matrix.lippiece.ru:5349".extraConfig = ''reverse_proxy localhost:4200 '';
       "matrixrtc.lippiece.ru" = {
         extraConfig = ''
           handle /sfu/get {
