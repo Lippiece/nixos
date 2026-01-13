@@ -124,6 +124,12 @@
             enable = true;
             autostart = true;
           };
+          rust_analyzer = {
+            enable = true;
+            autostart = true;
+            installCargo = true;
+            installRustc = true;
+          };
         };
       };
 
@@ -207,6 +213,7 @@
             prettier.command = "prettier";
             oxfmt.command = "oxfmt";
             yamlfmt.command = lib.getExe pkgs.yamlfmt;
+            rustmt.command = lib.getExe pkgs.rustfmt;
           };
           formatters = {
             oxlint = {
@@ -264,7 +271,7 @@
             # python = ["isort" "black"];
             yaml = ["yamlfmt"];
             # fish = ["fish_indent"];
-            # rust = ["rustfmt"];
+            rust = ["rustfmt"];
             injected = {options = {ignore_errors = true;};};
           };
           format_after_save =
