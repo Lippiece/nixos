@@ -298,6 +298,10 @@ in {
       enable = true;
       capSysNice = true;
     };
+
+    chromium = {
+      enablePlasmaBrowserIntegration = true;
+    };
   };
 
   qt = {
