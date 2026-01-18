@@ -133,12 +133,6 @@
           }
         '';
       };
-      "rustdesk.lippiece.ru:21114".extraConfig = "reverse_proxy localhost:3104";
-      "rustdesk.lippiece.ru:21115".extraConfig = "reverse_proxy localhost:3105";
-      "rustdesk.lippiece.ru:21116".extraConfig = "reverse_proxy localhost:3106";
-      "rustdesk.lippiece.ru:21117".extraConfig = "reverse_proxy localhost:3107";
-      "rustdesk.lippiece.ru:21118".extraConfig = "reverse_proxy localhost:3108";
-      "rustdesk.lippiece.ru:21119".extraConfig = "reverse_proxy localhost:3109";
     };
   };
 }
