@@ -369,6 +369,7 @@ in {
           WordSeparator = "-";
         };
         GUI = {
+          ApplicationTheme = "dark";
           ColorPasswords = true;
           MinimizeOnClose = true;
           MinimizeToTray = true;

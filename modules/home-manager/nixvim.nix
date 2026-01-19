@@ -451,8 +451,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "dmmulroy";
           repo = "tsc.nvim";
-          rev = "eecf551d69bf683603c77bd31a031873261d0147";
-          sha256 = "1m8drdmj6dsn6n2g3xc92qgs5ka8mway3ss8licxn9xsjnva74rn";
+          rev = "e083bcf1e54bc3af7df92b33235efb334e8c782c";
+          sha256 = "0f7as51kc3q3f8x0wv6v6xjdlw35blsnrkhyk2vkblprmryhk3sv";
         };
       })
       (vimUtils.buildVimPlugin
