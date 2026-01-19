@@ -260,7 +260,7 @@
             javascriptreact = ["oxfmt" "oxlint" "eslint_d"];
             typescriptreact = ["oxfmt" "oxlint" "eslint_d"];
             astro = ["prettier" "biome_check" "oxlint" "eslint_d"];
-            vue = ["oxfmt" "oxlint" "eslint_d"];
+            vue = ["biome_check" "oxfmt" "oxlint" "eslint_d"];
             svelte = ["prettier" "biome_check" "oxlint" "eslint_d"];
             css = ["oxfmt"];
             html = ["oxfmt"];
