@@ -210,13 +210,13 @@ in {
         # application/pgp types.
         set pgp_decode_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --status-fd=2 %?p?--passphrase-fd 0 --pinentry-mode=loopback? --no-verbose --quiet --batch --output - %f"
         set pgp_verify_command="sq verify --signature-file %s -- %f"
-        set pgp_sign_command="sq sign --batch %?a?--signer %a? --mode text --signature-file - -- %f"
-        set pgp_clearsign_command="sq sign --batch %?a?--signer %a? --cleartext -- %f"
-        set pgp_decrypt_command="sq decrypt --batch --signatures 0 -- %f"
+        set pgp_sign_command="sq sign %?a?--signer %a? --mode text --signature-file - -- %f"
+        set pgp_clearsign_command="sq sign %?a?--signer %a? --cleartext -- %f"
+        set pgp_decrypt_command="sq decrypt --signatures 0 %f"
         # Note: We use pgpewrap because %r is a list, and --for only handles one
         # argument per option.
-        set pgp_encrypt_only_command="${pkgs.mutt}/bin/pgpewrap sq encrypt --without-signature --batch -- --for %r -- %f"
-        set pgp_encrypt_sign_command="${pkgs.mutt}/bin/pgpewrap sq encrypt --batch %?a?--signer %a? -- --for %r -- %f"
+        set pgp_encrypt_only_command="${pkgs.mutt}/bin/pgpewrap sq encrypt --without-signature -- --for %r -- %f"
+        set pgp_encrypt_sign_command="${pkgs.mutt}/bin/pgpewrap sq encrypt --signer-email lippiece@vivaldi.net -- --for %r -- %f"
 
         # Keyring management
         set pgp_import_command="sq cert import -- %f"
@@ -226,11 +226,11 @@ in {
         set pgp_verify_key_command="sq pki identify --cert %r 2>&1"
         # TODO: This relies on ${lib.getExe pkgs.sequoia-chameleon-gnupg}, ideally this would use a native interface.
         # Note: the second --with-fingerprint adds fingerprints to subkeys
-        set pgp_list_pubring_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --no-verbose --batch --quiet --with-colons --with-fingerprint --with-fingerprint --list-keys %r"
-        set pgp_list_secring_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --no-verbose --batch --quiet --with-colons --with-fingerprint --with-fingerprint --list-secret-keys %r"
+        set pgp_list_pubring_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --no-verbose --quiet --with-colons --with-fingerprint --with-fingerprint --list-keys %r"
+        set pgp_list_secring_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --no-verbose --quiet --with-colons --with-fingerprint --with-fingerprint --list-secret-keys %r"
 
         set pgp_good_sign="^[[:space:]]*Good signature from "
-        set pgp_decryption_okay="^[[:space:]]*Encrypted using "
+        set pgp_decryption_okay="Decrypted by"
       '';
     };
     mbsync = {

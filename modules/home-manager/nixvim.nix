@@ -3,6 +3,9 @@
   lib,
   ...
 }: {
+  home.packages = with pkgs; [
+    dockerfile-language-server
+  ];
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
@@ -129,6 +132,11 @@
             autostart = true;
             installCargo = true;
             installRustc = true;
+          };
+          dockerls = {
+            enable = true;
+            activate = true;
+            autostart = true;
           };
         };
       };
