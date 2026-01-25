@@ -268,6 +268,8 @@ in {
       package = pkgs.steam.override {
         extraPkgs = pkgs:
           with pkgs; [
+            unrar
+            p7zip
             alsa-lib.out
             libsForQt5.libqtpas.out
             at-spi2-atk.out
