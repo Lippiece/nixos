@@ -392,7 +392,7 @@
       schemastore.enable = true;
       sleuth.enable = true;
       todo-comments.enable = true;
-      treesitter-refactor.enable = true;
+      # treesitter-refactor.enable = true;
       treesitter-textobjects.enable = true;
       treesj.enable = true;
       trouble.enable = true;
@@ -465,17 +465,18 @@
       })
       (vimUtils.buildVimPlugin
         {
-          name = "vscode-diff.nvim";
+          name = "codediff.nvim";
           buildInputs = [vimPlugins.nui-nvim];
           nativeBuildInputs = [pkgs.cmake];
           buildPhase = ''
-            make
+            make clean && make
           '';
+          doCheck = false;
           src = pkgs.fetchFromGitHub {
             owner = "esmuellert";
-            repo = "vscode-diff.nvim";
-            rev = "main";
-            hash = "sha256-aI3JowDmk4hjuiOyKEZQPd1OWJbdh2pM7sd9huRt7Zc=";
+            repo = "codediff.nvim";
+            rev = "v2.14.0";
+            hash = "sha256-D2wskJMB3wexyP3e0aVQ7/iiVGJVYiuhN3Zx0Apc/KU=";
           };
         })
     ];

@@ -13,10 +13,6 @@
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    phoenix = {
-      url = "git+https://codeberg.org/celenity/Phoenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -37,8 +33,6 @@
         ./modules/nixos/hardware-configuration.nix
 
         inputs.home-manager.nixosModules.default
-
-        inputs.phoenix.nixosModules.default
 
         inputs.impermanence.nixosModules.impermanence
       ];

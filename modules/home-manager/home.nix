@@ -115,6 +115,7 @@ in {
     # steamcmd
     rsync
     tomb
+    delta
 
     # # Nix
     alejandra

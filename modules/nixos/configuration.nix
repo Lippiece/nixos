@@ -118,7 +118,21 @@ in {
       unar
       git
       silver-searcher
-      kdotool
+      (
+        kdotool.overrideAttrs (finalAttrs: previousAttrs: {
+          version = "master";
+          src = fetchFromGitHub {
+            owner = "jinliu";
+            repo = "kdotool";
+            rev = "1ad61acb56c0707df53a4d9ce10153a87f08523b";
+            hash = "sha256-zGuq8YjxLRSd26UfRgBfKveesZy6ruVLQlTbGN/afoE=";
+          };
+          cargoDeps = rustPlatform.fetchCargoVendor {
+            inherit (finalAttrs) src;
+            hash = "sha256-CZr/aPAPFjeJdlF8wvf1c16bBGhzGhVW3WnZJ8TC68A=";
+          };
+        })
+      )
       gcc
       vlc
       btop
