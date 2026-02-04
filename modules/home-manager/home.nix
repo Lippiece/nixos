@@ -91,7 +91,7 @@ in {
     # # vim
     neovide
     # neovim
-    # fzf
+    fzf
     # lua54Packages.luarocks
     # gnumake
     # python312Packages.pip
