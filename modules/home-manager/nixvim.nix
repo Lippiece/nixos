@@ -6,6 +6,79 @@
   home.packages = with pkgs; [
     dockerfile-language-server
   ];
+
+  home.file = {
+    ".config/nvim/snippets/friendly".source = "${pkgs.vimPlugins.friendly-snippets}/snippets";
+    ".config/nvim/snippets/package.json".text =
+      #json
+      ''
+        {
+          "contributes": {
+            "snippets": [
+              {
+                "language": "svelte",
+                "path"    : "./friendly/svelte.json"
+              },
+              {
+                "language": "nix",
+                "path"    : "./friendly/nix.json"
+              },
+              {
+                "language": "html",
+                "path"    : "./friendly/html.json"
+              },
+              {
+                "language": "yaml",
+                "path"    : "./friendly/docker/docker-compose.json"
+              },
+              {
+                "language": "dockerfile",
+                "path"    : "./friendly/docker/docker_file.json"
+              },
+              {
+                "language": [
+                  "javascript",
+                  "vue",
+                  "astro",
+                  "svelte",
+                  "typescript"
+                ],
+                "path": "./friendly/javascript/javascript.json"
+              },
+              {
+                "language": "vue",
+                "path"    : "./friendly/frameworks/vue/html.json"
+              },
+              {
+                "language": "vue",
+                "path"    : "./friendly/frameworks/vue/script.json"
+              },
+              {
+                "language": "vue",
+                "path"    : "./friendly/frameworks/vue/nuxt-html.json"
+              },
+              {
+                "language": "vue",
+                "path"    : "./friendly/frameworks/vue/nuxt-script.json"
+              },
+              {
+                "language": "vue",
+                "path"    : "./friendly/frameworks/vue/style.json"
+              },
+              {
+                "language": "vue",
+                "path"    : "./friendly/frameworks/vue/vue.json"
+              },
+              {
+                "language": "typescript",
+                "path"    : "./friendly/javascript/typescript.json"
+              }
+            ]
+          },
+          "name": "personal-snippets"
+        }
+      '';
+  };
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
@@ -392,7 +465,6 @@
       schemastore.enable = true;
       sleuth.enable = true;
       todo-comments.enable = true;
-      # treesitter-refactor.enable = true;
       treesitter-textobjects.enable = true;
       treesj.enable = true;
       trouble.enable = true;
@@ -411,6 +483,10 @@
       bufferline.enable = true;
       telescope.enable = true;
       overseer.enable = true;
+      friendly-snippets = {
+        enable = true;
+        package = pkgs.vimPlugins.friendly-snippets;
+      };
     };
 
     extraPlugins = with pkgs; [
