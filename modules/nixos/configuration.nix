@@ -104,7 +104,6 @@ in {
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_ENABLE_WAYLAND = "1";
       BROWSER = "brave";
-      PAGER = "nvim -R";
       MANPAGER = "nvim +Man!";
     };
     etc."xdg/kcminputrc".text = ''
