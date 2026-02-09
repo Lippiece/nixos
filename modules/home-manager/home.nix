@@ -47,6 +47,7 @@ in {
     # mpc-qt
     kdePackages.filelight
     element-desktop
+    kitty
 
     (brave.overrideAttrs (oldAttrs: {
       nativeBuildInputs = oldAttrs.nativeBuildInputs or [] ++ [makeWrapper];
@@ -89,8 +90,6 @@ in {
     #################################
 
     # # vim
-    neovide
-    # neovim
     fzf
     # lua54Packages.luarocks
     # gnumake
@@ -333,27 +332,6 @@ in {
       # enableFishIntegration = true;
       enableNushellIntegration = true;
     };
-    alacritty = {
-      enable = true;
-      settings = {
-        general = {
-          import = ["~/.config/alacritty/themes/themes/gruvbox_dark.toml"];
-        };
-        font = {
-          normal = {
-            family = "0xProto Nerd Font";
-            style = "Regular";
-          };
-        };
-        mouse = {
-          hide_when_typing = true;
-        };
-        window = {
-          opacity = 0.9;
-          blur = true;
-        };
-      };
-    };
 
     keepassxc = {
       autostart = true;
@@ -430,7 +408,7 @@ in {
       defaultFonts = {
         serif = ["Inter Variable" "Noto Serif"];
         sansSerif = ["Inter Variable" "Noto Sans"];
-        monospace = ["0xProto Nerd Font Mono"];
+        monospace = ["Maple Mono"];
         emoji = ["Noto Color Emoji"];
       };
     };

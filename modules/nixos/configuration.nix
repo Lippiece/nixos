@@ -396,8 +396,8 @@ in {
 
   fonts = {
     packages = with pkgs; [
+      maple-mono.truetype-autohint
       inter-nerdfont
-      nerd-fonts._0xproto
       nerd-fonts.symbols-only
       nerd-fonts.liberation
 
@@ -412,7 +412,7 @@ in {
       defaultFonts = {
         serif = ["Inter Variable" "Noto Serif"];
         sansSerif = ["Inter Variable" "Noto Sans"];
-        monospace = ["0xProto Nerd Font Mono"];
+        monospace = ["Maple Mono"];
         emoji = ["Noto Color Emoji"];
       };
     };

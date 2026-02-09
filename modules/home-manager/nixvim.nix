@@ -127,7 +127,7 @@
       termguicolors = true;
       timeoutlen = 300;
       undofile = true;
-      guifont = "0xProto Nerd Font Mono:h10";
+      guifont = "Maple Mono:h10";
       scrolloff = 8;
       langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz";
       foldnestmax = 8;

@@ -24,5 +24,5 @@ in
         freetype.out
         libz.out
       ];
-    runScript = "/home/lippiece/.config/nixos/packages/catapult/catapult-linux-x64-24.11a";
+    runScript = "/home/lippiece/.config/nixos/packages/catapult/catapult-linux-x64-25.11a";
   }
