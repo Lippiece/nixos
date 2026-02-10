@@ -307,7 +307,7 @@
                 "--fix-dangerously"
                 "$FILENAME"
               ];
-              exit_codes = [0 2]; # code 2 is given when the file includes some non-autofixable errors
+              exit_codes = [0 1 2]; # code 2 = non-autofixable errors; code 1 = warnings
               stdin = false;
               tmpfile_format = "ConformOxlint$FILENAME";
             };
