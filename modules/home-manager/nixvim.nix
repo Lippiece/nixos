@@ -539,22 +539,6 @@
           sha256 = "0f7as51kc3q3f8x0wv6v6xjdlw35blsnrkhyk2vkblprmryhk3sv";
         };
       })
-      (vimUtils.buildVimPlugin
-        {
-          name = "codediff.nvim";
-          buildInputs = [vimPlugins.nui-nvim];
-          nativeBuildInputs = [pkgs.cmake];
-          buildPhase = ''
-            make clean && make
-          '';
-          doCheck = false;
-          src = pkgs.fetchFromGitHub {
-            owner = "esmuellert";
-            repo = "codediff.nvim";
-            rev = "v2.14.0";
-            hash = "sha256-D2wskJMB3wexyP3e0aVQ7/iiVGJVYiuhN3Zx0Apc/KU=";
-          };
-        })
     ];
     extraConfigLua =
       #lua
