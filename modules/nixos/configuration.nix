@@ -119,17 +119,18 @@ in {
       silver-searcher
       (
         kdotool.overrideAttrs (finalAttrs: previousAttrs: {
-          version = "master";
+          version = "1ad61acb56c0707df53a4d9ce10153a87f08523b";
           src = fetchFromGitHub {
             owner = "jinliu";
             repo = "kdotool";
-            rev = "1ad61acb56c0707df53a4d9ce10153a87f08523b";
-            hash = "sha256-zGuq8YjxLRSd26UfRgBfKveesZy6ruVLQlTbGN/afoE=";
+            rev = "049e3f5620ad8c5484241d7d06d742bc17d423ed";
+            hash = "sha256-8pKPVOj0fMwzzuNehG+vbDxKn+wfpWoiYabl5wkcQtc=";
           };
           cargoDeps = rustPlatform.fetchCargoVendor {
             inherit (finalAttrs) src;
             hash = "sha256-CZr/aPAPFjeJdlF8wvf1c16bBGhzGhVW3WnZJ8TC68A=";
           };
+          patches = [];
         })
       )
       gcc
@@ -242,7 +243,6 @@ in {
     dconf.enable = true;
     firefox = {
       enable = true;
-      package = inputs.firefox.packages.${pkgs.stdenv.hostPlatform.system}.firefox-nightly-bin;
       nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration tridactyl-native];
       preferences = {
         "widget.use-xdg-desktop-portal.file-picker" = 1;
