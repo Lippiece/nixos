@@ -368,6 +368,11 @@ in {
       };
     };
     git-credential-keepassxc.enable = true;
+
+    chromium = {
+      enable = true;
+      package = pkgs.ungoogled-chromium;
+    };
   };
 
   xdg = {
