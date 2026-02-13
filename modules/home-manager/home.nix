@@ -364,6 +364,7 @@ in {
           ClearClipboard = false;
           IconDownloadFallback = true;
           LockDatabaseIdle = false;
+          LockDatabaseScreenLock = false;
         };
       };
     };
