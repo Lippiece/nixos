@@ -305,6 +305,22 @@ in {
             xorg.libXfixes.out
             xorg.libXrandr.out
             xorg.libxcb.out
+
+            xorg.libXcursor.out
+            xorg.libXi.out
+            xorg.libXinerama.out
+            xorg.libXrender.out
+            libGL.out
+
+            SDL2.out
+            SDL2_image.out
+            SDL2_mixer.out
+            SDL2_ttf.out
+            libgcc.lib
+            udev
+
+            freetype.out
+            libz.out
           ];
       };
     };
@@ -543,7 +559,7 @@ in {
       nvidiaSettings = false;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     graphics = {
