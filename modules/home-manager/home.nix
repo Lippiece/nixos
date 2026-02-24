@@ -84,6 +84,11 @@ in {
     colloid-icon-theme
     colloid-gtk-theme
     kdePackages.karousel
+    (
+      kdePackages.spectacle.override {
+        tesseractLanguages = ["rus" "eng"];
+      }
+    )
 
     #################################
     #              CLI              #
