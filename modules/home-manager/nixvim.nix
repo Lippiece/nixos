@@ -473,7 +473,18 @@
       which-key.enable = true;
       actions-preview.enable = true;
       dap.enable = true;
-      project-nvim.enable = true;
+      project-nvim = {
+        enable = true;
+        package = pkgs.vimUtils.buildVimPlugin {
+          name = "project.nvim";
+          src = pkgs.fetchFromGitHub {
+            owner = "DrKJeff16";
+            repo = "project.nvim";
+            rev = "e0349d75dacc64178fc8a4f549807d44816942db";
+            hash = "sha256-jUBMIYDUzncQstQ50A+UWYKsr3/Y0HKIzhkAMIPx1ZA=";
+          };
+        };
+      };
       sandwich.enable = true;
       git-conflict.enable = true;
       ccc.enable = true;
