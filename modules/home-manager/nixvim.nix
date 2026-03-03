@@ -377,7 +377,6 @@
       schemastore.enable = true;
       sleuth.enable = true;
       todo-comments.enable = true;
-      treesitter-refactor.enable = true;
       treesitter-textobjects.enable = true;
       treesj.enable = true;
       trouble.enable = true;
@@ -386,7 +385,6 @@
       which-key.enable = true;
       actions-preview.enable = true;
       dap.enable = true;
-      project-nvim.enable = true;
       sandwich.enable = true;
       git-conflict.enable = true;
       ccc.enable = true;
@@ -448,21 +446,6 @@
           sha256 = "1m8drdmj6dsn6n2g3xc92qgs5ka8mway3ss8licxn9xsjnva74rn";
         };
       })
-      (vimUtils.buildVimPlugin
-        {
-          name = "vscode-diff.nvim";
-          buildInputs = [vimPlugins.nui-nvim];
-          nativeBuildInputs = [pkgs.cmake];
-          buildPhase = ''
-            make
-          '';
-          src = pkgs.fetchFromGitHub {
-            owner = "esmuellert";
-            repo = "vscode-diff.nvim";
-            rev = "main";
-            hash = "sha256-aI3JowDmk4hjuiOyKEZQPd1OWJbdh2pM7sd9huRt7Zc=";
-          };
-        })
     ];
     extraConfigLua =
       #lua

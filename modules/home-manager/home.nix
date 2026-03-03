@@ -289,7 +289,8 @@ in {
         };
         Service = {
           Type = "simple";
-          ExecStart = "/home/lippiece/bin/updater.sh";
+          ExecStart = "${lib.getExe pkgs.bash} /home/lippiece/bin/updater.sh";
+          Environment = "PATH=/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
         };
       };
     };

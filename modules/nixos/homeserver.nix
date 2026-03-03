@@ -133,6 +133,7 @@
           }
         '';
       };
+      "roundcube.lippiece.ru".extraConfig = "reverse_proxy localhost:3400";
     };
   };
 }

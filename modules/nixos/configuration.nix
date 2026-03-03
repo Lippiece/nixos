@@ -136,10 +136,10 @@
       unar
       git
       silver-searcher
-      kdotool
       vlc
       btop
-      glances
+      # TODO: build failure
+      # glances
       unzip
       tree
     ];
@@ -230,4 +230,9 @@
   # system.copySystemConfiguration = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  zramSwap = {
+    enable = true;
+    memoryPercent = 150;
+  };
 }
