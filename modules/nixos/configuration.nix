@@ -444,7 +444,6 @@ in {
     settings = {
       experimental-features = ["nix-command" "flakes"];
       cores = 8;
-      max-jobs = 8;
       auto-optimise-store = true;
       keep-going = true;
     };
