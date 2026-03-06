@@ -79,6 +79,7 @@ in {
     variety
     prismlauncher
     # (pkgs.callPackage ../../packages/rimsort/package.nix {})
+    (pkgs.callPackage ../../packages/catapult/package.nix {})
 
     # # System
     colloid-icon-theme
