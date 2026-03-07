@@ -298,18 +298,18 @@ in {
             nspr.out
             nss.out
             pango.out
-            xorg.libX11.out
-            xorg.libXcomposite.out
-            xorg.libXdamage.out
-            xorg.libXext.out
-            xorg.libXfixes.out
-            xorg.libXrandr.out
-            xorg.libxcb.out
+            libX11.out
+            libXcomposite.out
+            libXdamage.out
+            libXext.out
+            libXfixes.out
+            libXrandr.out
+            libxcb.out
 
-            xorg.libXcursor.out
-            xorg.libXi.out
-            xorg.libXinerama.out
-            xorg.libXrender.out
+            libXcursor.out
+            libXi.out
+            libXinerama.out
+            libXrender.out
             libGL.out
 
             SDL2.out
@@ -444,6 +444,7 @@ in {
     settings = {
       experimental-features = ["nix-command" "flakes"];
       cores = 8;
+      max-jobs = 8;
       auto-optimise-store = true;
       keep-going = true;
     };

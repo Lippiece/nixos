@@ -77,7 +77,7 @@ in {
       removeWarningPopup = true;
     })
     variety
-    prismlauncher
+    # prismlauncher
     # (pkgs.callPackage ../../packages/rimsort/package.nix {})
 
     # # System
@@ -253,11 +253,15 @@ in {
     git = {
       enable = true;
       # delta.enable = true;
-      diff-so-fancy.enable = true;
-      diff-so-fancy.changeHunkIndicators = true;
       signing.signByDefault = true;
       userEmail = "github@lippiece.anonaddy.me";
       userName = "${name}";
+    };
+
+    diff-so-fancy = {
+      enable = true;
+      changeHunkIndicators = true;
+      enableGitIntegration = true;
     };
 
     tealdeer.enable = true;
@@ -433,6 +437,14 @@ in {
     theme = {
       name = "colloid-gtk-theme";
       package = pkgs.colloid-gtk-theme;
+    };
+  };
+
+  xdg.desktopEntries = {
+    catapult = {
+      name = "Catapult";
+      exec = ''fish -c "runbuild /home/lippiece/.config/nixos/packages/catapult catapult"'';
+      terminal = false;
     };
   };
 }
