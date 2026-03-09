@@ -9,6 +9,7 @@ in {
   imports = [
     inputs.nixvim.homeModules.nixvim
     ./nixvim.nix
+    ./homeserver.nix
   ];
   home.username = "${name}";
   home.homeDirectory = "/home/lippiece";

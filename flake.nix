@@ -21,7 +21,6 @@
       modules = [
         # My configuration
         ./modules/nixos/configuration.nix
-        ./modules/nixos/homeserver.nix
         ./modules/nixos/hardware-configuration.nix
 
         inputs.home-manager.nixosModules.default

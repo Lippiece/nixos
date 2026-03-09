@@ -10,6 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./homeserver.nix
   ];
 
   home-manager = {
@@ -182,22 +183,25 @@
   # Enable the OpenSSH daemon.
   services = {
     openssh.enable = true;
-    # dnsproxy = {
-    #   enable = true;
-    #   settings = {
-    #     bootstrap = ["9.9.9.9:53"];
-    #
-    #     # Plain DNS upstream
-    #     # upstream = [ "1.1.1.1:53" ];
-    #     # DNS over TLS upstream
-    #     # upstream = [ "tls://dns.adguard.com" ];
-    #     # DNS over HTTPS upstream
-    #     upstream = ["9.9.9.9:53"];
-    #     # upstream = ["quic://lipguard.ydns.eu"];
-    #   };
-    #   # Additional launch flags
-    #   # flags = [ "--verbose" ];
-    # };
+    dnsproxy = {
+      enable = true;
+      settings = {
+        bootstrap = ["tls://9.9.9.9:853"];
+
+        # Plain DNS upstream
+        # upstream = [ "1.1.1.1:53" ];
+        # DNS over TLS upstream
+        # upstream = [ "tls://dns.adguard.com" ];
+        # DNS over HTTPS upstream
+        upstream = [
+          "quic://lipguard.ydns.eu"
+          "quic://dns.alidns.com"
+          "quic://dns.caliph.dev"
+        ];
+      };
+      # Additional launch flags
+      # flags = [ "--verbose" ];
+    };
 
     btrfs.autoScrub.enable = true;
 
@@ -208,13 +212,6 @@
         verbosity = "crit";
         extraOptions = ["--loadavg-target" "5.0"];
       };
-    };
-
-    resolved = {
-      enable = true;
-      fallbackDns = [
-        "9.9.9.9"
-      ];
     };
   };
 
