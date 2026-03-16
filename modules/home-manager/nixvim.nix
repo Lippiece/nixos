@@ -465,7 +465,27 @@
       schemastore.enable = true;
       sleuth.enable = true;
       todo-comments.enable = true;
-      treesitter-textobjects.enable = true;
+      treesitter-textobjects = {
+        enable = true;
+        settings = {
+          enable = true;
+          move = {
+            set_jumps = true;
+          };
+          selection_modes = {
+            parameter.outer = "v";
+            function.outer = "V";
+            class.outer = "<c-v>";
+          };
+          keymaps = {
+            ab = "@block.outer";
+            ac = "@call.outer";
+            ib = "@block.inner";
+            ic = "@call.inner";
+          };
+          lookahead = true;
+        };
+      };
       treesj.enable = true;
       trouble.enable = true;
       ts-comments.enable = true;
@@ -538,6 +558,7 @@
           sha256 = "0f7as51kc3q3f8x0wv6v6xjdlw35blsnrkhyk2vkblprmryhk3sv";
         };
       })
+      vimPlugins.treewalker-nvim
     ];
     extraConfigLua =
       #lua
@@ -602,6 +623,43 @@
         })
         require"tsc".setup({
           use_trouble_qflist = true,
+        })
+
+        require"treewalker".setup({
+          -- Whether to briefly highlight the node after jumping to it
+          highlight = true,
+
+          -- How long should above highlight last (in ms)
+          highlight_duration = 250,
+
+          -- The color of the above highlight. Must be a valid vim highlight group.
+          -- (see :h highlight-group for options)
+          highlight_group = 'CursorLine',
+
+          -- Whether to create a visual selection after a movement to a node.
+          -- If true, highlight is disabled and a visual selection is made in
+          -- its place.
+          select = false,
+
+          -- Whether to use vim.notify to warn when there are missing parsers or incorrect options
+          notifications = true,
+
+          -- Whether the plugin adds movements to the jumplist -- true | false | 'left'
+          --  true: All movements more than 1 line are added to the jumplist. This is the default,
+          --        and is meant to cover most use cases. It's modeled on how { and } natively add
+          --        to the jumplist.
+          --  false: Treewalker does not add to the jumplist at all
+          --  "left": Treewalker only adds :Treewalker Left to the jumplist. This seems the most
+          --          likely jump to cause location confusion, so use this to minimize writes
+          --          to the jumplist, while maintaining some ability to go back.
+          jumplist = true,
+
+          -- Whether movement, when inside the scope of some node, should be confined to that scope.
+          -- When true, when moving through neighboring nodes inside some node, you won't be able to
+          -- move outside of that scope via :Treewalker Up/Down. When false, if on a node at the end
+          -- of a scope, movement will bring you to the next node of similar indentation/number of
+          -- ancestor nodes, even when it is outside of the scope you're currently in.
+          scope_confined = false,
         })
 
         vim.opt.rtp:prepend(${"\"" + pkgs.vimPlugins.vim-fetch + "\""})
@@ -1425,30 +1483,6 @@
         options.desc = "Code Action (fastaction)";
       }
       {
-        key = "]]";
-        mode = ["n"];
-        action.__raw = ''
-          function()
-            Snacks.words.jump(1)
-          end
-        '';
-        options = {
-          desc = "Next Reference";
-        };
-      }
-      {
-        key = "[[";
-        mode = ["n"];
-        action.__raw = ''
-          function()
-            Snacks.words.jump(-1)
-          end
-        '';
-        options = {
-          desc = "Prev Reference";
-        };
-      }
-      {
         key = "<Esc>";
         mode = ["n"];
         action = "<cmd>noh<CR>";
@@ -1577,13 +1611,6 @@
         options.desc = "Run vue-tsc";
       }
 
-      # Redoxahmii/json-to-types.nvim
-      {
-        key = "<leader>ct";
-        action = "<CMD>ConvertJSONtoLangBuffer typescript<CR>";
-        options.desc = "Convert JSON to TS from buffer";
-      }
-
       # Overseer
       {
         key = "<leader>uo";
@@ -1599,6 +1626,55 @@
         key = "<leader>ul";
         action = "<CMD>OverseerLoadBundle<CR>";
         options.desc = "Load Overseer command bundle";
+      }
+
+      # https://github.com/aaronik/treewalker.nvim
+      # -- movement
+      # vim.keymap.set({ 'n', 'v' }, '<C-k>', '<cmd>Treewalker Up<cr>', { silent = true })
+      {
+        mode = ["n" "v"];
+        key = "<C-k>";
+        action = "<cmd>Treewalker Up<cr>";
+      }
+      # vim.keymap.set({ 'n', 'v' }, '<C-j>', '<cmd>Treewalker Down<cr>', { silent = true })
+      {
+        mode = ["n" "v"];
+        key = "<C-j>";
+        action = "<cmd>Treewalker Down<cr>";
+      }
+      # vim.keymap.set({ 'n', 'v' }, '<C-h>', '<cmd>Treewalker Left<cr>', { silent = true })
+      {
+        mode = ["n" "v"];
+        key = "<C-h>";
+        action = "<cmd>Treewalker Left<cr>";
+      }
+      # vim.keymap.set({ 'n', 'v' }, '<C-l>', '<cmd>Treewalker Right<cr>', { silent = true })
+      {
+        mode = ["n" "v"];
+        key = "<C-l>";
+        action = "<cmd>Treewalker Right<cr>";
+      }
+      #
+      # -- swapping
+      # vim.keymap.set('n', '<C-S-k>', '<cmd>Treewalker SwapUp<cr>', { silent = true })
+      {
+        key = "<C-S-k>";
+        action = "<cmd>Treewalker SwapUp<cr>";
+      }
+      # vim.keymap.set('n', '<C-S-j>', '<cmd>Treewalker SwapDown<cr>', { silent = true })
+      {
+        key = "<C-S-j>";
+        action = "<cmd>Treewalker SwapDown<cr>";
+      }
+      # vim.keymap.set('n', '<C-S-h>', '<cmd>Treewalker SwapLeft<cr>', { silent = true })
+      {
+        key = "<C-S-h>";
+        action = "<cmd>Treewalker SwapLeft<cr>";
+      }
+      # vim.keymap.set('n', '<C-S-l>', '<cmd>Treewalker SwapRight<cr>', { silent = true })
+      {
+        key = "<C-S-l>";
+        action = "<cmd>Treewalker SwapRight<cr>";
       }
     ];
 

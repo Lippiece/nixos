@@ -103,7 +103,7 @@ in {
     # python312Packages.venvShellHook
     # uv
     # cargo
-    nodejs_latest
+    nodejs
     # ripgrep
     python313Packages.demjson3
 

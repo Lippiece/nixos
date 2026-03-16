@@ -68,7 +68,7 @@ in {
     dnsproxy = {
       enable = true;
       settings = {
-        bootstrap = ["9.9.9.9:853"];
+        bootstrap = ["tls://9.9.9.9:853"];
 
         # Plain DNS upstream
         # upstream = [ "1.1.1.1:53" ];
