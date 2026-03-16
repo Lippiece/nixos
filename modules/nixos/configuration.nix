@@ -49,9 +49,9 @@
     networkmanager.enable =
       true; # Easiest to use and most distros use this by default.
     # If using NetworkManager:
-    networkmanager.dns = "systemd-resolved";
+    networkmanager.dns = "default";
     # networkmanager.dns = "none";
-    # nameservers = ["127.0.0.1"];
+    nameservers = ["1.1.1.1" "9.9.9.9"];
 
     useDHCP = lib.mkDefault true;
     enableIPv6 = false;
@@ -184,7 +184,7 @@
   services = {
     openssh.enable = true;
     dnsproxy = {
-      enable = true;
+      enable = false;
       settings = {
         bootstrap = ["tls://9.9.9.9:853"];
 
