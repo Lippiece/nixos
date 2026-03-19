@@ -16,6 +16,11 @@
     # Helpers
     impermanence.url = "github:nix-community/impermanence";
     nix-alien.url = "github:thiagokokada/nix-alien";
+
+    typenix = {
+      url = "github:ryanrasti/typenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: {

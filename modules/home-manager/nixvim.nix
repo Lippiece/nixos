@@ -9,6 +9,21 @@
 
   home.file = {
     ".config/nvim/snippets/friendly".source = "${pkgs.vimPlugins.friendly-snippets}/snippets";
+    ".config/nvim/lsp/typenix".text =
+      #lua
+      ''
+        return {
+          cmd = function(dispatchers)
+            local cmd = "typenix"
+            return vim.lsp.rpc.start({ cmd, "--lsp", "--stdio" }, dispatchers)
+          end,
+          root_markers = { "flake.nix", ".git" },
+          filetypes = {
+            "nix",
+            "nixts",
+          },
+        }
+      '';
     ".config/nvim/snippets/package.json".text =
       #json
       ''
@@ -697,6 +712,27 @@
             },
           },
         })
+
+        -- NOTE: typenix
+        ---@type vim.lsp.Config
+        vim.lsp.config("typenix", {
+          cmd = function(dispatchers)
+            local cmd = "typenix"
+            return vim.lsp.rpc.start({ cmd, "--lsp", "--stdio" }, dispatchers)
+          end,
+          root_markers = { "flake.nix", ".git" },
+          filetypes = {
+            "nix",
+            "nixts",
+          }
+        })
+
+        vim.filetype.add({
+          pattern = {
+            [".*/*.nix.d.ts"] = "nixts",
+          },
+        })
+        vim.treesitter.language.register("typescript", { "nixts" })
       '';
 
     lsp = {

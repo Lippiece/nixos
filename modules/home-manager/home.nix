@@ -124,6 +124,7 @@ in {
     # # Nix
     alejandra
     update-nix-fetchgit
+    inputs.typenix.packages.x86_64-linux.default
 
     # # Mutt
     mutt-wizard
