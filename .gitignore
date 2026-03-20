@@ -5,3 +5,4 @@ packages/catapult/catapult-linux*
 nixos-switch.log
 archive/
 packages/catapult/bn
+packages/catapult/tlg

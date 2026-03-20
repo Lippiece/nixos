@@ -28,6 +28,7 @@ in {
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
       "net.ipv4.tcp_congestion_control" = "bbr";
+      "vm.swappiness" = "10";
     };
 
     initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/d97cee83-4277-4653-bf49-9280b6dcd10a";
@@ -572,12 +573,15 @@ in {
   };
 
   zramSwap = {
+    priority = 100;
     enable = true;
     memoryPercent = 100;
   };
 
   swapDevices = [
     {
+      discardPolicy = "both";
+      priority = 50;
       device = "/swapfile";
       size = 16 * 1024; # 16GB
     }
