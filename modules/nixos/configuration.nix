@@ -2,7 +2,6 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  config,
   lib,
   inputs,
   pkgs,
@@ -28,7 +27,7 @@ in {
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
       "net.ipv4.tcp_congestion_control" = "bbr";
-      "vm.swappiness" = "10";
+      "vm.swappiness" = "1";
     };
 
     initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/d97cee83-4277-4653-bf49-9280b6dcd10a";
@@ -573,15 +572,14 @@ in {
   };
 
   zramSwap = {
-    priority = 100;
+    priority = 50;
     enable = true;
     memoryPercent = 100;
   };
 
   swapDevices = [
     {
-      discardPolicy = "both";
-      priority = 50;
+      priority = 100;
       device = "/swapfile";
       size = 16 * 1024; # 16GB
     }
