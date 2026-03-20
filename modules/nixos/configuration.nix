@@ -572,14 +572,14 @@ in {
   };
 
   zramSwap = {
-    priority = 50;
+    priority = 100;
     enable = true;
     memoryPercent = 100;
   };
 
   swapDevices = [
     {
-      priority = 100;
+      priority = 0;
       device = "/swapfile";
       size = 16 * 1024; # 16GB
     }
