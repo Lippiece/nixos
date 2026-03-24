@@ -48,6 +48,7 @@ in {
     kdePackages.filelight
     element-desktop
     kitty
+    qimgv
 
     (brave.overrideAttrs (oldAttrs: {
       nativeBuildInputs = oldAttrs.nativeBuildInputs or [] ++ [makeWrapper];
