@@ -72,7 +72,6 @@ in {
     onlyoffice-desktopeditors
 
     # # Entertainment
-    webtorrent_desktop
     qbittorrent-enhanced
     (bottles.override {
       removeWarningPopup = true;
