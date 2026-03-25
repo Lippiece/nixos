@@ -27,8 +27,14 @@ in {
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
       "net.ipv4.tcp_congestion_control" = "bbr";
-      "vm.swappiness" = "1";
     };
+
+    kernelParams = [
+      "zswap.enabled=1" # enables zswap
+      "zswap.compressor=lz4" # compression algorithm
+      "zswap.max_pool_percent=20" # maximum percentage of RAM that zswap is allowed to use
+      "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
+    ];
 
     initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/d97cee83-4277-4653-bf49-9280b6dcd10a";
   };
@@ -571,15 +577,8 @@ in {
     };
   };
 
-  zramSwap = {
-    priority = 100;
-    enable = true;
-    memoryPercent = 100;
-  };
-
   swapDevices = [
     {
-      priority = 0;
       device = "/swapfile";
       size = 16 * 1024; # 16GB
     }
