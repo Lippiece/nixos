@@ -396,7 +396,10 @@ in {
   };
 
   services = {
-    easyeffects.enable = true;
+    easyeffects = {
+      enable = true;
+      package = pkgs.callPackage ../../packages/easyeffects/package.nix {};
+    };
     nextcloud-client = {
       enable = true;
       startInBackground = true;
