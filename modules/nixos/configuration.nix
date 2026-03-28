@@ -339,6 +339,13 @@ in {
     chromium = {
       enablePlasmaBrowserIntegration = true;
     };
+
+    throne = {
+      enable = true;
+      tunMode.enable = true;
+      tunMode.setuid = true;
+      package = pkgs.callPackage ../../packages/throne/package.nix {};
+    };
   };
 
   qt = {

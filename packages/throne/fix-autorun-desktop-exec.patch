@@ -1,0 +1,24 @@
+diff --git a/src/sys/AutoRun.cpp b/src/sys/AutoRun.cpp
+index 80a2a6b..2c1b5d3 100644
+--- a/src/sys/AutoRun.cpp
++++ b/src/sys/AutoRun.cpp
+@@ -169,18 +169,9 @@ void AutoRun_SetEnabled(bool enable) {
+     QString desktopFileLocation = userAutoStartPath + appName + QLatin1String(".desktop");
+     QStringList appCmdList;
+ 
+-    if (QProcessEnvironment::systemEnvironment().contains("APPIMAGE")) {
+-        appCmdList << QProcessEnvironment::systemEnvironment().value("APPIMAGE");
+-    } else {
+-        appCmdList << QApplication::applicationFilePath();
+-    }
+-
++    appCmdList << "Throne";
+     appCmdList << "-tray";
+ 
+-    if (Configs::dataManager->settingsRepo->flag_use_appdata) {
+-        appCmdList << "-appdata";
+-    }
+-
+     if (enable) {
+         if (!QDir().exists(userAutoStartPath) && !QDir().mkpath(userAutoStartPath)) {
+             // qCWarning(lcUtility) << "Could not create autostart folder"
