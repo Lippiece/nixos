@@ -337,17 +337,6 @@
               stdin = false;
               tmpfile_format = "ConformStylelint$FILENAME";
             };
-            biome_check = {
-              command = "biome";
-              args = [
-                "check"
-                "--write"
-                "--unsafe"
-                "--stdin-file-path"
-                "$FILENAME"
-              ];
-              stdin = true;
-            };
           };
           formatters_by_ft = {
             # -- ["*"] = { "injected" };
@@ -355,11 +344,11 @@
             typescript = ["oxfmt" "oxlint" "eslint_d"];
             javascriptreact = ["oxfmt" "oxlint" "eslint_d"];
             typescriptreact = ["oxfmt" "oxlint" "eslint_d"];
-            astro = ["prettier" "biome_check" "oxlint" "eslint_d"];
-            vue = ["biome_check" "oxfmt" "oxlint" "eslint_d"];
-            svelte = ["prettier" "biome_check" "oxlint" "eslint_d"];
+            astro = ["prettier" "oxlint" "eslint_d"];
+            vue = ["oxfmt" "oxlint" "eslint_d"];
+            svelte = ["prettier" "oxlint" "eslint_d"];
             css = ["oxfmt"];
-            html = ["oxfmt"];
+            html = ["oxfmt" "eslint_d"];
             json = ["oxfmt" "eslint_d"];
             jsonc = ["oxfmt" "eslint_d"];
             nix = ["alejandra"];
