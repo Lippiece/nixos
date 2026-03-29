@@ -6,3 +6,4 @@ nixos-switch.log
 archive/
 packages/catapult/bn
 packages/catapult/tlg
+packages/catapult/catapult_settings.json

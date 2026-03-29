@@ -15,18 +15,18 @@
   # override if you want to have more up-to-date rulesets
   throne-srslist ?
     fetchurl {
-      url = "https://raw.githubusercontent.com/throneproj/routeprofiles/99e2810b244374456b51bbe184c78c2e48003166/srslist.h";
-      hash = "sha256-pyf7BViomKNscm4aQshE8lvfPwlhvOaTjzZgKWuAR+c=";
+      url = "https://raw.githubusercontent.com/throneproj/routeprofiles/05793e2da7ca10a7acb2494f60a27ac5f7ec924c/srslist.h";
+      hash = "sha256-NHer5Vy1zBL9yJlVDLVFNRG4ITzb2GTjmt718KsSrGw=";
     },
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "throne";
-  version = "unstable";
+  version = "1.1.1-unstable-2026-03-28";
 
   src = fetchFromGitHub {
     owner = "throneproj";
     repo = "Throne";
-    tag = "master";
+    rev = "f53bb73790782a9a9b7bfeb30c8d6e6bcc2b05f0";
     hash = "sha256-hEjbzS0JV5OA0c9kWTFGc5kv04qzobN0TFBjMJZ1ohc=";
   };
 
@@ -44,7 +44,7 @@ stdenv.mkDerivation (finalAttrs: {
     qt6Packages.qttools
   ];
 
-  env.INPUT_VERSION = "master";
+  env.INPUT_VERSION = finalAttrs.version;
 
   # suppress errors in 3rdparty/simple-protobuf
   env.NIX_CFLAGS_COMPILE = "-Wno-error=maybe-uninitialized";
@@ -56,7 +56,7 @@ stdenv.mkDerivation (finalAttrs: {
     ./nixos-disable-setuid-request.patch
 
     # sets the Exec field of the auto-run .desktop file to use the Throne binary from PATH
-    # ./fix-autorun-desktop-exec.patch
+    ./fix-autorun-desktop-exec.patch
   ];
 
   preBuild = ''

@@ -50,13 +50,14 @@ in {
     kitty
     qimgv
 
-    (brave.overrideAttrs (oldAttrs: {
-      nativeBuildInputs = oldAttrs.nativeBuildInputs or [] ++ [makeWrapper];
-      postInstall = ''
-        wrapProgram "$out/bin/brave" \
-          --add-flags "--proxy-server=socks5://127.0.0.1:2334"
-      '';
-    }))
+    brave
+    # (brave.overrideAttrs (oldAttrs: {
+    #   nativeBuildInputs = oldAttrs.nativeBuildInputs or [] ++ [makeWrapper];
+    #   postInstall = ''
+    #     wrapProgram "$out/bin/brave" \
+    #       --add-flags "--proxy-server=socks5://127.0.0.1:2334"
+    #   '';
+    # }))
 
     # # Emulators
     # Laggy and can't redirect USB

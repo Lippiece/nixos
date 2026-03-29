@@ -1,8 +1,8 @@
-diff --git a/src/sys/AutoRun.cpp b/src/sys/AutoRun.cpp
-index 80a2a6b..2c1b5d3 100644
---- a/src/sys/AutoRun.cpp
-+++ b/src/sys/AutoRun.cpp
-@@ -169,18 +169,9 @@ void AutoRun_SetEnabled(bool enable) {
+diff --git a/src/sys/linux/AutoRun.cpp b/src/sys/linux/AutoRun.cpp
+index 1fafe35..fe04c75 100644
+--- a/src/sys/linux/AutoRun.cpp
++++ b/src/sys/linux/AutoRun.cpp
+@@ -31,18 +31,9 @@ void AutoRun_SetEnabled(bool enable) {
      QString desktopFileLocation = userAutoStartPath + appName + QLatin1String(".desktop");
      QStringList appCmdList;
  
