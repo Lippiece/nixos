@@ -102,6 +102,14 @@
     withNodeJs = true;
     vimdiffAlias = true;
 
+    performance.byteCompileLua = {
+      enable = true;
+      configs = true;
+      luaLib = true;
+      nvimRuntime = true;
+      plugins = true;
+    };
+
     globals = {
       mapleader = ",";
       maplocalleader = "\\";
@@ -298,20 +306,15 @@
 
       conform-nvim = {
         enable = true;
+        autoInstall = {
+          enable = true;
+          overrides = {
+            oxlint = null;
+          };
+        };
         settings = {
           formatters = {
-            alejandra = {
-              command = lib.getExe pkgs.alejandra;
-            };
-            stylua = {
-              command = lib.getExe pkgs.stylua;
-            };
-            prettier.command = "prettier";
-            oxfmt.command = "oxfmt";
-            yamlfmt.command = lib.getExe pkgs.yamlfmt;
-            rustmt.command = lib.getExe pkgs.rustfmt;
-          };
-          formatters = {
+            # TODO: doesn't apply all fixes
             oxlint = {
               command = "oxlint";
               args = [
@@ -340,17 +343,17 @@
           };
           formatters_by_ft = {
             # -- ["*"] = { "injected" };
-            javascript = ["oxfmt" "oxlint" "eslint_d"];
-            typescript = ["oxfmt" "oxlint" "eslint_d"];
-            javascriptreact = ["oxfmt" "oxlint" "eslint_d"];
-            typescriptreact = ["oxfmt" "oxlint" "eslint_d"];
-            astro = ["prettier" "oxlint" "eslint_d"];
-            vue = ["oxfmt" "oxlint" "eslint_d"];
-            svelte = ["prettier" "oxlint" "eslint_d"];
+            javascript = ["oxfmt" "oxlint"];
+            typescript = ["oxfmt" "oxlint"];
+            javascriptreact = ["oxfmt" "oxlint"];
+            typescriptreact = ["oxfmt" "oxlint"];
+            astro = ["prettier" "oxlint"];
+            vue = ["oxfmt" "oxlint"];
+            svelte = ["prettier" "oxlint"];
             css = ["oxfmt"];
-            html = ["oxfmt" "eslint_d"];
-            json = ["oxfmt" "eslint_d"];
-            jsonc = ["oxfmt" "eslint_d"];
+            html = ["oxfmt"];
+            json = ["oxfmt"];
+            jsonc = ["oxfmt"];
             nix = ["alejandra"];
             lua = ["stylua"];
             # python = ["isort" "black"];
@@ -374,7 +377,7 @@
                 }
               end
             '';
-          log_level = "warn";
+          log_level = "info";
           notify_on_error = true;
           notify_no_formatters = true;
         };
@@ -435,15 +438,15 @@
         enable = true;
         lintersByFt = {
           fish = ["fish"];
-          json = ["jsonlint" "eslint_d"];
-          jsonc = ["jsonlint" "eslint_d"];
-          javascript = ["oxlint" "eslint_d"];
-          typescript = ["oxlint" "eslint_d"];
-          typescriptreact = ["oxlint" "eslint_d"];
-          javascriptreact = ["oxlint" "eslint_d"];
-          astro = ["oxlint" "eslint_d"];
-          svelte = ["oxlint" "eslint_d"];
-          vue = ["oxlint" "eslint_d"];
+          json = ["jsonlint"];
+          jsonc = ["jsonlint"];
+          javascript = ["oxlint"];
+          typescript = ["oxlint"];
+          typescriptreact = ["oxlint"];
+          javascriptreact = ["oxlint"];
+          astro = ["oxlint"];
+          svelte = ["oxlint"];
+          vue = ["oxlint"];
           css = ["stylelint"];
           # html = ["markuplint"];
           # -- Use the "*" filetype to run linters on all filetypes.

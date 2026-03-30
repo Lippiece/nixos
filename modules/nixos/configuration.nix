@@ -41,7 +41,7 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
-  time.timeZone = lib.mkDefault "Europe/Kaliningrad";
+  time.timeZone = "Europe/Kaliningrad";
 
   services = {
     pipewire = {
@@ -87,7 +87,7 @@ in {
       # flags = [ "--verbose" ];
     };
 
-    automatic-timezoned.enable = true;
+    # automatic-timezoned.enable = true;
 
     # Load nvidia driver for Xorg and Wayland
     xserver.videoDrivers = ["nvidia"];
