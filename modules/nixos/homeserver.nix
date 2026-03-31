@@ -57,22 +57,39 @@
     enable = true;
     enableReload = true;
     virtualHosts = {
-      "lipcloud.ydns.eu".extraConfig = ''reverse_proxy localhost:11000 '';
-      "lipsearch.ydns.eu".extraConfig = ''reverse_proxy localhost:3001 '';
-      "warden.ydns.eu".extraConfig = ''reverse_proxy localhost:3002 '';
-      "lipgit.ydns.eu".extraConfig = ''reverse_proxy localhost:3003 '';
-      "lipgrammar.ydns.eu".extraConfig = ''reverse_proxy localhost:3006 '';
-      "lipguard.ydns.eu".extraConfig = ''reverse_proxy localhost:3007 '';
-      "lipoffice.ydns.eu".extraConfig = ''reverse_proxy localhost:3010 '';
-      "liprss.ydns.eu".extraConfig = ''reverse_proxy localhost:3011 '';
+      "lipcloud.ydns.eu".extraConfig = ''
+        vars /_matrix/push/v1/notify request_uri /index.php/apps/uppush/gateway/matrix
+        vars request_uri {uri}
+
+        reverse_proxy localhost:11000
+
+        php_fastcgi localhost:11000 {
+          root /var/www/html/nextcloud
+          env REQUEST_URI {vars.request_uri}
+        }
+      '';
+      "lipsearch.ydns.eu".extraConfig = ''reverse_proxy localhost:3001'';
+      "warden.ydns.eu".extraConfig = ''reverse_proxy localhost:3002'';
+      "lipgit.ydns.eu".extraConfig = ''reverse_proxy localhost:3003'';
+      "lipgrammar.ydns.eu".extraConfig = ''reverse_proxy localhost:3006'';
+      "lipguard.ydns.eu".extraConfig = ''reverse_proxy localhost:3007'';
+      "lipoffice.ydns.eu".extraConfig = ''reverse_proxy localhost:3010'';
+      "liprss.ydns.eu".extraConfig = ''reverse_proxy localhost:3011'';
+      "roundcube.lippiece.ru".extraConfig = "reverse_proxy localhost:3400";
+
       "matrix.lippiece.ru" = {
         extraConfig = ''
-                   handle_path /.well-known/matrix/* {
+          handle_path /.well-known/matrix/* {
             root * /etc/caddy/well-known-matrix
             file_server
             header Access-Control-Allow-Origin *
             header Content-Type application/json
           }
+
+          # Unified push to Nextcloud
+          @push path /_matrix/push/v1/notify
+          rewrite @push localhost:11000/index.php/apps/uppush/gateway/matrix
+          reverse_proxy @push localhost:4210
 
           # Match MAS endpoints first so they don't fall through to Synapse
           @masLogin {
@@ -121,8 +138,8 @@
           }
         '';
       };
-      "matrix.lippiece.ru:3478".extraConfig = ''reverse_proxy localhost:4200 '';
-      "matrix.lippiece.ru:5349".extraConfig = ''reverse_proxy localhost:4200 '';
+      "matrix.lippiece.ru:3478".extraConfig = ''reverse_proxy localhost:4200'';
+      "matrix.lippiece.ru:5349".extraConfig = ''reverse_proxy localhost:4200'';
       "matrixrtc.lippiece.ru" = {
         extraConfig = ''
           handle /sfu/get {
@@ -133,7 +150,7 @@
           }
         '';
       };
-      "roundcube.lippiece.ru".extraConfig = "reverse_proxy localhost:3400";
+      "mautrix-media.lippiece.ru".extraConfig = ''reverse_proxy localhost:4220'';
     };
   };
 }

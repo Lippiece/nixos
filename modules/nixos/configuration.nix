@@ -54,7 +54,7 @@
     nameservers = ["1.1.1.1" "9.9.9.9"];
 
     useDHCP = lib.mkDefault true;
-    enableIPv6 = false;
+    enableIPv6 = true;
   };
 
   # Set your time zone.
