@@ -467,6 +467,7 @@ in {
 
     tmux = {
       enable = true;
+      escapeTime = 10;
       plugins = with pkgs.tmuxPlugins; [
         resurrect
         harpoon

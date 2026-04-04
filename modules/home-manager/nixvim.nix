@@ -455,13 +455,6 @@
           fish = ["fish"];
           json = ["jsonlint"];
           jsonc = ["jsonlint"];
-          javascript = ["oxlint"];
-          typescript = ["oxlint"];
-          typescriptreact = ["oxlint"];
-          javascriptreact = ["oxlint"];
-          astro = ["oxlint"];
-          svelte = ["oxlint"];
-          vue = ["oxlint"];
           css = ["stylelint"];
           # html = ["markuplint"];
           # -- Use the "*" filetype to run linters on all filetypes.
@@ -470,15 +463,6 @@
           # -- '_' = [ 'fallback linter' ];
           # -- "*" = [ "typos" ];
         };
-        # luaConfig.post = ''
-        #   local oxlint = require('lint').linters.oxlint
-        #   oxlint.args = {
-        #     "--import-plugin",
-        #     "--type-aware",
-        #     "--format",
-        #     "github"
-        #   }
-        # '';
       };
 
       noice = {
