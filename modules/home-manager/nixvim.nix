@@ -95,6 +95,7 @@
       '';
   };
   programs.nixvim = {
+    package = pkgs.neovim-unwrapped;
     enable = true;
     defaultEditor = true;
     viAlias = true;
@@ -102,12 +103,27 @@
     withNodeJs = true;
     vimdiffAlias = true;
 
-    performance.byteCompileLua = {
-      enable = true;
-      configs = true;
-      luaLib = true;
-      nvimRuntime = true;
-      plugins = true;
+    performance = {
+      # combinePlugins = {
+      #   combinePlugins.standalonePlugins = [
+      #     "nvim-treesitter-queries-lua"
+      #     "nvim-treesitter-queries"
+      #     "treesitter-queries-lua"
+      #     "treesitter-queries"
+      #     "snacks"
+      #     "snacks.nvim"
+      #     "snacks-nvim"
+      #   ];
+      #   enable = true;
+      # };
+      byteCompileLua = {
+        enable = true;
+        configs = true;
+        luaLib = true;
+        initLua = false;
+        nvimRuntime = true;
+        plugins = true;
+      };
     };
 
     globals = {
@@ -314,20 +330,20 @@
         };
         settings = {
           formatters = {
-            # TODO: doesn't apply all fixes
-            oxlint = {
-              command = "oxlint";
-              args = [
-                "--import-plugin"
-                "--type-aware"
-                "--fix"
-                "--fix-suggestions"
-                "--fix-dangerously"
-                "$FILENAME"
-              ];
-              exit_codes = [0 1 2]; # code 2 = non-autofixable errors; code 1 = warnings
-              stdin = false;
-              tmpfile_format = "ConformOxlint$FILENAME";
+            oxlint_fix = {
+              options = {
+                ignore_errors = true;
+              };
+              format.__raw =
+                #lua
+                ''
+                  function()
+                    vim.g.disable_autoformat = true
+                    vim.cmd([[LspOxlintFixAll]])
+                    vim.cmd([[w]])
+                    vim.g.disable_autoformat = false
+                  end
+                '';
             };
             stylelint = {
               meta = {
@@ -343,17 +359,17 @@
           };
           formatters_by_ft = {
             # -- ["*"] = { "injected" };
-            javascript = ["oxfmt" "oxlint"];
-            typescript = ["oxfmt" "oxlint"];
-            javascriptreact = ["oxfmt" "oxlint"];
-            typescriptreact = ["oxfmt" "oxlint"];
-            astro = ["prettier" "oxlint"];
-            vue = ["oxfmt" "oxlint"];
-            svelte = ["prettier" "oxlint"];
-            css = ["oxfmt"];
-            html = ["oxfmt"];
-            json = ["oxfmt"];
-            jsonc = ["oxfmt"];
+            javascript = ["oxfmt" "oxlint_fix"];
+            typescript = ["oxfmt" "oxlint_fix"];
+            javascriptreact = ["oxfmt" "oxlint_fix"];
+            typescriptreact = ["oxfmt" "oxlint_fix"];
+            astro = ["prettier" "oxlint_fix"];
+            vue = ["oxfmt" "oxlint_fix"];
+            svelte = ["prettier" "oxlint_fix"];
+            css = ["oxfmt" "oxlint_fix"];
+            html = ["oxfmt" "oxlint_fix"];
+            json = ["oxfmt" "oxlint_fix"];
+            jsonc = ["oxfmt" "oxlint_fix"];
             nix = ["alejandra"];
             lua = ["stylua"];
             # python = ["isort" "black"];
@@ -371,7 +387,6 @@
                 end
 
                 return {
-                  async = true,
                   ignore_errors = true,
                   lsp_format = "fallback",
                 }
@@ -455,6 +470,15 @@
           # -- '_' = [ 'fallback linter' ];
           # -- "*" = [ "typos" ];
         };
+        # luaConfig.post = ''
+        #   local oxlint = require('lint').linters.oxlint
+        #   oxlint.args = {
+        #     "--import-plugin",
+        #     "--type-aware",
+        #     "--format",
+        #     "github"
+        #   }
+        # '';
       };
 
       noice = {
@@ -777,6 +801,26 @@
               nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
               home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
             };
+          };
+        };
+        oxlint = {
+          enable = true;
+          activate = true;
+          # autostart = true;
+          config = {
+            cmd = [
+              (lib.getExe pkgs.cpulimit)
+              "-i"
+              "-l"
+              "30"
+              "/home/lippiece/.bun/bin/oxlint"
+              "--import-plugin"
+              "--type-aware"
+              "--lsp"
+            ];
+            root_markers = [
+              "package.json"
+            ];
           };
         };
       };
@@ -1632,6 +1676,7 @@
             require("tsc").setup {
               use_trouble_qflist = true,
               bin_path = "node_modules/.bin/vue-tsc",
+              flags = "-b"
             }
             require("tsc").run()
           end
