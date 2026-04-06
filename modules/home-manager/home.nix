@@ -1,3 +1,9 @@
+# @ts: { lib: Lib; pkgs: Nixpkgs; stdenv: Stdenv; [key: string]: any }
+# Nixpkgs — top-level pkgs object
+# Lib — all nixpkgs lib functions (lib.concatStringsSep, lib.optionalString, etc.)
+# Stdenv — mkDerivation, hostPlatform, cc, etc.
+# Platform — isLinux, isDarwin, system, etc.
+# Derivation — standard derivation output type
 {
   pkgs,
   lib,
@@ -121,6 +127,8 @@ in {
     rsync
     tomb
     delta
+    (pkgs.callPackage ../../packages/sem/package.nix {})
+    (pkgs.callPackage ../../packages/weave/package.nix {})
 
     # # Nix
     alejandra
