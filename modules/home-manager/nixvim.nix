@@ -713,19 +713,8 @@
           },
         })
 
-        -- NOTE: typenix
         ---@type vim.lsp.Config
-        vim.lsp.config("typenix", {
-          cmd = function(dispatchers)
-            local cmd = "typenix"
-            return vim.lsp.rpc.start({ cmd, "--lsp", "--stdio" }, dispatchers)
-          end,
-          root_markers = { "flake.nix", ".git" },
-          filetypes = {
-            "nix",
-            "nixts",
-          }
-        })
+        vim.lsp.enable("typenix")
 
         vim.filetype.add({
           pattern = {
@@ -1360,19 +1349,19 @@
         };
       }
       {
-        key = "<leader><tab>o";
-        mode = ["n"];
-        action = "<cmd>tabonly<cr>";
-        options = {
-          desc = "Close Other Tabs";
-        };
-      }
-      {
         key = "<leader><tab>f";
         mode = ["n"];
         action = "<cmd>tabfirst<cr>";
         options = {
           desc = "First Tab";
+        };
+      }
+      {
+        key = "<leader><tab>o";
+        mode = ["n"];
+        action = "<cmd>tabonly<cr>";
+        options = {
+          desc = "Close Other Tabs";
         };
       }
       {

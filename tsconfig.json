@@ -1,1 +1,1 @@
-{"include": ["**/*.nix"]}
+{ "include": ["**/*.nix"] }
