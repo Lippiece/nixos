@@ -81,7 +81,10 @@ in {
         # DNS over TLS upstream
         # upstream = [ "tls://dns.adguard.com" ];
         # DNS over HTTPS upstream
-        upstream = ["quic://lipguard.ydns.eu"];
+        upstream = [
+          "quic://lipguard.ydns.eu"
+          "tls://9.9.9.9:853"
+        ];
       };
       # Additional launch flags
       # flags = [ "--verbose" ];
