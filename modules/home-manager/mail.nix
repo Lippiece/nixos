@@ -272,6 +272,17 @@ in {
           WantedBy = ["graphical-session.target"];
         };
       };
+
+      clear-notifications = {
+        Unit = {
+          Description = "Clear KDE notifications";
+        };
+
+        Service = {
+          Type = "simple";
+          ExecStart = "${lib.getExe pkgs.bash} /home/lippiece/bin/clear_notifications.sh";
+        };
+      };
     };
     user.timers = {
       mailsync = {
@@ -284,6 +295,17 @@ in {
           OnBootSec = "5m";
           OnUnitActiveSec = "5m";
           Persist = true;
+        };
+
+        Install = {
+          WantedBy = ["timers.target"];
+        };
+      };
+
+      clear-notifications = {
+        Timer = {
+          OnBootSec = "15m";
+          OnUnitActiveSec = "15m";
         };
 
         Install = {
