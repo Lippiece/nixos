@@ -150,7 +150,7 @@ in {
   # plain files is through 'home.file'.
   home.file = {
     # ".mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/lib/mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json";
-    ".config/chromium/NativeMessagingHosts/org.keepassxc.keepassxc_browser.json".text = ''
+    "~/.config/chromium/NativeMessagingHosts/org.keepassxc.keepassxc_browser.json".text = ''
       {
         "allowed_origins": [
           "chrome-extension://pdffhmdngciaglkoonimfcmckehcpafo/",
@@ -164,8 +164,8 @@ in {
 
     '';
 
-    ".config/chromium/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
-    ".config/BraveSoftware/Brave-Browser/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+    "~/.config/chromium/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+    "~/.config/BraveSoftware/Brave-Browser/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -586,10 +586,7 @@ in {
   };
 
   services = {
-    easyeffects = {
-      enable = true;
-      package = pkgs.callPackage ../../packages/easyeffects/package.nix {};
-    };
+    easyeffects.enable = true;
     nextcloud-client = {
       enable = true;
       startInBackground = true;

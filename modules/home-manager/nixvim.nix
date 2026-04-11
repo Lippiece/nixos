@@ -309,7 +309,7 @@
                 name = "Codeium";
                 module = "codeium.blink";
                 async = true;
-                score_offset = -1;
+                score_offset = -5;
               };
             };
           };
