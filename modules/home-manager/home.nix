@@ -146,11 +146,12 @@ in {
     # rustup
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  # Home Manager is pretty bad at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
     # ".mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/lib/mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json";
-    "~/.config/chromium/NativeMessagingHosts/org.keepassxc.keepassxc_browser.json".text = ''
+
+    ".config/chromium/NativeMessagingHosts/org.keepassxc.keepassxc_browser.json".text = ''
       {
         "allowed_origins": [
           "chrome-extension://pdffhmdngciaglkoonimfcmckehcpafo/",
@@ -161,11 +162,22 @@ in {
         "path": "${pkgs.keepassxc}/bin/keepassxc-proxy",
         "type": "stdio"
       }
-
     '';
 
-    "~/.config/chromium/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
-    "~/.config/BraveSoftware/Brave-Browser/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+    ".config/BraveSoftware/Brave-Browser/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+    ".config/BraveSoftware/Brave-Browser/NativeMessagingHosts/org.keepassxc.keepassxc_browser.json".text = ''
+      {
+        "allowed_origins": [
+          "chrome-extension://pdffhmdngciaglkoonimfcmckehcpafo/",
+          "chrome-extension://oboonakemofpalcgghocfoadofidjkkk/"
+          ],
+        "description": "KeePassXC integration with native messaging support",
+        "name": "org.keepassxc.keepassxc_browser",
+        "path": "${pkgs.keepassxc}/bin/keepassxc-proxy",
+        "type": "stdio"
+      }
+    '';
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -573,6 +585,9 @@ in {
     chromium = {
       enable = true;
       package = pkgs.ungoogled-chromium;
+      nativeMessagingHosts = [
+        pkgs.kdePackages.plasma-browser-integration
+      ];
     };
   };
 

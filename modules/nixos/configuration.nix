@@ -324,10 +324,6 @@ in {
       capSysNice = true;
     };
 
-    chromium = {
-      enablePlasmaBrowserIntegration = true;
-    };
-
     throne = {
       enable = true;
       tunMode.enable = true;
