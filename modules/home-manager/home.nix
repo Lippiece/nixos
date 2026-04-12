@@ -188,6 +188,13 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    "bunfig.toml".text =
+      #toml
+      ''
+        [install]
+        minimumReleaseAge = 60480 # 7 days in seconds
+      '';
   };
   home.shell = {
     enableFishIntegration = true;
