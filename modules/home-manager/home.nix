@@ -127,8 +127,6 @@ in {
     rsync
     tomb
     delta
-    (pkgs.callPackage ../../packages/sem/package.nix {})
-    (pkgs.callPackage ../../packages/weave/package.nix {})
     (pkgs.callPackage ../../packages/git_bayesect/package.nix {})
 
     # # Nix

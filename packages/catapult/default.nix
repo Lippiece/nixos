@@ -5,14 +5,14 @@ in
     name = "catapult";
     targetPkgs = pkgs:
       with pkgs; [
-        xorg.libXcursor.out
-        xorg.libXi.out
-        xorg.libXinerama.out
-        xorg.libXrender.out
+        libXcursor.out
+        libXi.out
+        libXinerama.out
+        libXrender.out
         libGL.out
-        xorg.libX11.out
-        xorg.libXext.out
-        xorg.libXrandr.out
+        libX11.out
+        libXext.out
+        libXrandr.out
 
         SDL2.out
         SDL2_image.out
@@ -24,5 +24,5 @@ in
         freetype.out
         libz.out
       ];
-    runScript = "/home/lippiece/.config/nixos/packages/catapult/catapult-linux-x64-25.11a";
+    runScript = "/home/lippiece/.config/nixos/packages/catapult/Dabdoob-linux.x86_64";
   }
