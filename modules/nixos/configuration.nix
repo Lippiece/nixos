@@ -244,7 +244,7 @@ in {
     };
     kde-pim = {
       enable = true;
-      kontact = true;
+      merkuro = true;
     };
     msmtp = {
       enable = true;

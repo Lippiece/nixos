@@ -129,6 +129,7 @@
     globals = {
       mapleader = ",";
       maplocalleader = "\\";
+      columns = 80;
     };
 
     opts = {
@@ -149,7 +150,7 @@
       breakindent = true;
       smartindent = true;
       wrap = true;
-      textwidth = 80;
+      textwidth = 0;
       wrapmargin = 0;
       list = true;
       number = true;
@@ -574,25 +575,22 @@
         };
       })
       vimPlugins.treewalker-nvim
+      (vimUtils.buildVimPlugin {
+        name = "cheatsheet";
+        nativeBuildInputs = [vimPlugins.telescope-nvim];
+        src = pkgs.fetchFromGitHub {
+          owner = "sudormrfbin";
+          repo = "cheatsheet.nvim";
+          rev = "9716f9aaa94dd1fd6ce59b5aae0e5f25e2a463ef";
+          sha256 = "0dm94kppbnky8y0gs1pdfs7vcc9hyp8lf6h33dw6ndqfnw3hd2ad";
+        };
+      })
     ];
     extraConfigLua =
       #lua
       ''
         vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
         vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
-
-        if vim.g.neovide then
-          vim.opt.scrolloff = 15
-          vim.g.neovide_opacity = 0.9
-
-          -- vim.g.neovide_font_hinting = "none"
-          -- vim.g.neovide_font_edging = "subpixelantialias"
-
-          -- vim.keymap.set("n", "<C-v>", '"+P') -- Paste normal mode
-          -- vim.keymap.set("v", "<C-v>", '"+P') -- Paste visual mode
-          vim.keymap.set("c", "<C-v>", "<C-R>+") -- Paste command mode
-          vim.keymap.set("i", "<C-v>", '<ESC>l"+Pli') -- Paste insert mode
-        end
 
         -- Highlight on yank
         local highlight_group =
@@ -639,26 +637,20 @@
         require"tsc".setup({
           use_trouble_qflist = true,
         })
-
         require"treewalker".setup({
           -- Whether to briefly highlight the node after jumping to it
           highlight = true,
-
           -- How long should above highlight last (in ms)
           highlight_duration = 250,
-
           -- The color of the above highlight. Must be a valid vim highlight group.
           -- (see :h highlight-group for options)
           highlight_group = 'CursorLine',
-
           -- Whether to create a visual selection after a movement to a node.
           -- If true, highlight is disabled and a visual selection is made in
           -- its place.
           select = false,
-
           -- Whether to use vim.notify to warn when there are missing parsers or incorrect options
           notifications = true,
-
           -- Whether the plugin adds movements to the jumplist -- true | false | 'left'
           --  true: All movements more than 1 line are added to the jumplist. This is the default,
           --        and is meant to cover most use cases. It's modeled on how { and } natively add
@@ -668,13 +660,38 @@
           --          likely jump to cause location confusion, so use this to minimize writes
           --          to the jumplist, while maintaining some ability to go back.
           jumplist = true,
-
           -- Whether movement, when inside the scope of some node, should be confined to that scope.
           -- When true, when moving through neighboring nodes inside some node, you won't be able to
           -- move outside of that scope via :Treewalker Up/Down. When false, if on a node at the end
           -- of a scope, movement will bring you to the next node of similar indentation/number of
           -- ancestor nodes, even when it is outside of the scope you're currently in.
           scope_confined = false,
+        })
+        require("cheatsheet").setup({
+            -- Whether to show bundled cheatsheets
+            -- For generic cheatsheets like default, unicode, nerd-fonts, etc
+            -- bundled_cheatsheets = {
+            --     enabled = {},
+            --     disabled = {},
+            -- },
+            bundled_cheatsheets = true,
+            -- For plugin specific cheatsheets
+            -- bundled_plugin_cheatsheets = {
+            --     enabled = {},
+            --     disabled = {},
+            -- }
+            bundled_plugin_cheatsheets = true,
+            -- For bundled plugin cheatsheets, do not show a sheet if you
+            -- don't have the plugin installed (searches runtimepath for
+            -- same directory name)
+            include_only_installed_plugins = true,
+            -- Key mappings bound inside the telescope window
+            telescope_mappings = {
+                ['<CR>'] = require('cheatsheet.telescope.actions').select_or_fill_commandline,
+                ['<A-CR>'] = require('cheatsheet.telescope.actions').select_or_execute,
+                ['<C-Y>'] = require('cheatsheet.telescope.actions').copy_cheat_value,
+                ['<C-E>'] = require('cheatsheet.telescope.actions').edit_user_cheatsheet,
+            }
         })
 
         vim.opt.rtp:prepend(${"\"" + pkgs.vimPlugins.vim-fetch + "\""})
@@ -712,10 +729,8 @@
             },
           },
         })
-
         ---@type vim.lsp.Config
         vim.lsp.enable("typenix")
-
         vim.filetype.add({
           pattern = {
             [".*/*.nix.d.ts"] = "nixts",
