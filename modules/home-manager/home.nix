@@ -254,6 +254,7 @@ in {
       ];
       interactiveShellInit = ''
         set -U __done_min_cmd_duration 1000
+        set-env CARAPACE_BRIDGES fish
       '';
     };
 
