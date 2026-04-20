@@ -201,28 +201,7 @@ in {
       enable = true;
       binfmt = true;
     };
-    lazygit = {
-      enable = true;
-      # package = pkgs.buildGoModule rec {
-      #   pname = "lazygit";
-      #   version = "unstable-2025-08-06";
-      #   src = pkgs.fetchFromGitHub {
-      #     owner = "jesseduffield";
-      #     repo = "lazygit";
-      #     rev = "c08903e3adabcf00d910e0107c1f675af958a70e";
-      #     sha256 = "1f1r7gkpyqwg8b6vg9h46zncdrm9i5xxlqkslziqxd3jm5w9afri";
-      #   };
-      #   vendorHash = null;
-      #   doCheck = false;
-      #   ldflags = ["-X main.version=${version}" "-X main.buildSource=nix"];
-      #   meta = with pkgs.lib; {
-      #     description = "Simple terminal UI for git commands";
-      #     homepage = "https://github.com/jesseduffield/lazygit";
-      #     license = licenses.mit;
-      #     mainProgram = "lazygit";
-      #   };
-      # };
-    };
+    lazygit.enable = true;
     nh = {
       enable = true;
       clean.enable = true;

@@ -128,6 +128,7 @@ in {
     tomb
     delta
     (pkgs.callPackage ../../packages/git_bayesect/package.nix {})
+    git-town
 
     # # Nix
     alejandra
