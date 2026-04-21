@@ -212,6 +212,7 @@ in {
   home.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
     MOZ_ENABLE_WAYLAND = "1";
+    EDITOR = "nvim";
     BROWSER = "brave";
     MANPAGER = "nvim +Man!";
     SHELL = lib.getExe pkgs.elvish;
