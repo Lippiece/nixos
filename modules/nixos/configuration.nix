@@ -112,6 +112,7 @@ in {
     shells = [pkgs.elvish];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
+      EDITOR = "nvim";
       MOZ_ENABLE_WAYLAND = "1";
       BROWSER = "brave";
       MANPAGER = "nvim +Man!";

@@ -133,6 +133,7 @@
     };
 
     opts = {
+      shell = "fish";
       confirm = true;
       cursorline = true;
       expandtab = true;
@@ -737,6 +738,11 @@
           },
         })
         vim.treesitter.language.register("typescript", { "nixts" })
+
+        -- use fish for nvim
+        vim.api.nvim_create_autocmd({'VimEnter'}, {
+          command = "let $SHELL = 'fish'",
+        })
       '';
 
     lsp = {
