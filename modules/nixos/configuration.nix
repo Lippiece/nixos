@@ -109,11 +109,13 @@ in {
 
   # Enable touchpad support (enabled default in most desktopManager).
   environment = {
+    shells = [pkgs.elvish];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_ENABLE_WAYLAND = "1";
       BROWSER = "brave";
       MANPAGER = "nvim +Man!";
+      SHELL = lib.getExe pkgs.elvish;
     };
     etc."xdg/kcminputrc".text = ''
       [Keyboard]
@@ -133,6 +135,7 @@ in {
       glances
       unzip
       tree
+      fish
 
       # Libs & tools
       icu
@@ -165,9 +168,9 @@ in {
     # packages = with pkgs; [
     # ];
     hashedPasswordFile = "/persist/pass";
-    # shell = pkgs.fish;
+    shell = pkgs.elvish;
   };
-  users.defaultUserShell = pkgs.fish;
+  users.defaultUserShell = pkgs.elvish;
   users.mutableUsers = false;
 
   # List packages installed in system profile.
@@ -185,9 +188,9 @@ in {
     };
     ssh.startAgent = true;
     fish = {
-      enable = true;
-      generateCompletions = true;
-      useBabelfish = true;
+      enable = false;
+      # generateCompletions = true;
+      # useBabelfish = true;
     };
     # neovim = {
     #   enable = true;
@@ -210,7 +213,6 @@ in {
     };
     nix-index = {
       enable = true;
-      enableFishIntegration = true;
     };
     npm.enable = true;
     dconf.enable = true;
