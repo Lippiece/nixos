@@ -204,6 +204,7 @@ in {
         eval (starship init elvish)
 
         use extend
+        use functions
       '';
   };
   home.shell = {
