@@ -183,9 +183,6 @@
     colorschemes.modus.enable = true;
 
     plugins = {
-      # lspconfig = {
-      #   enable = true;
-      # };
       lsp = {
         enable = true;
         inlayHints = true;
@@ -199,6 +196,11 @@
             autostart = true;
           };
           yamlls = {
+            enable = true;
+            autostart = true;
+          };
+          # toml
+          taplo = {
             enable = true;
             autostart = true;
           };
