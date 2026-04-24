@@ -49,12 +49,13 @@
     networkmanager.enable =
       true; # Easiest to use and most distros use this by default.
     # If using NetworkManager:
-    networkmanager.dns = "default";
-    # networkmanager.dns = "none";
-    nameservers = ["1.1.1.1" "9.9.9.9"];
+    # networkmanager.dns = "default";
+    # nameservers = ["1.1.1.1" "9.9.9.9"];
+    networkmanager.dns = "none";
+    nameservers = ["127.0.0.1"];
 
     useDHCP = lib.mkDefault true;
-    enableIPv6 = true;
+    enableIPv6 = false;
   };
 
   # Set your time zone.
@@ -129,6 +130,8 @@
     sessionVariables = {
       PAGER = "nvim -R";
       MANPAGER = "nvim +Man!";
+      # use less with wraps for journalctl
+      SYSTEMD_LESS = "FRXMK";
     };
     systemPackages = with pkgs; [
       # Essential
@@ -184,7 +187,7 @@
   services = {
     openssh.enable = true;
     dnsproxy = {
-      enable = false;
+      enable = true;
       settings = {
         bootstrap = ["tls://9.9.9.9:853"];
 
