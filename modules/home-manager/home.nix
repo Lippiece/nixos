@@ -177,6 +177,18 @@ in {
       }
     '';
 
+    ".mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json".text = ''
+              {
+          "allowed_extensions": [
+              "keepassxc-browser@keepassxc.org"
+          ],
+          "description": "KeePassXC integration with native messaging support",
+          "name": "org.keepassxc.keepassxc_browser",
+          "path": "${pkgs.keepassxc}/bin/keepassxc-proxy",
+          "type": "stdio"
+      }
+    '';
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -212,7 +224,6 @@ in {
   };
   home.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
-    MOZ_ENABLE_WAYLAND = "1";
     EDITOR = "nvim";
     BROWSER = "brave";
     MANPAGER = "nvim +Man!";

@@ -14,6 +14,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    phoenix = {
+      url = "git+https://gitlab.com/celenityy/Phoenix?ref=pages";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Helpers
     impermanence.url = "github:nix-community/impermanence";
@@ -53,6 +57,7 @@
         inputs.home-manager.nixosModules.default
 
         inputs.impermanence.nixosModules.impermanence
+        inputs.phoenix.nixosModules.default
       ];
     };
   };
