@@ -113,7 +113,7 @@ in {
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
       EDITOR = "nvim";
-      BROWSER = "brave";
+      BROWSER = "firefox";
       MANPAGER = "nvim +Man!";
       SHELL = lib.getExe pkgs.elvish;
     };
