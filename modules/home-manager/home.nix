@@ -49,12 +49,13 @@ in {
     v2rayn
     xray
     obsidian
-    (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
+    # (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
     # mpc-qt
     kdePackages.filelight
     element-desktop
     kitty
-    qimgv
+    # TODO: deno builds for hours
+    # qimgv
 
     brave
     # (brave.overrideAttrs (oldAttrs: {
@@ -80,9 +81,10 @@ in {
 
     # # Entertainment
     qbittorrent-enhanced
-    (bottles.override {
-      removeWarningPopup = true;
-    })
+    # TODO: openldap-2.6.13-i686-linux failed with exit code 2
+    # (bottles.override {
+    #   removeWarningPopup = true;
+    # })
     variety
     # prismlauncher
     # (pkgs.callPackage ../../packages/rimsort/package.nix {})

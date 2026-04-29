@@ -205,7 +205,6 @@ in {
         set crypt_use_gpgme = no
 
         # Encryption and signing
-        # TODO: This relies on ${lib.getExe pkgs.sequoia-chameleon-gnupg}, as upstream does not distinguish between
         # verifying cleartext, decrypting messages and analyzing public keys, for
         # application/pgp types.
         set pgp_decode_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --status-fd=2 %?p?--passphrase-fd 0 --pinentry-mode=loopback? --no-verbose --quiet --batch --output - %f"
