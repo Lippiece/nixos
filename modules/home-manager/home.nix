@@ -415,6 +415,17 @@ in {
     };
     kdeconnect.enable = true;
     ssh-agent.enable = true;
+
+    podman = {
+      enable = true;
+      enableTypeChecks = true;
+      containers = {
+        foo = {
+          autoUpdate = "registry";
+          image = "docker.io/hello-world";
+        };
+      };
+    };
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
