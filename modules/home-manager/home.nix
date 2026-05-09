@@ -49,7 +49,7 @@ in {
     v2rayn
     xray
     obsidian
-    # (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
+    (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
     # mpc-qt
     kdePackages.filelight
     element-desktop

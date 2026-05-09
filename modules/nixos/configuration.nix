@@ -237,7 +237,7 @@ in {
           from = mail;
           host = smtphost;
           user = "${name}";
-          passwordeval = "pass ${mail}";
+          passwordeval = "printf 'url=https://${mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
         };
 
         ${mailDW.mail} = {
@@ -246,7 +246,7 @@ in {
           from = mail;
           host = mailDW.smtphost;
           user = "${mailDW.name}";
-          passwordeval = "pass ${mailDW.mail}";
+          passwordeval = "printf 'url=https://${mailDW.mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
         };
       };
     };

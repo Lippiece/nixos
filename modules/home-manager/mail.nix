@@ -27,7 +27,7 @@ in {
 
   accounts.email = {
     accounts.${main.mail} = {
-      passwordCommand = "pass ${main.mail}";
+      passwordCommand = "printf 'url=https://${main.mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
       primary = true;
       realName = "${main.name}";
       address = "${main.mail}";
@@ -64,7 +64,7 @@ in {
     };
 
     accounts.${DW.mail} = {
-      passwordCommand = "pass ${DW.mail}";
+      passwordCommand = "printf 'url=https://${DW.mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
       realName = "${DW.name}";
       address = "${DW.mail}";
       userName = "${DW.name}";
