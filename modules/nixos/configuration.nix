@@ -83,6 +83,9 @@ in {
         # DNS over HTTPS upstream
         upstream = [
           "quic://lipguard.ydns.eu"
+        ];
+
+        fallback = [
           "tls://9.9.9.9:853"
         ];
       };
