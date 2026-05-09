@@ -116,6 +116,8 @@ in {
       BROWSER = "firefox";
       MANPAGER = "nvim +Man!";
       SHELL = lib.getExe pkgs.elvish;
+      # use less with wraps for journalctl
+      SYSTEMD_LESS = "FRXMK";
     };
     etc."xdg/kcminputrc".text = ''
       [Keyboard]
