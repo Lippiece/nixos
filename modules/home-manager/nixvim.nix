@@ -441,13 +441,6 @@
         };
       };
 
-      fastaction = {
-        enable = true;
-        settings = {
-          title = false;
-        };
-      };
-
       windsurf-nvim = {
         enable = true;
         settings.enable_cmp_source = false;
@@ -588,6 +581,16 @@
           sha256 = "0dm94kppbnky8y0gs1pdfs7vcc9hyp8lf6h33dw6ndqfnw3hd2ad";
         };
       })
+      (vimUtils.buildVimPlugin {
+        name = "code-action-menu.nvim";
+        nativeBuildInputs = [vimPlugins.snacks-nvim];
+        src = pkgs.fetchFromGitHub {
+          owner = "so1ve";
+          repo = "code-action-menu.nvim";
+          rev = "main";
+          sha256 = "sha256-vk+lBVU1j2Q4g6U4V5/Hkc4H6jrjp407exjer7Fp5F0=";
+        };
+      })
     ];
     extraConfigLua =
       #lua
@@ -698,6 +701,8 @@
         })
 
         vim.opt.rtp:prepend(${"\"" + pkgs.vimPlugins.vim-fetch + "\""})
+
+        require("code-action-menu").setup()
 
         -- NOTE: LSP
         vim.lsp.config("jsonls", {
@@ -1545,10 +1550,10 @@
         mode = ["n" "v"];
         action.__raw = ''
           function ()
-            require"fastaction".code_action {}
+            require"code-action-menu".code_action {}
           end
         '';
-        options.desc = "Code Action (fastaction)";
+        options.desc = "Code Action (code-action-menu)";
       }
       {
         key = "<Esc>";
