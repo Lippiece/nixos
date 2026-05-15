@@ -587,8 +587,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "so1ve";
           repo = "code-action-menu.nvim";
-          rev = "main";
-          sha256 = "sha256-vk+lBVU1j2Q4g6U4V5/Hkc4H6jrjp407exjer7Fp5F0=";
+          rev = "e18b1ad1c98350e13879d20eaaf3238d34890f04";
+          sha256 = "0pg4d6qszphqgcxqv9z37bm0gkliqygmff55hcw693rmal2sakxy";
         };
       })
     ];

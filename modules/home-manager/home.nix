@@ -113,6 +113,7 @@ in {
     # uv
     # cargo
     nodejs
+    deno
     # ripgrep
     python313Packages.demjson3
 
