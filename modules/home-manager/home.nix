@@ -85,9 +85,10 @@ in {
     # (bottles.override {
     #   removeWarningPopup = true;
     # })
-    variety
+    # variety # random wallpaper
     # prismlauncher
     # (pkgs.callPackage ../../packages/rimsort/package.nix {})
+    rimsort
 
     # # System
     colloid-icon-theme
