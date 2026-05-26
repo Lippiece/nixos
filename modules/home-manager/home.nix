@@ -88,7 +88,28 @@ in {
     # variety # random wallpaper
     # prismlauncher
     # (pkgs.callPackage ../../packages/rimsort/package.nix {})
-    rimsort
+    (
+      rimsort.overrideAttrs (oldAttrs: {
+        version = "v1.1.0";
+        src = fetchFromGitHub {
+          owner = "RimSort";
+          repo = "RimSort";
+          tag = "v1.1.0";
+          sha256 = "sha256-K4vGrQYbxK2oYYdiadDQpv4bLZah5PQMt2mUNS3ulRE=";
+          fetchSubmodules = true;
+        };
+
+        patches = [
+          (replaceVars ../../packages/rimsort/todds-path.patch {inherit todds;})
+          (replaceVars ../../packages/rimsort/steam-run.patch {
+            steam-run =
+              (steam.override {
+                privateTmp = false;
+              }).run;
+          })
+        ];
+      })
+    )
 
     # # System
     colloid-icon-theme
@@ -421,12 +442,12 @@ in {
     podman = {
       enable = true;
       enableTypeChecks = true;
-      containers = {
-        foo = {
-          autoUpdate = "registry";
-          image = "docker.io/hello-world";
-        };
-      };
+      # containers = {
+      #   foo = {
+      #     autoUpdate = "registry";
+      #     image = "docker.io/hello-world";
+      #   };
+      # };
     };
   };
 

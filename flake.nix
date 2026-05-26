@@ -13,14 +13,26 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     phoenix = {
       url = "git+https://gitlab.com/celenityy/Phoenix?ref=pages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    firefox = {
+      url = "github:nix-community/flake-firefox-nightly";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Helpers
-    impermanence.url = "github:nix-community/impermanence";
-    nix-alien.url = "github:thiagokokada/nix-alien";
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     typenix = {
       url = "github:ryanrasti/typenix";
