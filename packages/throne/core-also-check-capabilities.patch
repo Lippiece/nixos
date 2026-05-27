@@ -1,3 +1,16 @@
+diff --git a/main.go b/main.go
+index 37b69be..2d458f3 100644
+--- a/main.go
++++ b/main.go
+@@ -27,8 +27,6 @@
+ 	}
+ 	debug = os.Getenv("THRONE_CORE_DEBUG") == "1"
+
+-	parentcheck.CheckParentProcess()
+-
+ 	// Exit when parent dies
+ 	go func() {
+ 		parent, err := os.FindProcess(parentcheck.ParentPID)
 diff --git a/server.go b/server.go
 index 4499a6d..4c14d1a 100644
 --- a/server.go

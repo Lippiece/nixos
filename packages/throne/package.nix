@@ -21,13 +21,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "throne";
-  version = "1.1.2";
+  version = "1.1.4";
 
   src = fetchFromGitHub {
     owner = "throneproj";
     repo = "Throne";
     tag = finalAttrs.version;
-    hash = "sha256-gtbGKyEOTq+1IP7v4ZhVVohGQFlDtP7NbbhyFD2rCnA=";
+    hash = "sha256-yk/vBSMfhSdiWOmwl55GrD+urMnKasuH8nrFfpWkqr0=";
   };
 
   strictDeps = true;
@@ -92,7 +92,7 @@ stdenv.mkDerivation (finalAttrs: {
     })
   ];
 
-  passthru.core = buildGoModule {
+  passthru.core = buildGoModule rec {
     pname = "throne-core";
     inherit (finalAttrs) version src;
     sourceRoot = "${finalAttrs.src.name}/core/server";
@@ -103,7 +103,7 @@ stdenv.mkDerivation (finalAttrs: {
     ];
 
     proxyVendor = true;
-    vendorHash = "sha256-G0ev2my+sHQFYdmfkR2Zq3ujSeqi5fZ4BdrnUS8mfDE=";
+    vendorHash = "sha256-Viwrp/8b+VUZDL88Z740KV4hEiYGIDxgLe1Yi7HlLrs=";
 
     nativeBuildInputs = [
       protobuf
@@ -129,6 +129,16 @@ stdenv.mkDerivation (finalAttrs: {
       "internal/godebug.defaultGODEBUG=multipathtcp=0"
       "-checklinkname=0"
     ];
+
+    libcronet = fetchurl {
+      url = "https://github.com/SagerNet/cronet-go/releases/download/v148.0.7778.96-1/libcronet-linux-amd64.so";
+      hash = "sha256-3HKTqSnf+mlarhqJVV5zZhWPoKP0C74wEtRFvAXJlnI=";
+    };
+
+    postInstall = ''
+      install -Dm755 ${libcronet} \
+        $out/bin/libcronet.so
+    '';
 
     tags = [
       "with_clash_api"
