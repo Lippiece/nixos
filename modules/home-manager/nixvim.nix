@@ -249,11 +249,12 @@
             installCargo = true;
             installRustc = true;
           };
-          dockerls = {
-            enable = true;
-            activate = true;
-            autostart = true;
-          };
+          # TODO: replace
+          # dockerls = {
+          #   enable = true;
+          #   activate = true;
+          #   autostart = true;
+          # };
         };
       };
 
