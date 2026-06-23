@@ -82,7 +82,7 @@ in {
         # upstream = [ "tls://dns.adguard.com" ];
         # DNS over HTTPS upstream
         upstream = [
-          "quic://lipguard.ydns.eu"
+          "quic://lipguard.lippiece.ru"
         ];
 
         fallback = [
@@ -337,10 +337,10 @@ in {
       192.168.1.1 mwlogin.net
 
       192.168.1.102      cumulonimbus
-      192.168.1.102:3001 lipsearch.ydns.eu
-      192.168.1.102:3002 warden.ydns.eu
-      192.168.1.102:3003 lipgit.ydns.eu
-      192.168.1.102:3009 lipguard.ydns.eu
+      192.168.1.102:3001 lipsearch.lippiece.ru
+      192.168.1.102:3002 warden.lippiece.ru
+      192.168.1.102:3003 lipgit.lippiece.ru
+      192.168.1.102:3009 lipguard.lippiece.ru
 
       192.168.1.201      yuos
     '';
