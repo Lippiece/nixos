@@ -371,7 +371,7 @@ in {
         "--print-build-logs"
         "--commit-lock-file"
       ];
-      dates = "weekly";
+      dates = "daily";
       operation = "switch";
       persistent = true;
       enable = true;
