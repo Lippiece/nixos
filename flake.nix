@@ -24,6 +24,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Packages
+    nixpkgs-throne.url = "github:TomaSajt/nixpkgs/throne";
+    nixpkgs-rimsort.url = "github:Adda0/nixpkgs/rimsort-update";
+
     # Helpers
     impermanence = {
       url = "github:nix-community/impermanence";
@@ -38,15 +42,19 @@
       url = "github:ryanrasti/typenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs-throne.url = "github:TomaSajt/nixpkgs/throne";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
   in {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {
+        inherit inputs;
+        rimsortUnfree = import inputs.nixpkgs-rimsort {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      };
       modules = [
         {
           disabledModules = ["programs/throne.nix"];

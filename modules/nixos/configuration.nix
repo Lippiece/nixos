@@ -5,6 +5,7 @@
   lib,
   inputs,
   pkgs,
+  rimsortUnfree,
   ...
 }: let
   mail = "lippiece@vivaldi.net";
@@ -103,7 +104,7 @@ in {
     beesd.filesystems = {
       root = {
         spec = "/";
-        hashTableSizeMB = 2048;
+        hashTableSizeMB = 1024;
         verbosity = "crit";
         extraOptions = ["--loadavg-target" "5.0"];
       };
@@ -383,7 +384,7 @@ in {
 
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs;
+      inherit inputs rimsortUnfree;
     };
     useUserPackages = true;
 
