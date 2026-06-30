@@ -75,7 +75,9 @@ in {
     dnsproxy = {
       enable = true;
       settings = {
-        bootstrap = ["tls://9.9.9.9:853"];
+        bootstrap = [
+          "tls://1.1.1.1"
+        ];
 
         # Plain DNS upstream
         # upstream = [ "1.1.1.1:53" ];
@@ -87,7 +89,7 @@ in {
         ];
 
         fallback = [
-          "tls://9.9.9.9:853"
+          "tls://1.1.1.1"
         ];
       };
       # Additional launch flags
