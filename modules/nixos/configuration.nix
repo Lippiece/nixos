@@ -335,15 +335,15 @@ in {
   networking = {
     hostName = "mothership"; # Define your hostname.
     extraHosts = ''
-      192.168.1.1 mwlogin.net
+      192.168.0.1 mwlogin.net
 
-      192.168.1.102      cumulonimbus
-      192.168.1.102:3001 lipsearch.lippiece.ru
-      192.168.1.102:3002 warden.lippiece.ru
-      192.168.1.102:3003 lipgit.lippiece.ru
-      192.168.1.102:3009 lipguard.lippiece.ru
+      192.168.0.102      cumulonimbus
+      192.168.0.102:3001 lipsearch.lippiece.ru
+      192.168.0.102:3002 warden.lippiece.ru
+      192.168.0.102:3003 lipgit.lippiece.ru
+      192.168.0.102:3009 lipguard.lippiece.ru
 
-      192.168.1.201      yuos
+      192.168.0.201      yuos
     '';
 
     firewall.enable = false;
