@@ -27,6 +27,7 @@
     # Packages
     nixpkgs-throne.url = "github:TomaSajt/nixpkgs/throne";
     nixpkgs-rimsort.url = "github:Adda0/nixpkgs/rimsort-update";
+    vue_ls.url = "github:TyceHerrman/nixpkgs/vue-language-server-metadata-updater";
 
     # Helpers
     impermanence = {

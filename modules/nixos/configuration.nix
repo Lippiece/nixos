@@ -111,6 +111,10 @@ in {
         extraOptions = ["--loadavg-target" "5.0"];
       };
     };
+
+    spamassassin = {
+      enable = true;
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -244,6 +248,7 @@ in {
           auth = true;
           # try setting `tls_starttls` to `false` if sendmail hangs
           tls = true;
+          tls_starttls = false;
           from = mail;
           host = smtphost;
           user = "${name}";
@@ -253,7 +258,8 @@ in {
         ${mailDW.mail} = {
           auth = true;
           tls = true;
-          from = mail;
+          tls_starttls = false;
+          from = mailDW.mail;
           host = mailDW.smtphost;
           user = "${mailDW.name}";
           passwordeval = "printf 'url=https://${mailDW.mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";

@@ -8,7 +8,7 @@
     name = "lippiece";
     smtphost = "smtp.vivaldi.net";
     imaphost = "imap.vivaldi.net";
-    smtpport = 456;
+    smtpport = 465;
     imapport = 993;
   };
 
@@ -20,6 +20,8 @@
     smtpport = 465;
     imapport = 993;
   };
+  sq = lib.getExe pkgs.sequoia-sq;
+  sq-chameleon = lib.getExe pkgs.sequoia-chameleon-gnupg;
 in {
   home.packages = with pkgs; [
     sequoia-sq
@@ -131,8 +133,8 @@ in {
       video/*; setsid mpv --quiet %s &; copiousoutput
       audio/*; vlc %s ;
       application/pdf; ${pkgs.mutt-wizard}/lib/mutt-wizard/openfile %s ;
-      application/pgp-encrypted; ${lib.getExe pkgs.sequoia-sq} decrypt '%s'; copiousoutput;
-      application/pgp-keys; ${lib.getExe pkgs.sequoia-sq} key import '%s'; copiousoutput;
+      application/pgp-encrypted; ${sq} decrypt '%s'; copiousoutput;
+      application/pgp-keys; ${sq} key import '%s'; copiousoutput;
     '';
   };
   programs = {
@@ -207,27 +209,31 @@ in {
         # Encryption and signing
         # verifying cleartext, decrypting messages and analyzing public keys, for
         # application/pgp types.
-        set pgp_decode_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --status-fd=2 %?p?--passphrase-fd 0 --pinentry-mode=loopback? --no-verbose --quiet --batch --output - %f"
-        set pgp_verify_command="${lib.getExe pkgs.sequoia-sq} verify --signature-file %s -- %f"
-        set pgp_sign_command="${lib.getExe pkgs.sequoia-sq} sign %?a?--signer %a? --mode text --signature-file - -- %f"
-        set pgp_clearsign_command="${lib.getExe pkgs.sequoia-sq} sign %?a?--signer %a? --cleartext -- %f"
-        set pgp_decrypt_command="${lib.getExe pkgs.sequoia-sq} decrypt --signatures 0 %f"
+        set pgp_decode_command="${sq-chameleon} --status-fd=2 %?p?--passphrase-fd 0 --pinentry-mode=loopback? --no-verbose --quiet --batch --output - %f"
+        set pgp_verify_command="${sq} verify --signature-file %s -- %f"
+        set pgp_sign_command="${sq} sign %?a?--signer %a? --mode text --signature-file - -- %f"
+        set pgp_clearsign_command="${sq} sign %?a?--signer %a? --cleartext -- %f"
+        set pgp_decrypt_command="${sq} decrypt --signatures 0 %f"
 
-        set pgp_encrypt_only_command="${lib.getExe pkgs.sequoia-sq} encrypt --without-signature --for %r --for-email ${main.mail} -- %f"
-        set pgp_encrypt_sign_command="${lib.getExe pkgs.sequoia-sq} encrypt --signer-email ${main.mail} --for %r --for-email ${main.mail} -- %f"
+        set pgp_encrypt_only_command="${sq} encrypt --without-signature --for %r --for-email ${main.mail} -- %f"
+        set pgp_encrypt_sign_command="${sq} encrypt --signer-email ${main.mail} --for %r --for-email ${main.mail} -- %f"
 
         # Keyring management
-        set pgp_import_command="${lib.getExe pkgs.sequoia-sq} cert import -- %f"
-        set pgp_export_command="${lib.getExe pkgs.sequoia-sq} cert export --cert %r"
+        set pgp_import_command="${sq} cert import -- %f"
+        set pgp_export_command="${sq} cert export --cert %r"
         # Note: Disabled by default as the search can take some time.
-        # set pgp_getkeys_command="${lib.getExe pkgs.sequoia-sq} network search --batch --quiet -- %r"
-        set pgp_verify_key_command="${lib.getExe pkgs.sequoia-sq} pki identify --cert %r 2>&1"
+        # set pgp_getkeys_command="${sq} network search --batch --quiet -- %r"
+        set pgp_verify_key_command="${sq} pki identify --cert %r 2>&1"
         # Note: the second --with-fingerprint adds fingerprints to subkeys
-        set pgp_list_pubring_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --no-verbose --quiet --with-colons --with-fingerprint --with-fingerprint --list-keys %r"
-        set pgp_list_secring_command="${lib.getExe pkgs.sequoia-chameleon-gnupg} --no-verbose --quiet --with-colons --with-fingerprint --with-fingerprint --list-secret-keys %r"
+        set pgp_list_pubring_command="${sq-chameleon} --no-verbose --quiet --with-colons --with-fingerprint --with-fingerprint --list-keys %r"
+        set pgp_list_secring_command="${sq-chameleon} --no-verbose --quiet --with-colons --with-fingerprint --with-fingerprint --list-secret-keys %r"
 
         set pgp_good_sign="^[[:space:]]*Good signature from "
         set pgp_decryption_okay="Decrypted by"
+
+        set index_format = "%4C %<H?[%H] >%Z %{%b %d} %-15.15L (%<l?%4l&%4c>) %s"
+
+        spam "From:.+best-talents.+" "Spam"
       '';
     };
     mbsync = {

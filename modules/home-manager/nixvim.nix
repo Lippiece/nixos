@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   home.packages = with pkgs; [
@@ -238,6 +239,7 @@
           vue_ls = {
             enable = true;
             autostart = true;
+            package = inputs.vue_ls.outputs.legacyPackages.x86_64-linux.vue-language-server;
           };
           cssls = {
             enable = true;
