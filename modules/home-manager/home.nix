@@ -111,11 +111,6 @@ in {
       enableFishIntegration = true;
     };
 
-    fd = {
-      enable = true;
-      hidden = true;
-    };
-
     fish = {
       enable = true;
       generateCompletions = true;

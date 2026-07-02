@@ -124,6 +124,10 @@
       enableFishIntegration = true;
     };
     command-not-found.enable = false;
+    fzf = {
+      fuzzyCompletion = true;
+      keybindings = true;
+    };
   };
 
   environment = {
