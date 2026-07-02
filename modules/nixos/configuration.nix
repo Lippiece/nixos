@@ -50,7 +50,7 @@
       true; # Easiest to use and most distros use this by default.
     # If using NetworkManager:
     # networkmanager.dns = "default";
-    # nameservers = ["1.1.1.1" "9.9.9.9"];
+    # nameservers = ["1.1.1.1" "1.1.1.1"];
     networkmanager.dns = "none";
     nameservers = ["127.0.0.1"];
 
@@ -139,7 +139,7 @@
       bat
       unar
       git
-      silver-searcher
+      ripgrep
       vlc
       btop
       # TODO: build failure
@@ -150,18 +150,23 @@
   };
 
   system = {
-    # autoUpgrade = {
-    #   flake = inputs.self.outPath;
-    #   flags = [
-    #     "--upgrade-all"
-    #     "--print-build-logs"
-    #     "--commit-lock-file"
-    #   ];
-    #   dates = "weekly";
-    #   operation = "switch";
-    #   persistent = true;
-    #   enable = true;
-    # };
+    autoUpgrade = {
+      flake = inputs.self.outPath;
+      flags = [
+        "--upgrade-all"
+        "--print-build-logs"
+        "--commit-lock-file"
+      ];
+      dates = "weekly";
+      operation = "switch";
+      persistent = true;
+      enable = true;
+      allowReboot = true;
+      rebootWindow = {
+        lower = "02:00";
+        upper = "05:00";
+      };
+    };
 
     # Most users should NEVER change this value after the initial install, for any reason,
     stateVersion = "25.11"; # Did you read the comment?
@@ -185,11 +190,25 @@
 
   # Enable the OpenSSH daemon.
   services = {
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      ports = [13372 22];
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+        AllowUsers = ["lippiece"];
+        MaxAuthTries = 3;
+        PerSourcePenalties = "crash:3600s authfail:3600s max:86400s";
+      };
+    };
     dnsproxy = {
       enable = true;
       settings = {
-        bootstrap = ["tls://9.9.9.9:853"];
+        bootstrap = [
+          "tls://1.1.1.1"
+          "tls://9.9.9.9"
+        ];
 
         # Plain DNS upstream
         # upstream = [ "1.1.1.1:53" ];
@@ -197,9 +216,9 @@
         # upstream = [ "tls://dns.adguard.com" ];
         # DNS over HTTPS upstream
         upstream = [
-          "quic://lipguard.ydns.eu"
-          "quic://dns.alidns.com"
-          "quic://dns.caliph.dev"
+          # "quic://lipguard.lippiece.ru"
+          "tls://1.1.1.1"
+          "tls://9.9.9.9"
         ];
       };
       # Additional launch flags

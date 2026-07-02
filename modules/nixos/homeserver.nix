@@ -68,13 +68,11 @@
           env REQUEST_URI {vars.request_uri}
         }
       '';
-      "lipsearch.ydns.eu".extraConfig = ''reverse_proxy localhost:3001'';
-      "warden.ydns.eu".extraConfig = ''reverse_proxy localhost:3002'';
-      "lipgit.ydns.eu".extraConfig = ''reverse_proxy localhost:3003'';
-      "lipgrammar.ydns.eu".extraConfig = ''reverse_proxy localhost:3006'';
-      "lipguard.ydns.eu".extraConfig = ''reverse_proxy localhost:3007'';
-      "lipoffice.ydns.eu".extraConfig = ''reverse_proxy localhost:3010'';
-      "liprss.ydns.eu".extraConfig = ''reverse_proxy localhost:3011'';
+      "lipsearch.lippiece.ru".extraConfig = ''reverse_proxy localhost:3001'';
+      "warden.lippiece.ru".extraConfig = ''reverse_proxy localhost:3002'';
+      "lipgit.lippiece.ru".extraConfig = ''reverse_proxy localhost:3003'';
+      "lipguard.lippiece.ru".extraConfig = ''reverse_proxy localhost:3007'';
+      "liprss.lippiece.ru".extraConfig = ''reverse_proxy localhost:3011'';
       "roundcube.lippiece.ru".extraConfig = "reverse_proxy localhost:3400";
 
       "matrix.lippiece.ru" = {
@@ -150,7 +148,6 @@
           }
         '';
       };
-      "mautrix-media.lippiece.ru".extraConfig = ''reverse_proxy localhost:4220'';
     };
   };
 }

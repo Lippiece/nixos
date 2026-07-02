@@ -305,7 +305,7 @@ in {
         };
         Timer = {
           OnBootSec = "5m";
-          OnUnitInactiveSec = "4h";
+          OnUnitInactiveSec = "30min";
         };
       };
     };
