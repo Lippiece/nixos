@@ -139,8 +139,8 @@ in {
       bat
       unar
       git
-      # TODO: deprecated `fd`
-      # silver-searcher
+      ripgrep
+      fzf
       kdotool
       gcc
       vlc

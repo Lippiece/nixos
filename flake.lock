@@ -9,11 +9,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782828853,
-        "narHash": "sha256-rx1GbBZl8BQ2CMLTjrlYhHUs4kWgza9VK93XKBJ7+hI=",
+        "lastModified": 1783019991,
+        "narHash": "sha256-Cg5yoAs6anUDZNLKDn5JlXlK/+fdcI28E3v40sLGnk0=",
         "owner": "nix-community",
         "repo": "flake-firefox-nightly",
-        "rev": "a2de67e66ba12954c28c5888cb37f539ae227ced",
+        "rev": "a00fddb5b9e70494727ac72b8c7097d848e5f73a",
         "type": "github"
       },
       "original": {
@@ -60,11 +60,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778716662,
-        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "lastModified": 1782949081,
+        "narHash": "sha256-vp6Y/Grm98ESt6ceOkWiHWyZRDV3J1RID4w+6NWK9yA=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "rev": "17c9d6cdfc60c64f4ee8d306f9bc0b4ccb51481e",
         "type": "github"
       },
       "original": {
@@ -98,11 +98,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782839684,
-        "narHash": "sha256-vzs4SBgPsK4aNzlJR2PpFwtARazXMOxZonQnDz0YHxk=",
+        "lastModified": 1783024095,
+        "narHash": "sha256-oE+TNK98Pl7nHW4VU1oBvUKD5JR45U+py/NJmLoTNHI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2a37d71bbe69e1522ddabf03a4cea0374958bdbe",
+        "rev": "a4d410db95a6416d1008049330bd86b85b5db45a",
         "type": "github"
       },
       "original": {
@@ -287,11 +287,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1782706849,
-        "narHash": "sha256-b2ODGxKD3hgrwuesLtDomp2DKF3UiOn3+EBTDXpcqGo=",
+        "lastModified": 1783008629,
+        "narHash": "sha256-09BjomDm95T6kMWbzceSwOvnsyUGYAUJ0kvfx4jcPww=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "c6a99bb41fb0f37e03ca38b1d81b006e98e3bf1a",
+        "rev": "e52f93e175e63e4b9bfefd53b051a18f12217bed",
         "type": "github"
       },
       "original": {
@@ -406,11 +406,11 @@
     },
     "vue_ls": {
       "locked": {
-        "lastModified": 1782851199,
+        "lastModified": 1783014652,
         "narHash": "sha256-bdihPuKZH0GSX1tLvHrNfnBGXqIsa+yyBBrsHcss7aA=",
         "owner": "TyceHerrman",
         "repo": "nixpkgs",
-        "rev": "30e3bb88aa325bd05d92030b91dbd329fa6618f6",
+        "rev": "c78fbd076685fe5e9405abd7f65f65b4ea767cc3",
         "type": "github"
       },
       "original": {

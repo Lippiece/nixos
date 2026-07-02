@@ -249,11 +249,6 @@ in {
       icons = "auto";
     };
 
-    fd = {
-      enable = true;
-      hidden = true;
-    };
-
     pay-respects = {
       enable = true;
     };
