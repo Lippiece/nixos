@@ -53,7 +53,7 @@ in {
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
     # mpc-qt
     kdePackages.filelight
-    element-desktop
+    cinny-desktop
     kitty
     # TODO: deno builds for hours
     # qimgv
