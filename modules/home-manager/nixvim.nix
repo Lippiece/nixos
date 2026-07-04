@@ -257,6 +257,10 @@
           #   activate = true;
           #   autostart = true;
           # };
+          systemd_lsp = {
+            enable = true;
+            autostart = true;
+          };
         };
       };
 

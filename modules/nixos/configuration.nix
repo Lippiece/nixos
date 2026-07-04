@@ -11,6 +11,7 @@
   mail = "lippiece@vivaldi.net";
   name = "lippiece";
   smtphost = "smtp.vivaldi.net";
+  smtpport = 465;
 
   mailDW = {
     mail = "a.anisko@ddemo.ru";
@@ -246,10 +247,10 @@ in {
       accounts = {
         ${mail} = {
           auth = true;
-          # try setting `tls_starttls` to `false` if sendmail hangs
           tls = true;
           tls_starttls = false;
           from = mail;
+          port = smtpport;
           host = smtphost;
           user = "${name}";
           passwordeval = "printf 'url=https://${mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
@@ -259,6 +260,7 @@ in {
           auth = true;
           tls = true;
           tls_starttls = false;
+          port = smtpport;
           from = mailDW.mail;
           host = mailDW.smtphost;
           user = "${mailDW.name}";
