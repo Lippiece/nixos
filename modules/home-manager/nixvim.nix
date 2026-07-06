@@ -554,8 +554,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "andersevenrud";
           repo = "nvim_context_vt";
-          rev = "fadbd9e57af72f6df3dd33df32ee733aa01cdbc0";
-          sha256 = "0rx7lik3c40ka9y4qws0d960lzhvpnkv5hs512140dq4k2n5f6l2";
+          rev = "b72accf0ba6772c9ae6e37f4540a81f1bc715f1a";
+          sha256 = "0hf2h1zcb5xkn444d2c66dn5pi57yv522z7zgb1dxjjgaphsj6ka";
         };
       })
       (vimUtils.buildVimPlugin {
@@ -594,8 +594,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "so1ve";
           repo = "code-action-menu.nvim";
-          rev = "e18b1ad1c98350e13879d20eaaf3238d34890f04";
-          sha256 = "0pg4d6qszphqgcxqv9z37bm0gkliqygmff55hcw693rmal2sakxy";
+          rev = "38e7ec76269767e1faa61a467a13737a0ee4ac11";
+          sha256 = "0dqck96lvajznmc2a0a1lm2929wfc3jzq8zxricb1vx29bxnw1vr";
         };
       })
     ];
