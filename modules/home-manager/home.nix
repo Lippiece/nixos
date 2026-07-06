@@ -58,7 +58,7 @@ in {
     # TODO: deno builds for hours
     # qimgv
 
-    brave
+    inputs.brave-origin.packages.${pkgs.system}.default
     # (brave.overrideAttrs (oldAttrs: {
     #   nativeBuildInputs = oldAttrs.nativeBuildInputs or [] ++ [makeWrapper];
     #   postInstall = ''
@@ -168,8 +168,8 @@ in {
       }
     '';
 
-    ".config/BraveSoftware/Brave-Browser/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
-    ".config/BraveSoftware/Brave-Browser/NativeMessagingHosts/org.keepassxc.keepassxc_browser.json".text = ''
+    ".config/BraveSoftware/Brave-Origin/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+    ".config/BraveSoftware/Brave-Origin/NativeMessagingHosts/org.keepassxc.keepassxc_browser.json".text = ''
       {
         "allowed_origins": [
           "chrome-extension://pdffhmdngciaglkoonimfcmckehcpafo/",
@@ -393,6 +393,15 @@ in {
         pkgs.kdePackages.plasma-browser-integration
       ];
     };
+
+    # brave = {
+    #   enable = true;
+    #   package = inputs.brave-origin.packages.${pkgs.system}.default;
+    #   # nativeMessagingHosts = [
+    #   # pkgs.kdePackages.plasma-browser-integration
+    #   # "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json"
+    #   # ];
+    # };
   };
 
   xdg = {
