@@ -194,7 +194,7 @@ in
         cp -R usr/share $out
         cp -R opt/ $out/opt
 
-        export BINARYWRAPPER=$out/opt/brave.com/brave/brave-browser
+        export BINARYWRAPPER=$out/opt/brave.com/brave-nightly/brave-browser-nightly
 
         # Fix path to bash in $BINARYWRAPPER
         substituteInPlace $BINARYWRAPPER \
@@ -203,18 +203,22 @@ in
 
         ln -sf $BINARYWRAPPER $out/bin/brave
 
-        for exe in $out/opt/brave.com/brave/{brave,chrome_crashpad_handler}; do
+        # echo ----------------------------------------------
+        # ls -la $out/opt/brave.com/brave-nightly
+        # echo ----------------------------------------------
+
+        for exe in $out/opt/brave.com/brave-nightly/{brave,chrome_crashpad_handler}; do
             patchelf \
                 --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
                 --set-rpath "${rpath}" $exe
         done
 
         # Fix paths
-        substituteInPlace $out/share/applications/{brave-browser,com.brave.Browser}.desktop \
-            --replace-fail /usr/bin/brave-browser-stable $out/bin/brave
-        substituteInPlace $out/share/gnome-control-center/default-apps/brave-browser.xml \
+        substituteInPlace $out/share/applications/{brave-browser-,com.brave.Browser.}nightly.desktop \
+            --replace-fail /usr/bin/brave-browser-nightly $out/bin/brave
+        substituteInPlace $out/share/gnome-control-center/default-apps/brave-browser-nightly.xml \
             --replace-fail /opt/brave.com $out/opt/brave.com
-        substituteInPlace $out/opt/brave.com/brave/default-app-block \
+        substituteInPlace $out/opt/brave.com/brave-nightly/default-app-block \
             --replace-fail /opt/brave.com $out/opt/brave.com
 
         # Correct icons location
@@ -223,12 +227,12 @@ in
         for icon in ''${icon_sizes[*]}
         do
             mkdir -p $out/share/icons/hicolor/$icon\x$icon/apps
-            ln -s $out/opt/brave.com/brave/product_logo_$icon.png $out/share/icons/hicolor/$icon\x$icon/apps/brave-browser.png
+            ln -s "$out/opt/brave.com/brave-nightly/product_logo_''${icon}_nightly.png" $out/share/icons/hicolor/$icon\x$icon/apps/brave-browser-nightly.png
         done
 
         # Replace xdg-settings and xdg-mime
-        ln -sf ${xdg-utils}/bin/xdg-settings $out/opt/brave.com/brave/xdg-settings
-        ln -sf ${xdg-utils}/bin/xdg-mime $out/opt/brave.com/brave/xdg-mime
+        ln -sf ${xdg-utils}/bin/xdg-settings $out/opt/brave.com/brave-nightly/xdg-settings
+        ln -sf ${xdg-utils}/bin/xdg-mime $out/opt/brave.com/brave-nightly/xdg-mime
 
         runHook postInstall
       ''
@@ -272,7 +276,7 @@ in
 
     installCheckPhase = ''
       # Bypass upstream wrapper which suppresses errors
-      $out/opt/brave.com/brave/brave --version
+      $out/opt/brave.com/brave-nightly/brave --version
     '';
 
     passthru.updateScript = ./update.sh;
