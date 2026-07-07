@@ -24,11 +24,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    brave-origin = {
-      url = "github:Daniel-42-z/brave-origin-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Packages
     nixpkgs-throne.url = "github:TomaSajt/nixpkgs/throne";
     nixpkgs-rimsort.url = "github:Adda0/nixpkgs/rimsort-update";
