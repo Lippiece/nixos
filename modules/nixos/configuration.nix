@@ -154,6 +154,7 @@ in {
       unzip
       tree
       fish
+      nodejs_latest
 
       # Libs & tools
       icu
@@ -226,6 +227,7 @@ in {
     nh = {
       enable = true;
       clean.enable = true;
+      clean.extraArgs = "--keep 2 --keep-since 1d";
       clean.dates = "weekly";
       flake = "/home/lippiece/.config/nixos";
     };

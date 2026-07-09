@@ -114,8 +114,7 @@ in {
     # python312Packages.venvShellHook
     # uv
     # cargo
-    nodejs
-    deno
+    nodejs_latest
     # ripgrep
     python313Packages.demjson3
 

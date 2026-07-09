@@ -332,8 +332,7 @@
         "nixpkgs-throne": "nixpkgs-throne",
         "nixvim": "nixvim",
         "phoenix": "phoenix",
-        "typenix": "typenix",
-        "vue_ls": "vue_ls"
+        "typenix": "typenix"
       }
     },
     "systems": {
@@ -401,22 +400,6 @@
       "original": {
         "owner": "ryanrasti",
         "repo": "typenix",
-        "type": "github"
-      }
-    },
-    "vue_ls": {
-      "locked": {
-        "lastModified": 1782851199,
-        "narHash": "sha256-bdihPuKZH0GSX1tLvHrNfnBGXqIsa+yyBBrsHcss7aA=",
-        "owner": "TyceHerrman",
-        "repo": "nixpkgs",
-        "rev": "30e3bb88aa325bd05d92030b91dbd329fa6618f6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "TyceHerrman",
-        "ref": "vue-language-server-metadata-updater",
-        "repo": "nixpkgs",
         "type": "github"
       }
     }

@@ -239,7 +239,6 @@
           vue_ls = {
             enable = true;
             autostart = true;
-            package = inputs.vue_ls.outputs.legacyPackages.x86_64-linux.vue-language-server;
           };
           cssls = {
             enable = true;
@@ -258,6 +257,10 @@
           #   autostart = true;
           # };
           systemd_lsp = {
+            enable = true;
+            autostart = true;
+          };
+          denols = {
             enable = true;
             autostart = true;
           };
@@ -1690,6 +1693,36 @@
           end
         '';
         options.desc = "Run vue-tsc";
+      }
+      {
+        key = "<leader>td";
+        mode = ["x" "n"];
+        action.__raw = ''
+          function()
+            require("tsc").setup {
+              use_trouble_qflist = true,
+              bin_path = "/usr/bin/env",
+              flags = "deno check"
+            }
+            require("tsc").run()
+          end
+        '';
+        options.desc = "Run deno check";
+      }
+      {
+        key = "<leader>ta";
+        mode = ["x" "n"];
+        action.__raw = ''
+          function()
+            require("tsc").setup {
+              use_trouble_qflist = true,
+              bin_path = "/usr/bin/env",
+              flags = "astro check"
+            }
+            require("tsc").run()
+          end
+        '';
+        options.desc = "Run Astro check";
       }
 
       # Overseer
