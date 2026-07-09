@@ -14,11 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    phoenix = {
-      url = "git+https://gitlab.com/celenityy/Phoenix?ref=pages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -76,7 +71,6 @@
         inputs.home-manager.nixosModules.default
 
         inputs.impermanence.nixosModules.impermanence
-        inputs.phoenix.nixosModules.default
       ];
     };
   };
