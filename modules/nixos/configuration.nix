@@ -128,7 +128,7 @@ in {
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
       EDITOR = "nvim";
-      BROWSER = "firefox-nightly";
+      BROWSER = "brave";
       MANPAGER = "nvim +Man!";
       SHELL = lib.getExe pkgs.elvish;
       # use less with wraps for journalctl
@@ -242,7 +242,6 @@ in {
       preferences = {
         "widget.use-xdg-desktop-portal.file-picker" = 1;
       };
-      package = inputs.firefox.packages.${pkgs.stdenv.hostPlatform.system}.firefox-nightly-bin;
     };
     kde-pim = {
       enable = true;
