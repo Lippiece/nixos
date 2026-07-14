@@ -125,7 +125,6 @@ in {
     wl-clipboard-rs
     pass-git-helper
     proxychains-ng
-    commitizen
     gh
     # steamcmd
     rsync
@@ -351,37 +350,6 @@ in {
     keepassxc = {
       autostart = true;
       enable = true;
-      # For available settings, see https://github.com/keepassxreboot/keepassxc/blob/develop/src/core/Config.cpp
-      settings = {
-        FdoSecrets.Enabled = true; # Enable Secret Service Integration
-        SSHAgent.Enabled = true;
-        SSHAgent.UseOpenSSH = true;
-        Browser.Enabled = true;
-        PasswordGenerator = {
-          Type = 1;
-          WordCount = 6;
-          WordSeparator = "-";
-        };
-        GUI = {
-          ApplicationTheme = "dark";
-          ColorPasswords = true;
-          MinimizeOnClose = true;
-          MinimizeToTray = true;
-          ShowTrayIcon = true;
-          TrayIconAppearance = "monochrome-light";
-        };
-        General = {
-          AutoGeneratePasswordForNewEntries = true;
-          ConfigVersion = 2;
-          URLDoubleClickAction = 2;
-        };
-        Security = {
-          ClearClipboard = false;
-          IconDownloadFallback = true;
-          LockDatabaseIdle = false;
-          LockDatabaseScreenLock = false;
-        };
-      };
     };
     git-credential-keepassxc.enable = true;
 
