@@ -53,7 +53,6 @@ in {
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
     # mpc-qt
     kdePackages.filelight
-    cinny-desktop
     kitty
     # TODO: deno builds for hours
     # qimgv
@@ -434,6 +433,20 @@ in {
       name = "Catapult";
       exec = ''fish -c "runbuild /home/lippiece/.config/nixos/packages/catapult catapult"'';
       terminal = false;
+    };
+  };
+
+  systemd.user.services = {
+    gomuks-web = {
+      Install = {
+        WantedBy = ["default.target"];
+      };
+      Unit = {
+        Description = "Start gomuks-web backend";
+      };
+      Service = {
+        ExecStart = lib.getExe pkgs.gomuks-web;
+      };
     };
   };
 }
