@@ -23,6 +23,25 @@ in {
 
   # You should not change this value, even if you update Home Manager.
   home.stateVersion = "25.05";
+  nixpkgs.overlays = [
+    (final: prev: {
+      python314Packages = prev.python314Packages.overrideScope (
+        pyFinal: pyPrev: {
+          patool = pyPrev.patool.override {
+            file = prev.file.overrideAttrs {
+              # Work around too strict landlock hardening
+              # https://bugs.astron.com/view.php?id=785
+              postPatch = ''
+                substituteInPlace src/landlock.c --replace-fail \
+                  "LANDLOCK_ACCESS_FS_READ_FILE | LANDLOCK_ACCESS_FS_READ_DIR" \
+                  "LANDLOCK_ACCESS_FS_READ_FILE | LANDLOCK_ACCESS_FS_READ_DIR | LANDLOCK_ACCESS_FS_EXECUTE"
+              '';
+            };
+          };
+        }
+      );
+    })
+  ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -47,7 +66,6 @@ in {
     # # Tools
     kdePackages.kclock
     telegram-desktop
-    v2rayn
     xray
     obsidian
     (qt6Packages.callPackage ../../packages/mpc-qt/mpc-qt.nix {})
@@ -82,9 +100,9 @@ in {
     # # Entertainment
     qbittorrent-enhanced
     # TODO: openldap-2.6.13-i686-linux failed with exit code 2
-    # (bottles.override {
-    #   removeWarningPopup = true;
-    # })
+    (bottles.override {
+      removeWarningPopup = true;
+    })
     # variety # random wallpaper
     # prismlauncher
     # (pkgs.callPackage ../../packages/rimsort/package.nix {})
@@ -121,6 +139,7 @@ in {
     # bun
     so
     imagemagick
+    ffmpeg
     wl-clipboard-rs
     pass-git-helper
     proxychains-ng
