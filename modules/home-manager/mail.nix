@@ -39,7 +39,7 @@ in {
       neomutt = {
         enable = true;
         mailboxName = "${main.mail}";
-        sendMailCommand = "msmtpq -a ${main.mail}";
+        sendMailCommand = "sendmail --read-envelope-from --read-recipients -a ${main.mail}";
       };
 
       notmuch = {
@@ -75,7 +75,7 @@ in {
       neomutt = {
         enable = true;
         mailboxName = "${DW.mail}";
-        sendMailCommand = "msmtpq -a ${DW.mail}";
+        sendMailCommand = "sendmail --read-envelope-from --read-recipients -a ${DW.mail}";
       };
 
       notmuch = {
