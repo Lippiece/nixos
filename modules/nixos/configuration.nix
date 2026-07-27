@@ -116,10 +116,6 @@ in {
         extraOptions = ["--loadavg-target" "5.0"];
       };
     };
-
-    spamassassin = {
-      enable = true;
-    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).

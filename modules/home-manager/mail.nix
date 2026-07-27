@@ -21,25 +21,25 @@
     imapport = 993;
   };
   sq = lib.getExe pkgs.sequoia-sq;
-  sq-chameleon = lib.getExe pkgs.sequoia-chameleon-gnupg;
 in {
   home.packages = with pkgs; [
     sequoia-sq
+    sequoia-chameleon-gnupg
+    libsecret
   ];
 
   accounts.email = {
     accounts.${main.mail} = {
-      passwordCommand = "printf 'url=https://${main.mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
+      passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup mail ${main.mail}";
+
       primary = true;
       realName = "${main.name}";
       address = "${main.mail}";
       userName = "${main.name}";
       maildir.path = "${main.mail}";
 
-      neomutt = {
+      aerc = {
         enable = true;
-        mailboxName = "${main.mail}";
-        sendMailCommand = "sendmail --read-envelope-from --read-recipients -a ${main.mail}";
       };
 
       notmuch = {
@@ -63,6 +63,20 @@ in {
         create = "both";
         expunge = "both";
       };
+
+      imapnotify = {
+        enable = true;
+        boxes = [
+          "Inbox"
+        ];
+        extraConfig = {
+          onNewMail = "${pkgs.writeShellScript "onNewMail" ''
+            ${pkgs.isync}/bin/mbsync ${main.mail}
+            ${lib.getExe pkgs.notmuch} new
+            ${lib.getExe pkgs.libnotify} 'Mail'
+          ''}";
+        };
+      };
     };
 
     accounts.${DW.mail} = {
@@ -72,10 +86,8 @@ in {
       userName = "${DW.name}";
       maildir.path = "${DW.mail}";
 
-      neomutt = {
+      aerc = {
         enable = true;
-        mailboxName = "${DW.mail}";
-        sendMailCommand = "sendmail --read-envelope-from --read-recipients -a ${DW.mail}";
       };
 
       notmuch = {
@@ -139,109 +151,37 @@ in {
   };
   programs = {
     notmuch.enable = true;
-    neomutt = {
-      enable = true;
-      extraConfig = ''
-        unauto_view "*"
-
-        # Quote
-        color body brightcyan default "^[>].*"
-
-        # Link
-        color body brightyellow default "(https?|ftp)://[^ ]+"
-
-        # Code block start and end
-        color body cyan default "^\`\`\`.*$"
-
-        # mail address
-        color body yellow default "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-
-        # Patch mail highlight, copied from https://github.com/neomutt/dyk/issues/13
-        # Diff changes
-        color body brightgreen default "^[+].*"
-        color body brightred   default "^[-].*"
-
-        # Diff file
-        color body green       default "^[-][-][-] .*"
-        color body green       default "^[+][+][+] .*"
-
-        # Diff header
-        color body green       default "^diff .*"
-        color body green       default "^index .*"
-
-        # Diff chunk
-        color body cyan        default "^@@ .*"
-
-        # Linked issue
-        color body brightgreen default "^(close[ds]*|fix(e[ds])*|resolve[sd]*):* *#[0-9]+$"
-
-        # Credit
-        color body brightwhite default "(signed-off|co-authored)-by: .*"
-
-        # mutt-wizard
-        source ${pkgs.mutt-wizard}/share/mutt-wizard/mutt-wizard.muttrc
-
-        macro index,pager gi "<change-folder>=Inbox<enter>" "go to inbox"
-        macro index,pager Mi ";<save-message>=Inbox<enter>" "move mail to inbox"
-        macro index,pager Ci ";<copy-message>=Inbox<enter>" "copy mail to inbox"
-
-        # unbind index <return>
-        bind index <return> display-message
-
-        # My additions
-        macro index,pager Ml ";<save-message>=Later<enter>" "move mail to later"
-        macro index,pager gl "<change-folder>=Later<enter>" "go to Later folder"
-
-        macro index,pager,attach,compose \cb "\
-        <enter-command> set my_pipe_decode=\$pipe_decode pipe_decode<Enter>\
-        <pipe-message> urlscan<Enter>\
-        <enter-command> set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<Enter>" \
-        "call urlscan to extract URLs out of a message"
-
-        macro index,pager i1 '<sync-mailbox><enter-command>source /home/lippiece/.config/neomutt/${main.mail}<enter><change-folder>!<enter>;<check-stats>' "switch to ${main.mail}"
-        macro index,pager i2 '<sync-mailbox><enter-command>source /home/lippiece/.config/neomutt/${DW.mail}<enter><change-folder>!<enter>;<check-stats>' "switch to ${DW.mail}"
-
-        # Sequoia instad of GPG
-        set pgp_check_gpg_decrypt_status_fd = no
-        set pgp_use_gpg_agent = yes
-        set crypt_use_gpgme = no
-
-        # Encryption and signing
-        # verifying cleartext, decrypting messages and analyzing public keys, for
-        # application/pgp types.
-        set pgp_decode_command="${sq-chameleon} --status-fd=2 %?p?--passphrase-fd 0 --pinentry-mode=loopback? --no-verbose --quiet --batch --output - %f"
-        set pgp_verify_command="${sq} verify --signature-file %s -- %f"
-        set pgp_sign_command="${sq} sign %?a?--signer %a? --mode text --signature-file - -- %f"
-        set pgp_clearsign_command="${sq} sign %?a?--signer %a? --cleartext -- %f"
-        set pgp_decrypt_command="${sq} decrypt --signatures 0 %f"
-
-        set pgp_encrypt_only_command="${sq} encrypt --without-signature --for %r --for-email ${main.mail} -- %f"
-        set pgp_encrypt_sign_command="${sq} encrypt --signer-email ${main.mail} --for %r --for-email ${main.mail} -- %f"
-
-        # Keyring management
-        set pgp_import_command="${sq} cert import -- %f"
-        set pgp_export_command="${sq} cert export --cert %r"
-        # Note: Disabled by default as the search can take some time.
-        # set pgp_getkeys_command="${sq} network search --batch --quiet -- %r"
-        set pgp_verify_key_command="${sq} pki identify --cert %r 2>&1"
-        # Note: the second --with-fingerprint adds fingerprints to subkeys
-        set pgp_list_pubring_command="${sq-chameleon} --no-verbose --quiet --with-colons --with-fingerprint --with-fingerprint --list-keys %r"
-        set pgp_list_secring_command="${sq-chameleon} --no-verbose --quiet --with-colons --with-fingerprint --with-fingerprint --list-secret-keys %r"
-
-        set pgp_good_sign="^[[:space:]]*Good signature from "
-        set pgp_decryption_okay="Decrypted by"
-
-        set index_format = "%4C %<H?[%H] >%Z %{%b %d} %-15.15L (%<l?%4l&%4c>) %s"
-
-        spam "From:.+best-talents.+" "Spam"
-      '';
-    };
     mbsync = {
       enable = true;
       groups = {
         inboxes = {
           ${main.mail} = ["Inbox"];
           ${DW.mail} = ["Inbox"];
+        };
+      };
+    };
+    aerc = {
+      enable = true;
+      extraConfig = {
+        filters = {
+          "text/plain" = "colorize";
+          "text/html" = "html";
+          "message/delivery-status" = "colorize";
+          "message/rfc822" = "colorize";
+          ".headers" = "colorize";
+        };
+        ui = {
+          "styleset-name" = "nord";
+          "fuzzy-complete" = "true";
+          "icon-new" = "✨";
+          "icon-attachment" = "📎";
+          "icon-old" = "🕰️";
+          "icon-replied" = "📝";
+          "icon-flagged" = "🚩";
+          "icon-deleted" = "🗑️";
+        };
+        general = {
+          unsafe-accounts-conf = true;
         };
       };
     };
@@ -318,5 +258,9 @@ in {
         };
       };
     };
+  };
+
+  services = {
+    imapnotify.enable = true;
   };
 }
