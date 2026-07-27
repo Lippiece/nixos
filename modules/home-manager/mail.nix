@@ -14,7 +14,7 @@
 
   DW = {
     mail = "a.anisko@ddemo.ru";
-    name = "a.anisko@ddemo.ru";
+    name = "a.anisko";
     smtphost = "smtp.dw.team";
     imaphost = "imap.dw.team";
     smtpport = 465;
@@ -83,7 +83,7 @@ in {
       passwordCommand = "printf 'url=https://${DW.mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
       realName = "${DW.name}";
       address = "${DW.mail}";
-      userName = "${DW.name}";
+      userName = "${DW.mail}";
       maildir.path = "${DW.mail}";
 
       aerc = {
@@ -169,6 +169,7 @@ in {
           "message/delivery-status" = "colorize";
           "message/rfc822" = "colorize";
           ".headers" = "colorize";
+          "text/calendar" = "calendar";
         };
         ui = {
           "styleset-name" = "nord";
@@ -179,10 +180,39 @@ in {
           "icon-replied" = "📝";
           "icon-flagged" = "🚩";
           "icon-deleted" = "🗑️";
+          "icon-draft " = "🧾";
+          "icon-encrypted " = "🔒";
+          "icon-signed " = "🔑";
+          "icon-signed-encrypted " = "🔐";
+          "icon-unknown " = "❔";
+          "icon-invalid " = "❗";
+          "icon-forwarded " = "📨";
+          "threading-enabled " = "true";
+          "threading-by-subject " = "true";
+          "show-thread-context " = "true";
+          "msglist-scroll-offset " = "5";
+          "thread-prefix-tip " = "";
+          "thread-prefix-indent " = "";
+          "thread-prefix-stem " = "│";
+          "thread-prefix-limb " = "─";
+          "thread-prefix-folded " = "+";
+          "thread-prefix-unfolded " = "";
+          "thread-prefix-first-child " = "┬";
+          "thread-prefix-has-siblings " = "├";
+          "thread-prefix-orphan " = "┌";
+          "thread-prefix-dummy " = "┬";
+          "thread-prefix-lone " = "";
+          "thread-prefix-last-sibling " = "╰";
+          "timestamp-format " = "02.01.2006";
+          "this-day-time-format " = "3:04 PM";
+          "this-week-time-format " = "Mon 02.01";
+          "this-year-time-format " = "02.01";
+          "message-view-timestamp-format " = "02.01.2006, 3:04 PM GMT-0700";
         };
         general = {
           unsafe-accounts-conf = true;
         };
+        statusline = {display-mode = "icon";};
       };
     };
   };
