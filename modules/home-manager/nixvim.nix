@@ -557,8 +557,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "andersevenrud";
           repo = "nvim_context_vt";
-          rev = "b72accf0ba6772c9ae6e37f4540a81f1bc715f1a";
-          sha256 = "0hf2h1zcb5xkn444d2c66dn5pi57yv522z7zgb1dxjjgaphsj6ka";
+          rev = "8f2a18fb3696bd93a7a9ad85b42b225f63c906ea";
+          sha256 = "1n6k0srnvxfvb2hvr77sazaav911scyn1x1j3dsy7hlcphs2lxjg";
         };
       })
       (vimUtils.buildVimPlugin {

@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/gomuks/gomuks/releases/download/v0.2607.0/gomuks-desktop_26.07.0_amd64.deb";
-    sha256 = "ba83a0371b89895db8631e2919c7d0554cbf534ff33336a3ca744c8e995a9d9f";
+    sha256 = "17wxbacqwk3lraikcczk9x9vyk2ms33ija8ycfw5v2c93cvs10xs";
   };
 
   buildInputs = [
