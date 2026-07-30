@@ -36,10 +36,12 @@ in {
       realName = "${main.name}";
       address = "${main.mail}";
       userName = "${main.name}";
-      maildir.path = "${main.mail}";
 
       aerc = {
         enable = true;
+        extraAccounts = {
+          source = "notmuch://";
+        };
       };
 
       notmuch = {
@@ -84,10 +86,12 @@ in {
       realName = "${DW.name}";
       address = "${DW.mail}";
       userName = "${DW.mail}";
-      maildir.path = "${DW.mail}";
 
       aerc = {
         enable = true;
+        extraAccounts = {
+          source = "notmuch://";
+        };
       };
 
       notmuch = {
