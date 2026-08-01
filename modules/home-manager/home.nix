@@ -94,8 +94,6 @@ in {
     rimsortUnfree.rimsort
 
     # # System
-    colloid-icon-theme
-    colloid-gtk-theme
     kdePackages.karousel
     (
       kdePackages.spectacle.override {
@@ -418,17 +416,6 @@ in {
         monospace = ["Maple Mono"];
         emoji = ["Noto Color Emoji"];
       };
-    };
-  };
-
-  gtk = {
-    iconTheme = {
-      name = "colloid-icon-theme";
-      package = pkgs.colloid-icon-theme;
-    };
-    theme = {
-      name = "colloid-gtk-theme";
-      package = pkgs.colloid-gtk-theme;
     };
   };
 
