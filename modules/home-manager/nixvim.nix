@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  inputs,
   ...
 }: {
   home.packages = with pkgs; [
@@ -181,7 +180,7 @@
       conceallevel = 2;
     };
 
-    colorschemes.modus.enable = true;
+    colorscheme = "cendre";
 
     plugins = {
       lsp = {
@@ -599,6 +598,15 @@
           repo = "code-action-menu.nvim";
           rev = "38e7ec76269767e1faa61a467a13737a0ee4ac11";
           sha256 = "0dqck96lvajznmc2a0a1lm2929wfc3jzq8zxricb1vx29bxnw1vr";
+        };
+      })
+      (vimUtils.buildVimPlugin {
+        name = "cendre";
+        src = pkgs.fetchFromGitHub {
+          owner = "Aejkatappaja";
+          repo = "cendre";
+          rev = "master";
+          sha256 = "sha256-EWo7lPtiiGpffryaNm4GYJ8bJGtwqPPbrkw3vxBzqAE=";
         };
       })
     ];
