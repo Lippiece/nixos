@@ -296,7 +296,6 @@ in {
       escapeTime = 10;
       plugins = with pkgs.tmuxPlugins; [
         resurrect
-        harpoon
         {
           plugin = dracula;
           extraConfig = ''
