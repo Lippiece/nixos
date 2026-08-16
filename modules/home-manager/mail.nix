@@ -12,14 +12,6 @@
     imapport = 993;
   };
 
-  DW = {
-    mail = "a.anisko@ddemo.ru";
-    name = "a.anisko";
-    smtphost = "smtp.dw.team";
-    imaphost = "imap.dw.team";
-    smtpport = 465;
-    imapport = 993;
-  };
   sq = lib.getExe pkgs.sequoia-sq;
 in {
   home.packages = with pkgs; [
@@ -80,42 +72,6 @@ in {
         };
       };
     };
-
-    accounts.${DW.mail} = {
-      passwordCommand = "printf 'url=https://${DW.mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
-      realName = "${DW.name}";
-      address = "${DW.mail}";
-      userName = "${DW.mail}";
-
-      aerc = {
-        enable = true;
-        extraAccounts = {
-          source = "notmuch://";
-        };
-      };
-
-      notmuch = {
-        enable = true;
-      };
-
-      smtp = {
-        host = DW.smtphost;
-        port = DW.smtpport;
-      };
-
-      imap = {
-        host = DW.imaphost;
-        port = DW.imapport;
-      };
-
-      msmtp.enable = true;
-
-      mbsync = {
-        enable = true;
-        create = "both";
-        expunge = "both";
-      };
-    };
   };
   home.file = {
     # ".mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json".source = "${pkgs.kdePackages.plasma-browser-integration}/lib/mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json";
@@ -160,7 +116,6 @@ in {
       groups = {
         inboxes = {
           ${main.mail} = ["Inbox"];
-          ${DW.mail} = ["Inbox"];
         };
       };
     };

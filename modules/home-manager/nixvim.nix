@@ -263,6 +263,40 @@
             enable = true;
             autostart = true;
           };
+          nixd = {
+            enable = true;
+            autostart = true;
+            settings = let
+              flake = ''(builtins.getFlake (builtins.toString ./.))'';
+              system = ''''${builtins.currentSystem}'';
+            in {
+              nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
+
+              options = {
+                nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
+                # TODO: doesn't work: https://github.com/nix-community/nixd/issues/706
+                nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
+                home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
+              };
+            };
+          };
+          oxlint = {
+            enable = true;
+            autostart = true;
+            cmd = [
+              (lib.getExe pkgs.cpulimit)
+              "-i"
+              "-l"
+              "30"
+              "/home/lippiece/node_modules/.bin/oxlint"
+              "--import-plugin"
+              "--type-aware"
+              "--lsp"
+            ];
+            rootMarkers = [
+              "package.json"
+            ];
+          };
         };
       };
 
@@ -556,8 +590,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "andersevenrud";
           repo = "nvim_context_vt";
-          rev = "8f2a18fb3696bd93a7a9ad85b42b225f63c906ea";
-          sha256 = "1n6k0srnvxfvb2hvr77sazaav911scyn1x1j3dsy7hlcphs2lxjg";
+          rev = "74c5ec8786426c5458e1a9f6b8b2fd6977ba01ab";
+          sha256 = "0myi5kls8madqqcm01zb7wq6f6gwq0yz3fjdz143sdrdf1cjlyyw";
         };
       })
       (vimUtils.buildVimPlugin {
@@ -605,8 +639,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "Aejkatappaja";
           repo = "cendre";
-          rev = "master";
-          sha256 = "sha256-EWo7lPtiiGpffryaNm4GYJ8bJGtwqPPbrkw3vxBzqAE=";
+          rev = "4d0758a3e6bf0d415c5e7b8cbaaf396754213a07";
+          sha256 = "1q0gpa5im07dgbmsm5i6nyi6dzq29cx7p3bsccmbl9ppc51i3ldf";
         };
       })
     ];
@@ -804,45 +838,6 @@
           options.desc = "Rename";
         }
       ];
-      servers = {
-        nixd = {
-          enable = true;
-          activate = true;
-          settings = let
-            flake = ''(builtins.getFlake (builtins.toString ./.))'';
-            system = ''''${builtins.currentSystem}'';
-          in {
-            nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
-
-            options = {
-              nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
-              # TODO: doesn't work: https://github.com/nix-community/nixd/issues/706
-              nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
-              home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
-            };
-          };
-        };
-        oxlint = {
-          enable = true;
-          activate = true;
-          # autostart = true;
-          config = {
-            cmd = [
-              (lib.getExe pkgs.cpulimit)
-              "-i"
-              "-l"
-              "30"
-              "/home/lippiece/.bun/bin/oxlint"
-              "--import-plugin"
-              "--type-aware"
-              "--lsp"
-            ];
-            root_markers = [
-              "package.json"
-            ];
-          };
-        };
-      };
     };
 
     keymaps = [

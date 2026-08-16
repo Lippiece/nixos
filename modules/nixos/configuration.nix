@@ -9,15 +9,9 @@
   ...
 }: let
   mail = "lippiece@vivaldi.net";
-  name = "lippiece";
+  user = "lippiece";
   smtphost = "smtp.vivaldi.net";
   smtpport = 465;
-
-  mailDW = {
-    mail = "a.anisko@ddemo.ru";
-    name = "a.anisko";
-    smtphost = "smtp.dw.team";
-  };
 in {
   boot = {
     # Use the systemd-boot EFI boot loader.
@@ -253,19 +247,8 @@ in {
           from = mail;
           port = smtpport;
           host = smtphost;
-          user = "${name}";
-          passwordeval = "printf 'url=https://${mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
-        };
-
-        ${mailDW.mail} = {
-          auth = true;
-          tls = true;
-          tls_starttls = false;
-          port = smtpport;
-          from = mailDW.mail;
-          host = mailDW.smtphost;
-          user = "${mailDW.name}";
-          passwordeval = "printf 'url=https://${mailDW.mail}' | ${lib.getExe pkgs.git-credential-keepassxc} get | grep password | cut -d '=' -f 2";
+          user = user;
+          passwordeval = "${pkgs.libsecret}/bin/secret-tool lookup mail ${mail}";
         };
       };
     };

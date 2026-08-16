@@ -5,12 +5,12 @@
   ...
 } @ args: let
   pname = "brave";
-  version = "1.95.40";
+  version = "1.95.52";
 
   allArchives = {
     x86_64-linux = {
       url = "https://github.com/brave/brave-browser/releases/download/v${version}/brave-browser-nightly_${version}_amd64.deb";
-      hash = "sha256-MQyCuxqK8HyGclK5lZgv1CnR4NTqmO96BqcTMxaO85E=";
+      hash = "sha256-juyCQGnO3HpKai3MBvK/479OguKwh8+iQnVAamwp5PI=";
     };
   };
 
