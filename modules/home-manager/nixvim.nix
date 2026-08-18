@@ -116,11 +116,16 @@
             enable = true;
             autostart = true;
           };
-          vue_ls = {
+          # TODO: pnpm 10_34 CVEs
+          # vue_ls = {
+          #   enable = true;
+          #   autostart = true;
+          # };
+          cssls = {
             enable = true;
             autostart = true;
           };
-          cssls = {
+          systemd_lsp = {
             enable = true;
             autostart = true;
           };

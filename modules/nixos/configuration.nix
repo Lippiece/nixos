@@ -34,11 +34,14 @@
       "vm.overcommit_memory" = 1;
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
+      "net.core.rmem_default" = 2097152;
+      "net.core.wmem_default" = 2097152;
+      "net.core.tcp_mem" = "1048576 1048576 1048576";
+      "net.core.tcp_rmem" = "4096 262144 1048576";
+      "net.core.tcp_wmem" = "4096 262144 1048576";
       "net.ipv4.tcp_congestion_control" = "bbr";
     };
   };
-
-  # networking.hostName = "nixos"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
   networking = {
@@ -144,7 +147,6 @@
       unar
       git
       ripgrep
-      vlc
       btop
       # TODO: build failure
       # glances
@@ -157,11 +159,11 @@
     autoUpgrade = {
       flake = inputs.self.outPath;
       flags = [
-        "--upgrade-all"
         "--print-build-logs"
         "--commit-lock-file"
       ];
-      dates = "weekly";
+      upgrade = true;
+      dates = "daily";
       operation = "switch";
       persistent = true;
       enable = true;
@@ -209,6 +211,12 @@
     dnsproxy = {
       enable = true;
       settings = {
+        # WARN: This may break things, but it frees other hosts to bind like
+        # aardvark-dns in spindle needs
+        listen-addrs = [
+          "127.0.0.1"
+        ];
+
         bootstrap = [
           "tls://1.1.1.1"
           "tls://9.9.9.9"
@@ -220,13 +228,24 @@
         # upstream = [ "tls://dns.adguard.com" ];
         # DNS over HTTPS upstream
         upstream = [
-          # "quic://lipguard.lippiece.ru"
           "tls://1.1.1.1"
           "tls://9.9.9.9"
+          "h3://doh.dns.sb/dns-query"
+          "h3://doh.sb/dns-query"
+          "h3://dns.sb/dns-query"
+          "h3://dns.mullvad.net/dns-query"
+          "h3://private.canadianshield.cira.ca/dns-query"
+          "h3://unfiltered.adguard-dns.com/dns-query"
         ];
+        ipv6-disabled = true;
       };
       # Additional launch flags
-      # flags = [ "--verbose" ];
+      flags = [
+        "--ipv6-disabled"
+        "--cache"
+        "--cache-size"
+        "64000000"
+      ];
     };
 
     btrfs.autoScrub.enable = true;
@@ -257,5 +276,19 @@
   zramSwap = {
     enable = true;
     memoryPercent = 150;
+  };
+
+  systemd = {
+    services = {
+      nixos-upgrade = {
+        serviceConfig.EnvironmentFile = "/home/lippiece/.config/nixos/.env";
+        serviceConfig.WorkingDirectory = "/home/lippiece/.config/nixos";
+        serviceConfig.ExecStartPre = ["/run/current-system/sw/bin/nix flake update"];
+        unitConfig = {
+          After = ["dnsproxy.service"];
+          Wants = ["dnsproxy.service"];
+        };
+      };
+    };
   };
 }

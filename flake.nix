@@ -13,6 +13,11 @@
       url = "github:nix-community/nixvim";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tangled = {
+      url = "git+https://tangled.org/tangled.org/core";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: {
@@ -24,6 +29,7 @@
         ./modules/nixos/hardware-configuration.nix
 
         inputs.home-manager.nixosModules.default
+        inputs.tangled.nixosModules.spindle
       ];
     };
   };

@@ -1,4 +1,4 @@
-{
+{lib, ...}: {
   users.users.lippiece = {
     # replace `<USERNAME>` with the actual username
     extraGroups = [
@@ -10,12 +10,14 @@
 
   virtualisation = {
     containers.enable = true;
+    docker.enable = lib.mkForce false;
 
     podman = {
       enable = true;
 
       # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
+      dockerSocket.enable = true;
 
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
@@ -47,7 +49,13 @@
     }
   '';
 
-  systemd.services.caddy.preStart = "chmod -R a+rx /var/lib/caddy/";
+  systemd.services = {
+    caddy.preStart = "chmod -R a+rx /var/lib/caddy/";
+    spindle.environment = {
+      SPINDLE_SERVER_DOCKER_SOCKET = "/var/run/podman/podman.sock";
+    };
+  };
+
   networking.firewall.extraCommands = ''
     iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-port 5353
     iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-port 5353
@@ -140,14 +148,31 @@
       "matrix.lippiece.ru:5349".extraConfig = ''reverse_proxy localhost:4200'';
       "matrixrtc.lippiece.ru" = {
         extraConfig = ''
-          handle /sfu/get {
-            reverse_proxy localhost:4230
+          # for lk-jwt-service
+          @lk-jwt-service path /sfu/get* /healthz* /get_token*
+          route @lk-jwt-service {
+              reverse_proxy 127.0.0.1:4230
           }
-          handle {
-            reverse_proxy localhost:4240
-          }
+
+          # for livekit
+          reverse_proxy 127.0.0.1:4240
         '';
       };
+      "continuwuity.lippiece.ru".extraConfig = ''reverse_proxy localhost:4300'';
+      "tangled.lippiece.cc".extraConfig = ''reverse_proxy localhost:3501'';
+      "spindle.lippiece.cc".extraConfig = ''reverse_proxy localhost:3502'';
+    };
+  };
+
+  services = {
+    tangled.spindle = {
+      enable = true;
+      server = {
+        listenAddr = "0.0.0.0:3502";
+        hostname = "spindle.lippiece.cc";
+        owner = "did:plc:anrarapxxzxsdodcnprczsq5";
+      };
+      pipelines.workflowTimeout = "10m";
     };
   };
 }
