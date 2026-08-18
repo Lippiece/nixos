@@ -296,6 +296,7 @@ in {
       escapeTime = 10;
       plugins = with pkgs.tmuxPlugins; [
         resurrect
+        continuum
         {
           plugin = dracula;
           extraConfig = ''
@@ -322,7 +323,6 @@ in {
             set -g @dracula-clients-minimum 1
           '';
         }
-        tmux-which-key
       ];
       newSession = true;
       terminal = "tmux-256color";
