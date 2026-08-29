@@ -31,7 +31,7 @@
       grub.enable = false;
     };
     kernel.sysctl = {
-      "vm.overcommit_memory" = 1;
+      "vm.overcommit_memory" = lib.mkDefault 1;
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
       "net.core.rmem_default" = 2097152;

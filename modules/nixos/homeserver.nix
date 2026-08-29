@@ -1,4 +1,8 @@
-{lib, ...}: {
+{lib, ...}: let
+  knotUrl = "tangled.lippiece.cc";
+  spindleUrl = "spindle.lippiece.cc";
+  # appviewUrl = "appview.lippiece.cc";
+in {
   users.users.lippiece = {
     # replace `<USERNAME>` with the actual username
     extraGroups = [
@@ -53,6 +57,7 @@
     caddy.preStart = "chmod -R a+rx /var/lib/caddy/";
     spindle.environment = {
       SPINDLE_SERVER_DOCKER_SOCKET = "/var/run/podman/podman.sock";
+      HTTPS_PROXY = "socks5://127.0.0.1:2334";
     };
   };
 
@@ -159,8 +164,9 @@
         '';
       };
       "continuwuity.lippiece.ru".extraConfig = ''reverse_proxy localhost:4300'';
-      "tangled.lippiece.cc".extraConfig = ''reverse_proxy localhost:3501'';
-      "spindle.lippiece.cc".extraConfig = ''reverse_proxy localhost:3502'';
+      "${knotUrl}".extraConfig = ''reverse_proxy localhost:3501'';
+      "${spindleUrl}".extraConfig = ''reverse_proxy localhost:3502'';
+      # "${appviewUrl}".extraConfig = ''reverse_proxy localhost:3503'';
     };
   };
 
@@ -169,10 +175,19 @@
       enable = true;
       server = {
         listenAddr = "0.0.0.0:3502";
-        hostname = "spindle.lippiece.cc";
+        hostname = spindleUrl;
         owner = "did:plc:anrarapxxzxsdodcnprczsq5";
       };
       pipelines.workflowTimeout = "10m";
     };
+    # tangled.appview = {
+    #   enable = true;
+    #   port = 3503;
+    #   appviewHost = appviewUrl;
+    #   resend.sentFrom = "lippiece@vivaldi.net";
+    #
+    #   # TODO: ssh
+    #   # ssh = {};
+    # };
   };
 }

@@ -24,12 +24,13 @@
     nixosConfigurations."cumulonimbus" = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
+        inputs.tangled.nixosModules.spindle
+
         # My configuration
         ./modules/nixos/configuration.nix
         ./modules/nixos/hardware-configuration.nix
 
         inputs.home-manager.nixosModules.default
-        inputs.tangled.nixosModules.spindle
       ];
     };
   };
