@@ -72,7 +72,6 @@ in {
     # mpc-qt
     kdePackages.filelight
     kitty
-    (pkgs.callPackage ../../packages/gomuks-desktop/package.nix {})
 
     (pkgs.callPackage ../../packages/brave/package.nix {})
 
