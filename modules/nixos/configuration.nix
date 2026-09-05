@@ -82,10 +82,10 @@ in {
         # upstream = [ "tls://dns.adguard.com" ];
         # DNS over HTTPS upstream
         upstream = [
-          # "quic://lipguard.lippiece.ru"
-          "tls://1.1.1.1"
-          "tls://8.8.8.8"
-          "tls://9.9.9.9"
+          "quic://lipguard.lippiece.ru"
+          # "tls://1.1.1.1"
+          # "tls://8.8.8.8"
+          # "tls://9.9.9.9"
         ];
 
         fallback = [
