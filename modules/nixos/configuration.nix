@@ -328,13 +328,12 @@ in {
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
 
-  # Enable the DNS proxy.
   networking = {
-    hostName = "mothership"; # Define your hostname.
+    hostName = "mothership";
     extraHosts = ''
       192.168.0.1 mwlogin.net
 
-      192.168.0.102      cumulonimbus
+      192.168.10.100     cumulonimbus
       192.168.0.102:3001 lipsearch.lippiece.ru
       192.168.0.102:3002 warden.lippiece.ru
       192.168.0.102:3003 lipgit.lippiece.ru
@@ -345,16 +344,14 @@ in {
 
     firewall.enable = false;
 
-    networkmanager.enable =
-      true; # Easiest to use and most distros use this by default.
-    # If using NetworkManager:
+    networkmanager.enable = true;
+    # networking.networkmanager.dns = "systemd-resolved";
     networkmanager.dns = "none";
     nameservers = ["127.0.0.1"];
 
     useDHCP = lib.mkDefault true;
     enableIPv6 = false;
   };
-  # networking.networkmanager.dns = "systemd-resolved";
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
