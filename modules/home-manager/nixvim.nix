@@ -639,8 +639,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "Aejkatappaja";
           repo = "cendre";
-          rev = "c0e0a414b42dba889f16b3746839d7300dfb1c3f";
-          sha256 = "1arazd13xqlb85jkshyjii7bpbpzffw2ifw8knb845jq9m02lgk7";
+          rev = "5be36e27e6576ac37e6d1c5698a5691ab83db4df";
+          sha256 = "1zxlzr7cp7c7r0819x2d4nw0bzpip63ybxdap0w1bjpkfjdszfnj";
         };
       })
     ];

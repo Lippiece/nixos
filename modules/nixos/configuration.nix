@@ -71,29 +71,19 @@ in {
       enable = true;
       settings = {
         bootstrap = [
-          "tls://1.1.1.1"
           "tls://8.8.8.8"
-          "tls://9.9.9.9"
         ];
 
-        # Plain DNS upstream
-        # upstream = [ "1.1.1.1:53" ];
-        # DNS over TLS upstream
-        # upstream = [ "tls://dns.adguard.com" ];
-        # DNS over HTTPS upstream
         upstream = [
-          "quic://lipguard.lippiece.ru"
-          # "tls://1.1.1.1"
-          # "tls://8.8.8.8"
-          # "tls://9.9.9.9"
-        ];
-
-        fallback = [
-          "tls://1.1.1.1"
+          # "quic://lipguard.lippiece.ru"
           "tls://8.8.8.8"
-          "tls://9.9.9.9"
+          "https://doh.dns.sb/dns-query"
+          "https://doh.sb/dns-query"
+          "https://dns.mullvad.net/dns-query"
+          "https://unfiltered.adguard-dns.com/dns-query"
         ];
       };
+
       # Additional launch flags
       # flags = [ "--verbose" ];
     };
