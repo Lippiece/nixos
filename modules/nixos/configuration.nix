@@ -213,20 +213,22 @@
       settings = {
         # WARN: This may break things, but it frees other hosts to bind like
         # aardvark-dns in spindle needs
-        listen-addrs = [
-          "127.0.0.1"
-        ];
+        # listen-addrs = [
+        #   "127.0.0.1"
+        # ];
 
         bootstrap = [
           "tls://1.1.1.1"
+          "tls://8.8.8.8"
           "tls://9.9.9.9"
+          "https://doh.dns.sb/dns-query"
+          "https://doh.sb/dns-query"
+          "https://dns.sb/dns-query"
+          "https://dns.mullvad.net/dns-query"
+          "https://unfiltered.adguard-dns.com/dns-query"
+          "https://one.one.one.one/dns-query"
         ];
 
-        # Plain DNS upstream
-        # upstream = [ "1.1.1.1:53" ];
-        # DNS over TLS upstream
-        # upstream = [ "tls://dns.adguard.com" ];
-        # DNS over HTTPS upstream
         upstream = [
           "tls://1.1.1.1"
           "tls://9.9.9.9"
@@ -234,8 +236,8 @@
           "h3://doh.sb/dns-query"
           "h3://dns.sb/dns-query"
           "h3://dns.mullvad.net/dns-query"
-          "h3://private.canadianshield.cira.ca/dns-query"
           "h3://unfiltered.adguard-dns.com/dns-query"
+          "https://one.one.one.one/dns-query"
         ];
         ipv6-disabled = true;
       };

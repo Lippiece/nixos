@@ -35,19 +35,19 @@ in {
   environment.etc."caddy/well-known-matrix/client".text = ''
       {
         "m.homeserver": {
-            "base_url": "https://matrix.lippiece.ru"
+            "base_url": "https://matrix.lippiece.cc"
         },
         "m.identity_server": {
             "base_url": "https://vector.im"
         },
         "org.matrix.msc2965.authentication": {
-            "issuer": "https://matrix.lippiece.ru/",
-            "account": "https://matrix.lippiece.ru/account"
+            "issuer": "https://matrix.lippiece.cc/",
+            "account": "https://matrix.lippiece.cc/account"
         },
         "org.matrix.msc4143.rtc_foci":[
             {
                 "type": "livekit",
-                "livekit_service_url": "https://matrixrtc.lippiece.ru"
+                "livekit_service_url": "https://matrixrtc.lippiece.cc"
             }
         ]
     }
@@ -81,14 +81,14 @@ in {
           env REQUEST_URI {vars.request_uri}
         }
       '';
-      "lipsearch.lippiece.ru".extraConfig = ''reverse_proxy localhost:3001'';
-      "warden.lippiece.ru".extraConfig = ''reverse_proxy localhost:3002'';
-      "lipgit.lippiece.ru".extraConfig = ''reverse_proxy localhost:3003'';
-      "lipguard.lippiece.ru".extraConfig = ''reverse_proxy localhost:3007'';
-      "liprss.lippiece.ru".extraConfig = ''reverse_proxy localhost:3011'';
-      "roundcube.lippiece.ru".extraConfig = "reverse_proxy localhost:3400";
+      "lipsearch.lippiece.cc".extraConfig = ''reverse_proxy localhost:3001'';
+      "warden.lippiece.cc".extraConfig = ''reverse_proxy localhost:3002'';
+      "lipgit.lippiece.cc".extraConfig = ''reverse_proxy localhost:3003'';
+      "lipguard.lippiece.cc".extraConfig = ''reverse_proxy localhost:3007'';
+      "liprss.lippiece.cc".extraConfig = ''reverse_proxy localhost:3011'';
+      "roundcube.lippiece.cc".extraConfig = "reverse_proxy localhost:3400";
 
-      "matrix.lippiece.ru" = {
+      "matrix.lippiece.cc" = {
         extraConfig = ''
           handle_path /.well-known/matrix/* {
             root * /etc/caddy/well-known-matrix
@@ -133,7 +133,7 @@ in {
           reverse_proxy localhost:4210
         '';
       };
-      "matrix.lippiece.ru:8448" = {
+      "matrix.lippiece.cc:8448" = {
         extraConfig = ''
           handle_path /.well-known/matrix/* {
             root * /etc/caddy/well-known-matrix
@@ -149,9 +149,9 @@ in {
           }
         '';
       };
-      "matrix.lippiece.ru:3478".extraConfig = ''reverse_proxy localhost:4200'';
-      "matrix.lippiece.ru:5349".extraConfig = ''reverse_proxy localhost:4200'';
-      "matrixrtc.lippiece.ru" = {
+      "matrix.lippiece.cc:3478".extraConfig = ''reverse_proxy localhost:4200'';
+      "matrix.lippiece.cc:5349".extraConfig = ''reverse_proxy localhost:4200'';
+      "matrixrtc.lippiece.cc" = {
         extraConfig = ''
           # for lk-jwt-service
           @lk-jwt-service path /sfu/get* /healthz* /get_token*
@@ -163,7 +163,7 @@ in {
           reverse_proxy 127.0.0.1:4240
         '';
       };
-      "continuwuity.lippiece.ru".extraConfig = ''reverse_proxy localhost:4300'';
+      "continuwuity.lippiece.cc".extraConfig = ''reverse_proxy localhost:4300'';
       "${knotUrl}".extraConfig = ''reverse_proxy localhost:3501'';
       "${spindleUrl}".extraConfig = ''reverse_proxy localhost:3502'';
       # "${appviewUrl}".extraConfig = ''reverse_proxy localhost:3503'';
