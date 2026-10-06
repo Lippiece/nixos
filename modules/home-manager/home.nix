@@ -92,6 +92,15 @@ in {
     # (pkgs.callPackage ../../packages/rimsort/package.nix {})
     rimsortUnfree.rimsort
 
+    # # M-siq
+    lmms
+    helm
+    helvum
+    qpwgraph
+    alsa-utils
+    # ardour
+    # vital # unfree
+
     # # System
     kdePackages.karousel
     (
