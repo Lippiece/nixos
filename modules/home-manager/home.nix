@@ -8,7 +8,6 @@
   pkgs,
   lib,
   inputs,
-  rimsortUnfree,
   ...
 }: let
   name = "lippiece";
@@ -89,8 +88,7 @@ in {
       removeWarningPopup = true;
     })
     # prismlauncher
-    # (pkgs.callPackage ../../packages/rimsort/package.nix {})
-    rimsortUnfree.rimsort
+    rimsort
 
     # # M-siq
     lmms

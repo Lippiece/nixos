@@ -5,7 +5,6 @@
   lib,
   inputs,
   pkgs,
-  rimsortUnfree,
   ...
 }: let
   mail = "lippiece@vivaldi.net";
@@ -44,6 +43,7 @@ in {
       enable = true;
       pulse.enable = true;
       alsa.enable = true;
+      jack.enable = true;
     };
     libinput = {
       enable = true;
@@ -368,7 +368,7 @@ in {
 
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs rimsortUnfree;
+      inherit inputs;
     };
     useUserPackages = true;
 
