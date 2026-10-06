@@ -20,8 +20,6 @@
     };
 
     # Packages
-    nixpkgs-throne.url = "github:TomaSajt/nixpkgs/throne";
-    nixpkgs-rimsort.url = "github:Adda0/nixpkgs/rimsort-update";
 
     # Helpers
     impermanence = {
@@ -45,24 +43,8 @@
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs;
-        rimsortUnfree = import inputs.nixpkgs-rimsort {
-          inherit system;
-          config.allowUnfree = true;
-        };
       };
       modules = [
-        {
-          disabledModules = ["programs/throne.nix"];
-          imports = [
-            "${inputs.nixpkgs-throne}/nixos/modules/programs/throne.nix"
-          ];
-          nixpkgs.overlays = [
-            (final: prev: {
-              throne = inputs.nixpkgs-throne.legacyPackages.${system}.throne;
-            })
-          ];
-        }
-
         # My configuration
         ./modules/nixos/configuration.nix
         ./modules/nixos/persistence.nix
