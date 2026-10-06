@@ -264,7 +264,8 @@
             autostart = true;
           };
           nixd = {
-            enable = true;
+            # Eats whole CPU
+            enable = false;
             autostart = true;
             settings = let
               flake = ''(builtins.getFlake (builtins.toString ./.))'';

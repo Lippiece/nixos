@@ -403,11 +403,17 @@ in {
     builtins.elem (lib.getName pkg) [
       # Add additional package names here
       "obsidian"
+
+      # rimsort
       "steam"
       "steamcmd"
       "steam-unwrapped"
       "rimsort"
       "steamworkspy"
+      "steamworks"
+
+      "lsfg-vk" # bottles
+
       "codeium"
       "jitsi-meet"
     ];
