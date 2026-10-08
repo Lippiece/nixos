@@ -53,11 +53,24 @@ in {
     }
   '';
 
-  systemd.services = {
-    caddy.preStart = "chmod -R a+rx /var/lib/caddy/";
-    spindle.environment = {
-      SPINDLE_SERVER_DOCKER_SOCKET = "/var/run/podman/podman.sock";
-      HTTPS_PROXY = "socks5://127.0.0.1:2334";
+  systemd = {
+    paths = {
+      adguard-certs-changed = {
+        pathConfig = {
+          PathChanged = "/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/lipguard.lippiece.cc/";
+          Unit = "copy-adguard-certs.service";
+        };
+      };
+    };
+    services = {
+      copy-adguard-certs = {
+        description = "Copy AdguardHome domain Caddy certs to ~/.cache, readable by lippiece";
+        script = "install -m 440 --owner lippiece /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/lipguard.lippiece.cc/* ~/.cache/lipguard.lippiece.cc/";
+      };
+      spindle.environment = {
+        SPINDLE_SERVER_DOCKER_SOCKET = "/var/run/podman/podman.sock";
+        HTTPS_PROXY = "socks5://127.0.0.1:2334";
+      };
     };
   };
 

@@ -230,13 +230,12 @@
         ];
 
         upstream = [
-          "tls://1.1.1.1"
-          "tls://9.9.9.9"
-          "h3://doh.dns.sb/dns-query"
-          "h3://doh.sb/dns-query"
-          "h3://dns.sb/dns-query"
-          "h3://dns.mullvad.net/dns-query"
-          "h3://unfiltered.adguard-dns.com/dns-query"
+          "tls://8.8.8.8"
+          "https://doh.dns.sb/dns-query"
+          "https://doh.sb/dns-query"
+          "https://dns.sb/dns-query"
+          "https://dns.mullvad.net/dns-query"
+          "https://unfiltered.adguard-dns.com/dns-query"
           "https://one.one.one.one/dns-query"
         ];
         ipv6-disabled = true;
