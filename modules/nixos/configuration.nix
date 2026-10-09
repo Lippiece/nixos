@@ -75,12 +75,12 @@ in {
         ];
 
         upstream = [
-          # "quic://lipguard.lippiece.ru"
-          "tls://8.8.8.8"
-          "https://doh.dns.sb/dns-query"
-          "https://doh.sb/dns-query"
-          "https://dns.mullvad.net/dns-query"
-          "https://unfiltered.adguard-dns.com/dns-query"
+          "quic://lipguard.lippiece.cc"
+          # "tls://8.8.8.8"
+          # "https://doh.dns.sb/dns-query"
+          # "https://doh.sb/dns-query"
+          # "https://dns.mullvad.net/dns-query"
+          # "https://unfiltered.adguard-dns.com/dns-query"
         ];
       };
 
@@ -111,7 +111,7 @@ in {
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
       EDITOR = "nvim";
-      BROWSER = "brave";
+      BROWSER = "firefox";
       MANPAGER = "nvim +Man!";
       SHELL = lib.getExe pkgs.elvish;
       # use less with wraps for journalctl
@@ -320,15 +320,21 @@ in {
   networking = {
     hostName = "mothership";
     extraHosts = ''
-      192.168.0.1 mwlogin.net
+      192.168.0.1         mwlogin.net
 
-      192.168.10.100     cumulonimbus
-      192.168.0.102:3001 lipsearch.lippiece.ru
-      192.168.0.102:3002 warden.lippiece.ru
-      192.168.0.102:3003 lipgit.lippiece.ru
-      192.168.0.102:3009 lipguard.lippiece.ru
+      192.168.0.100       cumulonimbus
+      192.168.10.100      cumulonimbus
+      192.168.0.102:3001  lipsearch.lippiece.cc
+      192.168.10.102:3001 lipsearch.lippiece.cc
+      192.168.0.102:3002  warden.lippiece.cc
+      192.168.10.102:3002 warden.lippiece.cc
+      192.168.0.102:3003  lipgit.lippiece.cc
+      192.168.10.102:3003 lipgit.lippiece.cc
+      192.168.0.102:3009  lipguard.lippiece.cc
+      192.168.10.102:3009 lipguard.lippiece.cc
 
-      192.168.0.201      yuos
+      192.168.0.201       yuos
+      192.168.10.201      yuos
     '';
 
     firewall.enable = false;
