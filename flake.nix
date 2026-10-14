@@ -14,12 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Packages
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Packages
 
     # Helpers
     impermanence = {
@@ -42,7 +41,10 @@
   in {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
       specialArgs = {
-        inherit inputs;
+        inherit
+          inputs
+          system
+          ;
       };
       modules = [
         # My configuration

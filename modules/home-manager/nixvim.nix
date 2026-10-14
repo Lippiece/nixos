@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   home.packages = with pkgs; [
@@ -95,6 +96,7 @@
       '';
   };
   programs.nixvim = {
+    nixpkgs.source = inputs.nixpkgs;
     package = pkgs.neovim-unwrapped;
     enable = true;
     defaultEditor = true;

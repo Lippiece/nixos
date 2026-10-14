@@ -111,7 +111,7 @@ in {
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
       EDITOR = "nvim";
-      BROWSER = "firefox";
+      BROWSER = "firefox-nightly";
       MANPAGER = "nvim +Man!";
       SHELL = lib.getExe pkgs.elvish;
       # use less with wraps for journalctl
@@ -220,6 +220,7 @@ in {
     npm.enable = true;
     dconf.enable = true;
     firefox = {
+      package = inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin;
       enable = true;
       nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration tridactyl-native];
       preferences = {
