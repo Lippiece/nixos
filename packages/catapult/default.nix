@@ -18,6 +18,12 @@ in
         SDL2_image.out
         SDL2_mixer.out
         SDL2_ttf.out
+        libogg.out
+        libvorbis.out
+        sdl3-ttf.out
+        sdl3.lib
+        wavpack.out
+        pcre2
         libgcc.lib
         udev
 
