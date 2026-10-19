@@ -156,11 +156,16 @@ in {
     git = {
       enable = true;
       # delta.enable = true;
-      diff-so-fancy.enable = true;
-      diff-so-fancy.changeHunkIndicators = true;
+      # TODO:
+      # diff-so-fancy.enable = true;
+      # diff-so-fancy.changeHunkIndicators = true;
       signing.signByDefault = true;
-      userEmail = "github@lippiece.anonaddy.me";
-      userName = "${name}";
+      settings = {
+        user = {
+          name = "${name}";
+          email = "github@lippiece.anonaddy.me";
+        };
+      };
     };
 
     tealdeer.enable = true;
@@ -236,7 +241,7 @@ in {
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-      # enableFishIntegration = true;
+      enableFishIntegration = true;
     };
     alacritty = {
       enable = true;
