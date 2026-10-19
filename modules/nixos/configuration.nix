@@ -218,25 +218,20 @@
         # ];
 
         bootstrap = [
+          "https://1.1.1.1/dns-query"
           "tls://1.1.1.1"
           "tls://8.8.8.8"
           "tls://9.9.9.9"
-          "https://doh.dns.sb/dns-query"
-          "https://doh.sb/dns-query"
-          "https://dns.sb/dns-query"
-          "https://dns.mullvad.net/dns-query"
-          "https://unfiltered.adguard-dns.com/dns-query"
-          "https://one.one.one.one/dns-query"
         ];
 
         upstream = [
-          "tls://8.8.8.8"
           "https://doh.dns.sb/dns-query"
           "https://doh.sb/dns-query"
           "https://dns.sb/dns-query"
           "https://dns.mullvad.net/dns-query"
           "https://unfiltered.adguard-dns.com/dns-query"
-          "https://one.one.one.one/dns-query"
+          "tls://8.8.8.8"
+          "https://1.1.1.1/dns-query"
         ];
         ipv6-disabled = true;
       };
