@@ -71,7 +71,6 @@ in {
     # mpc-qt
     kdePackages.filelight
     kitty
-
     (pkgs.callPackage ../../packages/brave/package.nix {})
 
     # # Plasma
@@ -79,11 +78,10 @@ in {
 
     # # Work
     super-productivity
-    onlyoffice-desktopeditors
+    libreoffice
 
     # # Entertainment
     qbittorrent-enhanced
-    # TODO: openldap-2.6.13-i686-linux failed with exit code 2
     (bottles.override {
       removeWarningPopup = true;
     })
@@ -125,17 +123,12 @@ in {
     python313Packages.demjson3
 
     # # Shell
-    # bun
     so
     imagemagick
     ffmpeg
     wl-clipboard-rs
     pass-git-helper
-    proxychains-ng
-    gh
-    # steamcmd
     rsync
-    tomb
     delta
     (pkgs.callPackage ../../packages/git_bayesect/package.nix {})
     git-town
@@ -268,15 +261,18 @@ in {
 
     git = {
       enable = true;
-      # delta.enable = true;
       signing.signByDefault = true;
-      userEmail = "github@lippiece.anonaddy.me";
-      userName = "${name}";
+      settings.user = {
+        name = "${name}";
+        email = "github@lippiece.anonaddy.me";
+      };
     };
 
     diff-so-fancy = {
       enable = true;
-      changeHunkIndicators = true;
+      settings = {
+        changeHunkIndicators = true;
+      };
       enableGitIntegration = true;
     };
 
