@@ -202,7 +202,7 @@
             autostart = true;
           };
           # toml
-          taplo = {
+          tombi = {
             enable = true;
             autostart = true;
           };
