@@ -300,6 +300,16 @@
               "package.json"
             ];
           };
+
+          # Python
+          ruff = {
+            enable = true;
+            autostart = true;
+          };
+          basedpyright = {
+            enable = true;
+            autostart = true;
+          };
         };
       };
 
@@ -422,7 +432,11 @@
             jsonc = ["oxfmt"];
             nix = ["alejandra"];
             lua = ["stylua"];
-            # python = ["isort" "black"];
+            python = [
+              "ruff_fix"
+              "ruff_organize_imports"
+              "ruff_format"
+            ];
             yaml = ["yamlfmt"];
             # fish = ["fish_indent"];
             rust = ["rustfmt"];
