@@ -89,11 +89,11 @@ in {
     rimsort
 
     # # M-siq
-    lmms
-    helm
-    helvum
-    qpwgraph
-    alsa-utils
+    # lmms
+    # helm
+    # helvum
+    # qpwgraph
+    # alsa-utils
     # ardour
     # vital # unfree
 
@@ -142,10 +142,6 @@ in {
     mutt-wizard
     urlscan
     lynx
-
-    # # Rust
-    # rustc
-    # rustup
   ];
 
   # Home Manager is pretty bad at managing dotfiles. The primary way to manage
@@ -202,13 +198,6 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-
-    "bunfig.toml".text =
-      #toml
-      ''
-        [install]
-        minimumReleaseAge = 60480 # 7 days in seconds
-      '';
 
     # elvish
     ".config/elvish/rc.elv".text =

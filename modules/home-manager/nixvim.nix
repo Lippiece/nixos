@@ -267,7 +267,7 @@
           };
           nixd = {
             # Eats whole CPU
-            enable = false;
+            enable = true;
             autostart = true;
             settings = let
               flake = ''(builtins.getFlake (builtins.toString ./.))'';
@@ -276,10 +276,10 @@
               nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
 
               options = {
-                nixos.expr = ''${flake}.nixosConfigurations.mothership.options'';
+                nixos.expr = "${flake}.nixosConfigurations.mothership.options";
                 # TODO: doesn't work: https://github.com/nix-community/nixd/issues/706
-                nixvim.expr = ''${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options'';
-                home_manager.expr = ''${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []'';
+                nixvim.expr = "${flake}.inputs.nixvim.nixvimConfigurations.${system}.default.options";
+                home_manager.expr = "${flake}.nixosConfigurations.mothership.options.home-manager.users.type.getSubOptions []";
               };
             };
           };
