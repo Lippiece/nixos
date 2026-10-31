@@ -330,7 +330,7 @@ in {
           bind -T copy-mode-vi y send -X copy-selection
 
           # `open` the selected text
-          bind -T copy-mode-vi o send-keys -X copy-pipe-and-cancel "xargs open"
+          bind -T copy-mode-vi o send-keys -X copy-pipe-and-cancel "xargs xdg-open"
         '';
     };
     direnv = {

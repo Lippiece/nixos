@@ -22,10 +22,12 @@ in
         libvorbis.out
         sdl3-ttf.out
         sdl3.lib
+        sdl3-mixer.out
         wavpack.out
         pcre2
         libgcc.lib
         udev
+        glib
 
         freetype.out
         libz.out
