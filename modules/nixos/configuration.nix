@@ -208,6 +208,7 @@ in {
     };
     lazygit.enable = true;
     nh = {
+      package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.nh;
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep 2 --keep-since 1d";
@@ -220,7 +221,7 @@ in {
     npm.enable = true;
     dconf.enable = true;
     firefox = {
-      package = inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin;
+      package = inputs.firefox.packages.${pkgs.stdenv.hostPlatform.system}.firefox-nightly-bin;
       enable = true;
       nativeMessagingHosts.packages = with pkgs; [kdePackages.plasma-browser-integration tridactyl-native];
       preferences = {

@@ -9,11 +9,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793458804,
-        "narHash": "sha256-0MQwWa/1zmKXwrxxp/HZBkR7KQQJFnWlDNknmIFSSrU=",
+        "lastModified": 1793533153,
+        "narHash": "sha256-xXJUj+XoWPdXrsh0Ta3OppXT6USU0v9vwk7ErY05rEY=",
         "owner": "nix-community",
         "repo": "flake-firefox-nightly",
-        "rev": "1c99d6d837dbc92e98d9de72919545dea9b74348",
+        "rev": "f5c0f2ee5468eb5ae581988b777fcf518a38520d",
         "type": "github"
       },
       "original": {
@@ -172,6 +172,26 @@
         "type": "github"
       }
     },
+    "nh": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793576535,
+        "narHash": "sha256-YTRHibnanvLrmGPVMowNbKkbrksxBW3hErla5Kis/mo=",
+        "owner": "nix-community",
+        "repo": "nh",
+        "rev": "c063ba16c9d954a0f42ba9be5fb2b5810a4de8fc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nh",
+        "type": "github"
+      }
+    },
     "nix-alien": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -273,6 +293,7 @@
         "firefox": "firefox",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "nh": "nh",
         "nix-alien": "nix-alien",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",

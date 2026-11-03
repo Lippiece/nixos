@@ -29,6 +29,10 @@
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     typenix = {
       url = "github:ryanrasti/typenix";
@@ -36,14 +40,11 @@
     };
   };
 
-  outputs = {nixpkgs, ...} @ inputs: let
-    system = "x86_64-linux";
-  in {
+  outputs = {nixpkgs, ...} @ inputs: {
     nixosConfigurations."mothership" = nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit
           inputs
-          system
           ;
       };
       modules = [
