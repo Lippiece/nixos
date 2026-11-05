@@ -359,8 +359,6 @@ in {
     autoUpgrade = {
       flake = inputs.self.outPath;
       flags = [
-        "--update-input"
-        "nixpkgs"
         "--print-build-logs"
         "--commit-lock-file"
       ];
