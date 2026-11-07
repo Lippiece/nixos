@@ -44,6 +44,37 @@ in {
       pulse.enable = true;
       alsa.enable = true;
       jack.enable = true;
+      extraConfig.pipewire."virtual-combine-all-sinks" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-combine-stream";
+            args = {
+              "combine.mode" = "sink";
+              "node.name" = "virtual_combine_all_sinks";
+              "node.description" = "All sinks (virtual)";
+              "combine.latency-compensate" = true;
+              "combine.props" = {
+                "audio.position" = ["FL" "FR"];
+              };
+              "stream.props" = {};
+              "stream.rules" = [
+                {
+                  matches = [
+                    # any of the items in matches needs to match, if one does,
+                    # actions are emitted.
+                    {
+                      # all keys must match the value. ! negates. ~ starts regex.
+                      #node.name = "~alsa_input.*"
+                      "media.class" = "Audio/Sink";
+                    }
+                  ];
+                  actions.create-stream = {};
+                }
+              ];
+            };
+          }
+        ];
+      };
     };
     libinput = {
       enable = true;
