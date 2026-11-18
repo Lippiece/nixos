@@ -79,6 +79,7 @@ in {
     # # Work
     super-productivity
     libreoffice
+    anki
 
     # # Entertainment
     qbittorrent-enhanced
@@ -88,7 +89,7 @@ in {
     # prismlauncher
     rimsort
 
-    # # M-siq
+    # # m-siq
     # lmms
     # helm
     # helvum

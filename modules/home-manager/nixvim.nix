@@ -503,8 +503,10 @@
         settings.enable_cmp_source = false;
       };
 
+      # Codeberg is down
+      # https://social.anoxinon.de/@codebergstatus/117636437840688845
       lint = {
-        enable = true;
+        enable = false;
         lintersByFt = {
           fish = ["fish"];
           json = ["jsonlint"];
